@@ -207,5 +207,3 @@ Prompt:
 
 ---
 
-Let me know if you want Chapter 5 (Safety) or Chapter 6 (RAG & Agents) summarized next!
-

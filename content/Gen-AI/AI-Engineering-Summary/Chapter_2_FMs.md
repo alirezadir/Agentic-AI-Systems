@@ -207,5 +207,4 @@ except (ValueError, AssertionError):
 
 ---
 
-Let me know if you want this adapted to a Notion doc, PDF, or followed up with Chapter 3!
 

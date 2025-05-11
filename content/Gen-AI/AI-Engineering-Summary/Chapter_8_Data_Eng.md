@@ -2,7 +2,7 @@
 
 ---
 
-## 📘 Section Structure
+## Overview 
 
 1. Data Curation  
    - Data Quality  
@@ -253,5 +253,5 @@ df["toxicity"] = scores["toxicity"]
 df = df[df["toxicity"] < 0.2]
 ```
 
-Let me know if you'd like visuals added, or export as PDF/Notion/Markdown!
+
 

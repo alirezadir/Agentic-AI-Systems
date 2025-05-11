@@ -290,6 +290,5 @@ class LoRALinear(nn.Module):
         return self.linear(x) + (self.alpha / self.A.shape[1]) * (x @ self.A @ self.B)
 ```
 
-Let me know if you'd like even more advanced scripts (e.g., RLHF loop, SFT dataset generation, multi-GPU setup) or want to continue to Chapter 8!
 
 

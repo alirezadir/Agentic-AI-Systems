@@ -2,7 +2,7 @@
 
 ---
 
-### 📚 Structure Overview
+###  Overview
 
 1. **Challenges of Evaluating Foundation Models**  
 2. **Understanding Language Modeling Metrics**  
