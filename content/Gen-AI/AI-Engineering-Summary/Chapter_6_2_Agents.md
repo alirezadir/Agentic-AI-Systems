@@ -324,23 +324,6 @@ Plan: [get_today_date, fetch_top_products, fetch_product_info, generate_query, g
 ---
 
 ## 💻 6. Code Snippets & Practical Examples
-
-### 🔹 LangChain RAG Pipeline
-
-```python
-from langchain.vectorstores import FAISS
-from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.chains import RetrievalQA
-from langchain.llms import OpenAI
-
-embedding = HuggingFaceEmbeddings("all-MiniLM-L6-v2")
-vectorstore = FAISS.load_local("my_docs", embedding)
-retriever = vectorstore.as_retriever()
-llm = OpenAI(model="gpt-4")
-rag = RetrievalQA(llm=llm, retriever=retriever)
-answer = rag.run("What are AI safety principles?")
-```
-
 ### 🔹 Agent with Tool Registry
 
 ```python
