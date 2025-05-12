@@ -1,294 +1,221 @@
 # Chapter 7: Fine-tuning 
 
----
-
-## 📘 Structure Overview
-
-1. Why Finetune? When Not To
-2. Finetuning Strategies and Architectures
-   - Full Finetuning
-   - Partial Finetuning
-   - Parameter-Efficient Finetuning (PEFT)
-   - LoRA and QLoRA
-   - Adapter Architectures
-3. Finetuning Development Pipelines
-   - Dataset Preparation
-   - Tokenization and Format
-   - Model Scaling and Progression
-   - Distillation Paths
-4. Training Practices and Optimization
-   - Batch Size
-   - Epochs
-   - Prompt Loss Weights
-   - Scheduler & Optimizer Selection
-5. Domain Adaptation and Continued Pretraining
-6. Advanced Finetuning Topics
-   - Model Merging
-   - Layer Stacking
-   - Mixture-of-Experts Merging
-7. Finetuning vs RAG: Use Case Matrix
-8. Evaluation, Metrics & Testing
-9. Safety, Alignment, and Reinforcement Tuning
-10. Code Snippets & Practical Implementation
-
----
-
-## 🔍 1. Why Finetune? When Not To
-
-- Finetuning gives **precise control** over model behavior.
-- Necessary when:
-  - Output style/format is crucial
-  - Prompts alone don't deliver accuracy
-  - Low-latency, high-volume deployments are needed
-
-**Avoid Finetuning When:**
-- Data is small or noisy
-- You want live updates to data (→ use RAG instead)
-- No GPU access for training
-
----
-
-## 📚 2. Finetuning Strategies & Architectures
-
-### 2.1 Full Finetuning
-- Updates **all weights** of a model.
-- Pros: Maximum capability.
-- Cons: Requires thousands of GPUs for large models (e.g., LLaMA 65B).
-
-### 2.2 Partial Finetuning
-- Freeze majority of layers; only finetune top few (e.g., last transformer blocks).
-- Pros: Lower memory cost.
-- Cons: Limited task transfer.
-
-### 2.3 PEFT: Parameter-Efficient Finetuning
-
-#### Common Methods
-- **LoRA**: Insert trainable low-rank matrices in attention layers.
-- **Adapters**: Add trainable layers between existing layers.
-- **Prefix/Prompt Tuning**: Train only a prefix of input tokens.
-- **BitFit**: Finetune only bias terms.
-
-**LoRA Formula:**
-\[
-W' = W + \frac{\alpha}{r}AB
-\]
-Where A ∈ ℝ^{d×r}, B ∈ ℝ^{r×k}, r ≪ d, k
-
-### 2.4 Quantization-Aware Finetuning
-- e.g., **QLoRA**: Run training on 4-bit weights, then apply LoRA.
-- Reduces GPU memory needs 2–4x.
-- Use **BitsAndBytesConfig** with Hugging Face.
-
-### 2.5 Adapter Architectures
-- e.g., **Houlsby**, **Compacter**, **IA3**
-- Plug-in modules that tune behavior without touching base weights.
-- Allow multiple task adapters in same model (multi-task efficiency).
-
----
-
-## ⚙️ 3. Development Pipeline
-
-### 3.1 Dataset Preparation
-- Format: instruction → input → output
-- Prefer structured, aligned text with clear formatting
-
-```json
-{
-  "instruction": "Translate English to French",
-  "input": "The cat is sleeping",
-  "output": "Le chat dort"
-}
-```
-
-### 3.2 Tokenization and EOS Handling
-- Use the tokenizer of the pretrained base model.
-- Add special tokens (e.g., BOS, EOS) if model expects them.
+#### Keywords 
 
-### 3.3 Model Scaling Progression
-- Start with small models (e.g., 125M, 770M) for debugging
-- Move to 7B–13B for production finetuning
-- Consider quantized preloading + LoRA for larger models
+* **Transfer learning** reuses pre-trained model knowledge for new tasks/domains
+  - Improves sample efficiency
+  - Types of transfer learning:
+    - **Fine-tuning**: full or partial update of model weights
+    - **Feature-based transfer**: freeze base model, use it as feature extractor
+    - **Linear probing**: train only a linear classifier on frozen embeddings
+    - **Prompt tuning**: learn soft prompts; model remains frozen
+    - **Adapter tuning**: train lightweight modules (e.g., LoRA); base model frozen
+    - **Model distillation / merging**: compress or combine models
+    - **Multi-task learning**: shared model backbone across multiple tasks
 
-### 3.4 Distillation Paths
-- Use large LLM to generate training pairs
-- Finetune smaller, faster model
+* **Model adaptation**: subset of transfer learning, adapt a model to new domains/languages/tasks; often with limited data
+* **Finet-uning**: update model weights to improve task-specific performance
+* **PEFT** (Parameter-Efficient Finetuning) updating only subsets of model weights
 
-**Teacher Model** → Output → Becomes Data → Finetune Student Model
+## 1. Stages of Training for LLMs
 
----
+*Training pipeline for modern LLMs typically follows these stages:*
 
-## 📈 4. Training Practices
 
-### 4.1 Batch Size
-- Adjust based on memory availability
-- Use **gradient accumulation** if needed
+- **1. Pre-training**  
+  - Self-supervised learning (e.g., next-token prediction)  
+  - Data: Massive unlabeled text corpus  
+  - Goal: Build general world and language understanding
 
-### 4.2 Epochs & Early Stopping
-- Common defaults:
-  - 3–5 epochs (large datasets)
-  - 10+ epochs (small curated datasets)
-- Stop when val loss plateaus or increases
+- **2. Continued Pre-training**  
+  - Further self-supervised learning on domain/language-specific corpora  
+  - Data: Raw domain-specific text (e.g., legal, medical, multilingual)  
+  - Goal: Improve domain familiarity and specialization
 
-### 4.3 Prompt Loss Weight
-- Custom dataloader can apply weighted loss:
-  - Prompt = 0.1, Response = 0.9
-- Helps model focus on response rather than copying prompt
-
-### 4.4 Optimizer Selection
-- AdamW is most common
-- Schedule: Cosine + Warmup (e.g., 5% of total steps)
-
----
-
-## 🌐 5. Continued Pretraining (Domain Adaptation)
-
-- Continue training on domain data with unsupervised loss (e.g., next-token prediction).
-- Improves vocabulary fit and tokenization performance.
-- Use when:
-  - You have 10k+ documents in a niche area
-  - You need better recall of domain-specific concepts
-
----
-
-## 🧠 6. Advanced Topics: Merging and Layer Stacking
-
-### 6.1 Model Merging
-- Blend finetuned models using weighted averaging
-- E.g., base + safety model → safe assistant
-
-**Simple Merge Example:**
-```python
-merged_weights = (0.7 * base_weights + 0.3 * tuned_weights)
-```
-
-### 6.2 Frankenmodels / Layer Stacking
-- Compose layers from multiple models
-- E.g., first 10 layers from Model A, last 12 from Model B
-
-Used in:
-- Solar-10.7B
-- DARE/TaskVector merge strategies
-
----
-
-## 🧩 7. Finetuning vs. RAG Matrix
-
-| Situation                  | Finetuning | RAG |
-|---------------------------|------------|-----|
-| Static behavior tuning    | ✅         | ❌  |
-| Dynamic knowledge         | ❌         | ✅  |
-| Safety filters / detox    | ✅         | ❌  |
-| Web search integration    | ❌         | ✅  |
-| Few-shot fails            | ✅         | ❌  |
-
-**Strategy**: Use finetuning for personality, format, response rules. Use RAG for real-time facts.
-
----
-
-## 📏 8. Evaluation Metrics
-
-- **Loss (token-level)**: Tracks learning
-- **BLEU / ROUGE**: For text generation
-- **EM / Accuracy**: For classification tasks
-- **Bias/Detox Benchmarks**: e.g., RealToxicityPrompts
-
-Test across slices:
-- Short vs long prompts
-- Popular vs rare tokens
-- Specific topics/domains
-
----
-
-## 🛡️ 9. Safety and Reinforcement Alignment
-
-- Detox models: Trained with finetuning + reward signal
-- OpenAI uses RLHF (Reinforcement Learning from Human Feedback)
-- Tools: TRL (Hugging Face), PPOTrainer
-
-**Basic RLHF Pipeline:**
-1. SFT (Supervised Fine-tuning)
-2. Reward model from ranking data
-3. Policy optimization (e.g., PPO)
-
----
-
-## 💻 10. Code Snippets & Demos
-
-### A. LoRA Setup with PEFT
-```python
-from peft import get_peft_model, LoraConfig
-from transformers import AutoModelForCausalLM
-
-config = LoraConfig(task_type="CAUSAL_LM", r=4, lora_alpha=32, lora_dropout=0.05)
-model = AutoModelForCausalLM.from_pretrained("tiiuae/falcon-7b")
-model = get_peft_model(model, config)
-model.print_trainable_parameters()
-```
-
-### B. QLoRA Example
-```python
-from transformers import BitsAndBytesConfig
-bnb_config = BitsAndBytesConfig(load_in_4bit=True)
-model = AutoModelForCausalLM.from_pretrained("llama-7b", quantization_config=bnb_config)
-```
-
-### C. Training with HF Trainer
-```python
-from transformers import Trainer, TrainingArguments
-args = TrainingArguments(
-  output_dir="./outputs",
-  per_device_train_batch_size=8,
-  gradient_accumulation_steps=4,
-  num_train_epochs=3,
-  learning_rate=2e-5,
-  save_steps=1000,
-  logging_dir="./logs"
-)
-trainer = Trainer(model=model, args=args, train_dataset=train_data)
-trainer.train()
-```
-
-
-### D. Data Preprocessing (SFT-style JSON to Tokenized Format)
-```python
-from datasets import load_dataset
-from transformers import AutoTokenizer
-
-dataset = load_dataset("json", data_files="data.json")
-tokenizer = AutoTokenizer.from_pretrained("llama-7b")
-
-def tokenize(example):
-    return tokenizer(
-        f"### Instruction:\n{example['instruction']}\n\n### Input:\n{example['input']}\n\n### Response:\n{example['output']}",
-        truncation=True, padding="max_length"
-    )
-tokenized_dataset = dataset.map(tokenize)
-```
-
-### E. Evaluation Script (BLEU Score)
-```python
-from datasets import load_metric
-metric = load_metric("bleu")
-
-predictions = ["The cat is on the mat"]
-references = [["The cat sits on the mat"]]
-print("BLEU:", metric.compute(predictions=predictions, references=references))
-```
-
-### F. Custom LoRA Module in PyTorch
-```python
-import torch.nn as nn
-class LoRALinear(nn.Module):
-    def __init__(self, in_features, out_features, r=8):
-        super().__init__()
-        self.linear = nn.Linear(in_features, out_features)
-        self.A = nn.Parameter(torch.randn(in_features, r))
-        self.B = nn.Parameter(torch.randn(r, out_features))
-        self.alpha = 16
-
-    def forward(self, x):
-        return self.linear(x) + (self.alpha / self.A.shape[1]) * (x @ self.A @ self.B)
-```
-
-
-
+- **3. Supervised Finetuning (SFT)**  
+  - Train on (input, output) pairs for task alignment  
+  - Data: Labeled instruction-response data  
+  - Goal: Adapt to instruction-following tasks and formats
+
+- **4. Preference Finetuning (RLHF, DPO)**  
+  - Learn from human preferences using ranked responses  
+  - Data: Ranked outputs (e.g., winner vs. loser completions)  
+  - Goal: Optimize model behavior for safety, helpfulness, alignment
+
+- **5. PEFT (Parameter-Efficient Finetuning)**  
+  - Update only small, targeted parts of the model (e.g., adapters in LoRA)  
+  - Data: Any of the above  
+  - Goal: Efficient specialization with minimal memory/compute overhead
+
+- **6. Model Merging / Distillation**  
+  - Combine or compress models (e.g., distill large into small)  
+  - Data: Outputs or weights of finetuned models  
+  - Goal: Support multi-tasking or low-resource deployment
+
+
+
+
+
+
+## 2. Finetuning Overview
+* **Goal**: Adapt a base model to a specific task
+* **Forms**: Full, partial, PEFT (e.g., LoRA), supervised, preference, long-context
+* **Supervised finetuning**: (input, output) pairs to align with task-specific objectives
+* **Preference finetuning**: Learn to generate preferred responses using comparative data
+
+## 3. When to Finetune
+
+### Reasons to Finetune
+
+* Improve instruction-following & structured output (e.g., JSON, YAML)
+* Domain adaptation: SQL dialects, customer-specific queries
+* Bias mitigation: finetune on curated data to reduce learned biases
+* Distillation: train small models to mimic large ones
+* Finetuned small models can outperform larger base models (e.g., Grammarly’s Flan-T5 > GPT-3 on editing tasks)
+
+### Reasons Not to Finetune
+
+* High cost: (annotated) data, compute, ML knowledge (training, serving) needed
+  * Evaluation pipeline and iterative experimentation required
+* Can degrade performance on other tasks (catastrophic forgetting)-> consider separate models 
+* Not experimented with prompting (+Tools) 
+* May not outperform strong prompt+RAG setups
+
+
+### Finetuning vs RAG
+- **Fine-Tuning or Retrieve?** after prompt engineering? if Failures are 
+  - **Information-based** (facts)-> **RAG** (term based then embeddings),
+  - **Behavior-based** (forms)-> **Fine-tune**
+  - **Both**: **RAG first,** then Fine-tune  
+
+| Scenario                 | Best Choice    | Explanation                                                         |
+| ------------------------ | -------------- | ------------------------------------------------------------------- |
+| Missing / outdated information | **RAG**        | Connect model to external sources (BM25, embedding-based retrieval) |
+| Behavior-based (Output format issues)     | **Finetuning** | Reinforce syntax/styles with labeled data                           |
+| Hallucinations           | **RAG first**  | RAG reduces hallucination via grounding                             |
+| Both info & behavior | **RAG then Fine** | RAG addresses info gaps, finetuning aligns outputs                  |
+
+## 4. Memory Bottlenecks
+* **Memory** is a bottleneck for working with FMs (both inference & finetuning)
+  - Fine-tuning memory: f (N of parameters + numerical representations)
+* **Inference Memory**:
+  `Total = N × M × 1.2` where N = parameters, M = bytes/param (e.g., 2 bytes for FP16)
+    - 20% for activation and key-value vectors
+    - Example: 13B params × 2B × 1.2 = **\~31.2 GB**
+
+* **Training Memory**:
+
+  - Additional memory for:
+    * **Gradients**: 1 per trainable param
+    * **Optimizer state**: up to 2 per param (e.g., Adam)
+    * **Activations** (can exceed weights)
+    * Estimate: `Training Mem ≈ N x M x 3 ` (for Adam)
+
+* **Gradient checkpointing**: Recomputes activations to save memory
+
+* **Numerical formats**:
+
+  * **Floating Point**: FP32 (4B, High precision), FP16 (2B, Lower precision; inference / mixed precision), 
+  * **Brain Float**: BF16, (2B, Training on TPUs/GPUs)
+  * **Normal Float**: NF4 (Weight quantization)
+  * **Integer**: INT8, INT4 (Inference quantization)
+  * **Mixed precision** (AMP): common for training
+  * Note: Training is more sensitive to numerical precision; some Ops in 32, some 16, 8 bits; for inference, use 16, 8, 4 bits
+
+* **Quantization**: reduce bits per param (precision)
+    - mostly on weights 
+    - post-training (PTQ), or inference quantization (<=16)
+  
+
+## 5. FineTuning Techniques
+- finetuning large-scale models is memory-intensive
+- Reducing model’s memory footprint: finetuning more accessible
+- partial fine-tuning (e.g. only last layer) is parameter inefficient -> PEFT: inserting additional parameters into the model in the right places (parameter efficient)
+### 5.1 PEFT Techniques
+#### Adapter-Based Methods
+- Add trainable parameters to the model’s architecture,
+- Examples: 
+  - **LoRA** Low-rank adapters (W → W + α/r AB); **BitFit** Only  bias terms, **IA3**: Inject  per layer (multi-task efficient), **LongLoRA** long-context adaptation                                
+
+#### Soft Prompt-Based Methods
+- modify how the model processes the input 
+- **Soft prompt**: insert special trainable tokens (soft tokens)
+- e.g. Prompt Tuning, P-Tuning, Prefix-Tuning
+
+#### LoRA
+- LoRA is the most popular & dominant PEFT technique 
+  - No extra inference latency; 
+* **Low-rank update**:
+
+  ```math
+  W' = W + \frac{α}{r} * W_{AB}
+  ```
+  * `W_{AB} = A(n x r). B(r x m)` is a low rank decomposition (factorization)
+  * Only A and B are trainable (reduced memory); W kept intact
+  * Typically applied to Wq, Wv, Wk, Wo matrices
+  * why it works? pre-training implicitly minimizes the model’s intrinsic dimension.
+* **LoRA configs**:
+    - rank parameter r  
+      -  r = 2, 4, 8, ...
+      - e.g. GPT-3(750B ~ 350GB w/ 16FP) -> with r = 2 -> 18M (0.01%)
+      - 4 < r < 64, usually sufficient for many use cases
+    - LoRA Serving: 
+      * Merge LoRA weights (A,B) into weights before serving 
+      * Modular serving: merge during inference; load different adapters on same base model (multi-LoRA); adds latency
+      
+
+
+
+<!-- | LoRA Rank (r) | α/r Ratio | Memory  | Performance Notes              |
+| ------------- | --------- | ------- | ------------------------------ |
+| 2             | \~1       | 6–37 MB | Good results on Wq, Wv, Wk, Wo |
+| 64+           | varies    | higher  | May lead to overfitting        | -->
+
+#### Quantized LoRA (QLoRA)
+
+* 4-bit NF4 quantization + LoRA
+* Uses **paged optimizers** for CPU-GPU memory swap
+* Finetunes 65B models on single 48GB GPU
+* Trade-off: More memory-efficient, slower training due to dequantization
+* **Guanaco** models: competitive with GPT-3.5 tier
+
+### 5.2 Model Merging
+- ensemble methods: combine outputs of different models
+- model merging: goal: create a single model from multiple models
+- with or without fine-tuning 
+- model 1 on task 1, model 2 on task 2 -> merged model better at both
+- use case: multi-task finetuning (paralel fine-tuning -> merge)
+  - one way to do federated learning
+- Model merging approaches:how model parameters are combined: 
+  - summing, layer stacking, and concatenation.
+
+| Approach             | Summary                                                       |
+| -------------------- | ------------------------------------------------------------- |
+| **Summing (linear)** | Weighted average of task vectors or layers                    |
+| **SLERP**            | Spherical interpolation (geodesic path between model vectors) |
+| **Layer Stacking**   | Take layers from different models (frankenmerging, MoE)       |
+| **Concatenation**    | Merge LoRA adapters; total rank = r1 + r2                     |
+
+* **Task Vectors**: Δ = Finetuned - Base
+* **Pruning**: Reset redundant parameters to base (improves merge quality)
+
+## 6. Finetuning Tactics
+
+### Model Choice Strategy
+
+* **Progression path**: start small (cheapest and fastest), test, scale up
+* **Distillation path**: strong → small model via synthetic data
+
+### Frameworks
+
+* Hugging Face `peft`, `LLaMA-Factory`; more in Llama Police
+* Use inference APIs for quick tests; frameworks for control & tuning
+
+### Hyperparameters
+
+| Hyperparameter         | Typical Range | Notes                                      |
+| ---------------------- | ------------- | ------------------------------------------ |
+| **Learning rate**      | 1e-7 – 1e-3   | Stable loss = good; adjust with scheduler  |
+| **Batch size**         | ≥ 8           | Gradient accumulation if memory-bound      |
+| **Epochs**             | 1 (millions)–10 (thousands)        | Small data = more epochs; monitor val loss |
+| **Prompt loss weight** | 0.1 (default) | Tune contribution from prompt vs. response |

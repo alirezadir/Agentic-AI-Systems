@@ -20,17 +20,9 @@
 
 **Example Use Cases:**
 * Assistants, coworkers, and coaches
-<!-- * create a website, gather data, plan a trip, do market research, manage a customer account, automate data entry, prepare for
-interviews, interview our candidates, negotiate a deal, -->
-  * QA agents
-  * Research assistants
-  * Data analysts
-  * Coding agents (e.g., SWE-Agent)
+  * QA agents, Research assistants, Interview preparation, Negotiaion agent 
+  * Data analysts, Web scraping, summarizing bots, Coding agents (e.g., SWE-Agent), Website creation 
   * Customer support bots
-  * Web scraping + summarizing bots
-  * Interview preparation 
-  * Negotiaion agent 
-  * Website creation 
 
 * Example: RAG agent with Tabular data 
   - Task: `Project the sales revenue for product X over the next three months`
@@ -260,12 +252,6 @@ Plan: [get_today_date, fetch_top_products, fetch_product_info, generate_query, g
 * Reflection/adjustment quality
 * Tool call validity (tools, parameters)
 * Task success vs constraints
-
-
-
-
-* Can be done by same or separate agents
-* Example from Reflexion: revise code after test failure
 
 ### 3.6 Security
 
