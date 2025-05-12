@@ -1,8 +1,8 @@
-**Chapter 2: Understanding Foundation Models — Study Guide for Gen-AI Engineering Interviews**
+# **Chapter 2: Understanding Foundation Models**
 
 ---
 
-### 📚 Structure Overview
+### 📚 Overview
 
 1. **Training Data**
    - Multilingual Models

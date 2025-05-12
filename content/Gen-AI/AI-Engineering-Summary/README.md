@@ -1,6 +1,6 @@
 # AI Engineering Book Summary
 
-This is my personal summary of key concepts and chapters from the book [**AI Engineering** by Chip Huyen](https://www.oreilly.com/library/view/ai-engineering/9781098166298/). Each chapter distills core insights, practical notes, and system design principles relevant to building real-world ML and agentic systems.
+This is my personal summary of key concepts and chapters from the book [**AI Engineering** book by Chip Huyen](https://www.oreilly.com/library/view/ai-engineering/9781098166298/). Each chapter distills core insights, practical notes, and system design principles relevant to building real-world ML and agentic systems.
 
 ---
 
@@ -13,7 +13,8 @@ This is my personal summary of key concepts and chapters from the book [**AI Eng
 | 3 | [Evaluation of Generative Systems](./Chapter_3_Evaluation.md) |
 | 4 | [Evaluating AI Models & Agents](./Chapter_4_Evaluate_AI.md) |
 | 5 | [Prompt Engineering](./Chapter_5_Prompt_Eng.md) |
-| 6 | [RAG & Agentic Systems - Part 1](./Chapter_6_RAG_Agents_1.md) |
+| 6.1 | [RAG](./Chapter_6_1_RAG.md) |
+| 6.2 | [Agents](./Chapter_6_2_Agents.md) |
 | 7 | [Finetuning & Model Adaptation](./Chapter_7_Finetuning.md) |
 | 8 | [Data Engineering for GenAI](./Chapter_8_Data_Eng.md) |
 | 9 | [Inference Optimization Techniques](./Chapter_9_Inference%20Optim.md) |

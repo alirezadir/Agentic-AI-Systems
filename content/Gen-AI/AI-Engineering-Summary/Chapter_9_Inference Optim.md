@@ -2,126 +2,204 @@
 
 ---
 
+# Inference Optimization
+
+**inference optimization** aims to improve latency, cost, and throughput across model, hardware, and service levels
+
 ## Understanding Inference Optimization
 
 ### Inference Overview
 
-- **Inference Server**: Executes models using available hardware. Handles incoming requests and returns predictions.
-- **Inference Service**: Includes request routing, preprocessing, and the inference server.
-- **API Types**:
-  - **Online APIs**: Low latency, good for real-time use (chatbots, code gen).
-  - **Batch APIs**: Cost-effective, suited for high-throughput (summaries, recommendations).
+* **Inference server** executes models on hardware
+* **Inference service** handles request routing, preprocessing, response
 
-#### Bottlenecks
-| Type                    | Definition                                          | Examples                            |
-|-------------------------|-----------------------------------------------------|-------------------------------------|
-| Compute-bound          | Limited by raw computation power                    | Image generation                    |
-| Memory bandwidth-bound | Limited by data transfer rate (GPU <-> memory)     | Autoregressive LLM inference        |
+### Computational Bottlenecks
 
-**Prefill & Decode Phases**:
-- **Prefill**: Input tokens processed in parallel → compute-bound
-- **Decode**: One token at a time, dependent on memory load → bandwidth-bound
+#### Compute-bound
 
-### Interview Tips
-- Know the distinction between prefill and decode
-- Discuss trade-offs in batching latency vs. throughput
+* Limited by arithmetic ops
+* Example: **prefill step** in transformers
 
----
+#### Memory bandwidth-bound
 
-### Inference Performance Metrics
+* Limited by memory transfer speed
+* Example: **decode step** in transformers
 
-| Metric     | Meaning                                                  | Tips for Use Cases                  |
-|------------|----------------------------------------------------------|------------------------------------|
-| TTFT       | Time to First Token — affected by prefill step           | Important for conversational bots  |
-| TPOT       | Time Per Output Token — affected by decoding            | Critical for large outputs         |
-| TBT / ITL  | Time Between Tokens / Inter-Token Latency               | Monitors smoothness in generation  |
-| Throughput | Queries processed per second                            | Optimize for cost-efficiency       |
-| Goodput    | Useful throughput (removes failed/incomplete queries)   | Evaluates real system effectiveness|
-| Utilization| MFU/MBU show model/memory usage                         | Helps diagnose underused hardware  |
+#### Memory capacity-bound (a.k.a. OOM)
 
-**Interview Takeaways**:
-- Know trade-offs: reducing latency may increase cost.
-- Discuss metrics for both user experience and infra planning.
+* Often appears as memory-bound in ML usage
+* Can be addressed via model partitioning
 
----
+```python
+# Arithmetic intensity = FLOPs / bytes accessed
+# Use Roofline model to diagnose bottlenecks
+```
 
-### AI Accelerators
+## Online and Batch Inference APIs
 
-| Accelerator | Key Feature                     | When to Use                             |
-|-------------|----------------------------------|------------------------------------------|
-| GPU         | Parallel processing, flexible   | Standard for training & inference        |
-| TPU         | Google’s matrix-op optimized   | Cost-effective for batch jobs            |
-| Gaudi (Intel)| Memory/compute tuned chips     | Efficient LLM workloads                  |
-| Cerebras    | Wafer-scale engine             | Extreme scale models                     |
+* **Online APIs**: optimize for latency
+* **Batch APIs**: optimize for cost, allow aggressive batching
+* Use cases for batch APIs:
 
-**Memory Hierarchy Optimization**:
-- **FlashAttention, Triton, ROCm**: Improve bandwidth-sensitive ops
-- **Power Consumption Consideration**: Choose chips with optimal TDP/FLOPs balance
+  * Periodic reporting
+  * Document ingestion
+  * Synthetic data generation
+* **Streaming mode**: emits tokens as generated, improves user-perceived latency
 
-**Study Tip**: Review FLOPs, memory size, and bandwidth to match hardware to workload (compute-bound vs. bandwidth-bound).
+## Inference Performance Metrics
 
----
+### Latency Components
 
-## Inference Optimization
+* **TTFT**: Time to First Token (prefill)
+* **TPOT**: Time Per Output Token (decode)
+* **Total Latency** = `TTFT + TPOT × output_tokens`
 
-### Model Optimization
+### Throughput & Goodput
 
-#### Compression Techniques
-| Technique   | Description                                      | Use Case                             |
-|-------------|--------------------------------------------------|--------------------------------------|
-| Quantization| Reduce bit precision (e.g., float32 → int8)     | Faster inference, smaller models     |
-| Distillation| Small model trained to mimic large one           | Edge deployment                      |
-| Pruning     | Remove unimportant weights                      | Speed & memory gain without retrain |
+* **Throughput (TPS)**: tokens/sec system-wide
+* **Goodput**: requests/sec meeting latency SLOs
+* Tradeoff: Batching ↑ throughput, ↓ latency
 
-#### Decoder Optimization
-- **Autoregressive Decoding Bottlenecks**: Sequential generation delays output
-- **KV Cache**: Helps skip recomputation for past tokens
-- **Speculative Decoding**: Generate multiple tokens in parallel, verify correctness
+### Utilization
 
-#### Attention Mechanism Optimization
-- **Grouped-Query Attention**: Reduces quadratic complexity
-- **FlashAttention**: Efficient GPU kernel for attention
+#### MFU (Model FLOPs Utilization)
 
-#### Kernels & Compilers
-| Concept           | Purpose                                  | Tools                        |
-|------------------|------------------------------------------|------------------------------|
-| Vectorization     | Process multiple elements at once         | Torch, TensorRT              |
-| Parallelization   | Chunk work across cores                   | CUDA, Triton                 |
-| Loop Tiling       | Cache-efficient iteration order           | Hardware-specific tuning     |
-| Operator Fusion   | Combine ops to minimize memory overhead   | TVM, MLIR, OpenXLA           |
+```python
+MFU = actual_tokens_per_sec / peak_tokens_per_sec
+```
 
----
+#### MBU (Model Bandwidth Utilization)
 
-### Inference Service Optimization
+```python
+MBU = (param_count × bytes/param × tokens/s) / peak_bandwidth
+```
 
-#### Batching
-| Method             | Description                                  | Pros / Cons                          |
-|--------------------|----------------------------------------------|--------------------------------------|
-| Static Batching    | Wait for full batch                          | Efficient but high initial latency   |
-| Dynamic Batching   | Timeout-based batching                       | Good latency-cost tradeoff           |
-| Continuous Batching| Replace completed requests mid-batch         | Optimal throughput, lower latency    |
+* High MFU → compute-bound workload
+* High MBU → bandwidth-bound workload
 
-#### Parallelism
-| Type                | How it Works                                          | Best For                  |
-|---------------------|--------------------------------------------------------|---------------------------|
-| Pipeline            | Each layer on diff machine (adds comm. overhead)       | Training large models     |
-| Replica             | Same model, replicated to serve in parallel            | Low-latency apps          |
-| Context             | Input split across devices                             | Long-context handling     |
-| Sequence            | Ops split across machines (attention vs FF)            | Specialized workloads     |
+## AI Accelerators
 
-#### Prompt Caching
-- Cache frequent prompts or prefixes to reduce compute load
+### CPUs vs GPUs
 
-#### Decoupled Prefill & Decode
-- Prefill on one machine, decode on another
-- Separates compute and bandwidth bottlenecks
+* CPUs: few strong cores
+* GPUs: thousands of weak, parallel cores (for **matmul-heavy** workloads)
 
----
+### Specialized Inference Chips
 
-## Summary
-- Optimize **latency**, **throughput**, **utilization** based on workload needs.
-- Leverage model-level techniques (quantization, pruning, attention optimization) for size/speed.
-- Service-level techniques (batching, caching, parallelism) keep model quality intact.
+* Examples: Apple Neural Engine, AWS Inferentia, MTIA, Edge TPU
+* Optimized for: low-precision, fast memory, low power
+
+### Chip Metrics
+
+* **FLOPs**, **memory bandwidth**, **memory capacity**, **TDP**
+
+## Model Optimization
+
+### Model Compression
+
+#### Quantization
+
+* Reduces param size, memory bandwidth use
+* Popular: **weight-only quantization**
+
+#### Distillation
+
+* Trains smaller model to mimic larger one
+
+#### Pruning
+
+* Removes unimportant params or sets them to zero (sparsity)
+* Less adopted due to implementation complexity
+
+### Autoregressive Decoding Optimizations
+
+#### Speculative Decoding
+
+* Use **draft model** for K tokens → verify with **target model**
+
+```python
+# Pseudocode
+draft_tokens = draft_model(input)
+verified_tokens = target_model.verify(draft_tokens)
+```
+
+#### Inference with Reference
+
+* Copy repeated tokens directly from context instead of generating
+
+#### Parallel Decoding
+
+* Predict multiple tokens in parallel (e.g., **Medusa**, **Lookahead**)
+* Requires token **verification and integration**
+
+### Attention Mechanism Optimizations
+
+#### KV Cache
+
+```python
+# KV Cache size
+2 × B × S × L × H × bytes
+```
+
+* Bottleneck in long-context inference
+* Solutions:
+
+  * **Cross-layer attention**
+  * **Multi-query/grouped-query attention**
+  * **PagedAttention (vLLM)**
+
+#### Attention Kernels
+
+##### FlashAttention
+
+* Fuses attention ops into optimized kernel
+* Hardware-specific
+
+## Kernels and Compilers
+
+* Languages: **CUDA**, **Triton**, **ROCm**
+* Techniques:
+
+  * Vectorization
+  * Parallelization
+  * Loop Tiling
+  * Operator Fusion
+* Compilers: **torch.compile**, **XLA**, **OpenXLA**, **TensorRT**
+
+## Inference Service Optimization
+
+### Batching Techniques
+
+* **Static Batching**: fixed size
+* **Dynamic Batching**: fixed window
+* **Continuous Batching**: return completed requests early; refill batch
+
+### Decoupling Prefill and Decode
+
+* Allocate different machines for compute-bound (prefill) and bandwidth-bound (decode) stages
+
+### Prompt Caching
+
+* Cache overlapping prompt segments (e.g., system prompts)
+* Drastically reduces TTFT and cost
+* Tradeoff: additional memory
+
+### Parallelism Strategies
+
+#### Replica Parallelism
+
+* Multiple full-model replicas
+
+#### Model Parallelism
+
+* **Tensor Parallelism**: split operators
+* **Pipeline Parallelism**: split model stages
+
+#### Specialized Parallelism
+
+* **Context Parallelism**: split input sequence
+* **Sequence Parallelism**: split operations
+
 
 ---
 

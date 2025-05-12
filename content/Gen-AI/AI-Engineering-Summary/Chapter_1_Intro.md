@@ -1,5 +1,5 @@
 
-# 📘 Chapter 1 – Introduction to Building AI Applications with Foundation Models
+# 📘 Chapter 1 – Introduction 
 
 ---
 
@@ -14,9 +14,9 @@
 - Pretrained models reduce time-to-market for AI apps.
 - The barrier to entry is now about **prompting + integration**, not model training.
 
-### Interview Tips:
+<!-- ### Interview Tips:
 - Expect system design questions around "How would you use a foundation model to build X?"
-- Emphasize API orchestration, not just model accuracy.
+- Emphasize API orchestration, not just model accuracy. -->
 
 ---
 
