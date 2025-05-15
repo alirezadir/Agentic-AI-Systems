@@ -1,30 +1,5 @@
 # Chapter 6.1 : RAG
 
-<!-- ---
-
-## Overview 
-
-1. Introduction: Context Needs and Patterns
-2. RAG (Retrieval-Augmented Generation)
-   - Architecture
-   - Retrieval Algorithms
-   - Retrieval Optimization
-   - Beyond Text (Multimodal, Tabular)
-   - Evaluation
-   - Pitfalls & Best Practices
-3. Agents
-   - Overview
-   - Tools
-   - Planning & Control Flows
-   - Failure Modes & Evaluation
-   - Reflection & Iteration
-   - Security
-4. Memory in RAG & Agents
-5. Summary & Review Questions
-6. Code Snippets & Practical Examples
-
---- -->
-
 ## 1. Introduction
 
 - LLMs are powerful but **context-limited**.
