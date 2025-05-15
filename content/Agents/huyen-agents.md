@@ -1,6 +1,8 @@
 #  🤖  Agents
+This is a summary of Chip Huyen's blog and book chapter on agents, with some added context to provide a comprehensive overview of their design, capabilities, and practical applications.
 
 ### 1. Agents Overview
+
 
 * **Agents**: autonomous systems that:  a) **perceive an environment** and 2) **take actions** upon the environment, to achieve goals.
   - *Environment*: e.g. a game, computer, files, internet, road, etc

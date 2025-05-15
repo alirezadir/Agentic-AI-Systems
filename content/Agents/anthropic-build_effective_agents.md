@@ -6,28 +6,42 @@
 - [Anthropic Blog](https://www.anthropic.com/engineering/building-effective-agents)
 - [Anthropic Cookbook (patterns/agents)](https://github.com/anthropics/anthropic-cookbook/tree/main/patterns/agents)
 
+
+## Workflow Patterns Overview
+
+1. **Basic Workflows**  
+    - **Prompt Chaining**: Sequentially process tasks using predefined prompts.  
+    - **Routing**: Classify input and route to appropriate workflows or tools.  
+    - **Parallelization**: Execute multiple tasks simultaneously and aggregate results.  
+
+2. **Evaluator-Optimizer Workflow**  
+    - Iteratively refine outputs by generating, evaluating, and optimizing in a feedback loop.  
+
+3. **Orchestrator-Workers Workflow**  
+    - Dynamically decompose tasks into subtasks, delegate to specialized workers, and synthesize results.  
+
 ---
 
-## 🧩 Core Concepts
+## Core Concepts
 
 | Type        | Description                                                                 |
 |-------------|-----------------------------------------------------------------------------|
 | **Workflow**| Predefined sequence of LLM + tool steps, predictable, controlled logic      |
 | **Agent**   | LLM-driven reasoning and control over tools, memory, and task flow          |
 
+
+
+### ⚒️ When to Use What
 > 🟢 Use workflows when predictability matters  
 > 🔁 Use agents when flexibility and adaptability are required
 
----
+#### Workflow
+- Use **Workflow** for static processes with predefined steps.
+- Use **Workflow** for tool usage with human oversight.
 
-## ⚒️ When to Use What
-
-| Scenario                            | Use         |
-|-------------------------------------|-------------|
-| Static process with steps           | Workflow    |
-| Need to plan, adapt dynamically     | Agent       |
-| Tool usage with human oversight     | Workflow    |
-| Task may require retries/reasoning | Agent       |
+#### Agents
+- Use **Agent** when planning and dynamic adaptation are required.
+- Use **Agent** for tasks that may require retries or reasoning.
 
 ---
 
