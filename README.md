@@ -1,6 +1,6 @@
-# Gen-AI-Engineering
+# 🤖 Agentic-AI-Systems
 
-Welcome to **Gen-AI-Engineering** — a curated and evolving knowledge base for mastering Agentic and Generative AI system design.
+Welcome to **Agentic-AI-Systems** — a curated and evolving knowledge base for mastering Agentic and Generative AI system design.
 
 ---
 
@@ -18,7 +18,7 @@ Personal summaries of system design and evaluation overviews focused on generati
 
 
 ### 2. [`/Agents`](./content/Agents/) Summaries
-Personal summaries which deep dives into agent architectures, SDKs, workflows, and orchestration strategies.
+Personal summaries which deep dive into agent architectures, SDKs, workflows, and orchestration strategies.
 
 #### Agent Design Patterns
 - [LlamaIndex Multi-Agent Design](./content/Agents/llama-index-multi-agent.md): Exploring multi-agent communication and delegation in LlamaIndex.
@@ -33,10 +33,10 @@ Personal summaries which deep dives into agent architectures, SDKs, workflows, a
     - [OpenAI Agents: Concepts and Setup](./content/Agents/openai-agents.md): Key concepts and basic setup for OpenAI agentic systems.
 - [LlamaIndex Agent Workflow](./content/Agents/llama-index-agent-workflow.md): Setup and execution of agent workflows using LlamaIndex.
 
-#### Other
-- 
+<!-- #### Other -->
 
-### 3. [`Code`](./Code/) (🚧 Coming Soon)
+
+### 3. [`/Code`](./Code/) (🚧 Coming Soon)
 Hands-on starter code, examples, and small projects to accelerate your understanding and development of agentic systems.
 
 <!-- | Resource | Description |
