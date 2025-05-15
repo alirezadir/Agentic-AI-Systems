@@ -1,6 +1,8 @@
-# 🤖 Agentic-AI-Systems
+# 🤖 Agentic AI Systems
 
 Welcome to **Agentic-AI-Systems** — a curated and evolving knowledge base for mastering Agentic and Generative AI system design.
+
+![Agentic-AI-Systems](./imgs/cover-01.png)
 
 ---
 
