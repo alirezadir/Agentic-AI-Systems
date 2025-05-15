@@ -40,5 +40,5 @@
 
     
 ### Other Resources
-- [the rise of agentic AI](https://docs.google.com/presentation/d/1VNFGsCYMDT1VTe8W1wxFbmAwYsJ1I0Y-6CnTvuCEn98/edit?slide=id.g4dfce81f19_0_45#slide=id.g4dfce81f19_0_45)
+- [The rise of agentic AI](https://docs.google.com/presentation/d/1VNFGsCYMDT1VTe8W1wxFbmAwYsJ1I0Y-6CnTvuCEn98/edit?slide=id.g4dfce81f19_0_45#slide=id.g4dfce81f19_0_45)
 - [From LLMs to Stateful Long-Running Multi-Agent Systems](https://github.com/panaversity/learn-agentic-ai/blob/main/-01_lets_get_started/03_from_llms_to_stateful_long_runningl_multi_agents/01_what_are_multi_agent_systems.md)
