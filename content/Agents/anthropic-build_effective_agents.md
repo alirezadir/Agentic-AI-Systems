@@ -11,14 +11,14 @@
 
 1. **Basic Workflows**  
     - **Prompt Chaining**: Sequentially process tasks using predefined prompts.  
-    - **Routing**: Classify input and route to appropriate workflows or tools.  
-    - **Parallelization**: Execute multiple tasks simultaneously and aggregate results.  
+    - **Routing**: Classify input and route to appropriate workflows or tools (via handoffs).  
+    - **Parallelization**: Execute multiple sub-tasks simultaneously and aggregate results.  
 
 2. **Evaluator-Optimizer Workflow**  
-    - Iteratively refine outputs by generating, evaluating, and optimizing in a feedback loop.  
+    - Iteratively refine outputs by generating, evaluating, and optimizing via feedback loops and an evulator agent.  
 
 3. **Orchestrator-Workers Workflow**  
-    - Dynamically decompose tasks into subtasks, delegate to specialized workers, and synthesize results.  
+    - An orchestrator agent dynamically decomposes tasks into subtasks, delegates to specialized workers, and synthesizes results.  
 
 ---
 

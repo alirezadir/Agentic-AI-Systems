@@ -232,59 +232,6 @@ Evaluation isn’t a one-time task—it must be ongoing, systematic, and automat
 
 ---
 
-# 2. Prompt Engineering
-- Prompt: instructions (+ context) given to a model to perform a task
-    - e.g. Task description, Example(s), Output format
-- Prompt engineering: frames input instructions + context to guide a model’s behavior; 
- - often serving as the first step in models adaptation.
-
-## 2.1 Core Concepts
-
-* **In-Context Learning**:
-
-  * Zero-shot: no examples
-  * Few-shot: include examples in prompt
-
-* **Prompt Types**:
-
-  * **System Prompt**: configures base behavior
-  * **User Prompt**: direct user instruction
-
-* **Context Length and Efficiency**:
-
-  * Use only relevant parts
-  * Token limit = cost + latency bottleneck
-
----
-
-## 2.2 Prompt Engineering Best Practices
-
-1. **Write Clear and Explicit Instructions**
-2. **Provide Sufficient Context**: from RAG or knowledge base
-3. **Break Complex Tasks into Simpler Subtasks**
-4. **Give the Model Time to Think**: Chain-of-Thought
-5. **Iterate on Prompts**: test, revise, repeat
-6. **Evaluate Prompt Tools**: Promptfoo, DSPy, LangChain
-7. **Organize and Version Prompts**: for rollback and reproducibility
-
----
-
-## 2.3 Defensive Prompt Engineering
-
-| Threat                        | Description                                  |
-| ----------------------------- | -------------------------------------------- |
-| **Reverse Prompting**         | Extracting proprietary prompts from outputs  |
-| **Jailbreaking / Injection**  | Bypassing constraints with adversarial input |
-| **Sensitive Info Extraction** | Prompt-crafted info leaks                    |
-
-**Mitigations**:
-
-* Prompt filtering and sanitization
-* Guardrails for unsafe completions
-* Monitor inputs and outputs
-
----
-
 # 3. Finetuning
 
 Finetuning adapts models by updating weights based on task-specific data.

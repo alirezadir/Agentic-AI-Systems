@@ -1,11 +1,12 @@
-- LLMs Leaderboard
-    - [chatbot-arena-leaderboard](https://huggingface.co/spaces/lmarena-ai/chatbot-arena-leaderboard)
 
 ## LLMs
 ### 🔍 LLM Model Selection 
 
 Source: [Panaverse – Which LLM](https://github.com/panaversity/learn-agentic-ai/tree/main/-01_lets_get_started/00_which_llm)
 
+- LLMs Leaderboard
+    - [chatbot-arena-leaderboard](https://huggingface.co/spaces/lmarena-ai/chatbot-arena-leaderboard)
+    
 ## 📌 LLM Selection Criteria
 
 When choosing a Large Language Model (LLM) for agentic AI applications, consider the following:

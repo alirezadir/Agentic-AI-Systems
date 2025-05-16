@@ -1,9 +1,9 @@
 
-# OpenAI API QuickStart Guide (from Official Developer Docs)
+# OpenAI API QuickStart Guide 
+(from Official Developer Docs )
 
 This guide synthesizes the technical details and code examples from the official OpenAI API Guides across ten key areas:
-Text and Prompting, Images and Vision, Audio and Speech, Structured Outputs, Function Calling, Conversation State,
-Streaming, File Inputs, Reasoning, and Evals.
+- Text and Prompting, Images and Vision, Audio and Speech, Structured Outputs, Function Calling, Conversation State, Streaming, File Inputs, Reasoning, and Evals.
 
 ---
 
@@ -449,7 +449,7 @@ print(check.choices[0].message.content)
 ```
 
 ---
-## OpenAI Built-in Tools 
+## 10. OpenAI Built-in Tools 
 ### Web Search 
 
 - Use the `web_search_preview` tool to fetch real-time information from the web.
@@ -519,4 +519,23 @@ tasks:
 ```bash
 # Run your custom suite
 openai evals run math_eval --model gpt-4 --registry ./evals/registry --record
+```
+
+## 11. Loading Other Models in the OpenAI API
+- Example using Google Gemini model via ``base_url`` in ``client``
+```python
+  from openai import OpenAI
+
+  client = OpenAI(
+      api_key="GEMINI_API_KEY",
+      base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
+  )
+
+  response = client.chat.completions.create(
+      model="gemini-2.0-flash",
+      messages=[
+          {"role": "system", "content": "You are a helpful assistant."},
+          ...
+      ]
+  )
 ```

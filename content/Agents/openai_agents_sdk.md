@@ -31,13 +31,12 @@ The **Agents SDK** offers a minimal set of primitives:
     - Agent Hooks: Customize agent behavior at lifecycle stages.
     - [Voice Agents](https://platform.openai.com/docs/guides/voice-agents): Enable speech-to-speech or chained architectures.
 
-### Installation
-Install the SDK via pip:
+- Install the SDK via pip:
 ```bash
 pip install openai-agents
 ```
 
-### Hello World Example
+##### Hello World Example
 ```python
 from agents import Agent, Runner
 
@@ -55,7 +54,7 @@ A basic agent consists of:
 - **Model**: LLM and optional settings (e.g., temperature).
 - **Tools**: Callable functions or external tools.
 
-### Example: Haiku Agent
+##### Example: Haiku Agent
 ```python
 from agents import Agent, function_tool
 
@@ -71,22 +70,7 @@ agent = Agent(
 )
 ```
 
-### Context
-Agents support dependency injection and shared state via context:
-```python
-from dataclasses import dataclass
-from agents import Agent, RunContextWrapper
 
-@dataclass
-class UserContext:
-    uid: str
-    is_pro_user: bool
-
-    async def fetch_purchases(self) -> list:
-        ...
-
-agent = Agent[UserContext](...)
-```
 
 #### Output Types
 - Default output is plain `str`.
@@ -108,6 +92,32 @@ agent = Agent(
 )
 ```
 
+## 3. Models 
+- Built-in models: 
+    - Text models (generation, reasoning), 
+    - Image models (generation, analysis), 
+    - Audio models (tts, transcribe, whisper, real-time) 
+    - `o1`, `o3-mini`, `GPT-4.5`, `GPT-4o`, `GPT-4o-mini`, etc 
+    -  Just pass the model name to the agent `model`. Internally uses `OpenAIResponsesModel` or `OpenAIChatCompletionsModel`.
+    - List and pricing of models [here](https://platform.openai.com/docs/pricing#other-models)
+- Custom models: 
+    - Using littlellm 
+    ```python
+        # We prefix with litellm/ to tell the Runner to use the LitellmModel    
+        Agent(... model="litellm/anthropic/claude-3-5-sonnet-20240620", ...)
+        # or 
+        model_name = "anthropic/claude-3-5-sonnet-20240620"
+        Agent( ... model=LitellmModel(model=model_name, api_key=api_key) , ...)
+    ```
+    or
+    - Global: using ``AsyncOpenAI`` as client and `OpenAIChatCompletionsModel` as model
+    ```python
+        client = AsyncOpenAI(base_url=BASE_URL, api_key=API_KEY)
+        model=OpenAIChatCompletionsModel(model=MODEL_NAME, openai_client=client)
+    ```
+    - `Runner.run` level: using `ModelProvider`: `run_config=RunConfig(model_provider=CUSTOM_MODEL_PROVIDER)`
+    - Agent level: using `Agent.model`
+    - examples [here](https://github.com/openai/openai-agents-python/tree/main/examples/model_providers)
 ## 3. Tools
 ### Tool Types
 - **Hosted tools**: Run on LLM servers (e.g., `WebSearchTool`, `FileSearchTool`, `ComputerTool`).
@@ -254,16 +264,46 @@ Use the `Runner` class to execute agents:
 1. `Runner.run()` (async): Returns `RunResult`.
 2. `Runner.run_sync()` (sync wrapper): Returns `RunResult`.
 3. `Runner.run_streamed()` (async streaming): Returns `RunResultStreaming`.
-
+#### Example: Basic Run
 ```python
 from agents import Agent, Runner
+import asyncio
 
 async def main():
     agent = Agent(name="Assistant", instructions="You’re a concise assistant.")
     result = await Runner.run(agent, "Write a haiku about recursion.")
     print(result.final_output)
 ```
+### Example: streamed Run
+```python
+    async def main():
+        agent = Agent(...)
+        result = Runner.run_streamed(agent, input="Please tell me 5 jokes.")
 
+        async for event in result.stream_events():
+            if event.item.type == "message_output_item":
+                print(ItemHelpers.text_message_output(event.item))
+
+    asyncio.run(main())
+    ```
+- `stream_events()` types: 
+    - tool_call_output_item
+    - tool_call_item
+    - message_output_item
+
+### Run Config
+```python
+    from agents.run import RunConfig
+
+    config = RunConfig(
+        model=model,
+        model_provider=external_client,
+        tracing_disabled=True
+    )
+    
+    agent: Agent = Agent(name="Assistant", instructions=...)
+    result = Runner.run_sync(agent, "Hello, how are you.", run_config=config)
+```
 ### Multi-turn Conversation
 Each run represents a single logical turn in a conversation. Use `RunResult.to_input_list()` for the next turn.
 
@@ -299,12 +339,29 @@ async with MCPServerStdio(params={
         mcp_servers=[server],
     )
 ```
+### Context
+Agents support dependency injection and shared state via context:
+```python
+from dataclasses import dataclass
+from agents import Agent, RunContextWrapper
+
+@dataclass
+class UserContext:
+    uid: str
+    is_pro_user: bool
+
+    async def fetch_purchases(self) -> list:
+        ...
+
+agent = Agent[UserContext](...)
+```
 
 ### Agent Patterns 
 - [Agent Patterns Examples ](https://github.com/openai/openai-agents-python/tree/main/examples/agent_patterns)
 
 ### Multi-agent orchestration
-- [tBa]
+- Orchestrating via LLM
+- Orchestrating via code 
 
 ### Dynamic Instructions
 - `instructions` can be a function (sync or async) receiving `(context, agent)` and returning a prompt string at runtime.

@@ -1,13 +1,18 @@
 ## Modern Python 
 - Python 
-    - pydantic: data validation, parsing, and serialization management using Python type annotations
-        - type enforcement, auto conversion, and serialization(`.dict(), .json()`)
-    - asyncio: asynchronous I/O (async, await, async.run)
+    - `asyncio`: asynchronous I/O (async, await, async.run)
     - Docstrings: documentation strings for Python functions and classes ("""...""")
-    - OOP ( inheritance, metaclasses, decorators (e.g. `@dataclass, @property, @tool`))
-    - containers: Docker (build, run, push; Dockerfile)
-    [text](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)
-- [Python uv](https://www.datacamp.com/tutorial/python-uv): new, ultra-fast Python package manager.
+    - OOP ( inheritance, metaclasses, decorators (e.g. `@dataclass, @property, @tool`)
+    - `pydantic`: data validation, parsing, and serialization management using Python type annotations
+        - type enforcement, auto conversion, and serialization(`.dict(), .json()`)
+    - [py3 cheatsheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)
+
+- Containers: Docker (build, run, push; Dockerfile)
+- Package manager:
+    - [Python uv](https://www.datacamp.com/tutorial/python-uv): new, ultra-fast Python package manager; recommended for GenAI
+    `$ brew install uv`
+    `$ uv init explore-uv`
+    `$ uv add llama-index`
 - Vibe Coding / Chat-Oriented Programming (CHOP)
     - [cursor](https://www.cursor.com/en/features)
     - Copilot 
