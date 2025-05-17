@@ -78,7 +78,6 @@ agent = Agent(
 
 ```python
 from pydantic import BaseModel
-from agents import Agent
 
 class CalendarEvent(BaseModel):
     name: str
@@ -209,68 +208,60 @@ async def main():
 ```
 
 ## 4. Handoffs
-Handoffs allow agents to delegate tasks to specialized sub-agents, enabling modular workflows.
+- Handoffs allow agents to delegate tasks to other agents (e.g.specialized sub-agents), enabling modular workflows.
+- Handoffs are defined in the agent's `handoffs` property.
+- Can take an `agent` directly, or a Handoff object (e.g. `Handoff(agent, input_guardrails=...)`)
+
+
 
 ```python
 from agents import Agent
 
-booking_agent = Agent(...)
-refund_agent = Agent(...)
+billing_agent = Agent(name="Billing agent", instructions="...")
+refund_agent = Agent(name="Refund agent", instructions="...")
 
 triage_agent = Agent(
     name="Triage agent",
     instructions=(
-        "Help the user with their questions. "
-        "If booking-related, hand off to booking_agent. "
+        "... "
+        "If billing-related, hand off to billing_agent. "
         "If refund-related, hand off to refund_agent."
     ),
-    handoffs=[booking_agent, refund_agent],
+    handoffs=[billing_agent, handoff(refund_agent)],
 )
 ```
+-  Customizing handoffs using the `handoff()` function
+    ```python
+    from agents import handoff
 
-## 5. Guardrails
-Run input/output validations alongside agents for safety and relevance using `@input_guardrail` and `@output_guardrail`.
+    def on_handoff(agent, ctx):
+        print(f"Handing off to {agent.name}")
 
-### Input Guardrail Example
-```python
-@input_guardrail
-async def guard_input(ctx, agent, user_input):
-    return GuardrailFunctionOutput(output_info="ok", tripwire_triggered="math" in user_input)
+    handoffs = [handoff(agent=refund_agent, on_handoff=on_handoff(agent, ctx))]
+    ```
 
-agent = Agent(
-    name="Support",
-    instructions="Assist the user.",
-    input_guardrails=[guard_input],
-)
-```
 
-### Output Guardrail Example
-```python
-@output_guardrail
-async def guard_output(ctx, agent, output):
-    return GuardrailFunctionOutput(output_info=output, tripwire_triggered="badword" in output.text)
 
-agent = Agent(
-    name="Chat",
-    instructions="Respond courteously.",
-    output_guardrails=[guard_output],
-    output_type=ResponseModel,
-)
-```
-
-## 6. Running Agents
+## 5. Running Agents
 ### The Agent Loop
 Use the `Runner` class to execute agents:
 1. `Runner.run()` (async): Returns `RunResult`.
 2. `Runner.run_sync()` (sync wrapper): Returns `RunResult`.
 3. `Runner.run_streamed()` (async streaming): Returns `RunResultStreaming`.
+- Parameters:
+    - `starting_agent`: starting agent (required)
+    - `input`:  input to the agent (required)
+    - `context`
+    - `run_config`
+    - `hooks`
+    - `previous_response_id` 
 #### Example: Basic Run
 ```python
 from agents import Agent, Runner
 import asyncio
 
 async def main():
-    agent = Agent(name="Assistant", instructions="You’re a concise assistant.")
+    agent = Agent(name="Assistant", instructions="You're a concise assistant.")
     result = await Runner.run(agent, "Write a haiku about recursion.")
     print(result.final_output)
 ```
@@ -285,13 +276,19 @@ async def main():
                 print(ItemHelpers.text_message_output(event.item))
 
     asyncio.run(main())
-    ```
+```
 - `stream_events()` types: 
     - tool_call_output_item
     - tool_call_item
     - message_output_item
 
-### Run Config
+#### Run Config
+- Global settings for the agent run:
+    - `model`, `model_provider`
+    - `model_settings` (e.g. temperature, top_p, etc)
+    - `tracing_disabled`, `trace_metadata`, etc
+    - `input_guardrails`, `output_guardrails`
+    - `workflow_name, trace_id, group_id`:
 ```python
     from agents.run import RunConfig
 
@@ -320,6 +317,58 @@ async def main():
     result = await Runner.run(agent, new_input)
     print(result.final_output)  # California
 ```
+## 6. Guardrails
+Run input/output validations alongside agents for safety and relevance using `@input_guardrail` and `@output_guardrail`.
+- Input guardrails: run on the initial user input
+- Output guardrails: run on the final agent output
+- Guardrails run in 3 steps:
+    - guardrail receives the same input passed to the agent.
+    - guardrail function runs to produce a `GuardrailFunctionOutput`.
+    - check if `.tripwire_triggered` is true. If true, an `InputGuardrailTripwireTriggered` exception is raised
+
+### Input Guardrail Example
+```python
+@input_guardrail
+async def guard_input(ctx, agent, user_input):
+    # typically Runner.run(guardrail_agent, user_input, ctx)
+    return GuardrailFunctionOutput(output_info="ok", tripwire_triggered="math" in user_input)
+
+agent = Agent(
+    name="Support",
+    instructions="Assist the user.",
+    input_guardrails=[guard_input],
+)
+
+async def main():
+    # This should trip the guardrail
+    try:
+        await Runner.run(agent, "can you solve my math homework?")
+
+    except InputGuardrailTripwireTriggered:
+        print("Math homework guardrail tripped")
+```
+
+### Output Guardrail Example
+```python
+@output_guardrail
+async def guard_output(ctx, agent, output):
+    # typically Runner.run(guardrail_agent, output.response, ctx.context)
+    return GuardrailFunctionOutput(output_info=output, tripwire_triggered="badword" in output.text)
+
+agent = Agent(
+    name="Chat",
+    instructions="Respond courteously.",
+    output_guardrails=[guard_output],
+    output_type=ResponseModel,
+)
+async def main():
+    # This should trip the guardrail
+    try:
+        await Runner.run(agent, "Hello, can you help me with *badword*?")
+
+    except OutputGuardrailTripwireTriggered:
+        print("Badword output guardrail tripped")
+```
 
 ## 7. Other Features
 ### Model Context Protocol (MCP)
@@ -341,78 +390,236 @@ async with MCPServerStdio(params={
 ```
 ### Context
 Agents support dependency injection and shared state via context:
+- Local context: 
+    - via context wrapper (`wrapper: RunContextWrapper[TContext]`) and the `wrapper.context` property
+- Global context:
+    - Agent instructions ("`system/developer`" prompt).
+    - `input` when calling the Runner.run
+    - Expose it via function tools
+    - retrieval or web search
 ```python
+
 from dataclasses import dataclass
-from agents import Agent, RunContextWrapper
+from agents import Agent, RunContextWrapper, Runner, function_tool
 
+# A simple context object (using a dataclass)
 @dataclass
-class UserContext:
-    uid: str
-    is_pro_user: bool
+class UserInfo:  
+    name: str
+    uid: int
 
-    async def fetch_purchases(self) -> list:
-        ...
+# Tool: takes context wrapper: RunContextWrapper[UserInfo]
+# reads context via: wrapper.context
+@function_tool
+async def fetch_user_age(wrapper: RunContextWrapper[UserInfo]) -> str:  
+    return f"User {wrapper.context.name} is 47 years old"
+
+async def main():
+    # Create your context object
+    user_info = UserInfo(name="John", uid=123)  
+
+    # pass the context type to the Agent constructor (type check)
+    agent = Agent[UserInfo](  
+        name="Assistant",
+        tools=[fetch_user_age],
+    )
+
+    # Passing the local context to the Runner
+    result = await Runner.run(
+        starting_agent=agent,
+        input="What is the age of the user?",
+        context=user_info,
+    )
+
+    print(result.final_output) 
+    # The user John is 47 years old.
+
+if __name__ == "__main__":
+    asyncio.run(main())
 
 agent = Agent[UserContext](...)
 ```
+### Tracing 
+- **Agents Tracing**: to monitor and debug agentic workflow execution, including:  
+    - **logging**: fcn_calls, input/output, decisions, etc
+    - **visualization**: workflow, performance
+    - **debugging & error tracking**
+    - **workflow & performance monitoring**
+    - **agent interactions**
+    - (Also automatically captures MCP operations)
+- **Traces** vs Spans:  
+    - Trace: single end-to-end operation of a "workflow". The entire `Runner.run()` is wrapped in a trace.
+    - Span: operations with a start and end time: `agent_span(), generation_span(), fucntion_span(), guardrail_span()`, etc.
+- Enabling Tracing: tracing is enabled by default. 
+    - to disbale: `tracing_disabled=True` in `RunConfig`
+- Default Tracing: 
+    - default trace is named "`Agent trace`"
+- [OpenAI Traces Dashboard](https://platform.openai.com/traces)
+- Higher level Tracing 
+    - multiple run() calls in a single trace
+        - include different runs in `with trace("workflow_name")`: 
+    ```python
+    from agents import Agent, Runner, trace
 
-### Agent Patterns 
-- [Agent Patterns Examples ](https://github.com/openai/openai-agents-python/tree/main/examples/agent_patterns)
+    async def main():
+        agent = Agent(name="Joke generator", instructions="Tell funny jokes.")
 
-### Multi-agent orchestration
-- Orchestrating via LLM
-- Orchestrating via code 
+    with trace("Joke workflow"): 
+        first_result = await Runner.run(agent, "Tell me a joke")
+        second_result = await Runner.run(agent, f"Rate this joke: {first_result.final_output}")
+        print(f"Joke: {first_result.final_output}")
+        print(f"Rating: {second_result.final_output}")
+    ```
+- **Tracing Processors**: 
+    - Open AI Tracing Processors: 
+        ```python
+        # Set up the custom trace processor
+        local_processor = LocalTraceProcessor()
+        set_trace_processors([local_processor])
+        ```
+    - External tracing processors: 
+        - Weights & biases, logfire, braintrust, agentops, langsmith, MLflow, etc.
+        - Example: 
+            ```python
+            class AgentLogEntry(BaseModel):
+                agent_name: str, 
+                ...
+            log_entry = AgentLogEntry(...)
+            with trace("workflow_name"):
+                # do some work 
+                # ...
+                # Log the entry
+                await logfire.log(log_entry)
+                # Log metrics 
+                # agentops
+                agentops.log_metric("code_complexity", "low")
+                # keywords_ai
+                keywords_ai.log_metric("keyword_count", 10)
+                # scorecard
+                scorecard.log_metric("quality_score", evaluation.quality_score)
+                # ...
+            
+                ```
 
-### Dynamic Instructions
-- `instructions` can be a function (sync or async) receiving `(context, agent)` and returning a prompt string at runtime.
-
-```python
-from agents import Agent, RunContextWrapper
-
-def dynamic_instructions(
-    ctx: RunContextWrapper[UserContext], agent: Agent[UserContext]
-) -> str:
-    return f"User ID: {ctx.context.uid}. Tailor your response."
-
-agent = Agent[UserContext](
-    name="Dynamic agent",
-    instructions=dynamic_instructions,
-)
-```
+src: [openAI Tracing documentation](https://openai.github.io/openai-agents-python/tracing/)
 
 ### Lifecycle Events (Hooks)
 - Subclass AgentHooks to observe per-agent lifecycle events.
-- Common AgentHooks methods:
-
+    - **Run-Level Lifecycle** (`RunHooks`)
+    - **Agent-Level Lifecycle** (`AgentHooks`)
+- Common `AgentHooks` methods:
     - **on_start**: Called before this agent is invoked.
     - **on_end**: Called after this agent produces final output.
     - **on_handoff**: Called when this agent receives a handoff.
     - **on_tool_start**: Called before invoking any tool.
     - **on_tool_end**: Called after a tool returns its result.
+- `RunHooks`: are similarly defined `(on_agent_start, on_agent_end, on_handoff, on_tool_start, on_tool_end)`
 
-```python
-from agents import Agent, AgentHooks
+    ```python
+    from agents import Agent, AgentHooks
 
-class LoggingHooks(AgentHooks):
-    async def on_tool_start(self, context, agent, tool):
-        print(f"Invoking tool: {tool.name}")
+    class LoggingHooks(AgentHooks):
 
-    async def on_tool_end(self, context, agent, tool, result):
-        print(f"Tool {tool.name} returned: {result}")
+        async def on_agent_start(self, context: RunContextWrapper, agent: Agent) -> None:
+            print(f"Agent {agent.name} started.")
 
-agent = Agent(
-    name="Logger",
-    instructions="Do something",
-    hooks=LoggingHooks(),
-)
-```
+        async def on_tool_start(self, context, agent, tool):
+            print(f"Invoking tool: {tool.name}")
 
-### Tracing 
-- [openAI Tracing documentation](https://openai.github.io/openai-agents-python/tracing/)
-    -  automatically captures MCP operations
-- External tracing: 
-    - weights and biases
-    - logfire 
-    - langsmith
-    - MLflow
-    - etc.
+        async def on_tool_end(self, context, agent, tool, result):
+            print(f"Tool {tool.name} returned: {result}")
+
+    agent = Agent(
+        name="Logger",
+        instructions="Do something",
+        hooks=LoggingHooks(),
+    )
+    ```
+
+### Agent Patterns 
+- [Agent Patterns Examples ](https://github.com/openai/openai-agents-python/tree/main/examples/agent_patterns)
+    - agents_as_tools
+    - deterministic
+    - forcing_tool_use
+    - input_guardrails
+    - llm_as_a_judge
+    - output_guardrails
+    - parallelization   
+    - routing
+
+### Multi-agent orchestration
+- Orchestrating via LLM: 
+    - [Orchestrating via LLM](https://github.com/openai/openai-agents-python/tree/main/examples/agent_patterns/orchestration)
+- Orchestrating via code: 
+    - [Orchestrating via code](https://github.com/openai/openai-agents-python/tree/main/examples/agent_patterns/orchestration)
+
+### Voice Agents
+- [Voice Agents](https://openai.github.io/openai-agents-python/voice/)
+- Main concept is a "Voice Pipeline", including 3 stages (chained):  
+    - `TTS [audio -> text] -> agent -> [text -> audio] STT`
+    - `VoicePipeline` is a wrapper around the 3 stages.
+- Install: 
+    - `pip install openai-agents[voice]`
+- Example: 
+    - [Voice Agents Example](https://github.com/openai/openai-agents-python/tree/main/examples/voice)
+    ```python
+    from agents.voice import AudioInput, VoicePipeline, SingleAgentVoiceWorkflow
+    
+    # create an agent
+    agent = Agent(name="Assistant", instructions="You're a helpful assistant.")
+
+    async def main():
+        # set the VoicePipeline with the workflow (SingleAgentVoiceWorkflow)
+        pipeline = VoicePipeline(workflow=SingleAgentVoiceWorkflow(agent))
+        # create an audio input buffer
+        buffer = np.zeros(24000 * 3, dtype=np.int16)
+        audio_input = AudioInput(buffer=buffer)
+        
+        # run the pipeline
+        result = await pipeline.run(audio_input)
+
+        # Create an audio player using `sounddevice`
+        player = sd.OutputStream(samplerate=24000, channels=1, dtype=np.int16)
+        player.start()
+        ```
+
+
+## 8. Advanced topics 
+### Other types of Memory 
+- **Types of Memory** in Agentic Frameworks: 
+    - Short Term  Memory (STM)  
+        - **Working Memory** 
+        - **Cache Memory**
+    - [Long Term Memory (LTM)](https://langchain-ai.github.io/langmem/concepts/conceptual_guide/)
+        - Episodic Memory (EM): Past Experiences & interactions e.g. summaries of past conversations
+        - Semantic Memory: Facts & Knowledge e.g. User preferences, Paris <> France
+        - Procedural Memory: Learned tasks, System Behavior  e.g. personality and response patterns
+        <!-- - Conceptual Memory (CM) -->
+- **External Long Term Memory Tools**:
+    - Persistent memory stores (e.g. vector stores, databases)
+    - [LangMem](https://blog.langchain.dev/langmem-sdk-launch/) (LangChain SDK for LTM): 
+        - LangGraph LTM [Course](https://www.deeplearning.ai/short-courses/long-term-agentic-memory-with-langgraph/)
+    - [Letta](https://github.com/letta-ai/letta) (MemGPT)
+    - [Zep](https://github.com/getzep/graphiti) graph-base memory Grafiti
+    - [Pinecone](https://www.pinecone.io/learn/agentic-memory/)
+    - [Pinecone](https://www.pinecone.io/learn/agentic-memory/)
+- Sources: 
+    - [Different types of memories in agentic framework](https://www.linkedin.com/pulse/different-types-memories-agentic-framework-gourav-g--shdxc/)
+    - [AI Agent Memory Types Simplified](https://www.linkedin.com/posts/rakeshgohel01_these-explanations-will-clarify-your-ai-agent-activity-7313175951243190273-hZl_/)
+
+### Dynamic Instructions
+- `instructions` can be a function (sync or async) receiving `(context, agent)` and returning a prompt string at runtime.
+
+    ```python
+
+    def dynamic_instructions(ctx, agent) -> str:
+        return f"User ID: {ctx.context.uid}. Tailor your response."
+
+    agent = Agent(
+        name="Dynamic agent",
+        instructions=dynamic_instructions,
+    )
+    ```
+
+<!-- ### Payment Tools 
+- [stripe for agents SDK](https://docs.stripe.com/agents) -->
