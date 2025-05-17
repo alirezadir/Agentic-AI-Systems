@@ -1,18 +1,7 @@
-### Agents 
-#### Agent frameworks
-- [AutoGen](https://microsoft.github.io/autogen/stable/user-guide/core-user-guide/index.html): multi-agent AI framework
-    - [autogen-core & autogen-AgentChat]
-- [LlamaIndex](https://docs.llamaindex.ai/en/stable/index.html)
-- [LangGraph](https://docs.langgraph.ai/en/stable/index.html)
-- [LangChain Agents](https://python.langchain.com/docs/modules/agents)
-- [Crew AI](https://www.crewai.com/): Multi-agent framework
-    - [Crew AI Github](https://github.com/crewai/crewai)
-- OpenAI Agents
-    - [Guides](https://platform.openai.com/docs/guides/agents)
-    - [Python SDK](https://openai.github.io/openai-agents-python/)
-    - [Cookbook (Agent Orchestration)](https://cookbook.openai.com/examples/orchestrating_agents)
-- [HuggingFace SmolAgents](https://github.com/huggingface/smolagents): Code generation agents
-#### Agents Design
+# Resources 
+## Agents 
+### [Agentic Tools & Frameworks](./Agents/stack-tools.md#top-agentic-system-frameworks)
+### Agents System Design
 - Agent Design Patterns
     - [Building Effective Agents Cookbook (Anthropic)](https://www.anthropic.com/engineering/building-effective-agents)
     - [Anthropic Cookbook (Agents patterns)](https://github.com/anthropics/anthropic-cookbook/tree/main/patterns/agents)
@@ -34,11 +23,11 @@
 
 
 #### Applications
-- Agent Apps 
+- Agent Application Examples 
     - [🌟 Awesome LLM Apps](https://github.com/Shubhamsaboo/awesome-llm-apps?tab=readme-ov-file)
-        - [starter AI agents](https://github.com/Shubhamsaboo/awesome-llm-apps/tree/main/starter_ai_agents)
+        - [Starter AI agents](https://github.com/Shubhamsaboo/awesome-llm-apps/tree/main/starter_ai_agents)
 
     
 ### Other Resources
-- [The rise of agentic AI](https://docs.google.com/presentation/d/1VNFGsCYMDT1VTe8W1wxFbmAwYsJ1I0Y-6CnTvuCEn98/edit?slide=id.g4dfce81f19_0_45#slide=id.g4dfce81f19_0_45)
+- [The Rise of Agentic AI (slides)](https://docs.google.com/presentation/d/1VNFGsCYMDT1VTe8W1wxFbmAwYsJ1I0Y-6CnTvuCEn98/edit?slide=id.g4dfce81f19_0_45#slide=id.g4dfce81f19_0_45)
 - [From LLMs to Stateful Long-Running Multi-Agent Systems](https://github.com/panaversity/learn-agentic-ai/blob/main/-01_lets_get_started/03_from_llms_to_stateful_long_runningl_multi_agents/01_what_are_multi_agent_systems.md)

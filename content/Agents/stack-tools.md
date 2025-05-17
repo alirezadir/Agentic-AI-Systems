@@ -1,5 +1,8 @@
-# Frameworks & Tools
-### Top Agentic System Frameworks
+## Frameworks & Tools
+### Modern Python for Gen-AI
+- [Modern Python for Gen-AI](../modern_python.md)
+
+### Agent frameworks
 - OpenAI Agents
     - [OpenAI Agents (Guides)](https://platform.openai.com/docs/guides/agents)
     - [OpenAI Agents (Python SDK)](https://openai.github.io/openai-agents-python/)
@@ -35,13 +38,12 @@
 - [OpenAI API](https://platform.openai.com/docs/introduction) — Access GPT-4, tools, and assistants.
 - [Anthropic Claude API](https://docs.anthropic.com/) — Long context windows, focus on safe outputs.
 - [Google Vertex AI / Gemini API](https://cloud.google.com/vertex-ai/docs/generative-ai/overview) — Multimodal capabilities, enterprise-ready.
-- [Mistral (via OpenRouter](https://openrouter.ai/docs) or [Hugging Face](https://huggingface.co/mistralai)) — Open-source, fast, available on multiple platforms.
-- [Meta LLaMA (via Together.ai](https://docs.together.ai/docs/llama2) or [Hugging Face](https://huggingface.co/meta-llama)) — Open-source models, supports fine-tuning.
+- [Mistral via OpenRouter](https://openrouter.ai/docs) or [Hugging Face](https://huggingface.co/mistralai) — Open-source, fast, available on multiple platforms.
+- [Meta LLaMA via Together.ai](https://docs.together.ai/docs/llama2) or [Hugging Face](https://huggingface.co/meta-llama) — Open-source models, supports fine-tuning.
+- [Cohere API](https://docs.cohere.com/) — RAG-focused, strong embedding support.
 - [OpenRouter API](https://openrouter.ai/docs) — Unified API for multiple models.
     - [OpenRouter chat](https://openrouter.ai/chat)
 - [LittleLLM Framework](https://github.com/microsoft/little-llm) — Lightweight, composable agent framework.
-- [Ollama](https://ollama.ai/): locally deployable AI model runner
-- [Cohere API](https://docs.cohere.com/) — RAG-focused, strong embedding support.
 ##### Notes: 
 - Note the APIs' rate limits, such as: 
     - Requests per minute (RPM)  
@@ -60,6 +62,7 @@
   - [Weaviate](https://weaviate.io/)
   - [Haystack](https://haystack.deepset.ai/)
 
+- Ollama: locally deployable AI model runner
 ### Other Agentic Tools
 - [mem0](https://github.com/mem0ai/mem0): Intelligent memory layer
 - [Embedchain](https://docs.embedchain.ai/get-started/introduction): Configurable Framework for building LLM apps

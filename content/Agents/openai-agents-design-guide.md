@@ -1,5 +1,4 @@
-Suammary of: 
-# **OpenAI's “A Practical Guide to Building Agents”**
+# **OpenAI's “A Practical Guide to Building Agents” Summary**
 <!-- * 25, 2024* -->
 Source: [OpenAI Guide](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf)
 

@@ -1,6 +1,6 @@
-# 1. Evaluation 
+# 1. Gen-AI Evaluation 
 
-Evaluation is foundational to developing production-grade generative AI systems. It spans model-level assessment and holistic application-level performance. This section combines **Model Evaluation** and **Application Evaluation** as detailed in *AI Engineering* by Chip Huyen.
+ This summary combines **Model Evaluation** and **Application Evaluation** as detailed in *AI Engineering* by Chip Huyen.
 
 ---
 
