@@ -29,17 +29,21 @@ Personal summaries which deep dive into agent architectures, SDKs, workflows, an
 - [Huyen Platform Agents Overview](./content/Agents/huyen-agents.md): Guide to using Huyen's agent framework.
 
 #### Agentic Framework Summaries
-- **OpenAI Agents SDK** Summaries: 
-    - [**OpenAI Agents SDK** (Summary w/ examples)](./content/Agents/openai_agents_sdk.md): Comprehensive single-page SDK guide for building OpenAI-powered agents.
+- **OpenAI Agents SDK**: 
+    - [**OpenAI Agents SDK** (Summary w/ code)](./content/Agents/openai_agents_sdk.md): A comprehensive single-page SDK guide for building OpenAI-powered agents, with inline code examples (e.g. agents, tools / function calls, agent handoffs, memory & context,input & output guardrails, runners, tracing, etc).
     - [OpenAI Agents (Concepts and Setup)](./content/Agents/openai-agents.md): Key concepts and basic setup for OpenAI agentic systems.
-- [LlamaIndex Function Agent & Agent Workflow Summary](./content/Agents/llama-index-agent-workflow.md): Setup and execution of agent workflows using LlamaIndex.
-- More coming soon...
+- **LlamaIndex** 
+    - [Function Agent & Agent Workflow (Summary w/ code)](./content/Agents/llama-index-agent-workflow.md): Setup and execution of agent workflows using LlamaIndex.
+    - [LlamaIndex Multi-Agent System Design (Sumamry w /code)](./content/Agents/llama-index-multi-agent.md): Exploring multi-agent communication and delegation in LlamaIndex.
+- **CrewAI** 
+    - [CrewAI Agentic Framework Summary](./content/Agents/crewai-agentic-framework.md): A comprehensive summary of CrewAI, a multi-agent framework for building agentic systems.
+- LangGraph: coming soon...
 
 <!-- #### Other -->
 
 ---
 ### 3. [`/Code`](./Code/README.md) (🚧 Coming Soon)
-Hands-on starter code, examples, and small projects to accelerate your understanding and development of agentic systems.
+Hands-on starter codes, examples, and small projects to accelerate your understanding and development of agentic systems.
 
 <!-- | Resource | Description |
 |---------|-------------|

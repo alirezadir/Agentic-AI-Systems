@@ -1,6 +1,5 @@
 
-# 🧠 Anthropic: Building Effective Agents
-**Summary**
+# Anthropic's Building Effective Agents Summary
 **Published:** Dec 19, 2024  
 **Source:** 
 - [Anthropic Blog](https://www.anthropic.com/engineering/building-effective-agents)
