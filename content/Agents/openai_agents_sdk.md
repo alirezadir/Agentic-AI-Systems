@@ -1,10 +1,23 @@
 # OpenAI's Agents Overview
 
-This document provides an overview of OpenAI's Agents, based on the [official documentation](https://platform.openai.com/docs/guides/agents) and the [OpenAI Agents Python SDK](https://openai.github.io/openai-agents-python/).
+This document provides a comprehensive simmarized overview of OpenAI's Agents, with inline code examples, based on the [official documentation](https://platform.openai.com/docs/guides/agents) and the [OpenAI Agents Python SDK](https://openai.github.io/openai-agents-python/).
 
-## 1. Overview
+## Table of Contents
+- [Agents Overview](#1-agents-overview)
+- [Basic Agent Configuration](#2-basic-agent-configuration)
+- [Tools](#3-tools)
+- [Handoffs](#4-handoffs)
+- [Evaluation](#5-evaluation)
+- [Guardrails](#6-guardrails)
+- [Memory (Context)](#7-memory-context)
+- [Tracing](#8-tracing)
+- [Other Features](#9-other-features)
+- [Advanced topics](#10-advanced-topics)
 
-### Agent Components
+
+## 1. Agents Overview
+
+### Agents Components
 - **Models**: Handle reasoning, decision-making, and process various modalities.
 - **Tools**: Extend agent capabilities using hosted tools, function tools, or other agents.
 - **Knowledge and Memory**: Provide external or persistent knowledge to agents.
@@ -45,7 +58,7 @@ agent = Agent(name="Assistant", instructions="You are a helpful assistant")
 result = Runner.run_sync(agent, "Write a haiku about recursion in programming.")
 print(result.final_output)
 ```
-
+---
 ## 2. Basic Agent Configuration
 
 ### Key Components
@@ -54,43 +67,48 @@ A basic agent consists of:
 - **Model**: LLM and optional settings (e.g., temperature).
 - **Tools**: Callable functions or external tools.
 
-##### Example: Haiku Agent
+A basic agent can be created with the `Agent` class (and will be run using a `Runner` ([Running Agents](#6-running-agents)), with the following parameters:
+- `name`: The name of the agent.
+- `instructions`: The instructions for the agent.
+- `model`: The model to use for the agent.
+- `tools`: List of tools to use for the agent. Use `function_tool` decorator to create function tools.
+
+**Example**: A simple Haiku Agent with a function tool
 ```python
-from agents import Agent, function_tool
+    from agents import Agent, function_tool
 
-@function_tool
-def get_weather(city: str) -> str:
-    return f"The weather in {city} is sunny"
+    @function_tool
+    def get_weather(city: str) -> str:
+        return f"The weather in {city} is sunny"
 
-agent = Agent(
-    name="Haiku agent",
-    instructions="Always respond in haiku form",
-    model="o3-mini",
-    tools=[get_weather],
-)
+    agent = Agent(
+        name="Haiku agent",
+        instructions="Always respond in haiku form",
+        model="o3-mini",
+        tools=[get_weather],
+    )
 ```
-
 
 
 #### Output Types
 - Default output is plain `str`.
 - Specify `output_type` (e.g., Pydantic models, dataclasses, TypedDict, lists) for structured outputs.
 
-```python
-from pydantic import BaseModel
+    ```python
+    from pydantic import BaseModel
 
-class CalendarEvent(BaseModel):
-    name: str
-    date: str
-    participants: list[str]
+    class CalendarEvent(BaseModel):
+        name: str
+        date: str
+        participants: list[str]
 
-agent = Agent(
-    name="Calendar extractor",
-    instructions="Extract calendar events from text",
-    output_type=CalendarEvent,
-)
-```
-
+    agent = Agent(
+        name="Calendar extractor",
+        instructions="Extract calendar events from text",
+        output_type=CalendarEvent,
+    )
+    ```
+---
 ## 3. Models 
 - Built-in models: 
     - Text models (generation, reasoning), 
@@ -117,7 +135,8 @@ agent = Agent(
     - `Runner.run` level: using `ModelProvider`: `run_config=RunConfig(model_provider=CUSTOM_MODEL_PROVIDER)`
     - Agent level: using `Agent.model`
     - examples [here](https://github.com/openai/openai-agents-python/tree/main/examples/model_providers)
-## 3. Tools
+---
+## 4. Tools
 ### Tool Types
 - **Hosted tools**: Run on LLM servers (e.g., `WebSearchTool`, `FileSearchTool`, `ComputerTool`).
 - **Function tools**: Python functions decorated with `@function_tool` for schema generation and doc parsing.
@@ -206,8 +225,8 @@ orchestrator_agent = Agent(
 async def main():
     result = await Runner.run(orchestrator_agent, input="Say 'Hello, how are you?' in Spanish.")
 ```
-
-## 4. Handoffs
+---
+## 5. Handoffs
 - Handoffs allow agents to delegate tasks to other agents (e.g.specialized sub-agents), enabling modular workflows.
 - Handoffs are defined in the agent's `handoffs` property.
 - Can take an `agent` directly, or a Handoff object (e.g. `Handoff(agent, input_guardrails=...)`)
@@ -241,8 +260,8 @@ triage_agent = Agent(
     ```
 
 
-
-## 5. Running Agents
+---
+## 6. Running Agents
 ### The Agent Loop
 Use the `Runner` class to execute agents:
 1. `Runner.run()` (async): Returns `RunResult`.
@@ -317,7 +336,8 @@ async def main():
     result = await Runner.run(agent, new_input)
     print(result.final_output)  # California
 ```
-## 6. Guardrails
+---
+## 7. Guardrails
 Run input/output validations alongside agents for safety and relevance using `@input_guardrail` and `@output_guardrail`.
 - Input guardrails: run on the initial user input
 - Output guardrails: run on the final agent output
@@ -369,25 +389,8 @@ async def main():
     except OutputGuardrailTripwireTriggered:
         print("Badword output guardrail tripped")
 ```
-
-## 7. Other Features
-### Model Context Protocol (MCP)
-MCP standardizes how applications provide tools/context to LLMs.
-
-```python
-from agents import Agent
-from agents.mcp import MCPServerStdio
-
-async with MCPServerStdio(params={
-    "command": "npx",
-    "args": ["@modelcontextprotocol/server-filesystem", "samples"],
-}) as server:
-    agent = Agent(
-        name="MCP Agent",
-        instructions="Use MCP tools to complete tasks",
-        mcp_servers=[server],
-    )
-```
+---
+## 8. Memory (Context)
 ### Context
 Agents support dependency injection and shared state via context:
 - Local context: 
@@ -439,7 +442,8 @@ if __name__ == "__main__":
 
 agent = Agent[UserContext](...)
 ```
-### Tracing 
+---
+## 9.  Tracing 
 - **Agents Tracing**: to monitor and debug agentic workflow execution, including:  
     - **logging**: fcn_calls, input/output, decisions, etc
     - **visualization**: workflow, performance
@@ -499,9 +503,28 @@ agent = Agent[UserContext](...)
                 scorecard.log_metric("quality_score", evaluation.quality_score)
                 # ...
             
-                ```
+            ```
 
-src: [openAI Tracing documentation](https://openai.github.io/openai-agents-python/tracing/)
+- src: [openAI Tracing documentation](https://openai.github.io/openai-agents-python/tracing/)
+---
+## 10. Other Features
+### Model Context Protocol (MCP)
+MCP standardizes how applications provide tools/context to LLMs.
+
+```python
+from agents import Agent
+from agents.mcp import MCPServerStdio
+
+async with MCPServerStdio(params={
+    "command": "npx",
+    "args": ["@modelcontextprotocol/server-filesystem", "samples"],
+}) as server:
+    agent = Agent(
+        name="MCP Agent",
+        instructions="Use MCP tools to complete tasks",
+        mcp_servers=[server],
+    )
+```
 
 ### Lifecycle Events (Hooks)
 - Subclass AgentHooks to observe per-agent lifecycle events.
@@ -583,8 +606,8 @@ src: [openAI Tracing documentation](https://openai.github.io/openai-agents-pytho
         player.start()
         ```
 
-
-## 8. Advanced topics 
+---
+## 11. Advanced topics 
 ### Other types of Memory 
 - **Types of Memory** in Agentic Frameworks: 
     - Short Term  Memory (STM)  
@@ -623,3 +646,4 @@ src: [openAI Tracing documentation](https://openai.github.io/openai-agents-pytho
 
 <!-- ### Payment Tools 
 - [stripe for agents SDK](https://docs.stripe.com/agents) -->
+
