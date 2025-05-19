@@ -6,7 +6,7 @@ This repository contains a collection of frameworks, applied examples, and utili
 
 
 1. [`01_framework_examples/`](./01_framework_examples/README.md): Demos and templates for specific agent frameworks and tools
-2. [`02_agentic_design_patterns_examples/`](./02_agentic_design_patterns_examples/README.md  ): Design pattern templates for agentic systems
+2. [`02_agents_design_patterns_examples/`](./02_agents_design_patterns_examples/README.md  ): Design pattern templates for agentic systems
 3. [`03_use_case_examples/`](./03_use_case_examples/README.md): Complete, real-world agentic applications
 4. [`04_utils/`](./04_utils/README.md): Shared utilities and helper modules
 
