@@ -42,7 +42,7 @@ Personal summaries which deep dive into agent architectures, SDKs, workflows, an
 <!-- #### Other -->
 
 ---
-### 3. [`/Code`](./Code/README.md) (🚧 Coming Soon)
+### 3. [`/Code`](./code/README.md) (🚧 More Coming Soon`)
 Hands-on starter codes, examples, and small projects to accelerate your understanding and development of agentic systems.
 
 <!-- | Resource | Description |
