@@ -1,133 +1,60 @@
-# ── Python build & cache ─────────────────────────────────────
+# Python cache and build
 __pycache__/
 *.py[cod]
 *.so
 *.pyc
 *$py.class
 
-# ── Virtual environments ─────────────────────────────────────
+# Virtual environments
 .venv/
-env/
 venv/
 ENV/
-env.bak/
-venv.bak/
 
-# ── Jupyter notebook checkpoints ─────────────────────────────
+# Jupyter
 .ipynb_checkpoints/
-profile_default/
-ipython_config.py
 
-# ── .env and secrets ─────────────────────────────────────────
+# Environment variables and secrets
 .env
 .env.*
-!env.template           # keep a template if needed
+!env.template
 
-# ── Data files ───────────────────────────────────────────────
-data/**/*.faiss
-data/**/*.pkl
-data/**/*.npy
-data/**/*.db
-data/**/*.json
-data/**/*.csv
-*.sage.py
-db.sqlite3
-db.sqlite3-journal
+# Data files
+*.db
+*.sqlite3
+*.pkl
+*.npy
+*.faiss
+*.json
+*.csv
 
-# ── Temporary/staging folders ────────────────────────────────
-**/_staging/
-**/_staging/**
-/site
-
-# ── Logs or temp output ──────────────────────────────────────
+# Logs and temp
 *.log
 *.tmp
 *.bak
-pip-log.txt
-pip-delete-this-directory.txt
-celerybeat-schedule
-celerybeat.pid
-local_settings.py
 
-# ── Distribution / packaging ──────────────────────────────────
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-*.manifest
-*.spec
-.pybuilder/
-target/
-
-# ── Test coverage and cache ─────────────────────────────────
-htmlcov/
-.tox/
-.nox/
+# Test/coverage
 .coverage
 .coverage.*
 .cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
+htmlcov/
 .pytest_cache/
-cover/
-
-# ── Documentation ───────────────────────────────────────────
-docs/_build/
-
-# ── Type checking and linting ─────────────────────────────
 .mypy_cache/
-.dmypy.json
-dmypy.json
-.pyre/
-.pytype/
 .ruff_cache/
+.hypothesis/
 
-# ── IDE specific files ────────────────────────────────────
-.spyderproject
-.spyproject
-.ropeproject
-#.idea/
-
-# ── OS specific files ─────────────────────────────────────
+# IDE/project files
+.vscode/
+.idea/
 .DS_Store
 
-# ── Package specific ──────────────────────────────────────
-.pypirc
-.pdm.toml
-.pdm-python
-.pdm-build/
-__pypackages__/
-#.python-version    # pyenv
-#Pipfile.lock      # pipenv
-#poetry.lock       # poetry
-#pdm.lock         # pdm
-#uv.lock          # UV
-
-# ── Web frameworks ──────────────────────────────────────────
+# Chainlit and web frameworks
+.chainlit/
 instance/
 .webassets-cache
-.scrapy
-.chainlit/
 
-# ── Build artifacts ─────────────────────────────────────────
-cython_debug/
+# Ignore all files and folders starting with _
+_*
+_*/
 
 
 
