@@ -42,8 +42,14 @@ Personal summaries which deep dive into agent architectures, SDKs, workflows, an
 <!-- #### Other -->
 
 ---
-### 3. [`/Code`](./code/README.md) (🚧 More Coming Soon`)
+### 3. [`/Code`](./code/README.md) 
 Hands-on starter codes, examples, and small projects to accelerate your understanding and development of agentic systems.
+
+1. [`Framework examples`](./code/01_framework_examples/README.md): Demos and templates for specific agent frameworks and tools
+2. [`Agentic design patterns examples`](./code/02_agentic_design_patterns_examples/README.md  ): Design pattern templates for agentic systems
+3. [`Use case examples`](./code/03_use_case_examples/README.md): Complete, real-world agentic applications
+4. [`Utils`](./code/04_utils/README.md): Shared utilities and helper modules
+
 
 <!-- | Resource | Description |
 |---------|-------------|
