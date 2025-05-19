@@ -4,7 +4,7 @@ This directory contains demos and templates for specific agent frameworks and to
 
 ## Contents
 
-- `openai_agents/`: Examples using the OpenAI Agents SDK and API.
+- [`openai_agents/`](./openai_agents/README.md): Examples using the OpenAI Agents SDK and API.
 <!-- - `crewai/`: Orchestration and collaboration with CrewAI.
 - `langgraph/`: Workflows and graph-based agent flows with LangGraph.
 - `llama_index/`: Integrations and workflows using LlamaIndex.

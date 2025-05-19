@@ -60,6 +60,8 @@
   - [Weaviate](https://weaviate.io/)
   - [Haystack](https://haystack.deepset.ai/)
 
+### AI Agents Staccks 
+- [Letta's AI Agents Stack](https://www.letta.com/blog/ai-agents-stack)
 ### Other Agentic Tools
 - [mem0](https://github.com/mem0ai/mem0): Intelligent memory layer
 - [Embedchain](https://docs.embedchain.ai/get-started/introduction): Configurable Framework for building LLM apps

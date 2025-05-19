@@ -1,23 +1,23 @@
 ## Modern Python for Gen-AI
-- **Modern Python**
-    - **asyncio**: asynchronous I/O (`async`, `async.run()`, `await`)
-        - `async`: define an async function
-        - `asyncio.run()`: run an async function
-        - `await`: wait for an async function to complete w/o blocking the main thread; 
-            - `await` only used inside an `async def` function
-        ```python
-        import asyncio
-        async def main():
-            await asyncio.sleep(1)
-            print("Hello, async world!")
-        asyncio.run(main())
-        # Hello, async world!
-        ```
-        - `asyncio.gather()`: run multiple async functions in parallel
-    - **Docstrings**: documentation strings for Python functions and classes ("""...""")
-    - **OOP** concepts used often (inheritance, metaclasses, decorators (e.g. `@dataclass, @property, @tool`)), etc.
-    - `pydantic`: data validation, parsing, and serialization management using Python type annotations
-        - type enforcement, auto conversion, and serialization(`.dict(), .json()`)
+### Modern Python
+- **asyncio**: asynchronous I/O (`async`, `async.run()`, `await`)
+    - `async`: define an async function
+    - `asyncio.run()`: run an async function
+    - `await`: wait for an async function to complete w/o blocking the main thread; 
+        - `await` only used inside an `async def` function
+    ```python
+    import asyncio
+    async def main():
+        await asyncio.sleep(1)
+        print("Hello, async world!")
+    asyncio.run(main())
+    # Hello, async world!
+    ```
+    - `asyncio.gather()`: run multiple async functions in parallel
+- **Docstrings**: documentation strings for Python functions and classes ("""...""")
+- **OOP** concepts used often (inheritance, metaclasses, decorators (e.g. `@dataclass, @property, @tool`)), etc.
+- `pydantic`: data validation, parsing, and serialization management using Python type annotations
+    - type enforcement, auto conversion, and serialization(`.dict(), .json()`)
 - **Containers**: Docker (build, run, push; Dockerfile)
 - **Package managers**:
     - [Python uv](https://www.datacamp.com/tutorial/python-uv): new, ultra-fast Python package manager; recommended for GenAI
@@ -34,3 +34,12 @@
         - [LLM chat app](https://docs.streamlit.io/develop/tutorials/chat-and-llm-apps/build-conversational-apps)
         - [streamlit-gpt4](https://blog.streamlit.io/take-your-streamlit-apps-to-the-next-level-with-gpt-4/)
 - [Python 3 Cheatsheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)
+
+### Model Context Protocol (MCP) 
+
+- MCP (Model Context Protocol) is a **standardized protocol** (by Anthropic) to simplify how AI systems (like Claude or LLM agents) **connect** to external tools and databases (local or remote). 
+- Think of it as a USB-C for AI systems.
+    - Solves the **NxM problem** (N tools and M models talk through a single interface)
+    - a **model-agnostic**, **tool-agnostic**, and **open** protocol 
+- Follows a **host → client → server** architecture
+- For more details visit [Protocols for AI Systems](protocols-AI.md)

@@ -1,8 +1,10 @@
 import asyncio
 import base64
 from typing import Literal, Union
-
+from dotenv import load_dotenv
 from playwright.async_api import Browser, Page, Playwright, async_playwright
+
+_ : bool = load_dotenv()
 
 from agents import (
     Agent,
