@@ -1,21 +1,28 @@
 import asyncio
 from agents import Agent, handoff, Runner, RunContextWrapper
+from agents.extensions.handoff_prompt import RECOMMENDED_PROMPT_PREFIX
+
 
 # Define specialized agents with clear instructions
 billing_agent = Agent(
-    name="Billing Agent",
-    instructions="You handle billing-related queries, including invoices, payments, and pricing questions. Be professional and precise."
-)
+        name="Billing Agent",
+        instructions=f"""{RECOMMENDED_PROMPT_PREFIX}
+        You handle billing-related queries, including invoices, payments, and pricing questions. Be professional and precise.""",
+        handoff_description="Specialist agent for Billing questions"
+    )
 
 refund_agent = Agent(
-    name="Refund Agent", 
-    instructions="You handle refund requests and related policies. Be empathetic while following refund guidelines."
-)
-
+        name="Refund Agent", 
+        instructions=f"""{RECOMMENDED_PROMPT_PREFIX}
+        You handle refund requests and related policies. Be empathetic while following refund guidelines.""",
+        handoff_description="Specialist agent for Refund questions"
+    )
+# Define a callback function to handle handoffs
 def on_handoff(agent: Agent, ctx: RunContextWrapper[None]):
     print("Handoff called for agent: ", agent.name)
     # Could add more detailed logging or notifications here
 
+# the main triage agent
 triage_agent = Agent(
     name="Triage Agent",
     instructions=(

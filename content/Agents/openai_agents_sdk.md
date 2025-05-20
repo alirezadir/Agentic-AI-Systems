@@ -164,6 +164,25 @@ A basic agent can be created with the `Agent` class (and will be run using a `Ru
     - `Runner.run` level: using `ModelProvider`: `run_config=RunConfig(model_provider=CUSTOM_MODEL_PROVIDER)`
     - Agent level: using `Agent.model`
     - examples [here](https://github.com/openai/openai-agents-python/tree/main/examples/model_providers)
+
+#### OpenAI Model Comparison: Reasoning, Generation & Agentic Capabilities (as of May 2025)
+
+- Note: the **default model** for agents is `GPT-4o` (O4) as of May 2025. 
+
+| Capability / Model        | GPT-3.5-turbo | GPT-4 | GPT-4-turbo | GPT-4o (O4) | O3 / O3-mini | O1 |
+|---------------------------|---------------|--------|----------------|--------------|----------------|----|
+| **Reasoning Ability**     | Basic, error-prone | Excellent, but slower | Excellent | GPT-4-level + faster | Below GPT-4-turbo | Very basic |
+| **Decision-Making**       | Simple decisions only | Structured, logical | Strong decisions, better speed | Fast, natural decisions | Basic decisions, cost-efficient | Limited |
+| **Text Generation**       | Coherent, sometimes generic | High-quality and accurate | Similar to GPT-4, lower latency | Natural, expressive, real-time | Good enough for tasks | Basic output |
+| **Multi-step Reasoning**  | Weak CoT support | Strong CoT (chain-of-thought) | Strong + long context | Excellent at long CoT | Weak or limited CoT | Not supported |
+| **Tool Use / API Calling**| Supported (since 2023) | Supported | Supported | Best performance (fast + reliable) | Supported (slower response) | Limited or not available |
+| **Vision Input**          | ❌ Not supported | ✅ (GPT-4V only) | ✅ (GPT-4V) | ✅ Native (image + text) | Some models have image input | ❌ |
+| **Audio I/O**             | ❌ | ❌ | ❌ | ✅ Native speech in/out | ❌ | ❌ |
+| **Agentic Use / Handoff** | Basic, fragile | Structured but slower | Tool memory + stable handoff | Best agent support (OpenAI Agents API default) | Lightweight use cases | Not intended for agents |
+| **Latency / Speed**       | Fastest | Slowest | Fast | Very fast (comparable to 3.5) | Super fast | Super fast |
+| **Context Window**        | 16K | 8K (some 32K) | Up to 128K | 128K | 16K–32K (varies by tier) | Unknown |
+| **Relative Cost**         | 💸 Cheapest | 💰 Expensive | ⚖️ Balanced | ⚡ High performance at lower cost | 💸 Cheaper than 4o | 💸 Minimal |
+| **Best Use Case**         | Budget chatbots, simple gen | Reasoning-heavy workflows | Agents at scale, cost-aware apps | Real-time multimodal agents, production agents | Light agents or fast prototypes | Embedded/basic assistants |
 ---
 ## 4. Tools
 ### Tool Types
