@@ -11,10 +11,6 @@ allows us to guarantee valid JSON output, but some schemas are not strict-compat
 In this example, we define an output type that is not strict-compatible, and then we run the
 agent with strict_json_schema=False.
 
-We also demonstrate a custom output type.
-
-To understand which schemas are strict-compatible, see:
-https://platform.openai.com/docs/guides/structured-outputs?api-mode=responses#supported-schemas
 """
 
 

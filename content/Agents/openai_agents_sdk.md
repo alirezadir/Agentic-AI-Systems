@@ -1,6 +1,35 @@
-# OpenAI's Agents Overview
 
 This document provides a comprehensive simmarized overview of OpenAI's Agents, with inline code examples, based on the [official documentation](https://platform.openai.com/docs/guides/agents) and the [OpenAI Agents Python SDK](https://openai.github.io/openai-agents-python/).
+
+**Code Examples**: You can find the code examples in the [OpenAI Agents Examples](../../code/01_framework_examples/openai_agents/README.md) directory.
+
+**System Architecture Diagram**:
+
+```mermaid
+flowchart TD
+    UI["User Interface<br/>(Web, Voice, CLI, API Gateway)"]
+    AO["Agent Orchestrator<br/>(Runner, Context Router, Hooks)"]
+    TR["Tracing / Monitoring"]
+    AR["Agents Registry<br/>(instructions, model, tools, handoffs, guardrails)"]
+    TM["Tools Manager<br/>(Function/Hosted Tools, Agents as Tools)"]
+    GP["Guardrails & Policies<br/>(Input/Output Validators, Moderation, Policies)"]
+    MEM["Context & Memory Manager<br/>(Context, Memory, Vector Stores)"]
+    MP["Model Providers<br/>(o1, o3-mini, GPT-4o, GPT-4o-mini, Gemini, etc)"]
+    DB["Persistent Vector Stores / DB"]
+
+    UI <--> AO
+    TR <--> AO
+    AO --> AR
+    AO --> TM
+    AO --> GP
+    GP --> MEM
+    TM <--> AR
+    TM --> MEM
+    MP <--> AR
+    MEM <--> DB
+```
+
+
 
 ## Table of Contents
 - [Agents Overview](#1-agents-overview)
