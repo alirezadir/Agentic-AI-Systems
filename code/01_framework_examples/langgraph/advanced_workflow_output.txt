@@ -1,0 +1,9 @@
+Input: I'm really happy with the new AI features!
+Final Response: Sentiment analysis is needed.
+
+Input: Tell me more about machine learning.
+Final Response: I will provide you with information on the topic of machine learning.
+
+Input: This product is terrible and I'm very disappointed.
+Final Response: Sentiment analysis is needed to analyze the negative sentiment expressed by the user regarding the product.
+

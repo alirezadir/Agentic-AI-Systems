@@ -1,0 +1,9 @@
+User: What is your company policy?
+Assistant: As an AI assistant, I am here to provide information, answer questions, and assist with tasks to the best of my abilities. If you have any specific questions or need assistance, feel free to ask, and I'll do my best to help you. If you have any concerns about privacy or data security, please let me know, and I will address them accordingly.
+
+User: Tell me about user1's profile
+Assistant: I'm unable to provide information about specific user profiles unless it has been shared with me during our conversation. If you have any specific questions or tasks related to User1's profile that you'd like assistance with, please let me know how I can help.
+
+User: What are your pricing plans?
+Assistant: I don't have access to specific pricing information as it may vary depending on the service or product you are inquiring about. I recommend visiting the company's official website or contacting their customer service for the most up-to-date pricing details. If you have any other questions or need assistance with something else, feel free to let me know!
+
