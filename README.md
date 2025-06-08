@@ -1,7 +1,7 @@
 # 🤖 Agentic AI Systems
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Code style: black](https://img.shields.io/badge/code%20style-black-000.svg)](https://github.com/psf/black) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Code style: black](https://img.shields.io/badge/code%20style-black-000.svg)](https://github.com/psf/black)[![Tweet](https://img.shields.io/twitter/url?label=Share%20on%20X&url=https%3A%2F%2Fgithub.com%2Falirezadir%2FAgentic-AI-Systems&style=social)](https://twitter.com/intent/tweet?text=Check%20out%20Agentic%20AI%20Systems%20by%20%40alirezadira%20%E2%80%94%20A%20hands-on%20guide%20to%20building%20LLM%20agents%20%26%20systems!&url=https%3A%2F%2Fgithub.com%2Falirezadir%2FAgentic-AI-Systems&hashtags=AgenticAI,LLM,AIagents,GenAI) 
 <!-- [![GitHub stars](https://img.shields.io/github/stars/alirezadir/Agentic-AI-Systems?style=social)](https://github.com/alirezadir/Agentic-AI-Systems/stargazers) [![GitHub forks](https://img.shields.io/github/forks/alirezadir/Agentic-AI-Systems?style=social)](https://github.com/alirezadir/Agentic-AI-Systems/network) [![Last Commit](https://img.shields.io/github/last-commit/alirezadir/Agentic-AI-Systems)](https://github.com/alirezadir/Agentic-AI-Systems/commits/main) [![GitHub issues](https://img.shields.io/github/issues/alirezadir/Agentic-AI-Systems)](https://github.com/alirezadir/Agentic-AI-Systems/issues) [![Contributors](https://img.shields.io/github/contributors/alirezadir/Agentic-AI-Systems)](https://github.com/alirezadir/Agentic-AI-Systems/graphs/contributors)  -->
-[![Tweet](https://img.shields.io/twitter/url?label=Share%20on%20X&url=https%3A%2F%2Fgithub.com%2Falirezadir%2FAgentic-AI-Systems&style=social)](https://twitter.com/intent/tweet?text=Check%20out%20Agentic%20AI%20Systems%20by%20%40alirezadira%20%E2%80%94%20A%20hands-on%20guide%20to%20building%20LLM%20agents%20%26%20systems!&url=https%3A%2F%2Fgithub.com%2Falirezadir%2FAgentic-AI-Systems&hashtags=AgenticAI,LLM,AIagents,GenAI)
+
 
 Welcome to **Agentic-AI-Systems** — a curated and evolving knowledge base for mastering Agentic and Generative AI system design!
 
@@ -16,10 +16,10 @@ Personal summaries of system design and evaluation overviews focused on generati
 #### Gen-AI System Design Summaries
 
 - [AI Engineering (by Huyen) Book Summary](./content/Gen-AI/AI-Engineering-Summary/README.md): Summarized insights from GenAI and agentic system engineering workflows.
-- [GenAI Platform Overview (Huyen) Summary](./content/Gen-AI/huyen-Gen-AI-Platform.md): Technical architecture and features of Huyen’s GenAI platform.
+- [GenAI Platform Overview (Huyen) Summary](./content/Gen-AI/huyen-Gen-AI-Platform.md): Technical architecture and features of Huyen's GenAI platform.
 - [Gen-AI Evaluation Framework (Huyen) Suammry](./content/Gen-AI/huyen-evaluation.md): Evaluation methodology and scoring with tools.
 #### **Gen-AI API summaries**:
-- [OpenAI API Summary (single page w/ examples)](./content/Agents/openai_api_quickstart.md): Get started fast with OpenAI’s API for generative tasks.
+- [OpenAI API Summary (single page w/ examples)](./content/Agents/openai_api_quickstart.md): Get started fast with OpenAI's API for generative tasks.
 
 ---
 ### 2. [`/Agents`](./content/Agents/)
@@ -71,7 +71,7 @@ Hands-on starter codes, examples, and small projects to accelerate your understa
 
 ---
 
-<!-- ## 🚀 What You’ll Find Here
+<!-- ## 🚀 What You'll Find Here
 
 - 🤖 Design patterns for intelligent, agentic systems
 - 🧠 Framework comparisons: OpenAI, Anthropic, LlamaIndex
@@ -85,3 +85,59 @@ Hands-on starter codes, examples, and small projects to accelerate your understa
 > 🔜 *More coming soon — contributions welcome!* You can start by forking and submitting your own code-based experiments.
 
 Pull requests are welcome! If you'd like to add new frameworks, examples, or summaries, fork the repo and submit a PR.
+
+# Legal Document Assistant
+
+A production-level RAG (Retrieval-Augmented Generation) system for legal document analysis and querying, built with LangChain and LangGraph.
+
+## Features
+
+- Document ingestion pipeline for legal documents
+- Vector-based semantic search
+- Context-aware response generation
+- Source citation and reference tracking
+- API endpoints for integration
+
+## Project Structure
+
+```
+legal-doc-assistant/
+├── src/
+│   ├── data/           # Data processing and storage
+│   ├── models/         # LLM and embedding models
+│   ├── utils/          # Utility functions
+│   └── config/         # Configuration files
+├── tests/              # Test files
+├── docs/               # Documentation
+└── requirements.txt    # Project dependencies
+```
+
+## Setup
+
+1. Create a virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+3. Set up environment variables:
+Create a `.env` file in the root directory with:
+```
+OPENAI_API_KEY=your_api_key_here
+```
+
+## Development
+
+- Run tests: `pytest`
+- Format code: `black .`
+- Sort imports: `isort .`
+- Type checking: `mypy .`
+
+## License
+
+MIT
