@@ -1,0 +1,32 @@
+research_task:
+  description: >
+    Research the topic of {topic} thoroughly. Focus on:
+    1. Current state and developments
+    2. Key challenges and opportunities
+    3. Future trends and predictions
+    4. Notable examples and case studies
+  expected_output: >
+    A comprehensive research report with key findings, organized by topic
+  agent: researcher
+
+writing_task:
+  description: >
+    Create an engaging article about {topic} based on the research findings.
+    The article should be well-structured, informative, and accessible to a
+    general audience.
+  expected_output: >
+    A well-written article with clear sections, engaging content, and
+    proper formatting
+  agent: writer
+  output_file: article.md
+
+review_task:
+  description: >
+    Review the article about {topic}. Check for:
+    1. Accuracy of information
+    2. Clarity and readability
+    3. Structure and flow
+    4. Engagement and interest level
+  expected_output: >
+    A detailed review with specific suggestions for improvement
+  agent: reviewer 

@@ -1,0 +1,3 @@
+chainlit>=0.7.700
+pydantic>=2.5.0
+# Add your agent framework dependencies here 

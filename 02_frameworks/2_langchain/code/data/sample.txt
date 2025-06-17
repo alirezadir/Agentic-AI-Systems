@@ -1,0 +1,18 @@
+Artificial Intelligence and Machine Learning
+
+Artificial Intelligence (AI) is a broad field of computer science focused on creating intelligent machines that can perform tasks that typically require human intelligence. These tasks include visual perception, speech recognition, decision-making, and language translation.
+
+Machine Learning is a subset of AI that focuses on developing systems that can learn from and make decisions based on data. It uses statistical techniques to give computers the ability to "learn" from data, without being explicitly programmed.
+
+Key Concepts:
+1. Supervised Learning: Learning from labeled training data
+2. Unsupervised Learning: Finding patterns in unlabeled data
+3. Reinforcement Learning: Learning through interaction with an environment
+4. Deep Learning: Using neural networks with multiple layers
+
+Applications:
+- Natural Language Processing
+- Computer Vision
+- Robotics
+- Recommendation Systems
+- Autonomous Vehicles 

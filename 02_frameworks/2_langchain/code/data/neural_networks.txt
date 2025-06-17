@@ -1,0 +1,29 @@
+Neural Networks and Deep Learning
+
+Neural networks are computing systems inspired by the biological neural networks in human brains. They are a fundamental component of deep learning systems.
+
+Key Components:
+1. Neurons: Basic processing units
+2. Layers: Input, hidden, and output layers
+3. Weights: Connection strengths between neurons
+4. Activation Functions: Non-linear transformations
+
+Types of Neural Networks:
+- Feedforward Neural Networks
+- Convolutional Neural Networks (CNNs)
+- Recurrent Neural Networks (RNNs)
+- Long Short-Term Memory (LSTM) Networks
+- Transformer Networks
+
+Applications:
+- Image Recognition
+- Natural Language Processing
+- Speech Recognition
+- Time Series Prediction
+- Game Playing
+
+Training Process:
+1. Forward Propagation
+2. Loss Calculation
+3. Backpropagation
+4. Weight Updates 

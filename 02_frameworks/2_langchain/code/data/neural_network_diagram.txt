@@ -1,0 +1,10 @@
+Neural Network Architecture Diagram Description:
+
+This diagram shows a simple feedforward neural network with:
+- Input Layer: 3 neurons (circles) representing input features
+- Hidden Layer: 4 neurons with activation functions
+- Output Layer: 2 neurons for classification
+- Connections: Weighted lines between neurons showing the flow of information
+- Activation: Sigmoid functions shown as curved lines in the hidden layer
+
+The diagram illustrates how data flows from left to right through the network, with each layer transforming the input through weighted connections and activation functions. 
