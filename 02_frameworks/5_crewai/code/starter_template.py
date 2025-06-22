@@ -40,26 +40,29 @@ reviewer = Agent(
 research_task = Task(
     description="""Research the topic 'The Impact of Artificial Intelligence on Healthcare' 
     and gather key information about recent developments, benefits, and challenges.""",
-    agent=researcher
+    agent=researcher,
+    expected_output="A summary of recent developments, benefits, and challenges of AI in healthcare."
 )
 
 write_task = Task(
     description="""Write a comprehensive article about 'The Impact of Artificial Intelligence 
     on Healthcare' based on the research provided. Focus on making it engaging and informative.""",
-    agent=writer
+    agent=writer,
+    expected_output="A well-structured, engaging, and informative article about AI in healthcare."
 )
 
 review_task = Task(
     description="""Review the article about AI in healthcare. Check for accuracy, clarity, 
     and engagement. Provide suggestions for improvement.""",
-    agent=reviewer
+    agent=reviewer,
+    expected_output="A list of suggestions and corrections to improve the article's accuracy, clarity, and engagement."
 )
 
 # Create Crew
 crew = Crew(
     agents=[researcher, writer, reviewer],
     tasks=[research_task, write_task, review_task],
-    verbose=2,
+    verbose=True,
     process=Process.sequential
 )
 

@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 import os
 from dotenv import load_dotenv
-from starter_project.crew import ResearchAndWritingCrew
+from .crew import ResearchAndWritingCrew
 
 def main():
     """Run the research and writing crew."""
     # Load environment variables
     load_dotenv()
     
-    # Define the topic for research and writing
+    # Set the research topic
     topic = "Artificial Intelligence in Healthcare"
     
     # Create and run the crew

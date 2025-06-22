@@ -41,12 +41,12 @@ Core concepts and foundational knowledge for building agentic AI systems.
 4. Study `llms/` for model integration
 5. Review `python/` for best practices -->
 
-## 📖 Resources
+<!-- ## 📖 Resources
 
 - [OpenAI Docs](https://platform.openai.com/docs)
 - [Hugging Face](https://huggingface.co/docs/transformers)
 - [LangChain](https://python.langchain.com/docs/get_started/introduction)
-- [CrewAI](https://docs.crewai.com)
+- [CrewAI](https://docs.crewai.com) -->
 
 ## 🔧 Tools & Resources
 
