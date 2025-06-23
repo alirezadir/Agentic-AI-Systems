@@ -1,15 +1,16 @@
-# Philoagent Simulation Architecture (RAG-based Gaming Agent)
+## Example: Philoagent Simulation Architecture 
+(RAG-based Gaming Agent from [Neural Maze](https://github.com/neural-maze/philoagents-course))
 
-## 1. Memory Layer (MongoDB)
+<img src="../../assets/architectures/philoagent_system_architecture.png" alt="Philoagent Simulation Architecture" width="80%" />
+
+### 1. Memory Layer (MongoDB)
 
 - **Short-Term Memory** and **Long-Term Memory** stored in MongoDB
 - Interfaces with:
   - Agentic RAG Pipeline (for context retrieval)
   - RAG Feature Pipeline (for index creation)
 
----
-
-## 2. RAG Feature Pipeline
+### 2. RAG Feature Pipeline
 
 - **Purpose:**
   - Generates vector embeddings from game/content data
@@ -18,9 +19,7 @@
   - Connects to Memory (short/long-term)
   - Populates the inference layer
 
----
-
-## 3. Agentic RAG Inference Pipeline
+### 3. Agentic RAG Inference Pipeline
 
 **Core Modules:**
 - `State Client`: Handles session or player state
@@ -33,9 +32,7 @@
 - `FastAPI Server`: Hosts and exposes agent functions
 - Uses **LangGraph** for flow orchestration
 
----
-
-## 4. LLM API (Groq-powered)
+### 4. LLM API (Groq-powered)
 
 - Handles:
   - Prompt processing
@@ -44,17 +41,13 @@
   - Agentic Layer (via LLM Gateway)
   - External **Data Sources** (Wikipedia, documents, etc.)
 
----
-
-## 5. Game UI
+### 5. Game UI
 
 - Sends **questions** to the inference pipeline
 - Receives **answers** from the agent
 - Interfaces with LangGraph-driven logic
 
----
-
-## 6. Observability Pipeline (Opik)
+### 6. Observability Pipeline (Opik)
 
 **Monitoring Modules:**
 - `Prompt Monitoring`: Tracks prompt quality, latency
@@ -63,9 +56,7 @@
   - Eval dataset store
   - Continuous improvement pipeline
 
----
-
-## 7. Generate Eval Dataset
+### 7. Generate Eval Dataset
 
 - Uses external data sources to build test cases
 - Supports benchmarking for prompt-response cycles
@@ -74,9 +65,7 @@
   - Prompt Monitoring
   - Retraining or fine-tuning
 
----
-
-## 8. Data Sources
+### 8. Data Sources
 
 - Wikipedia
 - Web documents
@@ -85,9 +74,7 @@
   - `LLM API`
   - `Generate Eval Dataset`
 
----
-
-## Key Technologies Used
+### Key Technologies Used
 
 | Layer                  | Tools / Frameworks                        |
 |------------------------|-------------------------------------------|

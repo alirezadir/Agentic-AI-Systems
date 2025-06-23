@@ -31,7 +31,7 @@ Supports online learning, reinforcement learning, and continual learning. -->
 - Monitoring & Governance (Guardrails & Safety)
 - Infrastructure & AgentOps
 
-# Agentic System Architecture — Production-Ready Stack (2025)
+### Agentic System Architecture Layers — Production-Ready 
 
 | Layer Group                 | Module Name                         | Function / Purpose                                                                                   | Key Capabilities / Examples                                                                                       |
 |----------------------------|-------------------------------------|--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
@@ -134,12 +134,12 @@ Example: (Customer Support Agent)
 
 A comprehensive, step-by-step design document for building a production-grade agentic AI customer support system, combining reasoning, retrieval, memory, tool use, observability, feedback loops, and pattern-driven architecture.
 
-⸻
+---
 
 ## Step 1: Problem Formulation 
 ### 1.1 Define the System Goal & Scope
 
-🎯 Objective
+Objective
 
 We start by establishing **why** the system exists and **what** it must achieve.
 
@@ -166,7 +166,7 @@ Build a customer-facing LLM agent that:
 	•	Escalates gracefully to human agents
 	•	Learns and improves over time
 
-✅ Key Questions
+Key Questions
 
 - What is the agent expected to do?
 Is it a task planner, code assistant, gaming NPC, customer support agent, etc.?
@@ -192,7 +192,7 @@ What type of intelligence is expected?	RAG + tool-augmented LLM with reflection 
 
 ### Step 1.2: High-Level Requirements 
 
-✅ Functional Requirements
+Functional Requirements
 
 Requirement	Description
 NLU	Interpret natural queries
@@ -205,7 +205,7 @@ Observability	Logs, metrics, eval tracing
 Compliance	Handle PII, audit trails
 
 
-🎯 Key Design Constraints
+Key Design Constraints
 Low latency
 Expected response time under 2s
 Data sensitivity
@@ -217,7 +217,7 @@ Potential support for global markets
 
 
 
-### 1.3 🧱 Core Components
+### 1.3 Core Components
 
 •	UI: Chat widget, API endpoint
 •	Orchestration: LangGraph, LangChain logic
@@ -235,7 +235,7 @@ Potential support for global markets
 •	Data flows
 •	Model integration strategy
 
-🧱 Component Architecture
+Component Architecture
 
 Layer	Tools/Tech
 UI	React, Streamlit, Gradio
@@ -246,7 +246,7 @@ Tooling	Custom APIs, LangChain Tools
 Memory Store	Redis, Supabase, Zep
 Observability	Opik, Helicone, Langfuse
 
-🗺️ Data Flow
+Data Flow
 
 User ➝ UI ➝ Agent Orchestrator
    ├──> RAG ➝ Vector Store ➝ Docs
@@ -254,18 +254,18 @@ User ➝ UI ➝ Agent Orchestrator
    ├──> Memory Layer ➝ Context Injection
    └──> LLM Inference ➝ Final Response ➝ Guardrails ➝ Output to User
 
-🧠 Design Patterns at this Layer
+Design Patterns at this Layer
 	•	Meta-Agent Pattern: Modular orchestration of reasoning, memory, tools.
 	•	Prompt Routing: Dynamic path selection based on intent.
 	•	Parallel Execution: Run RAG + tool calls concurrently.
 
 ---
-## ✅ Step 3: System Architecture Design
+## Step 3: System Architecture Design
 
 
-⸻
+---
 
-🧱 High-Level Component Architecture
+High-Level Component Architecture
 
 1. User Interface (Frontend Layer)
 
@@ -275,7 +275,7 @@ Optional Voice UI	Converts speech to text (STT) and back (TTS)
 Messaging Middleware	Sends/receives messages from backend agent
 
 
-⸻
+---
 
 2. Agent Orchestration Layer
 
@@ -286,7 +286,7 @@ Prompt Construction	Dynamic templates (Jinja, JSON prompts)
 Task Execution / Routing	Routes requests to tools, retriever, LLM
 
 
-⸻
+---
 
 3. LLM Inference Layer
 
@@ -296,7 +296,7 @@ Response Synthesis	Final response generation, error handling
 Tool-aware Generation	Embeds tool call structure into prompt context
 
 
-⸻
+---
 
 4. Retrieval-Augmented Generation (RAG) System
 
@@ -307,7 +307,7 @@ Vector Store	Chroma, Weaviate, Pinecone, Qdrant
 Retriever	Hybrid (vector + keyword fallback)
 
 
-⸻
+---
 
 5. Tooling Layer (Action API Gateway)
 
@@ -318,7 +318,7 @@ Profile Fetch Tool	Pulls user profile from DB
 External Search Tool	Optional fallback (e.g., Serper, Exa)
 
 
-⸻
+---
 
 6. Memory Layer
 
@@ -328,7 +328,7 @@ Long-Term	MongoDB / Zep / Supabase	Stores user preferences, history, feedback
 Summarization	Periodically distills old sessions into memory slots	
 
 
-⸻
+---
 
 7. Observability & Feedback
 
@@ -338,7 +338,7 @@ Feedback Capture	Thumbs up/down, edit suggestions
 Model Evaluation	Human or LLM-graded evaluation
 
 
-⸻
+---
 
 8. Security, Guardrails, and Governance
 
@@ -349,9 +349,9 @@ Policy Enforcement	Role-based access control for agents
 Audit Logging	User actions + model outputs logged securely
 
 
-⸻
+---
 
-🗺️ Data Flow (Logical)
+Data Flow (Logical)
 
 User Input ➝ Frontend ➝ Agent Orchestrator
    ├──> RAG ➝ Vector Store ➝ Docs
@@ -361,9 +361,9 @@ User Input ➝ Frontend ➝ Agent Orchestrator
 ➝ Guardrails + Observability ➝ Output to User
 
 
-⸻
+---
 
-📦 Example Tech Stack (Modular)
+Example Tech Stack (Modular)
 
 Layer	Technologies
 UI	React, Streamlit, Gradio
@@ -376,15 +376,15 @@ Tool APIs	Custom REST APIs, Google, Stripe, etc.
 Infra	Docker, Kubernetes, AWS/GCP/Azure, RunPod
 
 
-⸻
+---
 
 
-⸻
+---
 
 ## Step 4: Data Modeling & Prompt Interface Design
 
 ### 4.1  Core Data Models
-🎯 Primary Entities
+Primary Entities
 Entity
 Attributes
 Source
@@ -407,7 +407,7 @@ timestamp, input, retrieved_docs, tool_calls[], output
 
 A modular prompt structure is critical for consistent, contextual agent behavior.
 
-🧱 Prompt Template Structure
+Prompt Template Structure
 
 [System Instructions]
 You are a helpful AI agent assisting users.
@@ -425,7 +425,7 @@ Language: {{user.language}}
 [Expected Format]
 Clear, actionable response
 
-🔧 Tool-Calling Prompt Interface
+Tool-Calling Prompt Interface
 
 {
   "tool_call": {
@@ -440,12 +440,12 @@ Clear, actionable response
 
 In multi-tool environments, prompt structure must also embed tool call hints.
 
-### 4.4 🧠 Design Patterns at this Layer
+### 4.4 Design Patterns at this Layer
 •	Prompt Chaining: Sequential reasoning and formatting layers.
 •	ReAct Pattern: Reasoning followed by tool action.
 •	CodeAct Pattern: Embed tool APIs directly in prompts.
 
-⸻
+---
 
 ## Step 5: Memory Strategy & Feedback Loops
 
@@ -477,44 +477,44 @@ Appended or summarized inline
 On tool completion
 
 
-🧠 Memory Layers
+Memory Layers
 
 Type	Description	Tools
 Short-term	In-session recall	Redis, BufferMemory
 Long-term	Cross-session summary, preferences	Zep, MongoDB
 
-🔁 Memory Ingestion Flow
+Memory Ingestion Flow
 
 Transcript ➝ GPT Summary ➝ Store in Zep/Supabase ➝ Retrieve per session/init
 
 ### 6. Feedback Loop Design
 
-✅ Feedback Collection
+Feedback Collection
 
 Type	Channel
 User Feedback	Thumbs up/down, edits
 LLM Scoring	GPT eval, Opik pipeline
 
-🔁 Real-time Feedback
+Real-time Feedback
 Method
 Action
-👍 / 👎
+Thumbs up / Thumbs down
 Store interaction result in feedback DB
 “Not helpful”
 Tag and escalate to human
 Edit Response
 Capture correction for LLM fine-tuning
 
-🔁 Feedback Loop
+Feedback Loop
 
 Feedback ➝ Eval Tag ➝ Prompt/Memory Update ➝ Improved Behavior
 
-🧠 Design Patterns at this Layer
+Design Patterns at this Layer
 	•	Self-Reflection: Analyze and revise outputs internally.
 	•	Reflexion Loop: Re-evaluate failed outputs using memory.
 	•	Evaluator Optimizer: Score outputs and re-route.
 
-🧠 LLM Evaluation
+LLM Evaluation
 
 Use automated scoring (e.g., GPT-4) for:
 	•	Answer quality
@@ -526,7 +526,7 @@ Store this evaluation metadata for:
 	•	Dashboard analytics
 	•	Long-term tuning
 	•	Prompt updates or model reranking
-⸻
+---
 
 ## Step 6: Tooling Integration + Action Framework
 Language alone isn’t enough — agentic AI systems must act:
@@ -555,7 +555,7 @@ Fallback Search
 External search (FAQs, web docs)
 Serper.dev, Exa, Bing API
 
-🔧 Tool Types
+Tool Types
 
 Type	Example
 Lookup	Track Order API
@@ -580,16 +580,16 @@ Handles:
 	•	Rate limiting
 	•	Retry/backoff on failure
 
-⚙️ Tool Router Flow
+Tool Router Flow
 
 LLM ➝ JSON Tool Call ➝ Router ➝ API ➝ Result ➝ Injected in Prompt ➝ Response
 
-🧰 Tool Execution Platform
+Tool Execution Platform
 	•	LangChain ToolExecutor
 	•	Custom FastAPI tool server
 	•	Observability via Langfuse traces
 
-🧠 Design Patterns at this Layer
+Design Patterns at this Layer
 	•	Tool Use Pattern: Encapsulate tool use with error handling.
 	•	CodeAct Pattern: Translate LLM output into structured tool calls.
 6. Tool Call Triggers
@@ -599,11 +599,11 @@ LLM ➝ JSON Tool Call ➝ Router ➝ API ➝ Result ➝ Injected in Prompt ➝ 
 8. Error & Safety Handling
 
 9. Security & Observability for Tools
-⸻
+---
 
 ## Step 7: Observability, Evaluation & Continuous Improvement
 
-📊 What to Measure
+What to Measure
 
 Metric Type	Example
 Latency	Time per LLM+tool round
@@ -611,31 +611,31 @@ Accuracy	Match to ground truth or eval score
 Feedback	Thumb ratio, correction count
 Tool Success	Failures, retries, latency
 
-🧪 Evaluation Types
+Evaluation Types
 	•	Automated: GPT-graded factuality, relevance
 	•	Human: Qualitative feedback, tagging
 
-🧱 Monitoring Stack
+Monitoring Stack
 
 Layer	Tool
 Tracing	Langfuse, OpenTelemetry
 Logs	Helicone, CloudWatch
 Alerting	Prometheus, PagerDuty
 
-🔁 Improvement Cycle
+Improvement Cycle
 
 Observability ➝ Pattern Tagging ➝ Prompt/Tool/Memory Update ➝ Versioned Rollout
 
-🧠 Design Patterns at this Layer
+Design Patterns at this Layer
 	•	Evaluator Optimizer: Scores and corrects poor output.
 	•	Reflexion Loop: Improves system based on performance feedback.
 
 
-## ✅ Step 7: Observability, Evaluation & Continuous Improvement
+## Step 7: Observability, Evaluation & Continuous Improvement
 
 Use Case: Customer Support Agent (Agentic AI System)
 
-⸻
+---
 
 1. Why Observability Matters
 
@@ -647,7 +647,7 @@ Without observability, you’re:
 	•	Blind to user frustration
 	•	Unable to improve model behavior
 
-⸻
+---
 
 2. What to Monitor
 
@@ -660,7 +660,7 @@ Memory Access	Retrieval hit/miss rate, summary size
 Escalations	When agents hand off to humans
 
 
-⸻
+---
 
 3. Key Tools & Frameworks
 
@@ -671,11 +671,11 @@ LLM Evaluation	Opik, GPT-as-a-judge, custom grading tools
 Error Alerting	Prometheus + Grafana, Sentry, PagerDuty
 
 
-⸻
+---
 
 4. Evaluation Types
 
-📌 Automated Evaluation
+Automated Evaluation
 
 Metric	Method
 Factuality	GPT-4 graded on factual correctness
@@ -684,9 +684,9 @@ Politeness	Classifier or LLM detects tone issues
 Latency	Measure roundtrip response time
 
 
-⸻
+---
 
-🧠 Human-in-the-Loop Evaluation
+Human-in-the-Loop Evaluation
 	•	Review edge cases
 	•	Tag failure reasons (wrong tool, bad memory, hallucination, etc.)
 	•	Feed back into:
@@ -694,7 +694,7 @@ Latency	Measure roundtrip response time
 	•	Tool fix/update
 	•	Model selection refinement
 
-⸻
+---
 
 5. Feedback Loop Integration
 
@@ -710,7 +710,7 @@ Latency	Measure roundtrip response time
 → Memory Injection Fix
 
 
-⸻
+---
 
 6. Versioning & Rollouts
 
@@ -722,7 +722,7 @@ Memory Format	Schema evolution via migration
 
 Tip: Use feature flags to test new flows safely.
 
-⸻
+---
 
 7. Failure Mode Analysis
 
@@ -733,7 +733,7 @@ Wrong context injected	Wrong user summary used	Add memory hash validation
 Looping responses	Agent keeps re-answering same way	Conversation turn limit + fallback
 
 
-⸻
+---
 
 8. Continuous Improvement Strategy
 
@@ -745,9 +745,9 @@ Memory Strategy	Tune summarization + injection methods
 Escalation Logic	Add rules based on recurring fail tags
 
 
-⸻
+---
 
-✅ Summary of Step 7
+Summary of Step 7
 
 You now have:
 	•	A complete observability stack
@@ -755,11 +755,11 @@ You now have:
 	•	Feedback loops for improving prompts, tools, and memory
 	•	A rollout/versioning strategy for safe iteration
 
-⸻
+---
 
 
 
-✅ Conclusion
+Conclusion
 
 This full-stack system design enables:
 	•	Intelligent support agent behavior
@@ -768,24 +768,6 @@ This full-stack system design enables:
 	•	Continuous, data-driven improvement
 	•	Pattern-aligned system design for modular growth
 
-🔌 Design Patterns Summary Table
-
-Pattern	Category	Use in this System
-Prompt Chaining	Prompt Workflow	Prompt pipeline in Step 4
-Routing	Prompt Workflow	Agent Orchestration (Step 3)
-Parallel Execution	Prompt Workflow	Concurrent RAG + tool calls
-ReAct Pattern	Agent Behavior	Reasoning + action in prompts
-CodeAct Pattern	Agent Behavior	Tool-invocation via prompts
-Meta-Agent Pattern	Agent Behavior	Modular orchestration components
-Self-Reflection	Self-Improving	Output critique + summarization
-Reflexion Loop	Self-Improving	Retry mechanism with memory
-Evaluator Optimizer	Self-Improving	Feedback routing + improvement
-Multi-Agent Workflow	Multi-Agent System	For scaling agents by skill/domain
-Network Pattern	Multi-Agent System	Parallel agents for categories
-Autonomous Agent Loop	Multi-Agent System	Background agents (not MVP)
-Agentic RAG	RAG-Based Pattern	Vector + memory hybrid retrieval
-Tool Use Pattern	Tool Integration	JSON-based tool schema execution
-ReWoo	Reasoning-Oriented	Multi-step task planning (optional)
 
 This design document is extensible to additional use cases such as:
 	•	Healthcare triage agents

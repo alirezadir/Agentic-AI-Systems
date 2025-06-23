@@ -53,6 +53,7 @@
 - [Cohere Embeddings](https://docs.cohere.com/docs/embeddings)
 - [HuggingFace Sentence Transformers](https://huggingface.co/sentence-transformers)
 - [LangChain Embeddings](https://python.langchain.com/docs/modules/data_connection/text_embedding/)
+- [VoyageAI](https://www.voyageai.com/): Embedding + re-rankers as a service
 
 #### Vector Databases
 - [FAISS](https://faiss.ai/): High-performance similarity search
@@ -64,8 +65,99 @@
 #### Local Deployment
 - [Ollama](https://ollama.ai/): Local model deployment and management
 
+#### Orchestration
+- Agent Orchestration Primitives:
+    - LangGraph: uses graph nodes (LLMs/tools/memory) with edge-controlled execution
+    - CrewAI: defines Agents, Tasks, Tools, and Crew → structured execution like a task force
+    - Autogen: supports Agent-to-Agent and Human-in-the-loop collaboration
+- Workflow Orchestration:
+    - [Prefect](https://www.prefect.io/): Workflow orchestration
+    - [Airflow](https://airflow.apache.org/): Workflow orchestration
+- Infrastructure Orchestration:
+    - [Kubernetes](https://kubernetes.io/): Container orchestration
+    - [Docker](https://www.docker.com/): Containerization
+    - [CloudInfra](https://www.cloudinfra.io/): Cloud infrastructure as code
+    - [AWS](https://aws.amazon.com/): Cloud infrastructure
+ 
+- [AI Orchestration Tools, Akka.io](https://akka.io/blog/ai-orchestration-tools)
+
+### Observability
+- [Opik](https://opik.ai/): Monitoring and evaluation
+- [ ] todo add more
 ### Specialized Agent Tools
 - [mem0](https://github.com/mem0ai/mem0): Agent memory management
 - [Embedchain](https://docs.embedchain.ai/get-started/introduction): LLM application framework
 - [Agno](https://github.com/agno-agi/agno): Knowledge-centric agent framework
 - [Firecrawl](https://www.firecrawl.dev/): Web data extraction ([FIRE-1](https://docs.firecrawl.dev/agents/fire-1) crawler)
+
+
+## Examples
+
+### Example Stacks
+
+#### Philoagent Simulation Architecture
+
+
+| Layer                  | Tools / Frameworks                        |
+|------------------------|-------------------------------------------|
+| Memory                 | MongoDB                                   |
+| Inference              | FastAPI, LangGraph                        |
+| Vector Indexing        | Custom Embedding + Vector DB              |
+| Orchestration          | Agentic Layer, State Client               |
+| LLM API                | Groq                                       |
+| Observability          | Opik (Monitoring & Evaluation)            |
+| UI                     | Custom Game UI                            |
+
+
+
+
+```mermaid
+graph TB
+  subgraph L1[Infra Orchestration Layer]
+    K8s[Kubernetes] --> Deploy
+    Docker --> K8s
+    Terraform --> CloudInfra
+  end
+
+  subgraph L2[Workflow Orchestration Layer]
+    Prefect --> WorkerNode1
+    Temporal --> AgentTask1
+    Airflow --> DAG1
+  end
+
+  subgraph L3[Agent Reasoning Layer]
+    LangGraph --> PlanTask
+    CrewAI --> AssignAgents
+    Autogen --> CodeAgent
+  end
+
+  UserQuery --> LangGraph
+  LangGraph --> Prefect
+  Prefect --> Docker
+  Docker --> K8s
+```
+
+
+```mermaid
+graph TD
+  A[User Query] --> B[LangGraph: Plans Task Nodes]
+  B --> C[Prefect: Orchestrates Steps]
+  C --> D1[LangChain: Tool - Web Search]
+  C --> D2[LangChain: Tool - PDF Extractor]
+  C --> D3[LangChain: Tool - Blog Generator]
+  D1 --> E[Redis/Pinecone: Stores Embeddings]
+  D2 --> E
+  D3 --> F[Draft Output]
+  C --> G[Prometheus Logs + Prefect Retry Logic]
+  F --> H[LangGraph Final Node: Output Response]
+```
+
+```mermaid
+graph TD
+  A[User Query] --> B[Agent Reasoning Layer<br/>Plans task, selects tools, sets goal]
+  B --> C[Workflow Layer<br/>Coordinates multi-step execution like fetch, summarize, email]
+  C --> D[Tool Execution Layer<br/>Calls APIs, plugins, or internal tools]
+  D --> E[Data Movement Layer<br/>Moves inputs and outputs between components]
+  E --> F[Infrastructure Layer<br/>Ensures services are running and scaled]
+  F --> G[Monitoring & Feedback Layer<br/>Logs, evaluates, and informs agent refinement]
+```

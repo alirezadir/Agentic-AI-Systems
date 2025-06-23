@@ -1,4 +1,9 @@
-## Multi-Modal RAGs
+# RAGs
+
+## Types of RAGs
+### Basic RAGs
+### Agentic RAGs
+### Multi-Modal RAGs
 ![Multi-Modal RAGs](../../assets/RAGs/multimodal-RAG-o3-1.png)
 ![Multi-Modal RAGs](../../assets/RAGs/multimodal-RAG-o1-1.png)
 ![Multi-Modal RAGs](../../assets/RAGs/multimodal-RAG-o3-2.png)

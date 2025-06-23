@@ -1,6 +1,6 @@
 # Resources 
 ## Agents 
-### 1. [Agentic Tools & Frameworks](./Agents/stack-tools.md#top-agentic-system-frameworks)
+### 1. [Agentic Tools & Frameworks](./stack-tools.md#top-agentic-system-frameworks)
 ### 2. Agents System Design
 - Agent Design Patterns
     - [Building Effective Agents Cookbook (Anthropic)](https://www.anthropic.com/engineering/building-effective-agents)

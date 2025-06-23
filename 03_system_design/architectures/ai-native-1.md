@@ -1,4 +1,4 @@
-# AI Agent System Architecture
+# AI Native System Architecture
 
 ## 1. User Input Layer
 

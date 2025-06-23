@@ -2,13 +2,13 @@
 
 > **A comprehensive guide to building production-ready AI agents and multi-agent systems**
 
-Welcome to **Agentic-AI-Systems** — a curated and evolving knowledge base for mastering Agentic and Generative AI system design!
+Welcome to **Agentic-AI-Systems** — a curated and evolving knowledge base for mastering Agentic and Generative AI system design! This repository is a collection of resources and examples that I have found useful in my journey of building agentic AI systems.
 
 ![Agentic-AI-Systems](./assets/cover-01.png)
 
 ---
 
-## 📂 Contents
+## Contents
 
 | Section | Description |
 |---------|-------------|
@@ -20,7 +20,7 @@ Welcome to **Agentic-AI-Systems** — a curated and evolving knowledge base for 
 
 ---
 
-## 🧠 Highlights
+## Highlights
 
 - **[AI Engineering Book Summary (Chip Huyen)](./01_foundations/ai-engineering-summary/README.md):** GenAI system workflows and infrastructure.
 - **[GenAI Platform Overview](./01_foundations/gen-AI/huyen-Gen-AI-Platform.md):** Platform architecture and technical breakdowns.
@@ -37,7 +37,7 @@ Welcome to **Agentic-AI-Systems** — a curated and evolving knowledge base for 
 
 <!-- 
 ---
-## ⚙️ Frameworks & Tutorials
+## Frameworks & Tutorials
 
 - **OpenAI SDK:** [Overview](./02_frameworks/1_openai/openai_agents/), [Design Guide](./02_frameworks/1_openai_agents/docs/openai-agents-design-guide.md), [Starter Code](./02_frameworks/1_openai_agents/code/)
 - **LangGraph:** [Docs](./02_frameworks/3_langgraph/docs/), [Code](./02_frameworks/3_langgraph/code/)
@@ -46,7 +46,7 @@ Welcome to **Agentic-AI-Systems** — a curated and evolving knowledge base for 
 
 ---
 
-## 🚀 Why Agentic-AI-Systems?
+## Why Agentic-AI-Systems?
 
 - **Practical:** Real code, real projects, real-world patterns
 - **Curated:** Only the most useful frameworks, tools, and concepts

@@ -2,6 +2,17 @@
 
 This directory contains reusable design patterns and templates for building agentic systems. Use these patterns as starting points or inspiration for structuring your own generative AI applications.
 
+1. [AI Agent Design Patterns](./AI-Agent-Design-Patterns-v1.3.md)
+2. [Patterns with Code Examples](./agentic_patterns_w_codes.md)
+3. [Code Examples](./code/README.md)
+
+
+
+
+
+
+
+
 <!-- ## What You'll Find
 
 - Common agent orchestration patterns

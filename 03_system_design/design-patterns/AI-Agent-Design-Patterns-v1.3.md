@@ -1,8 +1,5 @@
 
-# AI Agent Design Patterns (Comprehensive Guide)
-
-Curated from designs by @rakeshgohel01 + Industry Research  
-Structured by: ChatGPT (OpenAI)
+# AI Agents Design Patterns (Comprehensive Guide)
 
 ---
 
