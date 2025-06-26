@@ -1,4 +1,13 @@
+# Protocols
+
 ## Protocols for AI Systems
+
+This page provides an overview of protocols for AI systems, including Model Context Protocol (MCP) and Agentic AI (A2A).
+
+<img src="../../assets/protocols/agent-protocols-workflows.png" alt="Protocols for AI Systems" width="80%" />
+
+*Figure: Protocols for AI Systems. Adapted from [@rakeshgohel01].*
+
 
 ### 1. Model Context Protocol (MCP) 
 
@@ -7,6 +16,10 @@
     - Solves the **NxM problem** (N tools and M models talk through a single interface)
     - a **model-agnostic**, **tool-agnostic**, and **open** protocol 
 - Follows a **host → client → server** architecture
+
+<img src="../../assets/protocols/mcp.png" alt="Protocols for AI Systems" width="80%" />
+
+*Figure: Protocols for AI Systems. Adapted from [@rakeshgohel01].*
 
 #### Component Roles
 
@@ -136,4 +149,11 @@ def get_issues(repo: str, state: str, limit: int = 5):
 - [Open AI MCP](https://openai.github.io/openai-agents-python/mcp/)
 
 ### 2. A2A 
+
+<img src="../../assets/protocols/a2a.png" alt="Protocols for AI Systems" width="80%" />
+
+*Figure: A2A Protocol. Adapted from [@rakeshgohel01].*
+
+
+
 - [ ] ToDo

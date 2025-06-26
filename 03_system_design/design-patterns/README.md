@@ -1,6 +1,14 @@
+# Design Patterns
+This page provides design patterns in agentic AI systems.
+
+This directory contains an overview of reusable design patterns and templates for building agentic systems. Use these patterns as starting points or inspiration for structuring your own agentic AI applications.
+
+<!-- <img src="../../assets/design-patterns/design-patterns-1.jpeg" alt="Design Patterns" width="70%" />
+
+*Figure: Design Patterns.* -->
+
 # Design Pattern Examples
 
-This directory contains reusable design patterns and templates for building agentic systems. Use these patterns as starting points or inspiration for structuring your own generative AI applications.
 
 1. [AI Agent Design Patterns](./AI-Agent-Design-Patterns-v1.3.md)
 2. [Patterns with Code Examples](./agentic_patterns_w_codes.md)

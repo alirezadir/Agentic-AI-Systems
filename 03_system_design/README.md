@@ -4,15 +4,16 @@ This directory provides concise resources for designing, building, and evaluatin
 
 ## Directory Overview
 
-- **[Architectures](./architectures/):** System blueprints and the [12-Step Agentic System Design](./architectures/ASD-12-step-v1.5.md).
-- **[Design Patterns](./design-patterns/):** Patterns and code examples for agentic systems.
-- **[Cookbooks](./cookbooks/):** Practical guides and tutorials (e.g., Snowflake, Anthropic).
-- **[Agentic AI](./agentic-ai/):** Specialized agentic system design resources.
-- **[Layers](./layers/):** Cognitive and reasoning layer designs.
-- **[RAGs](./RAGs/README.md):** Retrieval-Augmented Generation architectures and examples (e.g., Uber).
-- **[Evals](./evals/):** Agent evaluation frameworks.
-- **[Protocols](./protocols/protocols-AI.md):** Communication standards for agentic systems.
-- **[Memory](./memory/memory-AI.md):** (Placeholder for future memory system docs)
+- **[Architectures](./architectures/README.md):** System blueprints and the 12-Step Agentic System Design.
+- **[Design Patterns](./design-patterns/README.md):** Patterns and code examples for agentic systems.
+- **[Cookbooks](./cookbooks/README.md):** Practical guides and tutorials.
+- **[Agents](./agents/README.md):** Agentic system agent definitions and resources.
+<!-- - **[Layers](./layers/README.md):** Cognitive and reasoning layer designs. -->
+- **[RAGs](./RAGs/README.md):** Retrieval-Augmented Generation architectures and examples.
+- **[Evals](./evals/README.md):** Agent evaluation frameworks.
+- **[Protocols](./protocols/README.md):** Communication standards for agentic systems.
+- **[Memory](./memory/README.md):** Memory system documentation.
+<!-- - **[_agent_ops](./_agent_ops/README.md):** Agent operations and monitoring tools. -->
 
 ---
 
