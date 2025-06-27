@@ -1,6 +1,6 @@
 # Layers of AI Agents Architecture
 
-## Core components 
+<!-- ## Core components  -->
 <!-- Layer, Description, Key Considerations -->
 <!-- **Perception Layer**
 Interfaces with the environment to gather data (e.g., sensors, APIs, user inputs).
@@ -17,9 +17,9 @@ Balances short-term and long-term memory, ensures data relevance and retrieval.
 **Learning Layer**
 Adapts behavior based on feedback and new data.
 Supports online learning, reinforcement learning, and continual learning. -->
+<img src="../../assets/architectures/agentic-ai-architecture-blueprint.png" alt="Agents" width="90%" />
 
-
-###  🧠 Agentic AI System Layer Stack (Production-Ready)
+###  Agentic AI System Layer Stack (Production-Ready)
 
 A modular, extensible architecture for designing production-grade agentic AI systems.
 
@@ -195,7 +195,7 @@ Reg --> Compute --> Storage --> Messaging --> OutputMod --> Struct
 
 ----
 
-##### Cursor version 
+<!-- ##### Cursor version 
 
 
 ### Agentic System Architecture Layers — Production-Ready 
@@ -247,4 +247,4 @@ Reg --> Compute --> Storage --> Messaging --> OutputMod --> Struct
 
 
 
-
+ -->

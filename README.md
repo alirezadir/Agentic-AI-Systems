@@ -4,7 +4,7 @@
 
 Welcome to **Agentic-AI-Systems** — a curated and evolving knowledge base for mastering Agentic and Generative AI system design! This repository is a collection of resources and examples that I have found useful in my journey of building agentic AI systems.
 
-<img src="./assets/covers/cover-03.png" alt="Agentic-AI-Systems" width="80%">
+<img src="./assets/covers/cover-03.png" alt="Agentic-AI-Systems" width="70%">
 
 ---
 
@@ -14,7 +14,7 @@ Welcome to **Agentic-AI-Systems** — a curated and evolving knowledge base for 
 |---------|-------------|
 | **[1. Foundations](./01_foundations/README.md)** | GenAI concepts and design, LLMs, evaluation, modern Python, and more. |
 | **[2. Frameworks](./02_frameworks/README.md)** | Tutorials and example codes for OpenAI, LangGraph, LlamaIndex, LangChain, CrewAI, Chainlit, and more. |
-| **[3. System Design](./03_system_design/README.md)** | Agentic AI System Design: Architectures, layers, design patterns, diagrams, and code. |
+| **[3. Agentic System Design](./03_system_design/README.md)** | Agentic AI System Design: Architectures, layers, design patterns, diagrams, and code. |
 | **[4. Use Cases](./04_use_cases/README.md)** | Real-world and example agent projects and applications. |
 | **[5. Resources](./05_resources/resources.md)** | Courses, tool stacks, protocols, and list of resources. |
 
