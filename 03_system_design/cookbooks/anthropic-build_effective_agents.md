@@ -30,9 +30,9 @@
 
 
 
-### ⚒️ When to Use What
-> 🟢 Use workflows when predictability matters  
-> 🔁 Use agents when flexibility and adaptability are required
+### When to Use What
+> Use workflows when predictability matters  
+> Use agents when flexibility and adaptability are required
 
 #### Workflow
 - Use **Workflow** for static processes with predefined steps.
@@ -216,11 +216,10 @@ A coding assistant that, upon receiving a feature request, identifies affected f
 
 
 
----
 
-## 🤖 Agent Pattern & Loop
+## Agent Pattern & Loop
 
-### 💬 Agent Loop Example
+### Agent Loop Example
 ```
 1. Decide: "I need to look up a fact"
 2. Act: Call web search API
@@ -236,9 +235,7 @@ while not done:
     state.update(result)
 ```
 
----
-
-## 🛠️ Tools & Enhancements
+###  Tools & Enhancements
 
 **Example**: Retrieval-augmented generation
 ```python
@@ -247,9 +244,7 @@ docs = vector_search(query)
 response = llm(prompt + docs)
 ```
 
----
-
-## ⚠️ Frameworks: Use Carefully
+##  Frameworks: Use Carefully
 
 | Framework        | Role                                |
 |------------------|--------------------------------------|
@@ -259,9 +254,8 @@ response = llm(prompt + docs)
 | **Vellum**       | Workflow UI with evaluation           |
 | **Amazon Bedrock** | Framework for agent orchestration   |
 
----
 
-## ✅ Best Practices
+### Best Practices
 
 - Start simple – don’t over-engineer
 - Use workflows first, agents when needed
@@ -269,9 +263,9 @@ response = llm(prompt + docs)
 - Observe, log, and evaluate results often
 
 ---
-### 🧠 Appendix 1: Agents in Practice
+###  Appendix 1: Agents in Practice
 
-#### A. 💬 Customer Support Agent
+#### A. Customer Support Agent
 
 **Why agents work well:**
 - Conversational interface matches natural support flow
@@ -306,17 +300,17 @@ response = llm(prompt + docs)
 - Compile overview
 ---
 
-### 🧰 Appendix 2: Prompt Engineering Your Tools
+### Appendix 2: Prompt Engineering Your Tools
 
 **Tools are essential to agentic systems. Good tool prompting = better agent behavior.**
 
-#### 🔧 Key Guidelines
+#### Key Guidelines
 
 - Let model "think" before committing to output
 - Use familiar formats (e.g., markdown over JSON for code)
 - Avoid formats with high overhead (e.g., line-count diffs)
 
-#### 🧠 Agent-Computer Interface (ACI) Tips
+####  Agent-Computer Interface (ACI) Tips
 
 | Tip                                  | Description                                                                 |
 |--------------------------------------|-----------------------------------------------------------------------------|

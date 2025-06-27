@@ -2,9 +2,8 @@
 
  This summary combines **Model Evaluation** and **Application Evaluation** as detailed in *AI Engineering* by Chip Huyen.
 
----
 
-## 1.1 Model Evaluation
+## 1. Model Evaluation
 
 Model evaluation measures how well a model performs specific tasks, independent of system integration.
 

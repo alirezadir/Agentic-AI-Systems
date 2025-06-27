@@ -4,7 +4,7 @@
 
 Welcome to **Agentic-AI-Systems** — a curated and evolving knowledge base for mastering Agentic and Generative AI system design! This repository is a collection of resources and examples that I have found useful in my journey of building agentic AI systems.
 
-![Agentic-AI-Systems](./assets/cover-01.png)
+![Agentic-AI-Systems](./assets/covers/cover-03.png)
 
 ---
 
