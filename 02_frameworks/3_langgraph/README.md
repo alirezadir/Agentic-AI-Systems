@@ -22,10 +22,10 @@ This folder provides starter code and examples to help you build AI agents with 
 
 ## Contents
 ### Docs
-- [Basic Chatbot Tutorial](./docs/1_basic_chatbot_tutorial.md): Key concepts and basic setup for LangGraph.
-- [Add Tools Tutorial](./docs/2_add_tools_tutorial.md): Fast start guide for using the LangGraph API.
-- [Add Memory Tutorial](./docs/3_add_memory_tutorial.md): Design principles and structure for LangGraph agents.
-- [Human-in-the-Loop Tutorial](./docs/4_human_in_the_loop_tutorial.md): Advanced tutorial for human-in-the-loop interactions.
+- [Basic Chatbot Tutorial](./1_basic_chatbot_tutorial.md): Key concepts and basic setup for LangGraph.
+- [Add Tools Tutorial](./2_add_tools_tutorial.md): Fast start guide for using the LangGraph API.
+- [Add Memory Tutorial](./3_add_memory_tutorial.md): Design principles and structure for LangGraph agents.
+- [Human-in-the-Loop Tutorial](./4_human_in_the_loop_tutorial.md): Advanced tutorial for human-in-the-loop interactions.
 
 ### Code
 - Starter codes for building agents with LangGraph can be found in the [code](./code/README.md) including:

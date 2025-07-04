@@ -1,35 +1,34 @@
-# OpenAI 
-This directory contains comprehensive docs and examples for building AI agents using the OpenAI Agents SDK.
+# OpenAI Agents
 
-## Overview
-This folder provides documentation and code examples for building AI agents with the OpenAI Agents SDK. It includes guides, tutorials, and starter code to help you get started quickly.
 
-## Prerequisites
-- Python 3.8 or higher
-- OpenAI API key (set as an environment variable or in a .env file)
+### Overview:
+This directory contains comprehensive documentation, guides, tutorials, and code examples for building AI agents using the OpenAI API and Agents SDK. It provides everything you need—including starter code—to help you get started quickly.
 
-## Usage
-1. Install dependencies:
-   ```bash
-   pip install openai openai-agents
-   ```
-2. Set your OpenAI API key:
-   ```bash
-   export OPENAI_API_KEY="your_api_key_here"
-   ```
-3. Explore the docs and code examples to build your own agents.
 
-## Contents
-### Docs
+
+### Contents:
+#### 1. Documents
 - [OpenAI Agents (Concepts and Setup)](./docs/openai_agents_overview.md): Key concepts and basic setup for OpenAI agentic systems.
 - [OpenAI Agents SDK (Comprehensive Guide)](./docs/openai_agents_sdk.md): Comprehensive guide and code examples for building agents with the OpenAI Agents SDK.
 - [OpenAI API Quickstart](./docs/openai_api_quickstart.md): Fast start guide for using the OpenAI API for generative tasks.
 - [OpenAI Agents Design Guide (Summary)](./docs/openai-agents-design-guide.md): Design principles and structure for OpenAI agents.
 
-### Code
-- Starter codes for building agents with the OpenAI Agents SDK can be found in the [code](./code/README.md) including: 
-    - basics, models, tools, context, handoffs, guardrails, run_stream, lifecycle, outputs, tracing, mcp, prompting, voice_agents. 
-
+#### 2. Code
+- Comprehensive starter codes for building agents with the OpenAI Agents SDK can be found in the [code](./code/README.md) including: 
+    - Agents basics, 
+    - models, 
+    - tools, 
+    - context, 
+    - handoffs, 
+    - guardrails, 
+    - streaming, 
+    - lifecycle, 
+    - outputs, 
+    - tracing, 
+    - mcp, 
+    - prompting, 
+    - and voice_agents. 
+<!-- 
 - #### Basic Examples
     - [`01_basic/`](./code/01_basic/): Simple "Hello World" examples showing basic agent setup and interaction
     - [`02_models/`](./code/02_models/): Working with external model providers and configurations
@@ -45,4 +44,4 @@ This folder provides documentation and code examples for building AI agents with
 - #### Advanced Examples
     - [`11_mcp/`](./code/11_mcp/): Using the Model Context Protocol
     - [`12_prompting/`](./code/12_prompting/): Advanced prompting techniques (e.g. dynamic prompting)
-    - [`13_voice_agents/`](./code/13_voice_agents/): Building voice-enabled agents
+    - [`13_voice_agents/`](./code/13_voice_agents/): Building voice-enabled agents -->

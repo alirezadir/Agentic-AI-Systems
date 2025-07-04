@@ -3,15 +3,17 @@
 <!-- - [ ] Todo: add readmes + update contents
 - [ ] Todo: add foundations from Gen-AI Interviews -->
 
-Core concepts and foundational knowledge for building agentic AI systems.
+This section provides core concepts and foundational knowledge for Gen-AI systems, Agents, and agentic AI systems. 
 
-## Contents
-
-- [`ai-engineering-summary/`](./ai-engineering-summary/): GenAI system workflows and infrastructure
-- [`gen-AI/`](./gen-AI/): Technical architecture and evaluation frameworks
-- [`agents/`](./agents/): OpenAI API and agent design patterns
-- [`llms/`](./llms/): Modern Python workflows and LLM integration
-- [`modern python/`](./python/): Best practices and optimization in modern Python & vibe coding
+### Contents:
+#### 1. Gen AI
+- [AI Engineering Summary](./ai-engineering-summary/README.md): chapter-wise summary of the  [**AI Engineering** book by Chip Huyen](https://www.oreilly.com/library/view/ai-engineering/9781098166298/)
+- [LLMs](./llms/): LLM training workflows, LLM frameworks comparison, and LLM architecture (trasnformers variants.)
+- [Gen-AI](./gen-AI/): Technical architecture and evaluation frameworks
+#### 2. Agents
+- [Agents](./agents/README.md): Agents and agentic AI systems definitions and evolution
+#### 3. AI coding
+- [Modern Python](./python/): Best practices and optimization in modern Python & vibe coding
 <!-- - [`assets/`](./assets/): Visual resources and diagrams -->
 
 <!-- ## Key Areas
@@ -51,7 +53,7 @@ Core concepts and foundational knowledge for building agentic AI systems.
 - [LangChain](https://python.langchain.com/docs/get_started/introduction)
 - [CrewAI](https://docs.crewai.com) -->
 
-## Tools & Resources
+<!-- ## Tools & Resources
 
 - Code examples and templates
 - Architecture diagrams
@@ -61,7 +63,7 @@ Core concepts and foundational knowledge for building agentic AI systems.
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change. -->
 
 <!-- ## License
 

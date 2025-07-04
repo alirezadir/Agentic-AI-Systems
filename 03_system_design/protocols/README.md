@@ -132,6 +132,10 @@ def get_issues(repo: str, state: str, limit: int = 5):
     ) as server:
         tools = await server.list_tools()
     ```
+
+#### Claude MCP Tool
+- Check out the code for [mcp_tool_claude.py](./mcp_tool_claude.py)
+
 - **Using MCP servers**
     - MPSC servers can be added to the agents as tools (the agent will call the list_tools() on the server to get the tools)
 

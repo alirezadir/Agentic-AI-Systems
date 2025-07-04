@@ -11,3 +11,8 @@ This directory contains reusable design patterns and templates for building agen
 5. [Routing](./routing.py)
 6. [Streaming Guardrails](./streaming_guardrails.py)
 
+#### Anthropic Patterns
+
+1. [Basic Workflows](./basic_workflows.ipynb)
+2. [Orchestrator-Workers](./orchestrator_workers.ipynb)
+3. [Evaluator-Optimizer](./evaluator_optimizer.ipynb)
