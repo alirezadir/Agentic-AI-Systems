@@ -130,9 +130,27 @@ Select the metrics that are most relevant to your objectives and use case. Regul
 
 
 ### Example: Chatbot Evualtion as MA Simulation
+
+
+When building a chat bot, such as a customer support assistant, it can be hard to properly evaluate your bot's performance. It's time-consuming to have to manually interact with it intensively for each code change.
+
+One way to make the evaluation process easier and more reproducible is to simulate a user interaction.
+
+The overall simulation looks something like this:
+
+
 <img src="../../assets/evals/eval_chatbot_simulation.png" alt="Memory" width="90%" />
 
 *Figure: Chatbot Eval as MA Simulation. Adapted from [LangGraph].* 
+
+In this [example from Langgraph](https://github.com/langchain-ai/langgraph/blob/main/docs/docs/tutorials/chatbot-simulation-evaluation/agent-simulation-evaluation.ipynb), you can find how to use a multi-agent simulation to evaluate the performance of a chat bot.
+
+#### Chat Bot Benchmarking using Simulation
+In this Langgraph [example](https://github.com/langchain-ai/langgraph/blob/main/docs/docs/tutorials/chatbot-simulation-evaluation/langsmith-agent-simulation-evaluation.ipynb) you can find how to use simulated conversations to benchmark your chat bot using LangSmith.
+
+
+
+
 
 
 

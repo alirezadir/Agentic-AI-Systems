@@ -7,13 +7,12 @@ This directory contains comprehensive documentation, guides, tutorials, and code
 
 
 ### Contents:
-#### 1. Documents
-- [OpenAI Agents (Concepts and Setup)](./openai_agents_overview.md): Key concepts and basic setup for OpenAI agentic systems.
-- [OpenAI Agents SDK (Comprehensive Guide)](./openai_agents_sdk.md): Comprehensive guide and code examples for building agents with the OpenAI Agents SDK.
-- [OpenAI API Quickstart](./openai_api_quickstart.md): Fast start guide for using the OpenAI API for generative tasks.
-- [OpenAI Agents Design Guide (Summary)](./openai-agents-design-guide.md): Design principles and structure for OpenAI agents.
+- [**OpenAI Agents (Overview)**](./openai_agents_overview.md): Key concepts and basic setup for OpenAI agentic systems.
+- [**OpenAI Agents SDK (Comprehensive Guide)**](./openai_agents_sdk.md): Comprehensive guide and code examples for building agents with the OpenAI Agents SDK.
+- [**OpenAI API Quickstart**](./openai_api_quickstart.md): Fast start guide for using the OpenAI API for generative tasks.
+- [**OpenAI Agents Design Guide** (Summary)](../../03_system_design/cookbooks/openai-agents-design-guide.md): Design principles and structure for OpenAI agents.
 
-#### 2. Code
-- Comprehensive starter codes for building agents with the OpenAI Agents SDK can be found in the [code](./code/README.md) including: 
-    - Agents basics: agents, models, tools, context, handoffs, guardrails, streaming, lifecycle, outputs, tracing, mcp, prompting, and voice_agents. 
-    - Advanced: streaming, lifecycle, outputs, tracing, mcp, prompting, and voice_agents. 
+##### Code Examples
+- Comprehensive starter codes for building agents in [code](./code/README.md) folder: 
+    - **Agents basics**: agents, models, tools, context, handoffs, guardrails, streaming, lifecycle, outputs, tracing, mcp, prompting, and voice_agents. 
+    - **Agents Advanced**: streaming, lifecycle, outputs, tracing, mcp, prompting, and voice_agents. 

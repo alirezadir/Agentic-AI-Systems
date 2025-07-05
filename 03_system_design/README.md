@@ -5,7 +5,7 @@ This directory provides concise resources for designing, building, and evaluatin
 ## Directory Overview
 
 - **[Architectures](./architectures/README.md):** System blueprints and the 12-Step Agentic System Design.
-- **[Design Patterns](./design-patterns/README.md):** Patterns and code examples for agentic systems.
+- **[Design Patterns](./design-patterns/agentic-ai-design-patterns.md):** Patterns and code examples for agentic systems.
 - **[Cookbooks](./cookbooks/README.md):** Practical guides and tutorials.
 - **[Agents](./agents/README.md):** Agentic system agent definitions and resources.
 <!-- - **[Layers](./layers/README.md):** Cognitive and reasoning layer designs. -->
