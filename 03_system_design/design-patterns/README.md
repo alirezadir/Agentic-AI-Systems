@@ -11,7 +11,7 @@ This directory contains an overview of reusable design patterns and templates fo
 
 
 1. [AI Agent Design Patterns](./AI-Agent-Design-Patterns-v1.3.md)
-2. [Patterns with Code Examples](./agentic_patterns_w_codes.md)
+2. [Agentic atterns with Code Examples](./agentic_patterns_w_codes.md)
 3. [Code Examples](./code/README.md)
 
 

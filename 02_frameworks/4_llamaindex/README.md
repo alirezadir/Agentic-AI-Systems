@@ -9,9 +9,6 @@ LlamaIndex is a framework for building AI agents that can use external data sour
 <!--  -->
 
 ### Contents:
-#### Docs
-- [LlamaIndex Agent Workflow](./docs/llama-index-agent-workflow.md)
-- [LlamaIndex Multi-Agent Workflow](./docs/llama-index-multi-agent-workflow.md)
-
-#### Code
-- [ ] TBA
+- [LlamaIndex Agent Workflow](./llamaindex-agent-workflow.md)
+- [LlamaIndex Multi-Agent Workflow](./llamaindex-multi-agent-workflow.md)
+- [Codes](./code)
