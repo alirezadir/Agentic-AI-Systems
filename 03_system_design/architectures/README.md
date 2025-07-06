@@ -12,7 +12,7 @@ Examples:
 - [Agentic AI at Nvidia](./nvidia-agentic-ai.md)
 - [PhiloAgent System Architecture](./philoagent_system_architecture.md)
 
-<img src="../../assets/architectures/agentic-ai-arsanjani.png" alt="Agents" width="80%" />
+<img src="../../assets/architectures/agentic-ai-arsanjani.png" alt="Agents" width="90%" />
 
 
 

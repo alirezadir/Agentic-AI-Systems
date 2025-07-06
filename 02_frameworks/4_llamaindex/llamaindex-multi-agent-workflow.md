@@ -112,7 +112,7 @@
       system_prompt="You are a writer. Use the write_report tool to draft the report based on the research notes.  you should get feedback at least once from the ReviewAgent",
       tools=[write_report],
       llm=llm,
-      can_handoff_to=["ReviewAgent"]
+      can_handoff_to=["ReviewAgent", "ResearchAgent"]
   )
 
   review_agent = FunctionAgent(

@@ -1,62 +1,3 @@
-## Core components 
-Layer, Description, Key Considerations
-<!-- **Perception Layer**
-Interfaces with the environment to gather data (e.g., sensors, APIs, user inputs).
-Data quality, real-time processing, multimodal data handling.
-**Cognition Layer  (reasonong & planing)**
-Processes information, makes decisions, and plans actions.
-Incorporates LLMs, reasoning engines, and planning modules.
-**Action Layer** 
-Executes decisions through actuators or API calls.
-Ensures actions are safe, reversible, and auditable.
-**Memory Layer**
-Stores knowledge, experiences, and state information.
-Balances short-term and long-term memory, ensures data relevance and retrieval.
-**Learning Layer**
-Adapts behavior based on feedback and new data.
-Supports online learning, reinforcement learning, and continual learning. -->
-
-
-- Agents 
-- Data 
-	- Vector DBs (Pinecone, Weaviate)
-	- Structured Data / Unstructured Data
-- RAG
-- Tools / Actions
-- Memory
-- Observability / Logging
-- Feedback / Evaluation / Reflection / Learning
-- Orchestration 
-- Communication 
-- Monitoring & Governance (Guardrails & Safety)
-- Infrastructure & AgentOps
-
-### Agentic System Architecture Layers — Production-Ready 
-
-| Layer Group                 | Module Name                         | Function / Purpose                                                                                   | Key Capabilities / Examples                                                                                       |
-|----------------------------|-------------------------------------|--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
-| Input & Perception Layer   | Perception & Ingestion Module       | Gathers information from environment or users                                                          | APIs, user input (text, voice, image), STT (Whisper), OCR, sensors, file uploads, multi-modal fusion              |
-|                            | Data Preprocessing & Normalization  | Cleans, transforms, and standardizes raw input                                                         | Noise reduction, text cleaning, PDF parsing, ASR transcripts, schema formatting                                   |
-|                            | Feature Extraction                  | Derives symbolic or vectorized representations from raw data                                           | Embedding models, image captioning (BLIP, LLaVA), metadata parsers                                                 |
-|                            | Intent Detection & Task Classification | Understands user queries or system triggers and assigns task types                                   | Prompt classifiers, semantic parsers, command routers                                                              |
-| Cognition Layer            | Reasoning & Planning Engine         | Core decision-making engine using symbolic logic or LLM reasoning                                      | Chain-of-Thought, ReAct, rule-based planners, task decomposers                                                     |
-|                            | Language Model Layer                | Natural language understanding and generation using foundation models                                  | GPT-4, Claude, Mistral, LLaMA, Gemini, LLaVA, Flamingo                                                             |
-| Memory Layer               | Episodic (Short-Term) Memory        | Tracks session history and recent interactions                                                         | Sliding window context, MemGPT, conversation logs                                                                  |
-|                            | Semantic (Long-Term) Memory         | Stores persistent knowledge, facts, user preferences, and learned data                                 | Vector DBs (Pinecone, Weaviate), Postgres, Redis, RAG systems                                                      |
-|                            | Memory Retrieval / Update Engine    | Retrieves relevant facts and updates memories during interactions                                      | Similarity search, summarization, knowledge base updates                                                           |
-| Action Layer               | Tool & API Invocation Module        | Executes actions by calling internal or external tools and services                                    | LangChain tools, function calling, plugins, webhooks, CRM/database connectors                                      |
-|                            | Execution Monitoring                | Tracks tool results, retries failures, and ensures transactional safety                                | API response validation, logging, fail-safe retries                                                                |
-| Learning & Feedback Layer  | Adaptation & Optimization Module    | Learns from interactions, feedback, and environment to improve behavior                                | RLHF, fine-tuning, LoRA/QLoRA, continual learning                                                                  |
-|                            | Feedback Integration                | Processes human or system feedback for correction and self-improvement                                 | Thumbs up/down, post-task ratings, telemetry-based feedback                                                        |
-| Orchestration Layer        | Workflow Orchestrator               | Manages control flow across modules, step sequencing, conditional logic                                | LangGraph, OpenAI Agent flows, DAG runners, AWS Step Functions                                                     |
-|                            | Multi-Agent Coordinator             | Supports interaction and handoff among specialized agents                                               | CrewAI, AutoGen, role-based agents, pub/sub, message brokers                                                       |
-|                            | Model Router                        | Routes task to appropriate model based on task type, latency, policy, or cost                          | Custom LLM router, OpenAI fallback, task-aware model selector                                                      |
-|                            | Tool/Memory Router                  | Decides when to use memory vs tools and manages data access strategies                                 | Decision trees, cost/latency optimization, hybrid routes                                                           |
-| Monitoring & Governance    | Observability & Logging             | Logs reasoning steps, tracks tool use, and reports metrics                                              | LangSmith, Arize, Grafana, OpenTelemetry, Phoenix                                                                  |
-|                            | Guardrails & Safety Layer           | Enforces behavior constraints, ethical filters, access rules                                            | GuardrailsAI, Rebuff, input/output validators, PII filters                                                         |
-|                            | Audit & Intervention Layer          | Provides transparency, human oversight, and governance                                                  | Decision logs, human-in-the-loop, alerting, override controls                                                      |
-| Infrastructure             | Storage & Compute Infrastructure    | Backend systems powering data, models, and computation                                                  | Vector DBs, Redis, SQL/NoSQL DBs, GPU/TPU clusters, container orchestration (Kubernetes, Ray)                     |
-|                            | Messaging & Integration Bus         | Ensures real-time communication and loose coupling across services                                     | Kafka, RabbitMQ, gRPC, REST APIs, WebSockets                                                                      |
 
 
 ## 12 steps 
@@ -127,7 +68,17 @@ Clarifying Qs: why/what(s):
 10. Feedback loops (collection, evaluation, improvement) + User Interaction (thumbs, edits, resopnses, etc)/ Reflection 
 11. Depoloyment & Scaling (users, data, and complexity) -  Iterative Dev (CI/CD) + Ethical (Bias + Transparency) + Optimmization (latency, resource management, computational cost, scalability, security), human AI collaboration, versioning, rollouts, etc 
 
+---
+**Gen-AI Platform**: A common order of components to add:
 
+1. Enhance **Context** (external data + Tools)
+2. **Guardrails** (protect system + users)
+3. **Router** and gateway (pipelines + security)
+4. **Optimize** latency + costs (cache)
+5. Add **complex logic** 
+6. **Observability**: visibility into the system for monitoring and debugging
+7. **Orchestration**: chaining all the components together
+---
 
 # Agentic AI System Design Template 
 Example: (Customer Support Agent)

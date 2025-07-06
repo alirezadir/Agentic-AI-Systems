@@ -29,7 +29,7 @@ Welcome to **Agentic-AI-Systems** — a curated and evolving knowledge base for 
 - **[LLMs](./01_foundations/llms/):** Transformers, LLMs, their training workflows, and frameworks.
 - **[LangGraph Tutorials](./02_frameworks/3_langgraph/docs/):** Step-by-step guides for building agentic workflows with LangGraph.
 - **[LlamaIndex Multi-Agent Systems](./02_frameworks/4_llamaindex/docs/llama-index-multi-agent.md):** Building multi-agent systems using LlamaIndex.
-- **[Agent System Design Patterns](./03_system_design/README.md):** Common architectures, cognition layers, and best practices for agentic systems.
+- **[Agent System Design Patterns](./03_system_design/design-patterns/agentic-ai-design-patterns.md):** Common architectures, cognition layers, and best practices for agentic systems.
 - **[Real-World Use Cases](./04_use_cases/README.md):** Example projects and applications of agentic AI in production.
 - **[Resource Library](./05_resources/resources.md):** Curated list of courses, tools, protocols, and further reading.
 

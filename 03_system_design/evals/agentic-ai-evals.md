@@ -145,7 +145,7 @@ The overall simulation looks something like this:
 
 In this [example from Langgraph](https://github.com/langchain-ai/langgraph/blob/main/docs/docs/tutorials/chatbot-simulation-evaluation/agent-simulation-evaluation.ipynb), you can find how to use a multi-agent simulation to evaluate the performance of a chat bot.
 
-#### Chat Bot Benchmarking using Simulation
+#### Langsmith Chat Bot Benchmarking using Simulation
 In this Langgraph [example](https://github.com/langchain-ai/langgraph/blob/main/docs/docs/tutorials/chatbot-simulation-evaluation/langsmith-agent-simulation-evaluation.ipynb) you can find how to use simulated conversations to benchmark your chat bot using LangSmith.
 
 

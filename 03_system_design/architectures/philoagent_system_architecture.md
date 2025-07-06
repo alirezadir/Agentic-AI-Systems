@@ -33,7 +33,6 @@
 - Uses **LangGraph** for flow orchestration
 
 ### 4. LLM API (Groq-powered)
-
 - Handles:
   - Prompt processing
   - Response generation
@@ -79,7 +78,7 @@
 | Layer                  | Tools / Frameworks                        |
 |------------------------|-------------------------------------------|
 | Memory                 | MongoDB                                   |
-| Inference              | FastAPI, LangGraph                        |
+| Inference Backend             | FastAPI, LangGraph                        |
 | Vector Indexing        | Custom Embedding + Vector DB              |
 | Orchestration          | Agentic Layer, State Client               |
 | LLM API                | Groq                                       |
