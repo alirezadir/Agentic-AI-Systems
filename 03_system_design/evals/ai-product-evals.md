@@ -11,7 +11,6 @@ This summary distills key lessons from Hamel Husain's [Your AI Product Needs Eva
 - Success = ability to iterate quickly: requires evaluation, debugging, and system change (prompting, fine-tuning, code).
 - Evaluation is the flywheel for improvement—like tests in software engineering.
 
----
 
 ## 2. The Three Levels of Evaluation
 
@@ -20,7 +19,6 @@ This summary distills key lessons from Hamel Husain's [Your AI Product Needs Eva
 - Should be fast, cheap, and run on every code change.
 - Use LLMs to help brainstorm assertions and generate synthetic test cases.
 - Example: For a real estate assistant, test that queries for listings return the correct number of results.
-
 ```python
 # Example assertion: No UUIDs in output
 const noExposedUUID = message => {
@@ -47,7 +45,6 @@ const noExposedUUID = message => {
 - Run only after product is mature enough for real users.
 - A/B testing for LLMs is similar to other products.
 
----
 
 ## 3. Practical Tips for Evaluation
 - Remove all friction from looking at data (logs, traces, dashboards).
@@ -56,13 +53,13 @@ const noExposedUUID = message => {
 - Write and update lots of tests; use LLMs to help generate and critique data.
 - Use your eval infrastructure for debugging and fine-tuning.
 
----
+
 
 ## 4. Evals Unlock Superpowers
 - **Fine-tuning:** Evaluation systems make it easy to curate and synthesize data for fine-tuning.
 - **Debugging:** Evaluation infra overlaps with debugging infra—logs, assertions, and trace search help diagnose and fix issues quickly.
 
----
+
 
 ## 5. Conclusion & Key Takeaways
 - Evaluation is the core of successful LLM product development.
@@ -70,6 +67,3 @@ const noExposedUUID = message => {
 - Use LLMs to bootstrap eval systems (test case generation, critique, labeling).
 - Re-use eval infra for debugging and fine-tuning.
 
----
-
-*For more, see the full post: [Your AI Product Needs Evals](https://hamel.dev/blog/posts/evals/)* 

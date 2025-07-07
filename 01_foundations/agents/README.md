@@ -56,6 +56,9 @@ An **agent** is an LLM system with dynamic control over tools, memory, and the f
     * Plan, reflect, and iterate based on feedback.
     * Support both read (perceive) and write (act) actions (e.g., send emails, execute code).
 
+
+** See [🤖  Agents in AI Engineering](./huyen-agents.md) for more details. **
+
 ---
 ## 2. LLM Workflows vs Agents 
 

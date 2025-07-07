@@ -1,209 +1,183 @@
 # Gen-AI Evaluation
 
-This summary combines **Model Evaluation** and **Application Evaluation** as detailed in *AI Engineering* book by Chip Huyen.
+This guide synthesizes best practices for **Model Evaluation** and **System Evaluation** as described in *AI Engineering* book by Chip Huyen.
+
+---
 
 ## 1. Model Evaluation
 
-Model evaluation measures how well a model performs specific tasks, independent of system integration.
+Model evaluation assesses how effectively a model performs its intended tasks, independent of the broader system.
 
-### Evaluation Criteria
+### 1.1 Model Evals: Criteria
 
-- **Domain-Specific Capability**: Accuracy within fields like coding, healthcare, law, finance
-    - Domain-specific benchmarks (private, public); usually exact correctness (e.g. functional)
-    - Multiple-choice questions for non-coding tasks; e.g. MMLU (Massive Multitask Language Understanding): math, STEM, social, legal (57 areas)
-    - Efficiency: runtime, memory usage
+- **Domain/Task Performance**: Accuracy in specialized domains (e.g., coding, healthcare, law, finance) via public/private benchmarks (e.g., MMLU for non-coding); include efficiency (runtime, memory).
 
-- **Generation Capability**: Fluency, coherence, and factuality of generated responses
-    - Factual consistency: local (against context); global (open knowledge)
-        - Self-verification (e.g. selfcheckGPT), Knowledge-augmented verification (e.g. Google's SAFE: Search-Augmented Factuality Evaluator: reasoning -> Google API)
-        - Textual Entailment: Decides if two statements are Entailment, Contradiction, or Neutral
+- **Generation Performance**: Fluency, coherence, and factuality (local/global). Methods: self-verification (SelfCheckGPT), knowledge-augmented checks (SAFE), textual entailment.
 
-- **Instruction-Following**: Adherence to task requirements, constraints, and formatting
-    - Benchmarks: IF-Eval (Google, focus on expected format), INFOBench
-    - Role-playing: RoleLLM (AI Judge)
+- **Instruction-Following**: Adherence to requirements, constraints, and format. Benchmarks: IF-Eval, INFOBench, role-based evals (e.g., RoleLLM).
 
-- **Cost and Latency**: TTFT (Time to First Token), TPS, total latency, token costs
+- **Cost and Latency**: Includes TTFT (Time to First Token), TPS (Tokens Per Second), total latency, and token costs.
 
-**Example:**
+##### Core LLM Metrics
 
-| **Criteria**        | **Metric**        | **Hard**       | **Ideal**     |
-|---------------------|-------------------|----------------|---------------|
-| Cost                | $/1M tokens       | < $30          | < $15         |
-| Scale               | Tokens/min (TPM)  | > 1M           | > 1M          |
-| Latency (TTFT)      | P90               | < 200 ms       | < 100 ms      |
-| Latency (Total)     | P90               | < 1 min        | < 30 sec      |
-| Model Quality       | Elo score         | > 1200         | > 1250        |
-| Code Generation     | pass@1 (HumanEval)| > 90%          | > 95%         |
-| Factual Consistency | Internal metric   | > 0.8          | > 0.9         |
+- **Entropy**: Measures uncertainty in model prediction ($H(p) = -\sum_{i=1}^{n} p_i \log_2(p_i)$, higher -> more uncertainty.)
+- **Cross-Entropy**: Uncertainty of model prediction ($H(p, q) = -\sum_{i=1}^{n} p_i \log_2(q_i)$, p: true, q:predicted).
+- **Perplexity**: Exponential of cross-entropy; lower values indicate better prediction ($PPL = 2^{H(p,q)}$).
+    - e.g H(p,q) = 3 bits, PPL = 8 possible options to choose from.
+    - PPL = 1-10: perfect, 10-100: good, 100-1000: bad, 1000+: terrible.
+- **BPC/BPB**: Bits-per-character/byte; relevant for compression-like tasks.
+- **BLEU**: Precision-based metric for machine translation.
+- **ROUGE**: Recall-based metric for summarization.
+- **BERTScore**: Semantic similarity metric for text generation.
 
-**Model Benchmarks:**
-- Use public benchmarks for model filtering, not selection.
-- For real usage, private leaderboards and application-specific tests work better.
-- Combine automated and human feedback (e.g. AI-as-a-judge) for robustness.
 
-#### Language Modeling Metrics
+**Sample Criteria Table:**
+| **Criteria**        | **Metric**        | **Hard** | **Ideal** |
+|---------------------|-------------------|----------|-----------|
+| Cost                | $/1M tokens       | < $30    | < $15     |
+| Scale               | TPM (Tokens/min)  | > 1M     | > 1M      |
+| TTFT                | ms (P90)          | < 200    | < 100     |
+| Total Latency       | sec (P90)         | < 60     | < 30      |
+| Quality             | Elo score         | > 1200   | > 1250    |
+| Code Gen            | pass@1 (%)        | > 90     | > 95      |
+| Factuality          | Internal metric   | > 0.8    | > 0.9     |
 
-| Metric            | Description                                                           |
-| ----------------- | --------------------------------------------------------------------- |
-| **Entropy**       | Measures uncertainty in predictions                                   |
-| **Cross-Entropy** | Average bits needed to encode output given the model                  |
-| **Perplexity**    | Exponential of cross-entropy; lower values indicate better prediction; measures how difficult it is for a model to predict a given text. |
-| **BPC/BPB**       | Bits-per-character / bits-per-byte for compression-like tasks         |
 
-### Model Evaluation Methods
+### 1.2 Model Evals: Methods
 
-- **Exact vs Subjective evaluation methods**
-    - Exact: no ambiguity (e.g. MCQ)
-    - Subjective: e.g. essay score
+- **Objective methods**: a clear, measurable, correct answer (e.g., multiple-choice, exact match)
+- **Subjective methods**: Open-ended, requires judgment (e.g., essay scoring)
+    - e.g. "How would you rate the customer service?"
 
-#### Exact Evaluation
+#### Objective Evaluation
 
-These rely on comparison with reference outputs.
+- **Functional Correctness**: Does the output meet requirements? Used for coding, SQL generation, etc.
+    - Benchmarks: HumanEval (OpenAI), MBPP (Google Python), BirdSQL, Spider, WikiSQL.
 
-- **Functional Correctness**
-    - Does it meet functional requirements and correctness?
-    - Tasks like coding and structured queries (e.g. SQL generation).
-    - Benchmarks: HumanEval (OpenAI) & MBPP (Google python) for coding; BirdSQL, Spider, WikiSQL for text-to-SQL
+- **Similarity to Reference Data (Ground Truth)**
+    - Compare model output to reference answers:
+        - *Human Evaluation*
+        - *Exact Match*
+        - *Lexical Similarity*: BLEU, ROUGE, METEOR
+        - *Semantic Similarity*: Embedding-based (e.g., cosine similarity using BERT, CLIP, OpenAI embeddings, sentence transformers)
+            - Metrics: BERTScore, etc.
+            - Applicable to multimodal data via joint embedding spaces.
 
-- **Similarity to Reference Data (GT)**
-    - Data: (Input, reference GT), e.g. in Translation
-    - Similarity between two open-ended texts:
-        - **Human Eval**
-        - **Exact Match**
-        - **Lexical Similarity**: BLEU, ROUGE, METEOR
-        - **Semantic Similarity**: Cosine similarity of sentence embeddings A·B/(|A|·|B|)
-            - Embeddings: BERT, CLIP, OpenAI text-embedding, sentence transformer
-            - Metrics e.g. BERTScore, etc.
-            - Used for any modality:
-                - Multimodal embeddings space: joint embeddings space: e.g. `[text_embedding x text_proj_matrix + vision_embedding x vision_proj_matrix]`
+- **Embedding Similarity**: Uses vector closeness to assess semantic alignment.
 
-- **Embedding Similarity**
-    - Leverages vector closeness to assess semantic correctness
+#### Subjective Evaluation
 
-#### AI as a Judge
+- ##### Comparative Evaluation (Ranking Models)
 
-- Using LLMs to evaluate LLMs (using AI to evaluate AI)
-- Prompt template ({question}, {answer}) + LLM model
-- Pros: Fast, easy, cheap; Scalable (e.g. 58% of LangChain evals)
-- Limits: consistency; may inherit biases
-- Use Chain-of-Thought or multiple judge models for robustness
-- AI as a Judge methods:
-    - Evaluate quality of a response by itself:  
-      `Given the following question and answer, evaluate how good the answer is for the question. Use the score from 1 to 5.`
-    - Compare with reference response
-    - Compare two responses
+    - **Pointwise Ranking**: Score models independently, then compare.
+    - **Comparative Ranking**: Directly compare models against each other to establish a ranking.
+        - Example: LMSYS’s Chatbot Arena leaderboard.
+        - Challenges: Scalability, standardization, and quality control.
+- ##### AI as a Judge
 
-#### Comparative Evaluation (Model Ranking)
+    - Use LLMs to judge other LLMs via prompt templates (e.g., `{question}, {answer}`).
+        - Pros: Fast, scalable, low cost.
+        - Cons: Can be inconsistent, may reflect model biases.
+        - More robust with chain-of-thought or multiple judges.
+        - Modes: score a response, compare to reference, or compare two responses.
 
-- Ranking models: **pointwise** vs **comparative evaluation**
-- **Pointwise Ranking**: evaluate independently; compare scores
-- **Comparative Ranking**: evaluate models against each other; compute a ranking from comparison results
-    - Benchmarks: popular LMSYS’s Chatbot Arena leaderboard
-    - Challenges: Scalability bottlenecks, lack of standardization and quality control
 
-##### Future Trends
 
-- Live A/B testing in production
-- Community voting platforms
-- Human-AI ensemble judging
+- **A/B testing** in production
+- **Arena Voting**: voting platforms (e.g., LMSYS's Chatbot Arena)
+- **Human-AI ensemble judging**
+- **Rubric Scoring**
 
-### Model Selection Workflow
 
-**Two steps for model selection:**
-1. Best achievable performance
-2. Map models on cost–performance axes; choose a model that gives the best performance for bucks
 
-**Model Selection Workflow:**
-1. Filter out models with hard attributes
-2. **Public model eval:** Filter with public benchmarks (e.g. HELM, LMSYS)
-3. **Task specific eval:** Define task-specific metrics & evaluate candidate models on internal data and own eval pipeline:
-    - Objectives: quality, latency, and cost
-    - Run cost-performance tradeoff analysis
-    - Select based on total ROI, not just raw performance
-4. Online eval: monitor, and collect feedback
+### 1.3 Model Selection
+
+**Two main steps:**
+1. Identify the best achievable performance.
+2. Map models on a cost–performance curve; select the model with optimal ROI.
+
+**Workflow:**
+1. Filter out models based on hard requirements.
+    - Use public benchmarks (e.g., HELM, LMSYS) for initial filtering.
+2. Define task-specific metrics and evaluate candidates on internal data using your own evaluation pipeline:
+    - Assess quality, latency, and cost.
+    - Analyze cost-performance tradeoffs.
+    - Select based on total ROI, not just raw performance.
+3. Continuously monitor in production and collect feedback.
+
+---
 
 ## 2. System Evaluation
 
-Application evaluation measures whether the full AI system performs its intended function in realistic use cases.
+System evaluation determines whether the complete AI application performs as intended in real-world scenarios.
 
-### Evaluation Pipeline Design
+### 2.1 System Evals: Pipeline Design
 
-**System Eval Pipeline Steps:**
-
+#### Key Steps:
 1. **Evaluate All Components**
-    - Many components: Retrieval, orchestration, fallback, guardrails
-    - Levels: per task, per turn, and per intermediate output
-2. **Create Evaluation Guidelines**
-    - *A correct response is not always a good response*
-    - Good response criteria: e.g. Relevance (to query), Factual consistency (to context), Safety
-    - Define criteria
-    - Rubric scores with (positive/negative) examples
-    - Tie metrics to business metrics:
-        - e.g. Factual consistency of 80%: we can automate 30%
-3. **Select Evaluation Methods & Datasets**
-    - Select Evaluation methods:
-        - e.g. toxicity classifier (toxicity) + semantic similarity (relevance) + AI judge (factual consistency)
-        - Mix & match: small classifier for 100% of data + expensive judge for 1%
-        - Use logprobs if available (esp for classification)
-        - Use automatic metrics when possible
-    - Select Evaluation Data:
-        - Mix of real, synthetic, edge-case, and adversarial inputs
-        - Annotate eval data: prod data or label with human / AI
-        - Slice-based evaluation: based on input type, user tiers, tags, length, etc. (prevents misinterpretation due to Simpson’s paradox)
-        - Multiple evaluation sets: behavior across usage types, devices, error types
-        - Estimate sample size needs: larger samples needed to confirm small performance gains (e.g. ~100 for 10% gain, ~1,000 for 3%)
-        - Evaluate your evaluation pipeline (high quality high score, business metrics)
-        - Ensure reproducibility (consistent judge configs (e.g. temperature = 0), fixed prompts, sampling)
-        - Control evaluation overhead (for latency)
+    - Assess each part (retrieval, orchestration, fallback, guardrails, etc.) at task, turn, and intermediate levels.
 
-#### Scoring Approaches
+2. **Select Metrics, Methods & Datasets**
+    - Align metrics to business goals.
+    - Combine automatic metrics (classifiers, logprobs), AI judges, and human review as needed.
+    - Build diverse datasets (real, synthetic, edge, adversarial); annotate via logs, humans, or AI.
+    - Slice results to avoid misleading aggregates; maintain multiple eval sets (e.g., by input type, user, tags, length, etc.).
+    - Use larger samples for small improvements; validate and minimize evaluation latency; ensure reproducibility.
 
-| Score Type        | Description        | Example                    |
-| ----------------- | ------------------ | -------------------------- |
-| **Binary**        | Pass/fail          | JSON format validity       |
-| **Ordinal Scale** | 1-5 or 1-10        | Relevance, tone            |
-| **Categorical**   | Predefined classes | Offensive / Helpful / Safe |
+3. **Set Clear Guidelines**
+    - Define criteria (e.g., relevance, factuality, safety) with rubrics and examples. 
+   
+#### Notes:
+- **Rubrics should include:**
+    - Clear success criteria with examples
+    - Failure examples, tagged by severity
 
-Use **multiple raters** or **LLMs-as-judges** for scale.
+- **Common Failure Modes:**
+    - Misinterpreted input
+    - Incoherent or factually incorrect answers
+    - Leakage of sensitive data or PII
+    - Hallucinated citations or sources
 
-#### Task-Level vs Turn-Level Evaluation
+- **Scoring Approaches:**
+    - **Binary:** Pass/fail scoring.  
+    - Example: JSON format validity.
+    - **Ordinal Scale:** Numeric scale, such as 1-5 or 1-10.  
+    - Example: Relevance, tone.
+    - **Categorical:** Selection from predefined classes.  
+    - Example: Offensive / Helpful / Safe.
 
-| Level          | Focus                                                                                            |
-| -------------- | ------------------------------------------------------------------------------------------------ |
-| **Task-Level** | End-to-end outcome (e.g. "was the ticket booked?")                                               |
-| **Turn-Level** | Intermediate steps in multi-turn workflows (e.g. "was the user's intent correctly interpreted?") |
+- **Task-Level vs. Turn-Level Evals**:
 
-### Evaluation Rubrics and Fail Modes
+    - **Task-Level:** Focuses on the end-to-end outcome.  
+    - Example: “Was the ticket booked?”
+    - **Turn-Level:** Focuses on intermediate steps in multi-turn workflows.  
+    - Example: “Was the user’s intent correctly interpreted?”
 
-**Key Failure Modes:**
 
-- Misinterpretation of input
-- Incoherent or factually incorrect answers
-- Leaking sensitive data or PII
-- Hallucinated citations or sources
 
-Rubrics should contain both:
 
-- Success criteria with examples
-- Failure examples with severity tagging
 
-### Monitoring, Logging & Feedback Loops
 
-- Track metrics over time and deployments
-- Use logs to audit failure cases
-- Integrate **user feedback** with system scoring
 
-**Metric Axes:**
+- You can scale up by using **multiple raters** or **LLMs-as-judges**.
 
+### 2.2 Monitoring, Logging & Feedback Loops
+
+- Continuously track metrics across time and deployments.
+- Use logs to audit and analyze failure cases.
+- Integrate **user feedback** into system scoring.
+
+**Metric Axes to Track:**
 - Prompt/model version
 - User segment
 - Query type
 
-### Tools & Practices
 
-- **LangSmith, Phoenix, Promptfoo** for evaluation orchestration
-- Prompt versioning + rollback support
-- A/B testing with real users and human raters
-- Evaluator dashboards to unify model & app views
+### 2.3 Tools & Best Practices
 
-Evaluation isn’t a one-time task—it must be ongoing, systematic, and automated wherever possible to ensure a safe, performant generative AI platform in production.
+- Use tools like **LangSmith, Phoenix, Promptfoo** for evaluation orchestration.
+- Implement prompt versioning and rollback.
+- Run A/B tests with real users and human raters.
+- Maintain evaluator dashboards to unify model and application views.
+
+**Remember:** Evaluation is not a one-time event. It should be ongoing, systematic, and as automated as possible to ensure your generative AI platform remains safe, reliable, and high-performing in production.
