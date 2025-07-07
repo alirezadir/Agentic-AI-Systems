@@ -17,11 +17,11 @@ texts = text_splitter.split_text(document)
 
 # 3. Create embeddings and store them in a vector store (FAISS)
 embeddings = OpenAIEmbeddings()
-db = FAISS.from_texts(texts, embeddings)  # FAISS is a simple example, use other options
+vector_db = FAISS.from_texts(texts, embeddings)  # Index and store in FAISS (use other options)
 
 # 4. Create a retrieval chain
 llm = OpenAI(temperature=0.0)  # You can adjust temperature for creativity
-retriever = db.as_retriever()  # LangChain's retriever handles the search
+retriever = vector_db.as_retriever()  # LangChain's retriever handles the search
 rag_chain = ConversationalRetrievalChain.from_llm(llm=llm, retriever=retriever, return_source_documents=True)  # Create a chain
 
 # 5. Get user input and generate a response

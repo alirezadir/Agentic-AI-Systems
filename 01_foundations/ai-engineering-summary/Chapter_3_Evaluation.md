@@ -1,29 +1,14 @@
-# Chapter 3: Evaluation Methodology
-
----
+# Chapter 3: Model Evaluation
 
 ###  Overview
 
 1. **Challenges of Evaluating Foundation Models**  
 2. **Understanding Language Modeling Metrics**  
-   - Entropy  
-   - Cross Entropy  
-   - Bits-per-Character and Bits-per-Byte  
-   - Perplexity & Interpretation  
 3. **Exact Evaluation**  
-   - Functional Correctness  
-   - Similarity Measurements  
-   - Embedding-Based Similarity  
 4. **AI as a Judge**  
-   - Use Cases, Setup, Limitations  
 5. **Comparative Evaluation**  
-   - Ranking Models  
-   - Challenges  
-   - Future Directions
-
----
-
-### ✅ 1. Challenges of Evaluating Foundation Models
+   
+### 1. Challenges of Evaluating Foundation Models
 
 - Foundation models are **open-ended** → hard to evaluate with fixed labels.
 - Evaluation now includes:
@@ -38,9 +23,7 @@
 
 **Interview Tip**: Know why eyeballing results is insufficient in production.
 
----
-
-### ✅ 2. Understanding Language Modeling Metrics
+### 2. Understanding Language Modeling Metrics
 
 #### Entropy (Shannon)
 - Measures uncertainty in a distribution.
@@ -61,9 +44,7 @@
 
 **Interview Tip**: Perplexity is only valid when labels are available. Doesn’t always reflect downstream task quality.
 
----
-
-### ✅ 3. Exact Evaluation
+### 3. Exact Evaluation
 
 #### Functional Correctness
 - Checks if model output **satisfies task requirements**.
@@ -85,9 +66,7 @@
 
 **Interview Tip**: Know when exact match breaks (e.g., paraphrasing) and when embedding-based similarity is better.
 
----
-
-### ✅ 4. AI as a Judge
+### 4. AI as a Judge
 
 #### Concept
 - Use LLMs to score or evaluate outputs.
@@ -111,9 +90,7 @@
 
 **Interview Tip**: Know pros/cons of LLM-based eval vs traditional metrics.
 
----
-
-### ✅ 5. Ranking Models with Comparative Evaluation
+### 5. Ranking Models with Comparative Evaluation
 
 #### Pointwise vs. Comparative
 - **Pointwise**: score each model independently.
@@ -139,18 +116,14 @@
 
 **Interview Tip**: Understand difference between comparative eval and A/B testing. Comparative = side-by-side.
 
----
-
-### 🔹 Summary Takeaways
+### Summary Takeaways
 
 - Evaluation is essential to deploy safe, useful Gen-AI systems.
 - Combine **exact + subjective** methods for robust pipelines.
 - Use **perplexity & entropy** for training eval, **functional correctness** for tasks, and **AI judges** for nuance.
 - Comparative evaluation is growing but requires care in design.
 
----
-
-### 🪡 Interview Review Questions (with Answers)
+### Interview Review Questions (with Answers)
 
 1. **Why is evaluating foundation models harder than classic ML?**  
    → Open-ended outputs, subjective quality, fast model evolution, lack of labels.
@@ -167,9 +140,7 @@
 5. **How does comparative evaluation differ from A/B testing?**  
    → Comparative = multiple outputs shown side-by-side; A/B = one-at-a-time.
 
----
-
-### 💻 Code Examples & Snippets
+### Code Examples & Snippets
 
 #### 1. Perplexity Calculation with HuggingFace Transformers
 ```python

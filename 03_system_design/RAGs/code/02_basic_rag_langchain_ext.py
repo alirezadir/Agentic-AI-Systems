@@ -182,7 +182,9 @@ def create_qa_chain(vectorstore: Chroma) -> Any:
     
     # Create the chain
     chain = (
-        {"context": retriever, "question": RunnablePassthrough()}
+        {"context": retriever, "question": RunnablePassthrough()} # this runnable map is equivalent to 
+        # retriever.invoke(query) → context
+	    # RunnablePassthrough().invoke(query) → question
         | prompt
         | llm
         | StrOutputParser()
@@ -240,6 +242,7 @@ def main():
             print(f"\nQuery: {query}")
             output_lines.append(f"## Query: {query}\n")
             try:
+                # invoke the chain with the query
                 result = qa_chain.invoke(query)
                 print(f"Answer: {result}")
                 output_lines.append(f"**Answer:** {result}\n")

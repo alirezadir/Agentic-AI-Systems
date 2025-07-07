@@ -18,8 +18,7 @@ This summary distills key lessons from Hamel Husain's [Your AI Product Needs Eva
 - Assertions (like pytest) for LLM features and scenarios.
 - Should be fast, cheap, and run on every code change.
 - Use LLMs to help brainstorm assertions and generate synthetic test cases.
-- Example: For a real estate assistant, test that queries for listings return the correct number of results.
-```python
+- Example: For a real estate assistant, test that queries for listings return the correct number of results.```python
 # Example assertion: No UUIDs in output
 const noExposedUUID = message => {
   const sanitizedComment = message.comment.replace(/\{\{.*?\}\}/g, '')
@@ -66,4 +65,5 @@ const noExposedUUID = message => {
 - Remove friction, keep it simple, and look at lots of data.
 - Use LLMs to bootstrap eval systems (test case generation, critique, labeling).
 - Re-use eval infra for debugging and fine-tuning.
+
 

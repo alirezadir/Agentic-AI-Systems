@@ -1,5 +1,5 @@
 # Cookbooks
-This page provides an overview and summaries of cookbooks in agentic AI systems.
+This page provides an overview and summaries of the most useful cookbooks in designing and building agentic AI systems.
 
 <!-- <img src="../../assets/cookbooks/cookbooks-1.jpeg" alt="Cookbooks" width="70%" />
 

@@ -1,5 +1,5 @@
 # Agentic AI Architectures
-This page provides an overview of architectures in agentic AI systems.
+This page provides a comprehensive overview of architectures in agentic AI systems, inlcuding architecture layers and step-by-step system design, and example architectures used by tech companies. 
 
 <img src="../../assets/architectures/ai-agent-arc-vectorize.png" alt="Agents" width="890%" />
 

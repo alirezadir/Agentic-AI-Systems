@@ -102,6 +102,7 @@ Reusable solutions to common problems in Agentic AI development.
   - **Final Answer**
 - **Use Case**:  
   - Foundation of modern agent frameworks; supports iterative, tool-augmented decision-making. 
+  - Popular use case as **reasoning agent** and **supervisor agent**.
   - Implemented in systems like LangChain, OpenAI Agents SDK, the ReAct paper, AutoGPT, and more.
 - Code: [Langchain](https://langchain-ai.github.io/langgraph/how-tos/react-agent-from-scratch/), [LlamaIndex](https://docs.llamaindex.ai/en/stable/examples/agent/react_agent/)
 

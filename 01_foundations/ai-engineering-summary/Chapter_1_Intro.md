@@ -1,5 +1,5 @@
 
-# 📘 Chapter 1 – Introduction 
+# Chapter 1 – Introduction 
 
 ---
 
@@ -54,14 +54,14 @@ Understand the **AI Stack**: Prompting → Retrieval → Model inference → Out
 
 | Category              | Consumer Example        | Enterprise Example                |
 |-----------------------|-------------------------|-----------------------------------|
-| 💻 Coding              | GitHub Copilot          | Internal dev tool generation      |
-| 🎥 Image/Video Gen     | Runway, Midjourney      | Ad creative, brand visuals        |
-| ✍️ Writing             | Substack, Jasper        | Report generation, SEO            |
-| 🎓 Education           | AI tutors, ChatGPT      | Onboarding, training bots         |
-| 🤖 Conversational Bots | Replika, Character.ai   | Customer support, copilots        |
-| 📚 Info Aggregation    | Chat with PDF tools     | Research summarization            |
-| 📂 Data Organization   | AI tagging              | Enterprise knowledge graphs       |
-| 🧩 Workflow Automation | Event planner bots      | CRM automation, lead scoring      |
+| Coding                | GitHub Copilot          | Internal dev tool generation      |
+| Image/Video Gen       | Runway, Midjourney      | Ad creative, brand visuals        |
+| Writing               | Substack, Jasper        | Report generation, SEO            |
+| Education             | AI tutors, ChatGPT      | Onboarding, training bots         |
+| Conversational Bots   | Replika, Character.ai   | Customer support, copilots        |
+| Info Aggregation      | Chat with PDF tools     | Research summarization            |
+| Data Organization     | AI tagging              | Enterprise knowledge graphs       |
+| Workflow Automation   | Event planner bots      | CRM automation, lead scoring      |
 
 ---
 
@@ -100,7 +100,7 @@ Understand the **AI Stack**: Prompting → Retrieval → Model inference → Out
 
 ---
 
-## ✅ Review Questions
+## Review Questions
 
 **1. What is AI engineering?**  
 > The discipline of building applications using foundation models (like GPT, Claude), focusing on prompting, integration, and feedback rather than training.
@@ -116,9 +116,9 @@ Understand the **AI Stack**: Prompting → Retrieval → Model inference → Out
 
 ---
 
-## 💻 Code Examples
+## Code Examples
 
-### ✅ Foundation Model API
+### Foundation Model API
 
 ```python
 from openai import OpenAI
@@ -138,7 +138,7 @@ def is_good_use_case_for_genai(task):
     return any(k in task.lower() for k in keywords)
 ``` -->
 
-### ✅ Project Directory Structure
+### Project Directory Structure
 
 ```bash
 genai_app/

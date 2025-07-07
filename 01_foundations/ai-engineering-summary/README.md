@@ -4,7 +4,7 @@ This is my personal summary of key concepts and chapters from the book [**AI Eng
 
 ---
 
-## 📚 Chapter Summaries
+## Chapter Summaries
 
 | Chapter | Title & Link |
 |--------|---------------|
@@ -20,9 +20,9 @@ This is my personal summary of key concepts and chapters from the book [**AI Eng
 | 9 | [Inference Optimization Techniques](./Chapter_9_Inference%20Optim.md) |
 | 10 | [Full-Stack AI Engineering](./Chapter_10_AI_Engineering.md) |
 
----
 
-## 🧠 Why This Summary?
+
+##  Why This Summary?
 
 - To consolidate modern AI engineering practices for reference and application.
 - To bridge theory and hands-on implementation for GenAI, agentic systems, and full-stack ML platforms.

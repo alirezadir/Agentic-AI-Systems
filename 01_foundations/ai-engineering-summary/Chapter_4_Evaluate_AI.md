@@ -1,27 +1,13 @@
 # Chapter 4: Evaluating AI Systems 
 
----
-
-### 📖 Structure Overview
+### Overview
 
 1. Evaluation-Driven Development  
-2. Evaluation Criteria  
-   - Domain-Specific Capability  
-   - Generation Capability  
-   - Instruction Following Capability  
-   - Cost and Latency  
+2. Evaluation Criteria   
 3. Model Selection  
-   - Benchmarks and Leaderboards  
-   - Open Source vs. APIs  
 4. Designing an Evaluation Pipeline  
-   - Define Evaluation Guidelines  
-   - Evaluate All Components  
-   - Use Mixed Evaluation Methods  
-   - Evaluate Evaluation Pipeline
-
----
-
-### ✅ 1. Evaluation-Driven Development
+   
+### 1. Evaluation-Driven Development
 
 - Inspired by **Test-Driven Development**: Define evaluation goals before building.
 - Use-case examples:
@@ -32,9 +18,7 @@
 
 **Interview Tip**: Always tie model goals to measurable outcomes.
 
----
-
-### ✅ 2. Evaluation Criteria
+### 2. Evaluation Criteria
 
 #### Domain-Specific Capability
 - How well does the model perform in the domain? (e.g., legal, finance, healthcare)
@@ -55,9 +39,7 @@
 - Model response time and inference cost.
 - Crucial for production viability and scaling.
 
----
-
-### ✅ 3. Model Selection
+### 3. Model Selection
 
 #### Benchmarks & Leaderboards
 - **Public Benchmarks**:
@@ -77,9 +59,7 @@
 
 **Interview Tip**: Expect to explain "build vs. buy" logic and infrastructure tradeoffs.
 
----
-
-### ✅ 4. Designing an Evaluation Pipeline
+### 4. Designing an Evaluation Pipeline
 
 #### Step 1: Define Evaluation Guidelines
 - What makes a response "good" or "bad"?
@@ -113,9 +93,7 @@
   - 3%: ~1,000
   - 1%: ~10,000
 
----
-
-### ✅ Evaluation Examples & Metrics
+### Evaluation Examples & Metrics
 
 - **MCQs**:
   - Great for knowledge and reasoning.
@@ -131,9 +109,7 @@
   - Tools: GPT-4/Claude moderation, Meta’s LlamaGuard, Perspective API
   - Benchmarks: RealToxicityPrompts, BOLD
 
----
-
-### 🔹 Summary Takeaways
+### Summary Takeaways
 
 - Use **evaluation-first design** to guide AI development.
 - Build **multi-tiered evaluation pipelines**: rule-based, statistical, human.
@@ -141,9 +117,7 @@
 - Tie model scores back to **business metrics**.
 - Iterate continuously — even your evaluation needs evaluation.
 
----
-
-### 🪡 Interview Review Questions (with Answers)
+### Interview Review Questions (with Answers)
 
 1. **Why is evaluation-driven development important?**  
    → Prevents unclear ROI, ensures measurable business value.
@@ -162,8 +136,6 @@
 
 6. **What makes an AI judge unreliable over time?**  
    → Inconsistency due to sampling, prompt phrasing, or underlying model changes.
-
----
 
 ### 💻 Code Examples & Snippets
 

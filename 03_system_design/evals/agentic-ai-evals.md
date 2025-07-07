@@ -1,8 +1,8 @@
 # Evaluation of Agentic AI Systems
 
-In this section we focus on evaluating Agentic AI Systems.
+In this section we provide a comprehensive overview of evaluating Agentic AI Systems, including evaluation layers, dimensions, methods, and frameworks.
 
-For a comprehensive overview of evaluating Gen-AI Systems (which are not agentic), see details in [Gen-AI Systems Evaluation](./gen-ai-evals.md). But below is a summary of the key points:
+For an overview of evaluating Gen-AI Systems (which are not agentic), see details in [Gen-AI Systems Evaluation](./gen-ai-evals.md). But below is a summary of the key points:
 
 ### **Evaluating Gen-AI Systems (key points)**
 

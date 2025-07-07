@@ -1,10 +1,6 @@
 # Chapter 10: AI Engineering Architecture and User Feedback
 
----
-
-## AI Engineering Architecture
-
----
+## 1. AI Engineering Architecture
 
 ### Step 1: Enhance Context
 
@@ -179,7 +175,7 @@ chain = SequentialChain(
 
 ---
 
-## User Feedback
+## 2. User Feedback
 
 ### Extracting Conversational Feedback
 - **Challenge**: Feedback is often implicit
