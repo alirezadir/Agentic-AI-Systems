@@ -1,5 +1,8 @@
 # Retrieval-Augmented Generation (RAG)
-This page provides an overview of (Retrieval-Augmented Generation) RAG architectures, including basic RAGs, agentic RAGs, multi-modal RAGs, and more advanced types of RAGs (such as CRAGs, self-RAGs, adaptive-RAGs, and KG-RAGs).
+
+**Updated 2025**: This page provides an overview of (Retrieval-Augmented Generation) RAG architectures, including basic RAGs, agentic RAGs, multi-modal RAGs, and more advanced types of RAGs (such as CRAGs, self-RAGs, adaptive-RAGs, and KG-RAGs).
+
+**2025 Context**: Agentic RAG has emerged as a major paradigm shift, representing the future of RAG systems. A comprehensive survey paper (arXiv:2501.09136v3) documents the evolution from Traditional RAG to Agentic RAG, highlighting dynamic retrieval strategies, reasoning-enhanced retrieval, and multi-step retrieval capabilities.
 
 You can find some code implementation in the [RAGs/code](https://github.com/alirezadir/Agentic-AI-Systems/tree/main/03_system_design/RAGs/code) folder.
 
@@ -211,14 +214,47 @@ There are three main approaches to multi-modal RAGs:
 
 
 ## 3. Agentic RAGs
-- Agentic RAGs refer to building **Retrieval Agents** 
-- Retrieval Agents are useful when we want to make decisions about whether to retrieve context from a vectorstore or respond to the user directly.
+
+**The Future of RAG is Agentic** (2025)
+
+Agentic RAG represents the evolution from static retrieval to dynamic, intelligent knowledge systems. Unlike traditional RAG that follows a fixed retrieve-then-generate pipeline, Agentic RAG enables AI agents to make intelligent decisions about when and how to retrieve information, adapt retrieval strategies based on context, and reason about the retrieved content.
+
+**2025 Research & Industry Adoption**: A comprehensive survey paper (arXiv:2501.09136v3, February 2025) documents the taxonomy and applications of Agentic RAG. Major technology companies including NVIDIA, AWS, and IBM have published guides and implementations, confirming Agentic RAG as the dominant paradigm for production RAG systems in 2025.
+
+### Key Characteristics of Agentic RAG (2025):
+
+- **Dynamic Knowledge Access**: Agents can access constantly changing data sources and make real-time retrieval decisions. Unlike static training data, Agentic RAG systems integrate with AI query engines that handle continuous updates from both private and public sources (NVIDIA, 2025).
+- **Reasoning-Enhanced Retrieval**: Agents reason about what information is needed before retrieving, improving relevance. The LLM acts as an orchestrator that understands tasks, generates solutions, and coordinates specialized models (NVIDIA's Perceive-Reason-Act-Learn framework).
+- **Multi-Step Retrieval**: Agents can perform iterative retrieval, refining queries based on initial results. This enables multi-hop reasoning across multiple documents and knowledge sources.
+- **Memory Integration**: Agents maintain context across interactions, learning from previous retrievals. This includes both short-term conversation context and long-term knowledge accumulation.
+- **Adaptive Strategies**: Agents choose retrieval strategies (semantic search, keyword search, hybrid, graph-based) based on query complexity and type. Systems can dynamically adjust from simple single-step retrieval to complex multi-step reasoning workflows.
+
+### Traditional RAG vs. Agentic RAG (2025):
+
+| Aspect | Traditional RAG | Agentic RAG |
+|--------|----------------|-------------|
+| **Retrieval Strategy** | Fixed pipeline (query → retrieve → generate) | Dynamic, adaptive (agent decides retrieval approach) |
+| **Query Processing** | Single-pass | Multi-step reasoning with iterative refinement |
+| **Context Awareness** | Limited to current query | Maintains conversation context and learns from interactions |
+| **Decision Making** | No decisions | Autonomous decisions about when/what/how to retrieve |
+| **Error Handling** | Basic | Self-corrective with reflection and query refinement |
+| **Knowledge Sources** | Static vector databases | Dynamic access to constantly updated sources (internal + external) |
+| **Workflow** | Linear | Orchestrated with planning, reflection, and tool use patterns |
+| **Use Cases** | Simple Q&A, fact retrieval | Complex research, multi-domain analysis, real-time decision support |
+
+### Implementation:
+
+Agentic RAGs refer to building **Retrieval Agents** that can make intelligent decisions about retrieval. Retrieval Agents are useful when we want to make decisions about:
+- Whether to retrieve context from a vectorstore or respond to the user directly
+- Which retrieval strategy to use (semantic, keyword, hybrid)
+- How many retrieval iterations are needed
+- Whether retrieved documents are relevant enough
 
 **Steps:**
 1. Preprocess documents
 2. Index documents in a vector DB
 3. Create a retriever tool
-4. Build an agentic RAG system with retrival tool that can decide when to use the retriever tool or respond to the user directly
+4. Build an agentic RAG system with retrieval tool that can decide when to use the retriever tool or respond to the user directly
 
 
 
@@ -299,10 +335,23 @@ Corrective-RAG (CRAG) is another strategy for RAG that incorporates self-reflect
 *Figure: KG-RAGs. Adapted from [langgraph].*
 
 ## Examples 
-### Uber Agentic RAG
+
+### Enterprise Agentic RAG Implementations
+
+#### Uber Agentic RAG
 - [Enhanced Agentic RAG at Uber (Uber Blog)](https://www.uber.com/blog/enhanced-agentic-rag/?utm_source=chatgpt.com)
+- Uber's implementation demonstrates production-scale agentic RAG with dynamic retrieval strategies and multi-step reasoning
 ![Agentic RAG Architecture](../../assets/rags/uber-agentic-rag.png)
-    <!-- - [ ] summary (tba) -->
+
+#### Key Enterprise Solutions (2025)
+- **Perplexity AI**: B2B agentic RAG platform for enterprise knowledge bases
+- **Glean AI**: Enterprise search with agentic RAG capabilities
+- **Sonar API**: Agentic RAG infrastructure for developers
+
+### Research & Open Source
+
+- **ARAG (Agentic Retrieval Augmented Generation)**: Research showing up to 42.1% improvement over standard RAG and recency-based baselines
+- Focus areas: Dynamic knowledge updates, reasoning-enhanced retrieval, multi-step query refinement
 
 
 

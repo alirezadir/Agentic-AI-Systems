@@ -2,10 +2,10 @@
 - Source: [Snowflake](https://www.snowflake.com/resource/a-practical-guide-to-ai-agents/)
 
 1. [Introduction](#introduction)
-2. [The Business Case – What Can AI Agents Offer](#1-the-business-case--what-can-ai-agents-offer)
-3. [The Platform – How to Implement AI Agents](#2-the-platform--how-to-implement-ai-agents)
-4. [Ethics and Bias – Overcoming Challenges](#3-ethics-and-bias--overcoming-challenges)
-5. [Bringing It All Together – Rolling Out AI Agents](#4-bringing-it-all-together--rolling-out-ai-agents)
+2. [The Business Case  What Can AI Agents Offer](#1-the-business-case--what-can-ai-agents-offer)
+3. [The Platform  How to Implement AI Agents](#2-the-platform--how-to-implement-ai-agents)
+4. [Ethics and Bias  Overcoming Challenges](#3-ethics-and-bias--overcoming-challenges)
+5. [Bringing It All Together  Rolling Out AI Agents](#4-bringing-it-all-together--rolling-out-ai-agents)
 6. [Snowflake for Data Agents](#5-snowflake-for-data-agents)
 7. [Industry Use Cases](#6-industry-use-cases)
 
@@ -20,13 +20,13 @@ This guide covers:
 - Key concepts in generative AI and AI agents
 - A strategic roadmap for implementing agentic AI
 
-## 1. The Business Case – What Can AI Agents Offer
+## 1. The Business Case  What Can AI Agents Offer
 
 AI agents can automate complex workflows, make context-sensitive decisions, and adapt to changing requirements. They are especially useful when:
 - Rules are too complex or dynamic for traditional software
 - Tasks require nuanced judgment or work with unstructured data
 
-## 2. The Platform – How to Implement AI Agents
+## 2. The Platform  How to Implement AI Agents
 
 ### Structured vs. Unstructured Data
 
@@ -45,14 +45,14 @@ Typical agent workflow steps:
 5. **Acting**: Execute actions
 6. **Learning and Adaptation**: Improve over time based on feedback
 
-## 3. Ethics and Bias – Overcoming Challenges
+## 3. Ethics and Bias  Overcoming Challenges
 
 Implementing AI agents requires strong governance to ensure ethical use and minimize bias. Key practices include:
 - **Guardrails**: Define business policies and acceptable outputs
 - **Evaluation**: Use benchmarks to assess reliability and performance
 - **Observability**: Monitor AI responses for compliance and detect issues
 
-## 4. Bringing It All Together – Rolling Out AI Agents
+## 4. Bringing It All Together  Rolling Out AI Agents
 
 ### Planning for Agentic AI: A Strategic Roadmap
 

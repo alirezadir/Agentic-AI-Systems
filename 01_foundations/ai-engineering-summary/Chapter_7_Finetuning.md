@@ -71,7 +71,7 @@
 * Domain adaptation: SQL dialects, customer-specific queries
 * Bias mitigation: finetune on curated data to reduce learned biases
 * Distillation: train small models to mimic large ones
-* Finetuned small models can outperform larger base models (e.g., Grammarly’s Flan-T5 > GPT-3 on editing tasks)
+* Finetuned small models can outperform larger base models (e.g., Grammarlys Flan-T5 > GPT-3 on editing tasks)
 
 ### Reasons Not to Finetune
 
@@ -109,7 +109,7 @@
     * **Gradients**: 1 per trainable param
     * **Optimizer state**: up to 2 per param (e.g., Adam)
     * **Activations** (can exceed weights)
-    * Estimate: `Training Mem ≈ N x M x 3 ` (for Adam)
+    * Estimate: `Training Mem  N x M x 3 ` (for Adam)
 
 * **Gradient checkpointing**: Recomputes activations to save memory
 
@@ -129,13 +129,13 @@
 
 ## 5. FineTuning Techniques
 - finetuning large-scale models is memory-intensive
-- Reducing model’s memory footprint: finetuning more accessible
+- Reducing models memory footprint: finetuning more accessible
 - partial fine-tuning (e.g. only last layer) is parameter inefficient -> PEFT: inserting additional parameters into the model in the right places (parameter efficient)
 ### 5.1 PEFT Techniques
 #### Adapter-Based Methods
-- Add trainable parameters to the model’s architecture,
+- Add trainable parameters to the models architecture,
 - Examples: 
-  - **LoRA** Low-rank adapters (W → W + α/r AB); **BitFit** Only  bias terms, **IA3**: Inject  per layer (multi-task efficient), **LongLoRA** long-context adaptation                                
+  - **LoRA** Low-rank adapters (W  W + /r AB); **BitFit** Only  bias terms, **IA3**: Inject  per layer (multi-task efficient), **LongLoRA** long-context adaptation                                
 
 #### Soft Prompt-Based Methods
 - modify how the model processes the input 
@@ -148,12 +148,12 @@
 * **Low-rank update**:
 
   ```math
-  W' = W + \frac{α}{r} * W_{AB}
+  W' = W + \frac{}{r} * W_{AB}
   ```
   * `W_{AB} = A(n x r). B(r x m)` is a low rank decomposition (factorization)
   * Only A and B are trainable (reduced memory); W kept intact
   * Typically applied to Wq, Wv, Wk, Wo matrices
-  * why it works? pre-training implicitly minimizes the model’s intrinsic dimension.
+  * why it works? pre-training implicitly minimizes the models intrinsic dimension.
 * **LoRA configs**:
     - rank parameter r  
       -  r = 2, 4, 8, ...
@@ -166,9 +166,9 @@
 
 
 
-<!-- | LoRA Rank (r) | α/r Ratio | Memory  | Performance Notes              |
+<!-- | LoRA Rank (r) | /r Ratio | Memory  | Performance Notes              |
 | ------------- | --------- | ------- | ------------------------------ |
-| 2             | \~1       | 6–37 MB | Good results on Wq, Wv, Wk, Wo |
+| 2             | \~1       | 637 MB | Good results on Wq, Wv, Wk, Wo |
 | 64+           | varies    | higher  | May lead to overfitting        | -->
 
 #### Quantized LoRA (QLoRA)
@@ -196,7 +196,7 @@
 | **Layer Stacking**   | Take layers from different models (frankenmerging, MoE)       |
 | **Concatenation**    | Merge LoRA adapters; total rank = r1 + r2                     |
 
-* **Task Vectors**: Δ = Finetuned - Base
+* **Task Vectors**:  = Finetuned - Base
 * **Pruning**: Reset redundant parameters to base (improves merge quality)
 
 ## 6. Finetuning Tactics
@@ -204,7 +204,7 @@
 ### Model Choice Strategy
 
 * **Progression path**: start small (cheapest and fastest), test, scale up
-* **Distillation path**: strong → small model via synthetic data
+* **Distillation path**: strong  small model via synthetic data
 
 ### Frameworks
 
@@ -215,7 +215,7 @@
 
 | Hyperparameter         | Typical Range | Notes                                      |
 | ---------------------- | ------------- | ------------------------------------------ |
-| **Learning rate**      | 1e-7 – 1e-3   | Stable loss = good; adjust with scheduler  |
-| **Batch size**         | ≥ 8           | Gradient accumulation if memory-bound      |
-| **Epochs**             | 1 (millions)–10 (thousands)        | Small data = more epochs; monitor val loss |
+| **Learning rate**      | 1e-7  1e-3   | Stable loss = good; adjust with scheduler  |
+| **Batch size**         |  8           | Gradient accumulation if memory-bound      |
+| **Epochs**             | 1 (millions)10 (thousands)        | Small data = more epochs; monitor val loss |
 | **Prompt loss weight** | 0.1 (default) | Tune contribution from prompt vs. response |

@@ -53,7 +53,7 @@
 
 **Conditional Routing**
 
-* Add dynamic routing between `chatbot` → `tools`:
+* Add dynamic routing between `chatbot`  `tools`:
 
   ```python
   from langgraph.prebuilt import tools_condition

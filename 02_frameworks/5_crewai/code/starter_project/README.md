@@ -44,20 +44,20 @@ graph TD
 
 ```
 starter_project/
-├── .env                    # Environment variables
-├── pyproject.toml         # Project dependencies
-├── README.md              # This file
-└── src/
-    └── starter_project/
-        ├── __init__.py
-        ├── main.py        # Entry point
-        ├── crew.py        # Crew definition
-        ├── tools/
-        │   ├── custom_tool.py
-        │   └── __init__.py
-        └── config/
-            ├── agents.yaml
-            └── tasks.yaml
+ .env                    # Environment variables
+ pyproject.toml         # Project dependencies
+ README.md              # This file
+ src/
+     starter_project/
+         __init__.py
+         main.py        # Entry point
+         crew.py        # Crew definition
+         tools/
+            custom_tool.py
+            __init__.py
+         config/
+             agents.yaml
+             tasks.yaml
 ```
 
 ## Setup

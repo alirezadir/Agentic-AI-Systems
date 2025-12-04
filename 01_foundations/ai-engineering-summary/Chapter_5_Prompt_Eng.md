@@ -1,6 +1,5 @@
 # Chapter 5: Prompt Engineering 
 
----
 ## 2.1 Prompt Engineering Overview
 
 <!-- ### Overview -->
@@ -19,7 +18,7 @@
 
   * e.g. Task description, Example(s), Output format
   * context: information given to a model to perform the prompt's requested task 
-* **Prompt engineering**: frames input instructions + context to guide a model’s behavior; often serving as the first step in model adaptation.
+* **Prompt engineering**: frames input instructions + context to guide a models behavior; often serving as the first step in model adaptation.
 
 
 
@@ -36,8 +35,8 @@
 
     ```text
     Correct grammar:
-    Input: she go to school → Output: She goes to school
-    Input: they is playing → Output: They are playing
+    Input: she go to school  Output: She goes to school
+    Input: they is playing  Output: They are playing
     ```
 
 * **Prompt Types**:
@@ -145,7 +144,7 @@
             creator: str
       ```
    * Annotate prompts in production; track changes and usage outcomes
-   * Prompt **templates**: .prompt file format: Tools e.g. Firebase’s Dotprompt
+   * Prompt **templates**: .prompt file format: Tools e.g. Firebases Dotprompt
 
 *Additional Prompting Patterns:*
 
@@ -165,7 +164,6 @@
   Analyze this response and classify as SAFE, RISKY, or UNSAFE.
   ```
 
----
 
 ## 2.3 Defensive Prompt Engineering
 * **Prompt Attacks Types**
@@ -202,7 +200,7 @@
 into user prompts
   * **Manual Hacks**
 
-    * Obfuscation (typos like “el qeada” to bypass keyword filters)
+    * Obfuscation (typos like el qeada to bypass keyword filters)
     * Special character spamming (e.g., !!!!!!)
     * Format abuse (e.g., poetry or rap about a crime)
     * Roleplay injection (e.g., DAN, NSA agent)

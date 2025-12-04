@@ -1,12 +1,11 @@
-# 🤖 Agentic AI Systems
+#  Agentic AI Systems
 
 > **A comprehensive guide to building production-ready AI agents and multi-agent systems**
 
-Welcome to **Agentic-AI-Systems** — a curated and evolving knowledge base for mastering Agentic and Generative AI system design! This repository is a collection of resources and examples that I have found useful in my journey of building agentic AI systems.
+Welcome to **Agentic-AI-Systems**  a curated and evolving knowledge base and hands-on guide for learning about Agents, Agentic AI system design, and building production-ready AI agents and multi-agent systems. This repository is a collection of resources and examples that I have found useful in my journey of building agentic AI systems.
 
-<img src="./assets/covers/cover-03.png" alt="Agentic-AI-Systems" width="70%">
+<img src="./assets/covers/cover-03.png" alt="Agentic-AI-Systems" width="50%">
 
----
 
 ## Contents
 
@@ -41,7 +40,6 @@ Welcome to **Agentic-AI-Systems** — a curated and evolving knowledge base for 
 
 
 <!-- 
----
 ## Frameworks & Tutorials
 
 - **OpenAI SDK:** [Overview](./02_frameworks/1_openai/openai_agents/), [Design Guide](./02_frameworks/1_openai_agents/docs/openai-agents-design-guide.md), [Starter Code](./02_frameworks/1_openai_agents/code/)
@@ -62,10 +60,9 @@ Welcome to **Agentic-AI-Systems** — a curated and evolving knowledge base for 
 
 ## Contributing
 
-> 🔜 *More coming soon — contributions welcome!* You can start by forking and submitting your own code-based experiments.
+>  *More coming soon  contributions welcome!* You can start by forking and submitting your own code-based experiments.
 
 Pull requests are welcome! If you'd like to add new frameworks, examples, or summaries, fork the repo and submit a PR.
 
----
 
-Made with ❤️ by [Alireza Dirafzoon](https://github.com/alirezadir).
+Made with love by [Alireza Dirafzoon](https://github.com/alirezadir).

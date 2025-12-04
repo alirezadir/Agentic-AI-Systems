@@ -2,7 +2,6 @@
 
 This guide synthesizes best practices for **Model Evaluation** and **System Evaluation** as described in *AI Engineering* book by Chip Huyen.
 
----
 
 ## 1. Model Evaluation
 
@@ -71,7 +70,7 @@ Model evaluation assesses how effectively a model performs its intended tasks, i
 
     - **Pointwise Ranking**: Score models independently, then compare.
     - **Comparative Ranking**: Directly compare models against each other to establish a ranking.
-        - Example: LMSYS’s Chatbot Arena leaderboard.
+        - Example: LMSYSs Chatbot Arena leaderboard.
         - Challenges: Scalability, standardization, and quality control.
 - ##### AI as a Judge
 
@@ -94,7 +93,7 @@ Model evaluation assesses how effectively a model performs its intended tasks, i
 
 **Two main steps:**
 1. Identify the best achievable performance.
-2. Map models on a cost–performance curve; select the model with optimal ROI.
+2. Map models on a costperformance curve; select the model with optimal ROI.
 
 **Workflow:**
 1. Filter out models based on hard requirements.
@@ -105,7 +104,6 @@ Model evaluation assesses how effectively a model performs its intended tasks, i
     - Select based on total ROI, not just raw performance.
 3. Continuously monitor in production and collect feedback.
 
----
 
 ## 2. System Evaluation
 
@@ -149,9 +147,9 @@ System evaluation determines whether the complete AI application performs as int
 - **Task-Level vs. Turn-Level Evals**:
 
     - **Task-Level:** Focuses on the end-to-end outcome.  
-    - Example: “Was the ticket booked?”
+    - Example: Was the ticket booked?
     - **Turn-Level:** Focuses on intermediate steps in multi-turn workflows.  
-    - Example: “Was the user’s intent correctly interpreted?”
+    - Example: Was the users intent correctly interpreted?
 
 
 

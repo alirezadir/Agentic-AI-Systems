@@ -5,7 +5,6 @@
 This guide synthesizes the technical details and code examples from the official OpenAI API Guides across ten key areas:
 - Text and Prompting, Images and Vision, Audio and Speech, Structured Outputs, Function Calling, Conversation State, Streaming, File Inputs, Reasoning, and Evals.
 
----
 
 ## 1. Text and Prompting
 - **APIs Overview**: `Completions`, `Chat Completions`, `Responses`
@@ -13,11 +12,11 @@ This guide synthesizes the technical details and code examples from the official
   - **Chat Completions API**: Uses a list of messages (`developer`, `user`, `assistant`) to maintain conversational context.
   - **Responses API**: Latest, stateful, supports tools like web search, file access, and multi-step reasoning.
 
-- **Sampling Controls**: Adjust `temperature` (0–2) and `top_p` (0–1) for randomness vs coherence.
+- **Sampling Controls**: Adjust `temperature` (02) and `top_p` (01) for randomness vs coherence.
 - Tips: 
   - Use **Message Roles**: (`system/developer` for global instructions.)
   - Add few-shot examples for format guidance.
-  - Include chain-of-thought (CoT) cues like “Let’s think step by step.”
+  - Include chain-of-thought (CoT) cues like Lets think step by step.
 - Responses vs Chat Completions: 
   - responses: stateless, single input-output
     - input: `messages` (list of messages)
@@ -79,7 +78,6 @@ curl https://api.openai.com/v1/completions \
   }'
 ``` -->
 
----
 
 ## 2. Images
 - **Image Generation**: Use  DALL-E or GPT Image (`images` API, e.g. `gpt-image-1` model) for generating/Editing images from text prompts.
@@ -189,7 +187,6 @@ print(obj.name, obj.year)
 
   event = response.output_parsed
   ```
----
 
 ## 5. Function Calling
 - Calling functions using `tools`
@@ -312,7 +309,6 @@ print(obj.name, obj.year)
   ```
 
 
----
 
 ## 6. Conversation State
 - Manual management of conversation state
@@ -355,7 +351,6 @@ print(obj.name, obj.year)
     ```
 
 
----
 
 ## 7. Streaming
 - Use `stream=True` to receive partial responses in real-time.
@@ -380,7 +375,6 @@ for chunk in stream:
 print(response)
 ```
 
----
 
 ## 8. File Inputs (PDFs and Vision)
 
@@ -409,7 +403,6 @@ response = openai.ChatCompletion.create(
 print(response.choices[0].message.content)
 ```
 
----
 
 ## 9. Reasoning
 
@@ -448,7 +441,6 @@ check = openai.ChatCompletion.create(model="gpt-4", messages=follow_up)
 print(check.choices[0].message.content)
 ```
 
----
 ## 10. OpenAI Built-in Tools 
 ### Web Search 
 

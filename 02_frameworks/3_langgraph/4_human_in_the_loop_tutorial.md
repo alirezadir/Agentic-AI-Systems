@@ -92,7 +92,7 @@ graph = graph_builder.compile(checkpointer=memory)
 
 ## 3. Visualize the graph (optional)
 
-Visualizing the graph, you get the same layout as before – just with the added tool!
+Visualizing the graph, you get the same layout as before  just with the added tool!
 
 ``` python
 from IPython.display import Image, display

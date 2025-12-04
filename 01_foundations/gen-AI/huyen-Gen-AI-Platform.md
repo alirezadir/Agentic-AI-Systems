@@ -8,7 +8,7 @@ Summary of the article: [Building A Generative AI Platform](https://huyenchip.co
 - **Gen-AI platform**: a modular architecture for production-ready generative AI applications
 
 * **Extensible**: 
-    - simplest form: user request → app → model → response → user 
+    - simplest form: user request  app  model  response  user 
     - progressively adds components like **context, guardrails, routing, caching, orchestration**
     - Supports both self-hosted and API-based models
 
@@ -65,8 +65,8 @@ Summary of the article: [Building A Generative AI Platform](https://huyenchip.co
     - **Vector search**: ANN e.g. FAISS (HNSW), ScaNN (Tree), ANNOY (kd-tree), Pinecone, etc 
 
 * **Hybrid Search**: use both term based + vector search
-    - sequential: term-based → reranking with vectors (ANN)
-    - ensemble: use multiple candidate generations → re-rank
+    - sequential: term-based  reranking with vectors (ANN)
+    - ensemble: use multiple candidate generations  re-rank
 
 **Evaluation Metrics**
 
@@ -78,13 +78,21 @@ Summary of the article: [Building A Generative AI Platform](https://huyenchip.co
 ##### RAG with Tabular (Structured) Data
 * Standard RAG uses unstructured text (docs, PDFs).
 * SQL data: structured data 
-* Text-to-SQL → SQL Execution (query result) → Generation (response)
+* Text-to-SQL  SQL Execution (query result)  Generation (response)
     * same or different models for Text-to-SQL & Generation 
 * Large databases: Schema prediction (what tables to use for each query) 
 
-##### Agentic RAG
+##### Agentic RAG (2025 Update)
+- **The Future of RAG**: Agentic RAG has become the standard approach in 2025, representing the evolution from static retrieval to dynamic, intelligent knowledge systems.
 - Agentic RAG combines retrieval with dynamic, reasoning-based agent workflows
 - **Agentic**  = reasoning + memory + tool use (not static prompts)
+
+* **Key Characteristics (2025)**:
+  - Dynamic knowledge access with real-time retrieval decisions
+  - Reasoning-enhanced retrieval (agents reason about what information is needed)
+  - Multi-step retrieval with iterative query refinement
+  - Memory integration across interactions
+  - Adaptive retrieval strategies (semantic, keyword, hybrid)
 
 * Actions: Callable Functions  
 * Tools (one or more actions): RAG, web search, SQL, APIs, etc 
@@ -92,7 +100,7 @@ Summary of the article: [Building A Generative AI Platform](https://huyenchip.co
 
 ##### Query Rewriting
 
-* Converts ambiguous queries to explicit (e.g. entity resolution): `what about his wife?` → `when was the last time John did ...`
+* Converts ambiguous queries to explicit (e.g. entity resolution): `what about his wife?`  `when was the last time John did ...`
 * May require DB lookups for identity resolution
 
 ### Step 2: Guardrails
@@ -116,7 +124,7 @@ Summary of the article: [Building A Generative AI Platform](https://huyenchip.co
 
 #### Output Guardrails
 * AI models are *probabilistic*: 
-    * Unreliable outputs → **Output Quality** measurements needed
+    * Unreliable outputs  **Output Quality** measurements needed
         - **Output quality policies** (e.g. output format)
         - **Security & Safety policies** (sensitive info, toxic, etc)
 * **Output Failure Modes**:
@@ -128,7 +136,7 @@ Summary of the article: [Building A Generative AI Platform](https://huyenchip.co
     * General bad responses: e.g. a recipe full of sugar (use AI-as-a-judge)
 * **Detection Tools**: regex, toxicity classifiers, SAFE, SelfCheckGPT, AI as a Judge, etc
 * **Failure Management**: 
-    * **Retry Policies**: retry on failure (until pass), added latency → retry in parallel (redundancy)
+    * **Retry Policies**: retry on failure (until pass), added latency  retry in parallel (redundancy)
     * **Human Escalation**: hand off based on sentiment or complexity
 
 ### Step 3: Add Model Router and Gateway
@@ -137,7 +145,7 @@ Summary of the article: [Building A Generative AI Platform](https://huyenchip.co
 
 #### Router
 * Benefits of **multiple models**: specialized solutions; cost saving (simpler queries to cheaper models) 
-* Typically consists of **Intent Classification** → route to appropriate model/handler (e.g. ordering, troubleshooting, refund models, human agent in customer service)
+* Typically consists of **Intent Classification**  route to appropriate model/handler (e.g. ordering, troubleshooting, refund models, human agent in customer service)
     - Also avoids out-of-scope conversations
 * **Next Action Prediction** for ambiguous queries (e.g. freezing: account or weather)
 * **Routing based on model capabilities or cost**
@@ -307,7 +315,7 @@ else:
 * Sequence of steps for the system (function composition)
 * Pipeline example: 
 
-    process (raw) query → retrieve (rel. data) → construct prompt (query + data) → generate → evaluate → return/fallback
+    process (raw) query  retrieve (rel. data)  construct prompt (query + data)  generate  evaluate  return/fallback
     
 * do as much in parallel as possible (latency): e.g. routing & guardrail 
 

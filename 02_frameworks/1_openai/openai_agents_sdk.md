@@ -87,7 +87,6 @@ agent = Agent(name="Assistant", instructions="You are a helpful assistant")
 result = Runner.run_sync(agent, "Write a haiku about recursion in programming.")
 print(result.final_output)
 ```
----
 ## 2. Basic Agent Configuration
 
 ### Key Components
@@ -137,7 +136,6 @@ A basic agent can be created with the `Agent` class (and will be run using a `Ru
         output_type=CalendarEvent,
     )
     ```
----
 ## 3. Models 
 - Built-in models: 
     - Text models (generation, reasoning), 
@@ -176,14 +174,13 @@ A basic agent can be created with the `Agent` class (and will be run using a `Ru
 | **Text Generation**       | Coherent, sometimes generic | High-quality and accurate | Similar to GPT-4, lower latency | Natural, expressive, real-time | Good enough for tasks | Basic output |
 | **Multi-step Reasoning**  | Weak CoT support | Strong CoT (chain-of-thought) | Strong + long context | Excellent at long CoT | Weak or limited CoT | Not supported |
 | **Tool Use / API Calling**| Supported (since 2023) | Supported | Supported | Best performance (fast + reliable) | Supported (slower response) | Limited or not available |
-| **Vision Input**          | ❌ Not supported | ✅ (GPT-4V only) | ✅ (GPT-4V) | ✅ Native (image + text) | Some models have image input | ❌ |
-| **Audio I/O**             | ❌ | ❌ | ❌ | ✅ Native speech in/out | ❌ | ❌ |
+| **Vision Input**          |  Not supported |  (GPT-4V only) |  (GPT-4V) |  Native (image + text) | Some models have image input |  |
+| **Audio I/O**             |  |  |  |  Native speech in/out |  |  |
 | **Agentic Use / Handoff** | Basic, fragile | Structured but slower | Tool memory + stable handoff | Best agent support (OpenAI Agents API default) | Lightweight use cases | Not intended for agents |
 | **Latency / Speed**       | Fastest | Slowest | Fast | Very fast (comparable to 3.5) | Super fast | Super fast |
-| **Context Window**        | 16K | 8K (some 32K) | Up to 128K | 128K | 16K–32K (varies by tier) | Unknown |
-| **Relative Cost**         | 💸 Cheapest | 💰 Expensive | ⚖️ Balanced | ⚡ High performance at lower cost | 💸 Cheaper than 4o | 💸 Minimal |
+| **Context Window**        | 16K | 8K (some 32K) | Up to 128K | 128K | 16K32K (varies by tier) | Unknown |
+| **Relative Cost**         |  Cheapest |  Expensive |  Balanced |  High performance at lower cost |  Cheaper than 4o |  Minimal |
 | **Best Use Case**         | Budget chatbots, simple gen | Reasoning-heavy workflows | Agents at scale, cost-aware apps | Real-time multimodal agents, production agents | Light agents or fast prototypes | Embedded/basic assistants |
----
 ## 4. Tools
 ### Tool Types
 - **Hosted tools**: Run on LLM servers (e.g., `WebSearchTool`, `FileSearchTool`, `ComputerTool`).
@@ -273,7 +270,6 @@ orchestrator_agent = Agent(
 async def main():
     result = await Runner.run(orchestrator_agent, input="Say 'Hello, how are you?' in Spanish.")
 ```
----
 ## 5. Handoffs
 - Handoffs allow agents to delegate tasks to other agents (e.g.specialized sub-agents), enabling modular workflows.
 - Handoffs are defined in the agent's `handoffs` property.
@@ -308,7 +304,6 @@ triage_agent = Agent(
     ```
 
 
----
 ## 6. Running Agents
 ### The Agent Loop
 Use the `Runner` class to execute agents:
@@ -384,7 +379,6 @@ async def main():
     result = await Runner.run(agent, new_input)
     print(result.final_output)  # California
 ```
----
 ## 7. Guardrails
 Run input/output validations alongside agents for safety and relevance using `@input_guardrail` and `@output_guardrail`.
 - Input guardrails: run on the initial user input
@@ -437,7 +431,6 @@ async def main():
     except OutputGuardrailTripwireTriggered:
         print("Badword output guardrail tripped")
 ```
----
 ## 8. Memory (Context)
 ### Context
 Agents support dependency injection and shared state via context:
@@ -490,7 +483,6 @@ if __name__ == "__main__":
 
 agent = Agent[UserContext](...)
 ```
----
 ## 9.  Tracing 
 - **Agents Tracing**: to monitor and debug agentic workflow execution, including:  
     - **logging**: fcn_calls, input/output, decisions, etc
@@ -554,7 +546,6 @@ agent = Agent[UserContext](...)
             ```
 
 - src: [openAI Tracing documentation](https://openai.github.io/openai-agents-python/tracing/)
----
 ## 10. Other Features
 ### Model Context Protocol (MCP)
 MCP standardizes how applications provide tools/context to LLMs.
@@ -654,7 +645,6 @@ async with MCPServerStdio(params={
         player.start()
         ```
 
----
 ## 11. Advanced topics 
 ### Other types of Memory 
 - **Types of Memory** in Agentic Frameworks: 

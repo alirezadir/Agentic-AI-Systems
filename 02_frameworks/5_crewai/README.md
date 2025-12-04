@@ -1,10 +1,14 @@
 # CrewAI Framework
 
-This directory contains examples and implementations using the CrewAI framework for orchestrating role-playing, autonomous AI agents.
+**Updated 2025**: This directory contains examples and implementations using the CrewAI framework for orchestrating role-playing, autonomous AI agents.
 
 ## Overview
 
-CrewAI is a framework for orchestrating role-playing AI agents. By fostering collaborative intelligence, CrewAI empowers agents to work together seamlessly, tackling complex tasks.
+CrewAI is a framework for orchestrating role-playing AI agents. By fostering collaborative intelligence, CrewAI empowers agents to work together seamlessly, tackling complex tasks. It's particularly well-suited for:
+- Multi-agent collaboration scenarios
+- Role-based agent teams
+- Complex workflows requiring specialized agent roles
+- Team-based task orchestration
 
 ## Contents
 

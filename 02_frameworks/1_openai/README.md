@@ -1,8 +1,9 @@
 # OpenAI Agents
 
+**Updated 2025**: This directory contains comprehensive documentation, guides, tutorials, and code examples for building AI agents using the OpenAI API and **Agents SDK (released March 2025)**. It provides everything you need—including starter code—to help you get started quickly.
 
 ### Overview:
-This directory contains comprehensive documentation, guides, tutorials, and code examples for building AI agents using the OpenAI API and Agents SDK. It provides everything you need—including starter code—to help you get started quickly.
+The **OpenAI Agents SDK** is a minimalist Python framework designed for creating multi-agent workflows with robust tracing and production-ready features. Released in March 2025, it represents OpenAI's approach to building production-grade agentic AI systems.
 
 
 

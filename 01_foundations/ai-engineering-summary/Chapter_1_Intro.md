@@ -1,13 +1,12 @@
 
-# Chapter 1 – Introduction 
+# Chapter 1  Introduction 
 
----
 
 ## 1. The Rise of AI Engineering
 
 ### Key Concepts:
 - **AI Engineering**: The practice of building AI-powered applications using pre-trained models (esp. foundation models).
-- **Model-as-a-Service (MaaS)**: Provides access to models like GPT-4, Claude, Gemini via APIs—no need to train from scratch.
+- **Model-as-a-Service (MaaS)**: Provides access to models like GPT-4, Claude, Gemini via APIsno need to train from scratch.
 - **Foundation Models**: General-purpose models trained on massive data (text, images, code, etc.), enabling many downstream tasks.
 
 ### Practical Takeaways:
@@ -18,9 +17,8 @@
 - Expect system design questions around "How would you use a foundation model to build X?"
 - Emphasize API orchestration, not just model accuracy. -->
 
----
 
-## 2. From Language Models → Large Language Models → Foundation Models
+## 2. From Language Models  Large Language Models  Foundation Models
 
 ### Key Evolutions:
 | Generation | Core Idea           | Training Method          |
@@ -33,7 +31,6 @@
 - **Self-supervision**: Learning by predicting missing parts of input (e.g., masked words).
 - **Scaling laws**: More data + compute = better generalization.
 
----
 
 ## 3. From Foundation Models to AI Engineering
 
@@ -46,9 +43,8 @@
 > "Design a GenAI app for onboarding new employees using existing models."
 
 ### Pro Tip:
-Understand the **AI Stack**: Prompting → Retrieval → Model inference → Output formatting → Logging.
+Understand the **AI Stack**: Prompting  Retrieval  Model inference  Output formatting  Logging.
 
----
 
 ## 4. Foundation Model Use Cases
 
@@ -63,7 +59,6 @@ Understand the **AI Stack**: Prompting → Retrieval → Model inference → Out
 | Data Organization     | AI tagging              | Enterprise knowledge graphs       |
 | Workflow Automation   | Event planner bots      | CRM automation, lead scoring      |
 
----
 
 ## 5. Planning AI Applications
 
@@ -80,7 +75,6 @@ Understand the **AI Stack**: Prompting → Retrieval → Model inference → Out
 - Skipping human-in-the-loop checks.
 - No clear fallback for model failure cases.
 
----
 
 ## 6. The AI Engineering Stack
 
@@ -98,7 +92,6 @@ Understand the **AI Stack**: Prompting → Retrieval → Model inference → Out
 | Evaluation     | Offline evaluation            | Live prompt eval + logs                       |
 | Deployment     | Static retraining             | Dynamic prompts, LoRA, PEFT patches           |
 
----
 
 ## Review Questions
 
@@ -114,7 +107,6 @@ Understand the **AI Stack**: Prompting → Retrieval → Model inference → Out
 **4. Why is evaluation more important with FMs?**  
 > Output varies with prompt/version; logging and dynamic evaluation are essential.
 
----
 
 ## Code Examples
 
@@ -130,7 +122,7 @@ response = OpenAI().chat.completions.create(
 print(response.choices[0].message.content)
 ```
 
-<!-- ### ✅ Use Case Fit Helper
+<!-- ###  Use Case Fit Helper
 
 ```python
 def is_good_use_case_for_genai(task):
@@ -142,10 +134,10 @@ def is_good_use_case_for_genai(task):
 
 ```bash
 genai_app/
-├── prompts/         # Prompt templates + history
-├── retriever/       # Context/document retrieval
-├── llm/             # Model abstraction
-├── evaluator/       # Logs, metrics, A/B tools
-├── interface/       # CLI, API, or Web UI
-├── data/            # Queries, logs, feedback
+ prompts/         # Prompt templates + history
+ retriever/       # Context/document retrieval
+ llm/             # Model abstraction
+ evaluator/       # Logs, metrics, A/B tools
+ interface/       # CLI, API, or Web UI
+ data/            # Queries, logs, feedback
 ```

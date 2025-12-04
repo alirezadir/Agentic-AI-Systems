@@ -278,31 +278,50 @@ A comprehensive framework combining automated metrics, human+LLM-in-the-loop ass
 - **Memory Operations**: Read/write logs for working and persistent memory
 - **Message Chains**: Full conversation history with context updates
 
-## 4. Frameworks
+## 4. Frameworks (2025 Updates)
+
 Suggested Evaluation Frameworks & Tools
-odern agentic AI systems benefit from a variety of structured evaluation tools and frameworks that support observability, debugging, and reproducibility.
-Evaluation Frameworks & Tools
+
+Modern agentic AI systems benefit from a variety of structured evaluation tools and frameworks that support observability, debugging, and reproducibility. The evaluation landscape has matured significantly in 2025 with specialized platforms and standardized practices.
+
+### Evaluation Frameworks & Tools (2025)
+
 Modern agentic AI systems require structured evaluation tools for observability, debugging, and performance measurement.
-**Tracing & Observability**
-- LangSmith – Complete pipeline observability with traces, feedback, LLM metrics, and version control
-- PromptLayer – Prompt versioning, performance tracking, latency monitoring
-- Helicone – Lightweight OpenAI proxy with cost, token, and latency dashboards
-- Traceloop – Advanced observability for LangChain apps with structured tool call traces
 
-**Evaluation Infrastructure**
-- OpenAI Function Call Traces – Native tool invocation logging with JSONSchema validation
-- LangGraph – Visual orchestration framework enabling node-by-node agent flow evaluation
-- CrewAI – Multi-agent framework with role-based reasoning and planning step monitoring
+**Tracing & Observability (2025)**
+- **LangSmith**: Complete pipeline observability with traces, feedback, LLM metrics, and version control
+- **Langfuse**: Open-source observability and evaluation for LLM applications (2025)
+- **PromptLayer**: Prompt versioning, performance tracking, latency monitoring
+- **Helicone**: Lightweight OpenAI proxy with cost, token, and latency dashboards
+- **Traceloop**: Advanced observability for LangChain apps with structured tool call traces
+- **OpenTelemetry**: Standardized observability framework for agentic systems
 
-**Testing & Benchmarking**
-- Custom Test Harnesses – Synthetic user simulations for real-world workflows (travel planning, support triage)
-- LLM-as-Judge Pipelines – Automated grading using GPT-4/Claude for outputs and decision quality
-- Scenario Benchmarks – Task libraries with automated scoring (TruthfulQA, BIG-Bench derivatives)
+**Evaluation Platforms (2025)**
+- **Maxim AI**: End-to-end evaluation platform for AI agents with comprehensive benchmarking
+- **Comet Opik**: AI agent evaluation and monitoring with production-ready features
+- **Arize**: ML observability platform with specialized agent evaluation capabilities
+- **Evidently AI**: AI agent benchmarks and testing frameworks
 
-**DevOps & Debugging**
-- LangChain Callbacks – Execution graph inspection, tool monitoring, memory access tracking
-- Arize/Pinecone – Vector DB evaluation: embedding quality, latency, recall metrics
-- OpenAI/Anthropic Evals – YAML-configured test suites for model and agent assessment
+**Evaluation Infrastructure (2025)**
+- **OpenAI Agents SDK Tracing**: Built-in tracing for multi-agent workflows (March 2025)
+- **LangGraph Platform**: Visual orchestration framework with production monitoring tools (v1.0)
+- **LangGraph v1.0**: Node-by-node agent flow evaluation with enhanced debugging
+- **CrewAI**: Multi-agent framework with role-based reasoning and planning step monitoring
+
+**Testing & Benchmarking (2025)**
+- **Web Agent Benchmarks**: Specialized benchmarks for computer-using agents and web navigation
+- **OS Agent Benchmarks**: Operating system interaction and automation testing
+- **Tool-Using Agent Benchmarks**: External tool and API integration testing
+- **Multi-Agent Benchmarks**: Collaborative agent system evaluation
+- **Custom Test Harnesses**: Synthetic user simulations for real-world workflows
+- **LLM-as-Judge Pipelines**: Automated grading using GPT-4o/Claude 3.5 for outputs and decision quality
+- **Scenario Benchmarks**: Task libraries with automated scoring
+
+**DevOps & Debugging (2025)**
+- **LangChain Callbacks**: Execution graph inspection, tool monitoring, memory access tracking
+- **Arize/Pinecone**: Vector DB evaluation: embedding quality, latency, recall metrics
+- **OpenAI/Anthropic Evals**: YAML-configured test suites for model and agent assessment
+- **Production Monitoring**: Real-time dashboards, alerting, and performance tracking
 
  Best Practice: Use LangSmith as your central observability hub, then integrate specialized tools like Helicone for cost tracking or LangGraph for orchestration debugging.
 

@@ -1,6 +1,5 @@
 # Chapter 8: Dataset Engineering 
 
----
 
 ## Overview 
 
@@ -22,7 +21,6 @@
    - Clean and Filter Data  
    - Format Data
 
----
 # Dataset Engineering
 
 ## A Data-Centric View of AI
@@ -32,7 +30,7 @@
 * Shift in benchmarks:
 
   * 2021: Andrew Ng's data-centric competition
-  * 2023–2024: DataComp, DataPerf, dcbench
+  * 20232024: DataComp, DataPerf, dcbench
 
 ## Data Curation
 
@@ -83,9 +81,9 @@ Response (CoT): 23 - 20 + 6 = 9 apples
 
 | Phase               | General | Math/Reasoning | Code   | Multilingual | Exam  | Long Context |
 | ------------------- | ------- | -------------- | ------ | ------------ | ----- | ------------ |
-| Pre-training        | 50%     | 25%            | 17%    | 8%           | ✗     | ✗            |
+| Pre-training        | 50%     | 25%            | 17%    | 8%           |      |             |
 | Supervised Finetune | 52.66%  | 21.19%         | 14.89% | 3.01%        | 8.14% | 0.11%        |
-| Preference Finetune | 81.99%  | 5.89%          | 6.93%  | 5.19%        | ✗     | ✗            |
+| Preference Finetune | 81.99%  | 5.89%          | 6.93%  | 5.19%        |      |             |
 
 * Annealing code/math boosts reasoning
 
@@ -103,14 +101,14 @@ Response (CoT): 23 - 20 + 6 = 9 apples
 
 * Use:
 
-  * Self-supervised → Supervised
-  * Less relevant → Relevant
-  * Synthetic → Real
+  * Self-supervised  Supervised
+  * Less relevant  Relevant
+  * Synthetic  Real
 
 ## Data Acquisition
 
 * Best data source: your application
-* Curation pipeline: filter → annotate → synthesize → validate
+* Curation pipeline: filter  annotate  synthesize  validate
 
 ## Public Dataset Repositories
 
@@ -139,7 +137,7 @@ Response (CoT): 23 - 20 + 6 = 9 apples
 * Back-translation
 * Instruction synthesis from outputs
 * Multi-turn synthesis (UltraChat, Alpaca)
-* Long-context: chunk → QA → full context finetune
+* Long-context: chunk  QA  full context finetune
 
 ## Instruction Data Synthesis
 
@@ -147,7 +145,7 @@ Response (CoT): 23 - 20 + 6 = 9 apples
 * AI-human hybrid pipelines for balance
 * LLaMA 3:
 
-  * Code problem gen → solution gen → test gen → validate/fix → translate → document
+  * Code problem gen  solution gen  test gen  validate/fix  translate  document
   * 2.7M examples
 
 ## Data Verification
@@ -159,7 +157,7 @@ Response (CoT): 23 - 20 + 6 = 9 apples
 
 | Limitation        | Risk                                             |
 | ----------------- | ------------------------------------------------ |
-| Quality Control   | Garbage in → Garbage out                         |
+| Quality Control   | Garbage in  Garbage out                         |
 | Imitation Issues  | Superficial mimicry, hallucination risk          |
 | Model Collapse    | Recursive synthesis degrades rare-case coverage  |
 | Lineage Obscurity | Legal, license, contamination, benchmark leakage |
@@ -188,9 +186,8 @@ Response (CoT): 23 - 20 + 6 = 9 apples
 * Most dataset steps are not easily automatable
 * Creativity is key to dataset curation and validation
 
----
 
-## 💻 Code Examples (Expanded)
+##  Code Examples (Expanded)
 
 ### A. GPT-Based Instruction Generation
 ```python

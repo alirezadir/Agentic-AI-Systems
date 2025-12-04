@@ -1,5 +1,5 @@
 # From Models to Compound AI Systems
-Reference: [The Shift from Models to Compound AI Systems – BAIR Blog, Feb 2024](https://bair.berkeley.edu/blog/2024/02/18/compound-ai-systems/)
+Reference: [The Shift from Models to Compound AI Systems  BAIR Blog, Feb 2024](https://bair.berkeley.edu/blog/2024/02/18/compound-ai-systems/)
 
 ## 1. Compound AI Systems
 
@@ -11,7 +11,7 @@ Reference: [The Shift from Models to Compound AI Systems – BAIR Blog, Feb 2024
     - RAG pipelines, 
     - multi-step chains (e.g. CoT@32)
 - Compound systems enable higher performance, flexibility, and reliability than monolithic models alone.
-- **2025:** Agents and agentic AI systems
+- **2025:** Agents and agentic AI systems have become the dominant paradigm, with standardized frameworks, evaluation practices, and production-ready patterns
 
 
 **Why Compound AI Systems?**
@@ -50,7 +50,7 @@ Reference: [The Shift from Models to Compound AI Systems – BAIR Blog, Feb 2024
     - Examples: in a simple RAG system: 
         - many retrieval and models to choose from, 
         - techniques to improve retrieval quality (e.g. query expansion or reranking models), 
-        - techniques to improve the LLM’s generated output (e.g., running another LLM to check that the output relates to the retrieved passages)
+        - techniques to improve the LLMs generated output (e.g., running another LLM to check that the output relates to the retrieved passages)
 
 - **Optimization**: 
     - Requires co-optimizing the components (e.g. a model that wored well for a retrievr, and a retriver that works well for a model)
@@ -59,7 +59,7 @@ Reference: [The Shift from Models to Compound AI Systems – BAIR Blog, Feb 2024
 
 - **Operation (MLOps/DataOps)**: 
     - MLOps more challenging: 
-        - e.g. track and debug the performance of a classifer agent: variable number of “reflection” steps or external API calls
+        - e.g. track and debug the performance of a classifer agent: variable number of reflection steps or external API calls
     - Monitoring, debugging, and securing compound systems is more complex than for single models. 
     - New tools are emerging for trace analysis, data quality, and security.
 
@@ -109,11 +109,9 @@ Reference: [The Shift from Models to Compound AI Systems – BAIR Blog, Feb 2024
 
 ## 5. Conclusion
 
-- Compound AI systems—composed of multiple models, tools, and orchestration logic—are now the leading paradigm for achieving state-of-the-art results in AI applications.
+- Compound AI systemscomposed of multiple models, tools, and orchestration logicare now the leading paradigm for achieving state-of-the-art results in AI applications.
 - Best practices for design, optimization, and operation are still evolving, but frameworks and tools are rapidly emerging.
 - Compound systems are expected to remain a key trend in AI, enabling higher quality, reliability, and flexibility than monolithic models alone.
 
----
 
-**Reference:**  
 

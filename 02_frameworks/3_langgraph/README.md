@@ -1,9 +1,17 @@
 # LangGraph Examples
 
-This directory contains examples and templates for building AI agents using LangGraph, a framework for orchestrating multi-agent workflows.
+**Updated 2025**: This directory contains examples and templates for building AI agents using LangGraph, a framework for orchestrating multi-agent workflows.
+
+**LangGraph v1.0 (October 22, 2025)**: LangGraph reached v1.0, marking the first stable major release in the durable agent framework space. It offers node-based architecture for building multi-agent systems with structured state management, durable state persistence, built-in persistence for saving/resuming workflows, and human-in-the-loop patterns. The **LangGraph Platform** enables teams to run agent workflows at scale with tools to track, debug, and manage them in production.
 
 ## Overview
 This folder provides starter code and examples to help you build AI agents with LangGraph. It includes basic and advanced examples covering various aspects of agent development, such as multi-agent orchestration, workflow management, and more.
+
+**2025 Features**:
+- Production-ready platform for running agent workflows at scale
+- Advanced tracing and debugging tools
+- Structured state management for complex multi-agent systems
+- Visual workflow debugging and monitoring
 
 ## Prerequisites
 - Python 3.8 or higher

@@ -10,7 +10,6 @@
 **Key Terms**:
 - **External memory** = internal databases, internet, APIs, or documents (external to the model).
 
----
 
 ## 2. Retrieval-Augmented Generation (RAG)
 
@@ -26,16 +25,16 @@
   - Produces a response.
 
 **Architecture Types:**
-- **Standard RAG**: Single-pass retrieval → generation.
+- **Standard RAG**: Single-pass retrieval  generation.
 - **Multi-hop RAG**: Iterative document chaining.
-- **FiD (Fusion-in-Decoder)**: Encoder per chunk → concatenate hidden states → generate.
+- **FiD (Fusion-in-Decoder)**: Encoder per chunk  concatenate hidden states  generate.
 
 ### 2.2 Retrieval Algorithms
 
 #### Term-Based:
 - Uses keyword overlap (TF-IDF, BM25, elasticsearch).
-- ✅ Simple, fast
-- ❌ No semantic understanding
+-  Simple, fast
+-  No semantic understanding
 
 #### Embedding-Based:
 - Uses dense vector embeddings (OpenAI embeddings, BERT, BGE).
@@ -80,12 +79,12 @@ index.add(embeddings)
   * **Chunk units**: characters, words, sentences, paragraphs, or tokens  
     * Choose based on data type and tokenizer compatibility
 
-  * **Recursive chunking**: split sections → paragraphs → sentences  
+  * **Recursive chunking**: split sections  paragraphs  sentences  
     * Preserves structure, reduces context loss
 
   * **Specialized chunking**: 
-    * Code → by function/block  
-    * Q&A → by question-answer pair  
+    * Code  by function/block  
+    * Q&A  by question-answer pair  
     * Language-aware for non-English (e.g. Chinese)
 
   * **Overlapping**:  
@@ -99,7 +98,7 @@ index.add(embeddings)
     * **Large chunks**: better coherence, faster search, risk of cutoff
 
   * **Guideline**:  
-    * Stay within model’s context limit & embedding's context limit
+    * Stay within models context limit & embedding's context limit
     * Tune based on retrieval quality and performance needs
 
 
@@ -125,7 +124,7 @@ def chunk_text(text, size=500, overlap=100):
   - Audio: Use Whisper or HuBERT for transcript indexing.
 
 #### RAG with Tabular Data (Text-to-SQL):
-- Query: `“How many units of X were sold in the last 7 days`
+- Query: `How many units of X were sold in the last 7 days`
   - SQL: 
     ```sql
     SELECT SUM(units)
@@ -138,11 +137,10 @@ def chunk_text(text, size=500, overlap=100):
   - Text-to-SQL
   - SQL Execution 
   - Response Generation 
----
 
-## 💻 3. Code Snippets
+##  3. Code Snippets
 
-### 🔹 LangChain RAG Pipeline
+###  LangChain RAG Pipeline
 
 ```python
 from langchain.vectorstores import FAISS

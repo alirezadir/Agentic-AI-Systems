@@ -1,8 +1,12 @@
 # Agents & Agentic AI Systems
-This page provides an overview of agents and agentic AI systems. 
-There is no single definition of an AI agent, but there are some common characteristics.
+
+**Updated 2025**: This page provides an overview of agents and agentic AI systems, including the latest developments and definitions from leading AI organizations.
+
+There is no single definition of an AI agent, but there are some common characteristics that have become standardized in 2025.
 
 There is a lot of confusion about the difference between agents and LLM workflows. This page aims to clarify the differences and provide a comprehensive overview of agents.
+
+**2025 Context**: The field of AI agents has matured significantly, with standardized frameworks (OpenAI Agents SDK, LangGraph v1.0), new agent types (Computer-Using Agents, Voice Agents), and production-ready patterns emerging across the industry.
 
 
 
@@ -20,14 +24,16 @@ An **agent** is an LLM system with dynamic control over tools, memory, and the f
 - **Human-in-the-Loop Capability:** Agents can pause at checkpoints or when encountering blockers to request human feedback or intervention.
 - **Flexible Task Termination:** Tasks are completed when a goal is reached or a stopping condition is met (such as a maximum number of iterations or a time limit).
 
-#### OpenAI: 
+#### OpenAI (2025): 
 - Agents represent **systems that intelligently accomplish tasks**, ranging from executing simple workflows to pursuing complex, open-ended objectives. 
+
+- **Agents SDK (March 2025)**: OpenAI released a minimalist Python framework for creating multi-agent workflows with robust tracing and production-ready features.
 
 - Agents Components
     - **Models**: Handle reasoning, decision-making, and process various modalities.
     - **Tools**: Extend agent capabilities using hosted tools, function tools, or other agents.
     - **Knowledge and Memory**: Provide external or persistent knowledge to agents.
-    <!-- - **Audio and Speech**: Enable audio or speech-based interactions. -->
+    - **Computer-Using Agents (CUA)**: Agents that interact with computer interfaces using vision-language models (e.g., Operator powered by GPT-4o).
     - **Guardrails**: Ensure safety and relevance through input/output validations.
     - **Orchestration**: Manage workflows and task delegation across multiple agents.
 
@@ -57,9 +63,8 @@ An **agent** is an LLM system with dynamic control over tools, memory, and the f
     * Support both read (perceive) and write (act) actions (e.g., send emails, execute code).
 
 
-** See [🤖  Agents in AI Engineering](./huyen-agents.md) for more details. **
+** See [  Agents in AI Engineering](./huyen-agents.md) for more details. **
 
----
 ## 2. LLM Workflows vs Agents 
 
 <img src="../../assets/agents/agent-not-agent.jpeg" alt="Agents" width="90%" />
@@ -68,7 +73,6 @@ An **agent** is an LLM system with dynamic control over tools, memory, and the f
 
 <img src="../../assets/agents/llm-workflow-vs-agent.png" alt="Agents" width="80%" />
 
----
 ## 3. Agents vs Agentic AI Systems
 - Agents are a subset of agentic AI systems. There are many different definitions of agentic AI, but they all share some common characteristics. 
 - Mainly agentic AI systems are composed of multi-agent systems with multi-agent orchestration,  and higher levels of autonomy, and more complex control goals. 
@@ -86,9 +90,7 @@ An **agent** is an LLM system with dynamic control over tools, memory, and the f
 
 
 
----
 ## 4. Evolution of AI Agents
-
 
 #### Hugging Face: 
 <img src="../../assets/agents/agents-5-levels.png" alt="Agents" width="110%" />
@@ -98,6 +100,38 @@ An **agent** is an LLM system with dynamic control over tools, memory, and the f
 <img src="../../assets/agents/agent-evolution.jpeg" alt="Agents" width="90%" />
 
 *Figure: Agentic AI Evolution. Adapted from [Rakesh Gohel]).*
+
+## 5. Recent Developments (2025)
+
+### New Agent Types
+
+**Computer-Using Agents (CUA)**
+- Vision-language models enabling agents to interact with computer interfaces like humans
+- Key implementations: OpenAI's Operator, OpenCUA framework, Microsoft Fara-7B
+- Use cases: Web automation, GUI interaction, software testing, workflow automation
+
+**Voice Agents**
+- Major trend identified by a16z research
+- Automate sales calls and customer support with complex, multi-step processes
+- Key players: ElevenLabs, VAPI, 11x Retell AI
+
+**Agentic RAG Agents**
+- Agents that make intelligent decisions about when and how to retrieve information
+- Dynamic knowledge access with reasoning-enhanced retrieval
+- Represents the evolution from static RAG to intelligent retrieval systems
+
+### Framework Maturation (2025)
+
+- **OpenAI Agents SDK** (March 2025): Production-ready framework with built-in tracing
+- **LangGraph v1.0**: Node-based architecture for multi-agent systems
+- **LangChain v1.0**: Standard tool calling architecture, provider-agnostic design
+- **Model Context Protocol (MCP)**: Standard protocol for connecting AI models to external tools
+
+### Industry Adoption
+
+- **Enterprise Patterns**: Standardized design patterns for production agentic systems
+- **Evaluation Frameworks**: Comprehensive benchmarking tools and standardized testing practices
+- **Multi-Agent Systems**: Mature orchestration patterns for collaborative agent teams
 
 
 

@@ -8,7 +8,7 @@
   - Retrieval types: text, image, tabular
   - Tools: API wrappers (e.g., news, weather, finance), embeddings with FAISS, Pinecone, Weaviate
   - Consider dynamic context slicing and weighted retrieval (e.g., prioritize recency or semantic similarity)
-- **Foundation Analogy**: Context ≈ feature engineering for LLMs
+- **Foundation Analogy**: Context  feature engineering for LLMs
 - **Model Provider Capabilities**:
   - Vary in file limits, tool access, parallelism support
   - OpenAI: supports file uploads and function calling
@@ -26,7 +26,6 @@ result = qa.run("Summarize the latest policy on user privacy.")
 - Know how RAG works: retrieve + augment prompt
 - Explain differences between retrieval frameworks (chunking, ranking, execution)
 
----
 
 ### Step 2: Put in Guardrails
 
@@ -51,12 +50,11 @@ if 'flagged' in response['usage']:
 - Always pair input/output guardrails
 - Tune for balance: false positives vs. unfiltered risk
 
----
 
 ### Step 3: Add Model Router and Gateway
 
 #### Router
-- **Intent Classification**: Route based on user’s need (FAQ vs. billing vs. tech help)
+- **Intent Classification**: Route based on users need (FAQ vs. billing vs. tech help)
 - **Multi-model Serving**: Assign different models per task
 - **Cost Optimization**: Light models for simple tasks, heavy models for complex ones
 
@@ -80,7 +78,6 @@ def model_gateway():
 
 **Study Tip**: Differentiate routers (intent prediction) vs. gateways (API mgmt)
 
----
 
 ### Step 4: Reduce Latency with Caches
 
@@ -106,14 +103,13 @@ else:
     redis_cache[prompt_hash] = response
 ```
 
----
 
 ### Step 5: Add Agent Patterns
 
 - **Agentic Workflows**: Enable loops, conditionals, multi-tool execution
 - **Use Cases**:
   - Email composition, dynamic retrieval, bank transfers, form auto-fill
-- **Execution Flow**: Generation → Review → Tool Call → Re-gen (loop)
+- **Execution Flow**: Generation  Review  Tool Call  Re-gen (loop)
 
 #### Write Actions
 - **Risky**: Directly modifies external systems (e.g., sends email)
@@ -129,7 +125,6 @@ agent.run("Check weather and send a summary email.")
 **Interview Takeaway**:
 - Understand how agents differ from basic LLM usage: planning, memory, tool invocation
 
----
 
 ### 6. Monitoring and Observability
 
@@ -148,7 +143,6 @@ def log_request(response):
     return response
 ```
 
----
 
 ### 7. AI Pipeline Orchestration
 
@@ -173,7 +167,6 @@ chain = SequentialChain(
 )
 ```
 
----
 
 ## 2. User Feedback
 
@@ -193,7 +186,6 @@ if "again" in user_input.lower():
     feedback_label = "possible dissatisfaction"
 ```
 
----
 
 ### Feedback Design
 
@@ -206,19 +198,17 @@ if "again" in user_input.lower():
 
 **Design Tip**: Use microinteractions, emoji responses, comment tagging
 
----
 
 ### Feedback Limitations
 
-- **Biases**: Early users ≠ general users; feedback ≠ objective truth
-- **Misinterpretation Risk**: Negative feedback ≠ model failure
+- **Biases**: Early users  general users; feedback  objective truth
+- **Misinterpretation Risk**: Negative feedback  model failure
 - **Volume Tradeoff**: High-volume feedback might be low-signal
 
 **Recommendation**:
 - Combine user feedback with automated metrics for robustness
 - Use feedback to guide exploration, not directly optimize
 
----
 
 ## Chapter Summary
 - Gradually evolve system from basic model calls to full-fledged orchestration
@@ -226,7 +216,6 @@ if "again" in user_input.lower():
 - Use agents and orchestration to increase capability
 - Collect and interpret feedback for continuous improvement
 
----
 
 ## Additional Coding Snippets & Prototypes
 
@@ -270,9 +259,8 @@ def plan_and_execute(user_query):
     return result
 ```
 
----
 
-### 🧠 Comprehensive End-to-End AI Workflow Example
+###  Comprehensive End-to-End AI Workflow Example
 
 This prototype integrates context retrieval, moderation, scoring, logging, and caching in one modular pipeline.
 ```python 

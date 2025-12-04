@@ -8,7 +8,6 @@
   - Node.js
   - Next.js
 
----
 
 ## 2. Memory Layer
 - **Short-term & Long-term Memory:**
@@ -17,7 +16,6 @@
   - Cognéé
   - Letta
 
----
 
 ## 3. Tooling Layer
 - **Search & Action Tools:**
@@ -26,7 +24,6 @@
   - Exa
   - Composio
 
----
 
 ## 4. Agentic Observability
 - **Monitoring & Tracing:**
@@ -34,7 +31,6 @@
   - Helicone
   - Arize
 
----
 
 ## 5. Agent Orchestration
 - **Frameworks for Agent Management:**
@@ -44,7 +40,6 @@
   - LlamaIndex
   - Dust
 
----
 
 ## 6. Foundational Models
 - **LLM Providers:**
@@ -54,7 +49,6 @@
   - Qwen
   - Claude
 
----
 
 ## 7. Database Layer
 - **Vector & Metadata Storage:**
@@ -63,7 +57,6 @@
   - Supabase
   - Pinecone
 
----
 
 ## 8. Infrastructure / Base Layer
 - **Containerization & Orchestration:**
@@ -71,7 +64,6 @@
   - Kubernetes
   - Autoscaling VMs
 
----
 
 ## 9. GPU / CPU Providers
 - **Cloud & Edge Compute:**

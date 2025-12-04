@@ -150,6 +150,5 @@ Your thinking should be thorough and so it's fine if it's very long.
 ## Conclusion
 Claude 3.5 Sonnet, with a simple prompt and two general-purpose tools, achieved state-of-the-art results on SWE-bench Verified. The agent's minimal scaffolding and robust tool design allow the model to self-direct and solve complex real-world coding tasks.
 
----
 
 *For more details, see the original post: [Raising the bar on SWE-bench Verified with Claude 3.5 Sonnet](https://www.anthropic.com/engineering/swe-bench-sonnet)* 

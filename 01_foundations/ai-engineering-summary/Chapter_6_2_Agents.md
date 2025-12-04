@@ -1,5 +1,5 @@
-# Chapter 6.2 :  🤖 Agents
-<!-- ## 🤖 3. Agents -->
+# Chapter 6.2 :   Agents
+<!-- ##  3. Agents -->
 
 ### 1. Agents Overview
 
@@ -41,7 +41,6 @@
   - Compound mistakes: overall accuracy drops with # of steps (0.95)^10 = 0.6, (0.95)^100 = 0.06!
   - Higher stakes: due to tool access, and severe consequences of failures 
 
----
 ### 2. Tools
 
 * Agents take *actions* via Tools = External *APIs* or *functions* that agents can call.
@@ -66,14 +65,13 @@ APIs, social media APIS, etc
 
 * Agents require function schemas and metadata to use tools correctly.
 * Tool selection depends on environment, task, and model strength.
----
 ### 3. Planning & Control Flows
 
 #### 3.1 Planning Principles:
 * Task: An objective + constraints: plan a trip from LA to SF with a budget of $500
 * Planning: Decomposing a task into actionable steps considering constraints.
 * Plans must be **valid** & **efficient**
-<!-- * Task decomposition (e.g., high-level → subtask) is central. -->
+<!-- * Task decomposition (e.g., high-level  subtask) is central. -->
 * Agents can be prompted to plan using formats such as CoT ("think step by step").
 * **Planning** should be decoupled from **Execution** and only executed after **Validation**. 
 * **Multi-Agent Planning**:Planning may involve:
@@ -99,7 +97,7 @@ APIs, social media APIS, etc
 #### Control Flows:
 * Control Flow: order in which actions can be executed
 * Common Control Flows: 
-  * **Sequential**: A → B → C
+  * **Sequential**: A  B  C
   * **Conditional**: IF X THEN A ELSE B
   * **Parallel**: A and B run together
   * **Looped**: Repeat A until condition
@@ -111,7 +109,7 @@ APIs, social media APIS, etc
 *Example:*
 
 ```text
-Task: What’s the price of the best-selling product last week?
+Task: Whats the price of the best-selling product last week?
 Plan: [get_today_date, fetch_top_products, fetch_product_info, generate_query, generate_response]
 ```
 #### 3.2 LLMs as Planners
@@ -231,7 +229,6 @@ Plan: [get_today_date, fetch_top_products, fetch_product_info, generate_query, g
 * Humans can assist in providing or approving plans. -->
 
 
----
 ### 4. Agent Failure Modes & Evaluation
 - Agent evaluation: detecting failures 
 - Agent bechmark and leaderboards (e.g. Berkley function calling leaderboard, travelplanner benchmark, etc)
@@ -259,9 +256,8 @@ Plan: [get_today_date, fetch_top_products, fetch_product_info, generate_query, g
 * Validate all inputs (e.g., prevent SQL injection)
 * Use sandboxing and audit logs
 
----
 
-## 🧠 5. Memory 
+##  5. Memory 
 - **Memory**: to retain and utilize information
     - needed both for **RAGs** & **Agents**
     - **RAG**: context augmentation 
@@ -297,9 +293,8 @@ Plan: [get_today_date, fetch_top_products, fetch_product_info, generate_query, g
 
 * FIFO, redundancy removal (chat summary), reflection-based memory curation
 
----
 
-## ✅ 5. Review Questions
+##  5. Review Questions
 
 1. What defines an AI agent?
 2. Name 3 categories of tools.
@@ -307,10 +302,9 @@ Plan: [get_today_date, fetch_top_products, fetch_product_info, generate_query, g
 4. Describe a planning failure vs a tool failure.
 5. What types of memory can agents use?
 
----
 
-## 💻 6. Code Snippets & Practical Examples
-### 🔹 Agent with Tool Registry
+##  6. Code Snippets & Practical Examples
+###  Agent with Tool Registry
 
 ```python
 from langchain.agents import Tool, initialize_agent
@@ -328,10 +322,10 @@ tools = [
 ]
 
 agent = initialize_agent(tools, OpenAI(), agent="zero-shot-react-description", verbose=True)
-result = agent.run("What’s the weather in Paris and top 3 tourist spots?")
+result = agent.run("Whats the weather in Paris and top 3 tourist spots?")
 ```
 
-### 🔹 Agent Memory Store
+###  Agent Memory Store
 
 ```python
 from langchain.memory import ConversationBufferMemory
@@ -339,7 +333,7 @@ memory = ConversationBufferMemory(memory_key="chat_history")
 agent_chain = initialize_agent(..., memory=memory)
 ```
 
-### 🔹 Agent with SQL + Planning
+###  Agent with SQL + Planning
 
 ```python
 from langchain.agents import initialize_agent, Tool

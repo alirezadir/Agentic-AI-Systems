@@ -1,7 +1,6 @@
-# OpenAI Cookbook: Orchestrating Agents — Routines and Handoffs
+# OpenAI Cookbook: Orchestrating Agents  Routines and Handoffs
 **Source:** [OpenAI Cookbook: Orchestrating Agents](https://cookbook.openai.com/examples/orchestrating_agents)
 
----
 
 ## Overview
 
@@ -15,7 +14,6 @@ This guide introduces the concepts of **routines** and **handoffs** for orchestr
 | **Routine**  | A set of natural language instructions (system prompt) + tools to execute   |
 | **Handoff**  | Mechanism for transferring control between agents/routines                  |
 
----
 
 ## 1. Routines
 
@@ -180,7 +178,6 @@ while True:
     messages.extend(new_messages)
 ```
 
----
 
 ## 5. Handoffs Between Agents
 - Handoff: an agent (or routine) handing off an active conversation to another agent, like when you get transfered to someone else on a phone call. Except in this case, the agents have complete knowledge of your prior conversation!
@@ -266,7 +263,6 @@ def execute_tool_call(tool_call, tools, agent_name):
 
 see [handoffs.py](./code/handoffs.py) for a complete example.
 
----
 
 ## 6. Best Practices
 - Keep routines simple and robust
@@ -274,9 +270,7 @@ see [handoffs.py](./code/handoffs.py) for a complete example.
 - Let agents express intent to transfer/handoff
 - Log and observe agent behavior for improvement
 
----
 
 ## References
 - [OpenAI Cookbook: Orchestrating Agents](https://cookbook.openai.com/examples/orchestrating_agents)
 
----

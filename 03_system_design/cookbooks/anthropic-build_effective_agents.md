@@ -1,5 +1,7 @@
-
 # Anthropic's Building Effective Agents Summary
+
+**Updated 2025**: This cookbook remains one of the most comprehensive guides for building effective agents, with practical patterns and code examples.
+
 **Published:** Dec 19, 2024  
 **Source:** 
 - [Anthropic Blog](https://www.anthropic.com/engineering/building-effective-agents)
@@ -56,7 +58,6 @@ query = "Explain Claude AI"
 docs = vector_search(query)
 response = llm.invoke(prompt + docs)
 ```
----
 
 ## 2. Workflow Patterns 
 #### Workflow Patterns Overview
@@ -90,8 +91,8 @@ Checkout [basic_workflows.ipynb](../../03_system_design/design-patterns/code/bas
 
 **Example: Email generation**
 ```
-Step 1: Summarize user input →  
-Step 2: Generate subject line →  
+Step 1: Summarize user input   
+Step 2: Generate subject line   
 Step 3: Write full email based on summary & subject
 ```
 
@@ -124,8 +125,8 @@ result = chain("input text to be summarized", prompts)
 
 **Example: Product description generation**
 ```
-Run 3 different styles →  
-Compare outputs →  
+Run 3 different styles   
+Compare outputs   
 Pick best or combine
 ```
 
@@ -152,7 +153,7 @@ results = parallel(inputs, prompt)
     
 **Example: Customer support**
 ```
-Step 1: Classify query ("refund", "technical", "shipping") →  
+Step 1: Classify query ("refund", "technical", "shipping")   
 Step 2: Route to relevant prompt/tool
 ```
 
@@ -216,14 +217,14 @@ for ticket in tickets:
 
 Checkout [orchestrator-workers.ipynb](../../03_system_design/design-patterns/code/orchestrator_workers.ipynb) for full code examples.
 
-- Purpose: Dynamically decompose complex tasks into subtasks, delegate them to worker LLMs, and synthesize the results. ￼
+- Purpose: Dynamically decompose complex tasks into subtasks, delegate them to worker LLMs, and synthesize the results. 
 
 - A central LLM (**orchestrator**) *dynamically* breaks down tasks, delegates them to **worker** LLMs, and (a **synthesizer**) synthesizes their results. 
 - subtasks aren't pre-defined, but determined by the orchestrator based on the specific input
 
 Ideal Use Cases:
-	•	Tasks where subtasks can’t be predefined and vary based on input (e.g. code review, where coding tasks involving multiple file changes).
-	•	Search tasks requiring information gathering from diverse sources. ￼ ￼
+		Tasks where subtasks cant be predefined and vary based on input (e.g. code review, where coding tasks involving multiple file changes).
+		Search tasks requiring information gathering from diverse sources.  
 
 ```python 
 class Orchestrator:
@@ -355,11 +356,10 @@ result, chain_of_thought = loop(task, evaluator_prompt, generator_prompt)
 <!-- Example:
 Translating a poem where the initial translation is evaluated for tone and rhythm, and feedback is used to produce a more faithful rendition. -->
 
- ￼
+ 
 
 
 
----
 ## 3. Agents 
 **What is an Agent?**
 
@@ -389,11 +389,11 @@ In summary, agents are LLM-driven systems that iteratively interact with their e
 - Open-ended problems where:
     - The number of steps cannot be predetermined.
     - A fixed, hardcoded workflow is not feasible.
-- Scenarios where you can trust the agent’s autonomous decision-making.
+- Scenarios where you can trust the agents autonomous decision-making.
 - Ideal for scaling operations in trusted environments, such as customer support or coding tasks.
 
 **Trade-offs:**
-- Agents’ autonomy can lead to higher operational costs and an increased risk of compounding errors.
+- Agents autonomy can lead to higher operational costs and an increased risk of compounding errors.
 - Require thorough testing in sandboxed environments and the implementation of robust guardrails to ensure safety and reliability.
 
 
@@ -436,7 +436,6 @@ while not done:
 - Observe, log, and evaluate results often
 - Craft your ACI via documentation and testing
 
----
 ###  Appendix 1: Agents in Practice
 
 #### A. Customer Support Agent
@@ -451,11 +450,11 @@ while not done:
 **Business viability:**
 - Real-world implementations show success-based billing (e.g. charge per resolution)
 
-#### B. 💻 Coding Agents
+#### B.  Coding Agents
 
 **Why agents work well:**
 - Code is verifiable via automated tests
-- Iterative feedback loop: test → fix → re-test
+- Iterative feedback loop: test  fix  re-test
 - Well-structured problem space
 - Output is objectively measurable
 
@@ -465,14 +464,13 @@ while not done:
 - Human review still required for broader integration
 
 
-#### C.🧾 Document Processing Agent
+#### C. Document Processing Agent
 
 **Workflow**:
 - Upload document
 - Extract + segment text
 - Summarize segments
 - Compile overview
----
 
 ### Appendix 2: Prompt Engineering Your Tools
 
@@ -493,11 +491,10 @@ while not done:
 | **Test iteratively**                 | Use real input cases, analyze mistakes, refine tools                        |
 | **Poka-yoke design**                 | Make it harder to make mistakes (e.g., enforce absolute paths)      |
 
-<!-- #### 🛠 Claude Example:
+<!-- ####  Claude Example:
 - Issue: Agents failed with relative paths after changing directories
-- Fix: Required absolute paths → success rate improved -->
+- Fix: Required absolute paths  success rate improved -->
 
-> “On a SWE code benchmark, we spent more time optimizing tools than the prompt.”
+> On a SWE code benchmark, we spent more time optimizing tools than the prompt.
 
----
 

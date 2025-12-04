@@ -49,7 +49,7 @@
   - LMSYS, HuggingFace, HELM
   - Aggregation not always transparent
 
-**Contamination Example**: GPT-3 had ~40% overlap with common benchmarks【51:7†source】.
+**Contamination Example**: GPT-3 had ~40% overlap with common benchmarks51:7source.
 
 #### Open Source vs. Model APIs
 - Trade-offs across 7 axes:
@@ -64,7 +64,7 @@
 #### Step 1: Define Evaluation Guidelines
 - What makes a response "good" or "bad"?
 - Use real test queries, generate responses, manually label.
-- **Create rubrics**: Binary, 1–5 scale, -1/0/1 for contradiction/neutral/entailment.
+- **Create rubrics**: Binary, 15 scale, -1/0/1 for contradiction/neutral/entailment.
 - Validate with humans or AI agents.
 
 #### Step 2: Evaluate All Components
@@ -85,7 +85,7 @@
   - User group (free vs. premium)
   - Query source (mobile vs. web)
   - Query type (short vs. long)
-- Prevents **Simpson’s Paradox**: Aggregates may hide true performance patterns.
+- Prevents **Simpsons Paradox**: Aggregates may hide true performance patterns.
 
 #### Step 5: Estimate Sample Size
 - OpenAI guidelines:
@@ -106,7 +106,7 @@
 
 - **Safety Evaluation**:
   - Categories: profanity, self-harm, hate speech, stereotypes, bias
-  - Tools: GPT-4/Claude moderation, Meta’s LlamaGuard, Perspective API
+  - Tools: GPT-4/Claude moderation, Metas LlamaGuard, Perspective API
   - Benchmarks: RealToxicityPrompts, BOLD
 
 ### Summary Takeaways
@@ -115,29 +115,29 @@
 - Build **multi-tiered evaluation pipelines**: rule-based, statistical, human.
 - Apply **data slicing** and **criteria mapping** to uncover weaknesses.
 - Tie model scores back to **business metrics**.
-- Iterate continuously — even your evaluation needs evaluation.
+- Iterate continuously  even your evaluation needs evaluation.
 
 ### Interview Review Questions (with Answers)
 
 1. **Why is evaluation-driven development important?**  
-   → Prevents unclear ROI, ensures measurable business value.
+    Prevents unclear ROI, ensures measurable business value.
 
 2. **What four categories define evaluation criteria?**  
-   → Domain capability, generation quality, instruction following, cost & latency.
+    Domain capability, generation quality, instruction following, cost & latency.
 
 3. **Why are public benchmarks insufficient for model selection?**  
-   → They may be contaminated, misaligned with your application, or non-transparent.
+    They may be contaminated, misaligned with your application, or non-transparent.
 
 4. **How should you evaluate a multi-step system?**  
-   → Evaluate each component and the full pipeline independently.
+    Evaluate each component and the full pipeline independently.
 
-5. **What is Simpson’s Paradox, and why does it matter?**  
-   → A model may underperform on subgroups even if it looks good on aggregate.
+5. **What is Simpsons Paradox, and why does it matter?**  
+    A model may underperform on subgroups even if it looks good on aggregate.
 
 6. **What makes an AI judge unreliable over time?**  
-   → Inconsistency due to sampling, prompt phrasing, or underlying model changes.
+    Inconsistency due to sampling, prompt phrasing, or underlying model changes.
 
-### 💻 Code Examples & Snippets
+###  Code Examples & Snippets
 
 #### 1. Functional Evaluation Using Prompt + Classifier
 ```python
@@ -177,5 +177,4 @@ Prompt:
 ```
 *Purpose*: Evaluate factual consistency using LLM as meta-evaluator.
 
----
 

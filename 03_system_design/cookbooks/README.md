@@ -1,5 +1,8 @@
 # Cookbooks
-This page provides an overview and summaries of the most useful cookbooks in designing and building agentic AI systems.
+
+**Updated 2025**: This page provides an overview and summaries of the most useful cookbooks in designing and building agentic AI systems. These resources represent practical, production-tested guidance from leading organizations including Anthropic, OpenAI, Google, and Microsoft.
+
+**2025 Context**: The field has matured with standardized patterns, comprehensive design guides, and real-world case studies. These cookbooks provide battle-tested approaches for building production agentic AI systems.
 
 <!-- <img src="../../assets/cookbooks/cookbooks-1.jpeg" alt="Cookbooks" width="70%" />
 

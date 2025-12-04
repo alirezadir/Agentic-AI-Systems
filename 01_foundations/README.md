@@ -3,7 +3,9 @@
 <!-- - [ ] Todo: add readmes + update contents
 - [ ] Todo: add foundations from Gen-AI Interviews -->
 
-This section provides core concepts and foundational knowledge for Gen-AI systems, Agents, and agentic AI systems. 
+This section provides core concepts and foundational knowledge for Gen-AI systems, Agents, and agentic AI systems.
+
+**Note (2025)**: The field of agentic AI has seen significant maturation in 2025, with standardized frameworks, evaluation practices, and enterprise patterns. This foundational knowledge remains essential for understanding the latest developments in agentic AI systems. 
 
 ### Contents:
 #### 1. Gen AI

@@ -1,4 +1,7 @@
-# **OpenAI's “A Practical Guide to Building Agents”**
+# **OpenAI's A Practical Guide to Building Agents**
+
+**Updated 2025**: This guide provides foundational principles for building agents with OpenAI's framework. With the release of the Agents SDK in March 2025, many of these patterns are now implemented as first-class features.
+
 <!-- * 25, 2024* -->
 A summary from the OpenAI Guide: [A Practical Guide to Building Agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf)
 
@@ -59,7 +62,7 @@ agent = Agent(name="Weather agent", instructions="You are a ...", tools=[get_wea
 3. **Orchestration**: Agents as tools for other agents (manager pattern)
     - e.g. refund agent, research agent, write agent
 
-As the number of tools increases → split tasks across multiple agents
+As the number of tools increases  split tasks across multiple agents
 
 ```python
 from agents import Agent, WebSearchTool, function_tool 
@@ -92,7 +95,7 @@ You are an expert in ... convert the following doc into a clear set of instructi
 - Incremental approach for success
 
 **Orchestration Patterns**:
-- **Single Agent Systems**: single model + tools & instructions → execute workflow in a loop
+- **Single Agent Systems**: single model + tools & instructions  execute workflow in a loop
 - **Multi-Agent Systems**: distributed workflow execution across multiple agents
     - Sequence of tool calls & handoffs between agents, run multiple steps until exit condition is met
 
@@ -123,7 +126,7 @@ Two main categories:
 2. **Decentralized (Handing Off to Agents)**: multiple agents as peers, handing off tasks to one another
     - Hand-offs: one-way transfer of execution to another agent
     - Hand-off tool or function: start execution on new agent + transfer latest state
-    - e.g. User → Triage → Issues → Orders → Output
+    - e.g. User  Triage  Issues  Orders  Output
 
 **Single Agent vs Multi-Agent Architecture**:
 - More agents: separation of concepts, scalability, but more complexity & overhead

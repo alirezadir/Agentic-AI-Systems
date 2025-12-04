@@ -1,4 +1,7 @@
 ## Modern Python for Gen-AI
+
+**Updated 2025**: This guide covers modern Python practices essential for building Gen-AI and agentic AI systems.
+
 ### Modern Python
 - **asyncio**: asynchronous I/O (`async`, `async.run()`, `await`)
     - `async`: define an async function
@@ -24,8 +27,9 @@
         `$ brew install uv`
         `$ uv init explore-uv`
         `$ uv add llama-index`
-- **Vibe Coding / Chat-Oriented Programming (CHOP)**
+- **Vibe Coding**
     - [Cursor](https://www.cursor.com/en/features)
+    - [Claude Code](https://www.anthropic.com/news/claude-code)
     - Microsoft Copilot 
 - **UI**
     - [Gradio](https://gradio.app/)
@@ -35,11 +39,28 @@
         - [streamlit-gpt4](https://blog.streamlit.io/take-your-streamlit-apps-to-the-next-level-with-gpt-4/)
 - [Python 3 Cheatsheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)
 
+### Writing prompt strings 
+
+- using f-strings to write prompt strings 
+```python
+title = "Quantum Mechanics"
+prompt = f"This is the title: {title}"
+# → "This is the title: Quantum Mechanics"
+```
+- using double braces in strings in langchain for prompt templates: 
+```python
+from langchain.prompts import PromptTemplate
+template = "This is the title: {{title}}"  # Define template with placeholder
+prompt = PromptTemplate.from_template(template)
+filled_prompt = prompt.format(title="Quantum Mechanics")
+# This is the title: Quantum Mechanics
+```
 ### Model Context Protocol (MCP) 
+
 
 - MCP (Model Context Protocol) is a **standardized protocol** (by Anthropic) to simplify how AI systems (like Claude or LLM agents) **connect** to external tools and databases (local or remote). 
 - Think of it as a USB-C for AI systems.
     - Solves the **NxM problem** (N tools and M models talk through a single interface)
     - a **model-agnostic**, **tool-agnostic**, and **open** protocol 
-- Follows a **host → client → server** architecture
+- Follows a **host  client  server** architecture
 - For more details visit [Protocols for AI Systems](protocols-AI.md)

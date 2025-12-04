@@ -39,7 +39,7 @@
 - Chat Templates: messages <-> specific formatting +  handle  multi-turn conversations while maintaining context (chat history)
     - prevoius messages + special tokens concatenated to each message 
     - message exchanges -> into a single prompt
-    - use the chat_template from the model’s tokenizer (`tokenizer.apply_chat_template`)
+    - use the chat_template from the models tokenizer (`tokenizer.apply_chat_template`)
 - ChatML format: list of JSON messages `[{"role": "system", "content": "..."}, ...]`
 - ChatML to chat Template format: 
     ```
@@ -69,7 +69,7 @@
 - Example tools: Web Search, Image Generation, Retrieval, external API (youtube, github, etc)
 - How tools work?
     - LLMs only receive text inputs and generate text outputs
-    - LLMs generate text that represents a tool call, e.g. `call weather_tool(‘Paris’).`
+    - LLMs generate text that represents a tool call, e.g. `call weather_tool(Paris).`
     - Tool calling by Agent:  reads response, identifies tool call is required, executes the tool, and retrieves the actual data.
     - Tools given to LLMs via system prompt description of avaiable tools 
     - Tool's textual description includes: 
@@ -101,14 +101,14 @@
             ...      
         ```
 ### 1.4  AI Agent Workflow
-- Agents work in a continuous cycle of: thinking (**Thought**) → acting (**Act**) → observing (**Observe**)
+- Agents work in a continuous cycle of: thinking (**Thought**)  acting (**Act**)  observing (**Observe**)
     - thought: decide next step 
     - act: take action (call tools w/ arguments)
     - observe: reflect on output 
 - **Thought-Action-Observation Cycle**: 
     - a while loop: until the objective fulfilled.
     - example:
-        - Query: "`What’s the current weather in New York?`"?
+        - Query: "`Whats the current weather in New York?`"?
         - Thought: `The user needs current weather info for New York. I have access to a tool that fetches weather data. First, I need to call the weather API to get up-to-date details. `
         - Action: JSON-formatted command that calls the weather API tool:
             ```
@@ -120,10 +120,10 @@
             }
              ``` 
         - Observation: `Current weather in New York: partly cloudy, 15°C, 60% humidity.`
-        - Thought (reflection): `“Now that I have the weather data for New York, I can compile an answer for the user.”`
+        - Thought (reflection): `Now that I have the weather data for New York, I can compile an answer for the user.`
         - Action (final): `The current weather in New York is partly cloudy with a temperature of 15°C and 60% humidity` 
 - **1.4.1 Thoughts (Reasoning) & ReAct**
-    - **Thoughts**: Agent’s internal reasoning and planning processes
+    - **Thoughts**: Agents internal reasoning and planning processes
     - Types of Thoughts: 
         - Analysis: e.g. intent classification 
         - planning: breaking task into multiple steps 
@@ -134,7 +134,7 @@
         - Prioritization: e.g. security before new feature 
     - **ReAct** = Reason (Think) + Act 
         - ReAct is a prompting technique 
-        - appends `“Let’s think step by step”` (CoT) 
+        - appends `Lets think step by step` (CoT) 
         - encourages the model to generate a plan (decompose the problem into sub-tasks)
         - some models fine-tuned to "think before answering": e.g. Deepseek R1 or OpenAI's o1
             - trained to always include specific thinking sections `<think> ... </think>`
@@ -174,9 +174,9 @@
                     ```
 
 - **1.4.3 Observe: Reflect & Adapt**
-    -   **Observation**: Agent’s perception on the results of its actions
-    -   **Reflection**: Agent’s ability to analyze the outcome of its actions
-    -   **Adaptation**: Agent’s ability to adjust its strategy based on observations
+    -   **Observation**: Agents perception on the results of its actions
+    -   **Reflection**: Agents ability to analyze the outcome of its actions
+    -   **Adaptation**: Agents ability to adjust its strategy based on observations
     - **observation** phase: 
         - **collect** feedback from the environment
         - **analyze** the results / make decisions (success/failure, next action)
@@ -201,7 +201,7 @@
 - Agentic Frameworks Examples: 
     - **langgraph**
     - **llama_index**
-    - **smolagents**: focuses on codeAgent (performs “Actions” through code blocks, and then “Observes” results by executing the code.)
+    - **smolagents**: focuses on codeAgent (performs Actions through code blocks, and then Observes results by executing the code.)
     - openai's agents 
 - Components of Agentic Frameworks: 
     - An *LLM* engine 

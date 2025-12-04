@@ -9,13 +9,14 @@ This page provides an overview of protocols for AI systems, including Model Cont
 *Figure: Protocols for AI Systems. Adapted from [@rakeshgohel01].*
 
 
-### 1. Model Context Protocol (MCP) 
+### 1. Model Context Protocol (MCP) (2025)
 
-- MCP (Model Context Protocol) is a **standardized protocol** (by Anthropic) to simplify how AI systems (like Claude or LLM agents) **connect** to external tools and databases (local or remote). 
+- MCP (Model Context Protocol) is a **standardized protocol** (by Anthropic) to simplify how AI systems (like Claude or LLM agents) **connect** to external tools and databases (local or remote).
+- **2025 Status**: MCP has been widely adopted by OpenAI, Anthropic, and other major providers, becoming the de facto standard for tool and context provisioning in agentic AI systems. 
 - Think of it as a USB-C for AI systems.
     - Solves the **NxM problem** (N tools and M models talk through a single interface)
     - a **model-agnostic**, **tool-agnostic**, and **open** protocol 
-- Follows a **host → client → server** architecture
+- Follows a **host  client  server** architecture
 
 <img src="../../assets/protocols/mcp.png" alt="Protocols for AI Systems" width="80%" />
 
@@ -41,7 +42,7 @@ This page provides an overview of protocols for AI systems, including Model Cont
 
 ##### Example: GitHub MCP Server
 
-##### 📤 Sample MCP Request (JSON-RPC)
+#####  Sample MCP Request (JSON-RPC)
 
 ```json
 {
@@ -56,7 +57,7 @@ This page provides an overview of protocols for AI systems, including Model Cont
 }
 ```
 
-##### 📤 Sample MCP Request (Python)
+#####  Sample MCP Request (Python)
 
 ```python
     import requests
@@ -81,7 +82,7 @@ This page provides an overview of protocols for AI systems, including Model Cont
         print(f"- {issue['title']}")
 ```
 
-##### 📥 Sample MCP Server Response
+#####  Sample MCP Server Response
 
 ```json
 {
@@ -152,12 +153,22 @@ def get_issues(repo: str, state: str, limit: int = 5):
     - [ ] tracing
 - [Open AI MCP](https://openai.github.io/openai-agents-python/mcp/)
 
-### 2. A2A 
+### 2. A2A (Agent-to-Agent Protocol)
+
+**Updated 2025**: A2A protocols enable standardized communication between agents in multi-agent systems, supporting complex orchestration and collaboration patterns.
 
 <img src="../../assets/protocols/a2a.png" alt="Protocols for AI Systems" width="80%" />
 
 *Figure: A2A Protocol. Adapted from [@rakeshgohel01].*
 
+**Key Features (2025)**:
+- Standardized message formats for agent communication
+- Support for multi-agent orchestration frameworks
+- Integration with MCP for tool sharing between agents
+- Protocol support in major frameworks (LangGraph, CrewAI, OpenAI Agents SDK)
 
-
-- [ ] ToDo
+**Use Cases**:
+- Multi-agent collaboration systems
+- Hierarchical agent architectures
+- Agent handoff and delegation patterns
+- Distributed agent workflows

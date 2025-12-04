@@ -1,4 +1,6 @@
+# 12-Step Agentic System Design Framework
 
+**Updated 2025**: This comprehensive framework provides a systematic approach to designing production-ready agentic AI systems. The 12-step methodology has been refined based on real-world implementations and represents industry best practices for 2025.
 
 ## 12 steps 
 1.	Problem Formulation 
@@ -34,8 +36,8 @@ Clarifying Qs: why/what(s):
 - memory (availability, latency, throughput, etc)
 - evaluation methods (automated, human, AI as judge, etc)
 
-3.	MVP Design (Perception → Cognition → Action loop 
- + workflow/agent(s) pipeline + layers (reasonong, memory, tools/action, orchestration) + Agent Role(s) + cognitive (planning, reasoning and decision-making) + core loop (perceive → reason → act → reflect (or variations).)
+3.	MVP Design (Perception  Cognition  Action loop 
+ + workflow/agent(s) pipeline + layers (reasonong, memory, tools/action, orchestration) + Agent Role(s) + cognitive (planning, reasoning and decision-making) + core loop (perceive  reason  act  reflect (or variations).)
 4. Data 
 - Modeling schemas 
 - storage: Databases, knowledge bases, graph DBs, vector DBs,  (KB, DB, etc) 
@@ -68,7 +70,6 @@ Clarifying Qs: why/what(s):
 10. Feedback loops (collection, evaluation, improvement) + User Interaction (thumbs, edits, resopnses, etc)/ Reflection 
 11. Depoloyment & Scaling (users, data, and complexity) -  Iterative Dev (CI/CD) + Ethical (Bias + Transparency) + Optimmization (latency, resource management, computational cost, scalability, security), human AI collaboration, versioning, rollouts, etc 
 
----
 **Gen-AI Platform**: A common order of components to add:
 
 1. Enhance **Context** (external data + Tools)
@@ -78,14 +79,12 @@ Clarifying Qs: why/what(s):
 5. Add **complex logic** 
 6. **Observability**: visibility into the system for monitoring and debugging
 7. **Orchestration**: chaining all the components together
----
 
 # Agentic AI System Design Template 
 Example: (Customer Support Agent)
 
 A comprehensive, step-by-step design document for building a production-grade agentic AI customer support system, combining reasoning, retrieval, memory, tool use, observability, feedback loops, and pattern-driven architecture.
 
----
 
 ## Step 1: Problem Formulation 
 ### 1.1 Define the System Goal & Scope
@@ -111,11 +110,11 @@ Example Use Case: Customer Support Agent
 
 
 Build a customer-facing LLM agent that:
-	•	Answers queries using documentation and knowledge bases
-	•	Performs actions like refunds or order tracking via APIs
-	•	Adapts to user history and preferences
-	•	Escalates gracefully to human agents
-	•	Learns and improves over time
+		Answers queries using documentation and knowledge bases
+		Performs actions like refunds or order tracking via APIs
+		Adapts to user history and preferences
+		Escalates gracefully to human agents
+		Learns and improves over time
 
 Key Questions
 
@@ -139,7 +138,6 @@ What is the interaction mode?	Multimodal UI or API gateway
 What is the latency requirement?	Under 2s for real-time conversations
 What type of intelligence is expected?	RAG + tool-augmented LLM with reflection and planning
 
----
 
 ### Step 1.2: High-Level Requirements 
 
@@ -170,21 +168,20 @@ Potential support for global markets
 
 ### 1.3 Core Components
 
-•	UI: Chat widget, API endpoint
-•	Orchestration: LangGraph, LangChain logic
-•	LLM Layer: OpenAI, Claude, Groq
-•	RAG System: Vector DB + retriever
-•	Tool Layer: Order, refund, CRM APIs
-•	Memory: Short (Redis), Long (Zep, MongoDB)
-•	Feedback: Upvote/downvote, GPT scoring
-•	Observability: Langfuse, Helicone, dashboards
+	UI: Chat widget, API endpoint
+	Orchestration: LangGraph, LangChain logic
+	LLM Layer: OpenAI, Claude, Groq
+	RAG System: Vector DB + retriever
+	Tool Layer: Order, refund, CRM APIs
+	Memory: Short (Redis), Long (Zep, MongoDB)
+	Feedback: Upvote/downvote, GPT scoring
+	Observability: Langfuse, Helicone, dashboards
 
----
 ## Step 3: System Architecture Design (MVP)
-•	Component layout
-•	Infrastructure stack
-•	Data flows
-•	Model integration strategy
+	Component layout
+	Infrastructure stack
+	Data flows
+	Model integration strategy
 
 Component Architecture
 
@@ -199,22 +196,20 @@ Observability	Opik, Helicone, Langfuse
 
 Data Flow
 
-User ➝ UI ➝ Agent Orchestrator
-   ├──> RAG ➝ Vector Store ➝ Docs
-   ├──> Tools ➝ External APIs
-   ├──> Memory Layer ➝ Context Injection
-   └──> LLM Inference ➝ Final Response ➝ Guardrails ➝ Output to User
+User  UI  Agent Orchestrator
+   > RAG  Vector Store  Docs
+   > Tools  External APIs
+   > Memory Layer  Context Injection
+   > LLM Inference  Final Response  Guardrails  Output to User
 
 Design Patterns at this Layer
-	•	Meta-Agent Pattern: Modular orchestration of reasoning, memory, tools.
-	•	Prompt Routing: Dynamic path selection based on intent.
-	•	Parallel Execution: Run RAG + tool calls concurrently.
+		Meta-Agent Pattern: Modular orchestration of reasoning, memory, tools.
+		Prompt Routing: Dynamic path selection based on intent.
+		Parallel Execution: Run RAG + tool calls concurrently.
 
----
 ## Step 3: System Architecture Design
 
 
----
 
 High-Level Component Architecture
 
@@ -226,7 +221,6 @@ Optional Voice UI	Converts speech to text (STT) and back (TTS)
 Messaging Middleware	Sends/receives messages from backend agent
 
 
----
 
 2. Agent Orchestration Layer
 
@@ -237,7 +231,6 @@ Prompt Construction	Dynamic templates (Jinja, JSON prompts)
 Task Execution / Routing	Routes requests to tools, retriever, LLM
 
 
----
 
 3. LLM Inference Layer
 
@@ -247,7 +240,6 @@ Response Synthesis	Final response generation, error handling
 Tool-aware Generation	Embeds tool call structure into prompt context
 
 
----
 
 4. Retrieval-Augmented Generation (RAG) System
 
@@ -258,7 +250,6 @@ Vector Store	Chroma, Weaviate, Pinecone, Qdrant
 Retriever	Hybrid (vector + keyword fallback)
 
 
----
 
 5. Tooling Layer (Action API Gateway)
 
@@ -269,7 +260,6 @@ Profile Fetch Tool	Pulls user profile from DB
 External Search Tool	Optional fallback (e.g., Serper, Exa)
 
 
----
 
 6. Memory Layer
 
@@ -279,7 +269,6 @@ Long-Term	MongoDB / Zep / Supabase	Stores user preferences, history, feedback
 Summarization	Periodically distills old sessions into memory slots	
 
 
----
 
 7. Observability & Feedback
 
@@ -289,7 +278,6 @@ Feedback Capture	Thumbs up/down, edit suggestions
 Model Evaluation	Human or LLM-graded evaluation
 
 
----
 
 8. Security, Guardrails, and Governance
 
@@ -300,19 +288,17 @@ Policy Enforcement	Role-based access control for agents
 Audit Logging	User actions + model outputs logged securely
 
 
----
 
 Data Flow (Logical)
 
-User Input ➝ Frontend ➝ Agent Orchestrator
-   ├──> RAG ➝ Vector Store ➝ Docs
-   ├──> Tooling Layer ➝ External APIs
-   ├──> Memory Layer ➝ Context Injection
-   └──> LLM Inference ➝ Final Response
-➝ Guardrails + Observability ➝ Output to User
+User Input  Frontend  Agent Orchestrator
+   > RAG  Vector Store  Docs
+   > Tooling Layer  External APIs
+   > Memory Layer  Context Injection
+   > LLM Inference  Final Response
+ Guardrails + Observability  Output to User
 
 
----
 
 Example Tech Stack (Modular)
 
@@ -327,10 +313,8 @@ Tool APIs	Custom REST APIs, Google, Stripe, etc.
 Infra	Docker, Kubernetes, AWS/GCP/Azure, RunPod
 
 
----
 
 
----
 
 ## Step 4: Data Modeling & Prompt Interface Design
 
@@ -392,21 +376,20 @@ Tool-Calling Prompt Interface
 In multi-tool environments, prompt structure must also embed tool call hints.
 
 ### 4.4 Design Patterns at this Layer
-•	Prompt Chaining: Sequential reasoning and formatting layers.
-•	ReAct Pattern: Reasoning followed by tool action.
-•	CodeAct Pattern: Embed tool APIs directly in prompts.
+	Prompt Chaining: Sequential reasoning and formatting layers.
+	ReAct Pattern: Reasoning followed by tool action.
+	CodeAct Pattern: Embed tool APIs directly in prompts.
 
----
 
 ## Step 5: Memory Strategy & Feedback Loops
 
 5.1. Why Memory Matters in Customer Support
 
 An effective support agent needs situational awareness:
-	•	What was asked before?
-	•	What tools were used?
-	•	What did the user like/dislike?
-	•	What is known about this user historically?
+		What was asked before?
+		What tools were used?
+		What did the user like/dislike?
+		What is known about this user historically?
 
 Without memory, the agent feels robotic. With well-designed memory, it feels context-aware, adaptive, and human-aligned.
 
@@ -436,7 +419,7 @@ Long-term	Cross-session summary, preferences	Zep, MongoDB
 
 Memory Ingestion Flow
 
-Transcript ➝ GPT Summary ➝ Store in Zep/Supabase ➝ Retrieve per session/init
+Transcript  GPT Summary  Store in Zep/Supabase  Retrieve per session/init
 
 ### 6. Feedback Loop Design
 
@@ -451,42 +434,41 @@ Method
 Action
 Thumbs up / Thumbs down
 Store interaction result in feedback DB
-“Not helpful”
+Not helpful
 Tag and escalate to human
 Edit Response
 Capture correction for LLM fine-tuning
 
 Feedback Loop
 
-Feedback ➝ Eval Tag ➝ Prompt/Memory Update ➝ Improved Behavior
+Feedback  Eval Tag  Prompt/Memory Update  Improved Behavior
 
 Design Patterns at this Layer
-	•	Self-Reflection: Analyze and revise outputs internally.
-	•	Reflexion Loop: Re-evaluate failed outputs using memory.
-	•	Evaluator Optimizer: Score outputs and re-route.
+		Self-Reflection: Analyze and revise outputs internally.
+		Reflexion Loop: Re-evaluate failed outputs using memory.
+		Evaluator Optimizer: Score outputs and re-route.
 
 LLM Evaluation
 
 Use automated scoring (e.g., GPT-4) for:
-	•	Answer quality
-	•	Factual accuracy
-	•	Politeness / tone
-	•	Tool success or failure
+		Answer quality
+		Factual accuracy
+		Politeness / tone
+		Tool success or failure
 
 Store this evaluation metadata for:
-	•	Dashboard analytics
-	•	Long-term tuning
-	•	Prompt updates or model reranking
----
+		Dashboard analytics
+		Long-term tuning
+		Prompt updates or model reranking
 
 ## Step 6: Tooling Integration + Action Framework
-Language alone isn’t enough — agentic AI systems must act:
-	•	Fetch order status
-	•	Trigger refunds
-	•	Update user profiles
-	•	Escalate to humans
+Language alone isnt enough  agentic AI systems must act:
+		Fetch order status
+		Trigger refunds
+		Update user profiles
+		Escalate to humans
 
-Tools extend LLMs from “smart talkers” into interactive systems that can change the world (or a database, at least).
+Tools extend LLMs from smart talkers into interactive systems that can change the world (or a database, at least).
 
 2. Tool Types by Use Case
 
@@ -518,31 +500,31 @@ Escalation	Route to Human Agent
 Tools must be defined in a structured, model-readable way.
 
 4. Agent-to-Tool Flow
-[Prompt] → [LLM generates tool_call JSON] → [Tool Router executes API] 
-→ [Result returned] → [LLM generates final response using result]
+[Prompt]  [LLM generates tool_call JSON]  [Tool Router executes API] 
+ [Result returned]  [LLM generates final response using result]
 If the LLM is uncertain:
-	•	It can reflect (“Do I need a tool?”)
-	•	Or ask user for clarification before action
+		It can reflect (Do I need a tool?)
+		Or ask user for clarification before action
 
 5. Tool Execution Engine (Router)
 Handles:
-	•	JSON validation
-	•	Auth tokens (OAuth, API keys)
-	•	Rate limiting
-	•	Retry/backoff on failure
+		JSON validation
+		Auth tokens (OAuth, API keys)
+		Rate limiting
+		Retry/backoff on failure
 
 Tool Router Flow
 
-LLM ➝ JSON Tool Call ➝ Router ➝ API ➝ Result ➝ Injected in Prompt ➝ Response
+LLM  JSON Tool Call  Router  API  Result  Injected in Prompt  Response
 
 Tool Execution Platform
-	•	LangChain ToolExecutor
-	•	Custom FastAPI tool server
-	•	Observability via Langfuse traces
+		LangChain ToolExecutor
+		Custom FastAPI tool server
+		Observability via Langfuse traces
 
 Design Patterns at this Layer
-	•	Tool Use Pattern: Encapsulate tool use with error handling.
-	•	CodeAct Pattern: Translate LLM output into structured tool calls.
+		Tool Use Pattern: Encapsulate tool use with error handling.
+		CodeAct Pattern: Translate LLM output into structured tool calls.
 6. Tool Call Triggers
 
 7. Tool Output Injection Strategies
@@ -550,7 +532,6 @@ Design Patterns at this Layer
 8. Error & Safety Handling
 
 9. Security & Observability for Tools
----
 
 ## Step 7: Observability, Evaluation & Continuous Improvement
 
@@ -563,8 +544,8 @@ Feedback	Thumb ratio, correction count
 Tool Success	Failures, retries, latency
 
 Evaluation Types
-	•	Automated: GPT-graded factuality, relevance
-	•	Human: Qualitative feedback, tagging
+		Automated: GPT-graded factuality, relevance
+		Human: Qualitative feedback, tagging
 
 Monitoring Stack
 
@@ -575,30 +556,28 @@ Alerting	Prometheus, PagerDuty
 
 Improvement Cycle
 
-Observability ➝ Pattern Tagging ➝ Prompt/Tool/Memory Update ➝ Versioned Rollout
+Observability  Pattern Tagging  Prompt/Tool/Memory Update  Versioned Rollout
 
 Design Patterns at this Layer
-	•	Evaluator Optimizer: Scores and corrects poor output.
-	•	Reflexion Loop: Improves system based on performance feedback.
+		Evaluator Optimizer: Scores and corrects poor output.
+		Reflexion Loop: Improves system based on performance feedback.
 
 
 ## Step 7: Observability, Evaluation & Continuous Improvement
 
 Use Case: Customer Support Agent (Agentic AI System)
 
----
 
 1. Why Observability Matters
 
-An agent is never “done” — it must be monitored, evaluated, and refined continuously.
+An agent is never done  it must be monitored, evaluated, and refined continuously.
 
-Without observability, you’re:
-	•	Flying blind during failures
-	•	Missing edge cases
-	•	Blind to user frustration
-	•	Unable to improve model behavior
+Without observability, youre:
+		Flying blind during failures
+		Missing edge cases
+		Blind to user frustration
+		Unable to improve model behavior
 
----
 
 2. What to Monitor
 
@@ -611,7 +590,6 @@ Memory Access	Retrieval hit/miss rate, summary size
 Escalations	When agents hand off to humans
 
 
----
 
 3. Key Tools & Frameworks
 
@@ -622,7 +600,6 @@ LLM Evaluation	Opik, GPT-as-a-judge, custom grading tools
 Error Alerting	Prometheus + Grafana, Sentry, PagerDuty
 
 
----
 
 4. Evaluation Types
 
@@ -630,38 +607,35 @@ Automated Evaluation
 
 Metric	Method
 Factuality	GPT-4 graded on factual correctness
-Relevance	Compare question → response relevance score
+Relevance	Compare question  response relevance score
 Politeness	Classifier or LLM detects tone issues
 Latency	Measure roundtrip response time
 
 
----
 
 Human-in-the-Loop Evaluation
-	•	Review edge cases
-	•	Tag failure reasons (wrong tool, bad memory, hallucination, etc.)
-	•	Feed back into:
-	•	Prompt tuning
-	•	Tool fix/update
-	•	Model selection refinement
+		Review edge cases
+		Tag failure reasons (wrong tool, bad memory, hallucination, etc.)
+		Feed back into:
+		Prompt tuning
+		Tool fix/update
+		Model selection refinement
 
----
 
 5. Feedback Loop Integration
 
 [User Feedback / LLM Grading]
-    ↓
+    
 [Log to Feedback DB]
-    ↓
+    
 [Tag: good / needs improvement / escalation]
-    ↓
-→ Prompt Library Update
-→ Tool Decision Rule Update
-→ LLM Ranking Tuning
-→ Memory Injection Fix
+    
+ Prompt Library Update
+ Tool Decision Rule Update
+ LLM Ranking Tuning
+ Memory Injection Fix
 
 
----
 
 6. Versioning & Rollouts
 
@@ -673,18 +647,16 @@ Memory Format	Schema evolution via migration
 
 Tip: Use feature flags to test new flows safely.
 
----
 
 7. Failure Mode Analysis
 
 Mode	Example	Mitigation
-Hallucination	“We refunded it” (but didn’t)	Guardrail prompts + tool use only
+Hallucination	We refunded it (but didnt)	Guardrail prompts + tool use only
 Tool fails silently	Timeout during refund call	Add retries, confirm via status
 Wrong context injected	Wrong user summary used	Add memory hash validation
 Looping responses	Agent keeps re-answering same way	Conversation turn limit + fallback
 
 
----
 
 8. Continuous Improvement Strategy
 
@@ -696,32 +668,30 @@ Memory Strategy	Tune summarization + injection methods
 Escalation Logic	Add rules based on recurring fail tags
 
 
----
 
 Summary of Step 7
 
 You now have:
-	•	A complete observability stack
-	•	Evaluation strategies using LLM + human grading
-	•	Feedback loops for improving prompts, tools, and memory
-	•	A rollout/versioning strategy for safe iteration
+		A complete observability stack
+		Evaluation strategies using LLM + human grading
+		Feedback loops for improving prompts, tools, and memory
+		A rollout/versioning strategy for safe iteration
 
----
 
 
 
 Conclusion
 
 This full-stack system design enables:
-	•	Intelligent support agent behavior
-	•	Real-time and batch tool interaction
-	•	Memory-informed conversation continuity
-	•	Continuous, data-driven improvement
-	•	Pattern-aligned system design for modular growth
+		Intelligent support agent behavior
+		Real-time and batch tool interaction
+		Memory-informed conversation continuity
+		Continuous, data-driven improvement
+		Pattern-aligned system design for modular growth
 
 
 This design document is extensible to additional use cases such as:
-	•	Healthcare triage agents
-	•	Knowledge worker copilots
-	•	Simulation agents for games
-	•	Developer-facing agentic SDKs
+		Healthcare triage agents
+		Knowledge worker copilots
+		Simulation agents for games
+		Developer-facing agentic SDKs

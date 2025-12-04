@@ -1,8 +1,7 @@
 # **Chapter 2: Understanding Foundation Models**
 
----
 
-### 📚 Overview
+###  Overview
 
 1. **Training Data**
    - Multilingual Models
@@ -20,9 +19,8 @@
    - Structured Outputs
    - The Probabilistic Nature of AI
 
----
 
-### ✅ 1. Training Data
+###  1. Training Data
 
 #### Key Concepts
 - FMs are only as good as the data they're trained on. Data defines **model capabilities and limitations**.
@@ -40,14 +38,13 @@
 - Emphasize **data curation** skills and sourcing awareness.
 - Be ready to discuss **domain adaptation strategies**.
 
----
 
-### ✅ 2. Modeling
+###  2. Modeling
 
 #### Model Architecture
 - **Transformer (Vaswani et al., 2017)**:
   - Core of most FMs.
-  - Modules: embedding layer → multiple transformer blocks → output layer (unembedding).
+  - Modules: embedding layer  multiple transformer blocks  output layer (unembedding).
   - Strength: self-attention scales well.
   - Limitation: **quadratic complexity** with sequence length.
 
@@ -67,15 +64,14 @@
 
 #### Formulas
 - ReLU(x) = max(0, x)
-- Scaling Law (simplified): Performance ∝ (params × tokens)^α under compute constraint
+- Scaling Law (simplified): Performance  (params × tokens)^ under compute constraint
 
 #### Interview Tips
 - Know the **trade-offs between model size and inference cost**.
 - Mention **emerging architectures** like Mamba if asked about future trends.
 
----
 
-### ✅ 3. Post-Training
+###  3. Post-Training
 
 #### Supervised Finetuning (SFT)
 - Uses human-annotated task-specific datasets.
@@ -85,7 +81,7 @@
 #### Preference Finetuning
 - Uses **comparison data**: (prompt, better response, worse response)
 - Trains a **reward model (RM)**:
-  - Objective: Maximize \( r_\theta(x, y_w) - r_\theta(x, y_l) \)
+  - Objective: Maximize $r_{\theta}(x, y_w) - r_{\theta}(x, y_l)$
   - Algorithm: PPO (Proximal Policy Optimization)
 
 #### Alternatives
@@ -96,9 +92,8 @@
 - Understand RLHF and why it matters.
 - Be able to explain when **SFT alone suffices** vs. when **RLHF is needed**.
 
----
 
-### ✅ 4. Sampling
+###  4. Sampling
 
 #### Sampling Fundamentals
 - Sampling = converting output logits into text.
@@ -117,16 +112,15 @@
 
 #### Probabilistic Nature
 - Models aren't deterministic.
-- Prompt like: “Answer truthfully; say 'I don’t know' if unsure”
+- Prompt like: Answer truthfully; say 'I dont know' if unsure
 - Mitigation: Use RAG, prompt strategies, response filtering.
 
 #### Interview Tips
 - Know how **temperature, top-k, top-p affect model behavior**.
 - Be ready to write prompts for **structured outputs**.
 
----
 
-### 🔹 Summary
+###  Summary
 
 - Foundation models are shaped by **data, architecture, size, and sampling**.
 - Most production use cases use **pretrained + finetuned** models.
@@ -135,12 +129,11 @@
   - Generalization vs. Specialization
   - Cost vs. Capability
 
----
 
-### 🪡 Interview Review Questions (with Answers)
+###  Interview Review Questions (with Answers)
 
 1. **What defines a foundation model's capabilities?**
-   - Primarily its training data — quantity, quality, and domain coverage.
+   - Primarily its training data  quantity, quality, and domain coverage.
 
 2. **What are the dominant architecture types in Gen-AI today?**
    - Transformers, with emerging alternatives like Mamba and Jamba.
@@ -154,9 +147,8 @@
 5. **What are common ways to align models to tasks?**
    - SFT, Preference Finetuning (RLHF, DPO), Best-of-N Sampling.
 
----
 
-### 💻 Code Examples & Snippets (~1.5 Pages)
+###  Code Examples & Snippets (~1.5 Pages)
 
 #### 1. Top-k and Top-p Sampling (transformers)
 ```python
@@ -205,6 +197,5 @@ except (ValueError, AssertionError):
 ```
 *Purpose*: Postprocess outputs to ensure structure.
 
----
 
 

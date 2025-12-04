@@ -68,7 +68,7 @@
 #### Orchestration
 - Agent Orchestration Primitives:
     - LangGraph: uses graph nodes (LLMs/tools/memory) with edge-controlled execution
-    - CrewAI: defines Agents, Tasks, Tools, and Crew → structured execution like a task force
+    - CrewAI: defines Agents, Tasks, Tools, and Crew  structured execution like a task force
     - Autogen: supports Agent-to-Agent and Human-in-the-loop collaboration
 - Workflow Orchestration:
     - [Prefect](https://www.prefect.io/): Workflow orchestration

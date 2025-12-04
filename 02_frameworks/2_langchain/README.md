@@ -1,6 +1,8 @@
 # LangChain Examples
 
-This directory contains example implementations using LangChain, a framework for building applications with LLMs.
+**Updated 2025**: This directory contains example implementations using LangChain, a framework for building applications with LLMs.
+
+**LangChain v1.0 (October 22, 2025)**: LangChain reached v1.0, providing a standard tool calling architecture, provider-agnostic design, and middleware for production deployments. Key features include `create_agent` abstraction, standard content blocks, streamlined package surface area, and Python 3.10+ requirement (3.9 support dropped). It positions itself as the fastest way to build an AI agent with maximum control over workflows across any model/provider.
 
 ## MultiModal RAG Example
 

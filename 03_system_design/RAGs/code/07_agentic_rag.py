@@ -1,22 +1,39 @@
-# Agentic RAG - Extracted from langgraph_agentic_rag.ipynb
-# Source: https://github.com/langchain-ai/langgraph/blob/main/docs/docs/tutorials/rag/langgraph_agentic_rag.ipynb
+# ============================================================
+# --- 0. Agentic RAG - Extracted from langgraph_agentic_rag.ipynb
+#     Source: https://github.com/langchain-ai/langgraph/blob/main/docs/docs/tutorials/rag/langgraph_agentic_rag.ipynb
+# ============================================================
 
-# --- Setup ---
-# Install required packages (uncomment if running standalone)
-# %pip install -U --quiet langgraph "langchain[openai]" langchain-community langchain-text-splitters
-
+# ============================================================
+# --- 1. Imports (all at the top)
+# ============================================================
 import getpass
 import os
 
+from langchain_community.document_loaders import WebBaseLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_core.vectorstores import InMemoryVectorStore
+from langchain_openai import OpenAIEmbeddings
+from langchain.tools.retriever import create_retriever_tool
+from langgraph.graph import MessagesState
+from langchain.chat_models import init_chat_model
+from pydantic import BaseModel, Field
+from typing import Literal
+from langgraph.graph import StateGraph, START, END
+from langgraph.prebuilt import ToolNode
+from langgraph.prebuilt import tools_condition
+
+# ============================================================
+# --- 2. Environment Setup
+# ============================================================
 def _set_env(key: str):
     if key not in os.environ:
         os.environ[key] = getpass.getpass(f"{key}:")
 
 _set_env("OPENAI_API_KEY")
 
-# --- 1. Preprocess documents ---
-from langchain_community.document_loaders import WebBaseLoader
-
+# ============================================================
+# --- 3. Preprocess documents
+# ============================================================
 urls = [
     "https://lilianweng.github.io/posts/2024-11-28-reward-hacking/",
     "https://lilianweng.github.io/posts/2024-07-07-hallucination/",
@@ -26,8 +43,6 @@ urls = [
 docs = [WebBaseLoader(url).load() for url in urls]
 
 # Split the fetched documents into smaller chunks
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-
 docs_list = [item for sublist in docs for item in sublist]
 
 text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
@@ -35,16 +50,13 @@ text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
 )
 doc_splits = text_splitter.split_documents(docs_list)
 
-# --- 2. Create a retriever tool ---
-from langchain_core.vectorstores import InMemoryVectorStore
-from langchain_openai import OpenAIEmbeddings
-
+# ============================================================
+# --- 4. Create a retriever tool
+# ============================================================
 vectorstore = InMemoryVectorStore.from_documents(
     documents=doc_splits, embedding=OpenAIEmbeddings()
 )
 retriever = vectorstore.as_retriever()
-
-from langchain.tools.retriever import create_retriever_tool
 
 retriever_tool = create_retriever_tool(
     retriever,
@@ -52,10 +64,9 @@ retriever_tool = create_retriever_tool(
     "Search and return information about Lilian Weng blog posts.",
 )
 
-# --- 3. Generate query ---
-from langgraph.graph import MessagesState
-from langchain.chat_models import init_chat_model
-
+# ============================================================
+# --- 5. Generate query or respond
+# ============================================================
 response_model = init_chat_model("openai:gpt-4.1", temperature=0)
 
 def generate_query_or_respond(state: MessagesState):
@@ -68,10 +79,9 @@ def generate_query_or_respond(state: MessagesState):
     )
     return {"messages": [response]}
 
-# --- 4. Grade documents ---
-from pydantic import BaseModel, Field
-from typing import Literal
-
+# ============================================================
+# --- 6. Grade documents
+# ============================================================
 GRADE_PROMPT = (
     "You are a grader assessing relevance of a retrieved document to a user question. \n "
     "Here is the retrieved document: \n\n {context} \n\n"
@@ -107,7 +117,9 @@ def grade_documents(
     else:
         return "rewrite_question"
 
-# --- 5. Rewrite question ---
+# ============================================================
+# --- 7. Rewrite question
+# ============================================================
 REWRITE_PROMPT = (
     "Look at the input and try to reason about the underlying semantic intent / meaning.\n"
     "Here is the initial question:"
@@ -125,7 +137,9 @@ def rewrite_question(state: MessagesState):
     response = response_model.invoke([{"role": "user", "content": prompt}])
     return {"messages": [{"role": "user", "content": response.content}]}
 
-# --- 6. Generate an answer ---
+# ============================================================
+# --- 8. Generate an answer
+# ============================================================
 GENERATE_PROMPT = (
     "You are an assistant for question-answering tasks. "
     "Use the following pieces of retrieved context to answer the question. "
@@ -143,11 +157,9 @@ def generate_answer(state: MessagesState):
     response = response_model.invoke([{"role": "user", "content": prompt}])
     return {"messages": [response]}
 
-# --- 7. Assemble the graph ---
-from langgraph.graph import StateGraph, START, END
-from langgraph.prebuilt import ToolNode
-from langgraph.prebuilt import tools_condition
-
+# ============================================================
+# --- 9. Assemble the graph
+# ============================================================
 workflow = StateGraph(MessagesState)
 
 # Define the nodes we will cycle between
@@ -177,7 +189,9 @@ workflow.add_edge("rewrite_question", "generate_query_or_respond")
 
 graph = workflow.compile()
 
-# --- 8. Run the agentic RAG ---
+# ============================================================
+# --- 10. Run the agentic RAG (example)
+# ============================================================
 # Example run (streaming output)
 # for chunk in graph.stream(
 #     {

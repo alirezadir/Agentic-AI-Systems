@@ -10,7 +10,7 @@
    
 ### 1. Challenges of Evaluating Foundation Models
 
-- Foundation models are **open-ended** → hard to evaluate with fixed labels.
+- Foundation models are **open-ended**  hard to evaluate with fixed labels.
 - Evaluation now includes:
   - Accuracy & alignment
   - Safety, usefulness, creativity
@@ -28,21 +28,21 @@
 #### Entropy (Shannon)
 - Measures uncertainty in a distribution.
 - Higher entropy = more randomness.
-- “How many bits are needed to encode a message?”
+- How many bits are needed to encode a message?
 
 #### Cross Entropy
 - Measures distance between true label distribution \(P\) and predicted \(Q\).
-\[ H(P, Q) = - \sum P(x) \log Q(x) \]
+$$H(P, Q) = -\sum P(x) \log Q(x)$$
 
 #### Bits-per-Character (BPC), Bits-per-Byte (BPB)
 - Used to normalize cross entropy across token granularities (char/byte).
 
 #### Perplexity
 - \( PP = 2^{H(P, Q)} \) or \( e^{H(P, Q)} \)
-- Lower is better. Indicates model “confidence”.
+- Lower is better. Indicates model confidence.
 - Used in training diagnostics and benchmarking (e.g., LLaMA, PaLM).
 
-**Interview Tip**: Perplexity is only valid when labels are available. Doesn’t always reflect downstream task quality.
+**Interview Tip**: Perplexity is only valid when labels are available. Doesnt always reflect downstream task quality.
 
 ### 3. Exact Evaluation
 
@@ -94,7 +94,7 @@
 
 #### Pointwise vs. Comparative
 - **Pointwise**: score each model independently.
-- **Comparative**: pairwise comparison (A vs B) → better signal for subjective tasks.
+- **Comparative**: pairwise comparison (A vs B)  better signal for subjective tasks.
 
 #### Use Cases
 - LMSYS Chatbot Arena, Anthropic RLHF datasets
@@ -126,19 +126,19 @@
 ### Interview Review Questions (with Answers)
 
 1. **Why is evaluating foundation models harder than classic ML?**  
-   → Open-ended outputs, subjective quality, fast model evolution, lack of labels.
+    Open-ended outputs, subjective quality, fast model evolution, lack of labels.
 
 2. **What are the key language modeling metrics?**  
-   → Entropy, cross-entropy, perplexity, BPC/BPB.
+    Entropy, cross-entropy, perplexity, BPC/BPB.
 
 3. **When should you use AI as a judge?**  
-   → When you lack references, need subjective judgment, or want scalable evaluation.
+    When you lack references, need subjective judgment, or want scalable evaluation.
 
 4. **What are pitfalls of using perplexity?**  
-   → Doesn’t align with human preference, invalid for non-language outputs.
+    Doesnt align with human preference, invalid for non-language outputs.
 
 5. **How does comparative evaluation differ from A/B testing?**  
-   → Comparative = multiple outputs shown side-by-side; A/B = one-at-a-time.
+    Comparative = multiple outputs shown side-by-side; A/B = one-at-a-time.
 
 ### Code Examples & Snippets
 
@@ -192,6 +192,5 @@ print(response['choices'][0]['text'])
 ```
 *Purpose*: Use GPT as a judge by asking for a rating.
 
----
 
 

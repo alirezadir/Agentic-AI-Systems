@@ -1,8 +1,8 @@
 # Memory
-This page provides an overview of memory in agentic AI systems.
 
+**Updated 2025**: This page provides an overview of memory in agentic AI systems, including the latest patterns for short-term, long-term, and working memory in production agentic AI applications.
 
-<!-- - [ ] Todo: Context to be updated (from memory docs) -->
+**2025 Context**: Memory systems have evolved to support agentic RAG, dynamic context management, and sophisticated retrieval strategies. Modern memory architectures integrate seamlessly with vector databases, RAG pipelines, and agent orchestration frameworks.
 
 
 ## Memory Types

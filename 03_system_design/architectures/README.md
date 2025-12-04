@@ -1,5 +1,8 @@
 # Agentic AI Architectures
-This page provides a comprehensive overview of architectures in agentic AI systems, inlcuding architecture layers and step-by-step system design, and example architectures used by tech companies. 
+
+**Updated 2025**: This page provides a comprehensive overview of architectures in agentic AI systems, including architecture layers, step-by-step system design, and example architectures used by tech companies.
+
+**2025 Context**: Architecture patterns have matured significantly, with standardized approaches for production systems, new enterprise patterns, and comprehensive design methodologies. The 12-Step Agentic System Design framework provides a systematic approach to building production-ready agentic AI systems. 
 
 <img src="../../assets/architectures/ai-agent-arc-vectorize.png" alt="Agents" width="890%" />
 

@@ -52,13 +52,13 @@ This will:
 
 ```
 weather_agent/
-├── weather_api/
-│   ├── __init__.py
-│   └── weather_service.py
-├── weather_agent.py
-├── main.py
-├── app.py
-└── requirements.txt
+ weather_api/
+    __init__.py
+    weather_service.py
+ weather_agent.py
+ main.py
+ app.py
+ requirements.txt
 ```
 
 - `weather_api/`: Contains weather service implementation

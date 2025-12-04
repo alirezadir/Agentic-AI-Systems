@@ -1,5 +1,7 @@
 # Layers of AI Agents Architecture
 
+**Updated 2025**: This document outlines the comprehensive layer stack for production-ready agentic AI systems. The architecture has evolved to include standardized patterns for computer-using agents, agentic RAG, and enterprise-scale orchestration.
+
 <!-- ## Core components  -->
 <!-- Layer, Description, Key Considerations -->
 <!-- **Perception Layer**
@@ -58,7 +60,7 @@ A modular, extensible architecture for designing production-grade agentic AI sys
 |    |                                         | Failure Analysis                 | Debug root causes of errors                                        | Stack traces, feedback categorization, tool errors                               |
 |    |                                         | Evaluation                       | Analyze model and system quality                                   | Model evals (BLEU, accuracy), system evals, A/B tests                            |
 | 9  | **Feedback & Learning Layer**           | Feedback Loops                   | Capture user/system feedback                                       | Thumbs up/down, correction signals, behavior scoring                             |
-|    |                                         | Data Flywheel                    | Use new data to improve models and policies                        | Data logging → retraining → redeployment                                         |
+|    |                                         | Data Flywheel                    | Use new data to improve models and policies                        | Data logging  retraining  redeployment                                         |
 |    |                                         | Learning from Feedback           | Improve decisions based on outcomes                                | RLHF, continual fine-tuning, online learning                                     |
 | 10 | **Governance Layer**                    | Safety                           | Guard against undesired behaviors and violations                   | Guardrails, rate limiting, PII filtering                                         |
 |    |                                         | Responsible AI                   | Ensure fairness, explainability, non-bias                          | Explainability tools, fairness metrics, SHAP, LIME                               |
@@ -69,7 +71,6 @@ A modular, extensible architecture for designing production-grade agentic AI sys
 | 12 | **Output Layer**                        | Output Modalities                | Deliver responses in appropriate form                              | Natural language, visuals, files, structured JSON                                |
 |    |                                         | Output Structuring               | Format outputs for target destination                              | Markdown, JSON schema, UI rendering configs                                      |
 
----
 
 ##### Notes
 
@@ -198,7 +199,7 @@ Reg --> Compute --> Storage --> Messaging --> OutputMod --> Struct
 <!-- ##### Cursor version 
 
 
-### Agentic System Architecture Layers — Production-Ready 
+### Agentic System Architecture Layers  Production-Ready 
 
 | Layer Group (#)                        | Module (##) / Submodule                                                                  | Function / Purpose                                                              | Key Capabilities / Examples                                                                                    |
 |----------------------------------------|------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|

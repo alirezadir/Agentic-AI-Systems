@@ -14,7 +14,7 @@ Finetuning adapts models by updating weights based on task-specific data.
 **Reasons Not To:**
 
 * High cost (GPU + engineering)
-* Frequent data drift → retraining
+* Frequent data drift  retraining
 * Can solve with prompt/context updates
 
 **Finetuning vs. RAG:**
@@ -35,7 +35,6 @@ Finetuning adapts models by updating weights based on task-specific data.
 | Low-resource environments (edge, mobile)                     | **Finetune lightweight models**                       |
 | High-stakes or regulated domains                             | **PEFT + Strict evaluation + Optional Full Finetune** |
 
----
 
 ## 3.2 Memory Bottlenecks
 
@@ -45,7 +44,6 @@ Finetuning adapts models by updating weights based on task-specific data.
 
    * BF16, FP8, quantization for reduced memory
 
----
 
 ## 3.3 Finetuning Techniques
 
@@ -56,7 +54,6 @@ Finetuning adapts models by updating weights based on task-specific data.
 | **Model Merging**         | Combine checkpoints with task-specific models |
 | **Multi-task Finetuning** | Jointly optimize across datasets              |
 
----
 
 ## 3.4 Finetuning Tactics
 
@@ -65,7 +62,6 @@ Finetuning adapts models by updating weights based on task-specific data.
 * Use checkpointing and eval hooks during training
 * Consider post-finetuning eval + prompt tuning
 
----
 
 Finetuning should be used strategically and not by default. Prompt engineering and RAG are often lower-lift and can achieve comparable gains.
 
@@ -82,16 +78,14 @@ High-quality annotations are critical to building effective AI systems. Poor ann
 | **Coverage**                | Guidelines should include both canonical and edge-case examples |
 | **Alignment with Use Case** | Scoring should reflect application needs, not academic goals    |
 
----
 
 ## 5.2 Guidelines Structure
 
 * **Task Definition**: Describe the objective in plain language
-* **Scope Specification**: Define what’s in and out of scope
+* **Scope Specification**: Define whats in and out of scope
 * **Annotation Rubrics**: Provide rating scales or labels, with definitions
 * **Examples & Counterexamples**: Real, synthetic, and adversarial samples
 
----
 
 ## 5.3 Avoid Common Pitfalls
 
@@ -102,7 +96,6 @@ High-quality annotations are critical to building effective AI systems. Poor ann
 | Overly complex scoring schemes | Inconsistency, fatigue, noise            |
 | One-size-fits-all criteria     | Misalignment with product behavior       |
 
----
 
 ## 5.4 Evaluator Feedback Loop
 
@@ -110,7 +103,6 @@ High-quality annotations are critical to building effective AI systems. Poor ann
 * Regularly revise guidelines based on annotation disagreements
 * Integrate evaluator disagreement as a signal in modeling
 
----
 
 # 6. Chunking Strategies (for RAGs)
 
@@ -118,11 +110,10 @@ Chunking determines how documents are segmented into retrievable units for RAG p
 
 ## 6.1 Why Chunking Matters
 
-* LLMs have fixed context limits (e.g. 4k–32k tokens)
+* LLMs have fixed context limits (e.g. 4k32k tokens)
 * Small chunks = higher retrieval recall, but may miss context
 * Large chunks = more context, but worse recall and latency
 
----
 
 ## 6.2 Chunking Strategies
 
@@ -133,18 +124,16 @@ Chunking determines how documents are segmented into retrievable units for RAG p
 | **Document-Aware**    | Maintain markdown/code structure, tables, headers           |
 | **Adaptive Chunking** | Dynamically size chunks based on importance or section role |
 
----
 
 ## 6.3 Best Practices
 
 * Avoid splitting entities or references mid-sentence
 * Optimize for **retrieval unit granularity**:
 
-  * Legal docs → larger chunks
-  * FAQs/emails → smaller chunks
+  * Legal docs  larger chunks
+  * FAQs/emails  smaller chunks
 * Include metadata (e.g. source, title, headers) for re-ranking and grounding
 
----
 
 ## 6.4 Tools & Implementations
 
@@ -152,6 +141,5 @@ Chunking determines how documents are segmented into retrievable units for RAG p
 * **LlamaIndex Node Parsers**: hierarchical document parsing
 * Consider windowed chunk overlap (stride) to retain cross-chunk coherence
 
----
 
 Chunking is both a preprocessing and architectural decision in retrieval systems. Tailor it to document type, query style, and latency constraints.

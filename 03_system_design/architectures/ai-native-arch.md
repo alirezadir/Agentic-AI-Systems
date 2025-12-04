@@ -1,5 +1,7 @@
 # AI Native System Architecture
 
+**Updated 2025**: AI-native architectures represent systems designed from the ground up for agentic AI capabilities, with native support for reasoning, tool use, memory, and orchestration. This architecture pattern has become the standard for new agentic AI applications in 2025.
+
 ## 1. User Input Layer
 
 - **Input Channels:**
@@ -7,7 +9,6 @@
   - Text
   - Mobile/Web App
 
----
 
 ## 2. Authentication & User Identity
 
@@ -15,7 +16,6 @@
   - Authenticate users via OAuth / SSO
   - Retrieve user profile and assign access rights
 
----
 
 ## 3. Agent Runtime & Orchestration
 
@@ -24,7 +24,6 @@
   - Select appropriate tools or agents
   - Manage reasoning and execution flow
 
----
 
 ## 4. Tooling Framework (Function Tools)
 
@@ -36,7 +35,6 @@
 - **Input Sources:**
   - UI/UX Layer (chat, voice, goal-based prompts)
 
----
 
 ## 5. Guardrails (Input/Output Validation)
 
@@ -44,7 +42,6 @@
   - Apply safety and policy filters
   - Check for overload, task limits, and constraints
 
----
 
 ## 6. Language Model Inference (LLM)
 
@@ -52,7 +49,6 @@
   - Generate decisions, responses, and summaries
   - Powered by LLMs like GPT or Claude for reasoning
 
----
 
 ## 7. Business Logic / API Services
 
@@ -63,14 +59,12 @@
     - CRUO (Create/Read/Update/Operate)
     - 3rd-party integrations
 
----
 
 ## 8. Databases & Storage
 
 - **Responsibilities:**
   - Persist user metadata, meeting data, history, and energy profiles
 
----
 
 ## 9. Feedback Collection
 
@@ -78,7 +72,6 @@
   - Thumbs up/down
   - Edit suggestions or corrections
 
----
 
 ## 10. Learning / Memory Update Loop
 
@@ -86,7 +79,6 @@
   - Update long-term memory based on feedback and context
   - Adapt future agent responses accordingly
 
----
 
 ## 11. Async Processing / Background Tasks
 
@@ -95,7 +87,6 @@
   - Send emails
   - Fetch external data via APIs
 
----
 
 ## 12. Agent Output (to UI)
 
