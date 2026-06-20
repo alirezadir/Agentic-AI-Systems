@@ -9,6 +9,7 @@
 ## Contents: 
 - [Agentic AI Architecture Layers](./agentic-arch-layers.md)
 - [AI Native Architecture](./ai-native-arch.md)
+- [Durable and Background Agents](./durable-background-agents.md)
 <!-- - [ ] Todo: to be updated -->
 
 Examples:

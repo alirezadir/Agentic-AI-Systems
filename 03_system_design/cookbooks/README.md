@@ -13,5 +13,6 @@
 - [OpenAI Cookbook: Orchestrating Agents (Summary w/ code)](https://cookbook.openai.com/examples/orchestrating_agents ): concepts of **routines** and **handoffs** for orchestrating multiple agents
 - [OpenAI's A Practical Guide to Building Agents](./openai-agents-design-guide.md): openai's design guide on **agents** and **multi agent AI systems**
 - [Compound AI Systems (Berkeley AI Research)](./compund-ai-systems.md)
+- [Agent Harness Controls](./code/agent_harness_controls.py): Minimal Python example for budgets, trace events, approval gates, and idempotent side-effecting tools.
 
 <!-- - [ ] Todo (Add more cookbooks) -->

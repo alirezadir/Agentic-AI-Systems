@@ -172,3 +172,63 @@ def get_issues(repo: str, state: str, limit: int = 5):
 - Hierarchical agent architectures
 - Agent handoff and delegation patterns
 - Distributed agent workflows
+
+## 3. Protocol Security and Production Readiness
+
+MCP and A2A should be treated as trust boundaries. They make agents more useful, but they also expand the attack surface because tools and agents can expose private data, execute actions, or influence downstream reasoning.
+
+### MCP vs A2A in System Design
+
+| Protocol | Main job | Typical boundary |
+| --- | --- | --- |
+| MCP | Connect an LLM app or agent to tools, resources, prompts, and data | Agent-to-tool and agent-to-context |
+| A2A | Let agents discover, message, delegate, and coordinate with other agents | Agent-to-agent |
+
+### Production Gateway Pattern
+
+Put a gateway between the agent runtime and external protocol servers:
+
+```text
+agent runtime
+  -> protocol gateway
+  -> auth and identity propagation
+  -> policy engine
+  -> schema validation
+  -> rate limit and budget check
+  -> MCP server or remote agent
+  -> audit log and trace event
+```
+
+The gateway should enforce:
+
+- Tool allowlists.
+- User, tenant, and task-scoped permissions.
+- Schema validation for inputs and outputs.
+- Timeout and retry policy.
+- Cost and call-count budgets.
+- PII and secret scanning.
+- Human approval for sensitive actions.
+- Audit logs for every cross-boundary call.
+
+### Threat Model
+
+| Threat | Example | Control |
+| --- | --- | --- |
+| Prompt injection | Retrieved webpage instructs the agent to leak data | isolate tool output, apply instruction hierarchy, scan untrusted text |
+| Tool poisoning | Malicious tool mimics a trusted tool name | signed registries, allowlists, provenance |
+| Over-permission | Calendar tool can also email external users | least privilege, separate read/write scopes |
+| Cross-tool exfiltration | Agent reads private docs, then posts to Slack | data-flow policy, approval gates, DLP checks |
+| Agent impersonation | Remote agent claims a false capability or identity | authentication, agent cards, signed metadata |
+| Runaway delegation | Agents recursively call each other | max depth, budget caps, cycle detection |
+| Silent side effects | Tool changes data without user approval | dry-run mode, approvals, idempotency keys |
+
+### Design Checklist
+
+- Which tools or agents are trusted, semi-trusted, or untrusted?
+- What identity is propagated to each protocol call?
+- Are permissions scoped by user, tenant, task, and action?
+- Are read tools separated from write tools?
+- Can the agent call a tool that sends data outside the tenant?
+- Are tool outputs treated as data rather than instructions?
+- Are calls logged with trace id, task id, tool name, arguments, result, and cost?
+- Is there a kill switch or draft-only mode for unsafe behavior?
