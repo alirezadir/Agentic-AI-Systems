@@ -83,6 +83,7 @@
 
 ### Observability
 - [Opik](https://opik.ai/): Monitoring and evaluation
+- [agenttrace](https://github.com/luoyuctl/agenttrace): Local TUI for inspecting AI coding agent sessions, including cost, token usage, latency, failures, and reports.
 - [ ] todo add more
 ### Specialized Agent Tools
 - [mem0](https://github.com/mem0ai/mem0): Agent memory management
