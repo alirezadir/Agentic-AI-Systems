@@ -16,6 +16,7 @@ This guide outlines key categories and metrics to consider when evaluating AI ag
   - [Gen AI Systems Evals](./gen-ai-evals.md): Evaluation methods for non-agentic GenAI systems
   - [Agentic AI Systems Evals](./agentic-ai-evals.md): Comprehensive evaluation framework for agentic AI systems
   - [AI product evals](./ai-product-evals.md): Product-level evaluation metrics and practices
+  - [AgentOps](./agentops.md): Production observability, trace replay, online evals, alerts, and incident response for agents
 
 ## Key Evaluation Tools & Frameworks (2025)
 

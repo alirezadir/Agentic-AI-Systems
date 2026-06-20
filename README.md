@@ -16,12 +16,14 @@ Welcome to **Agentic-AI-Systems**  a curated and evolving knowledge base and han
 | **[3. Agentic System Design](./03_system_design/README.md)** | Agentic AI System Design: Architectures, layers, design patterns, diagrams, and code. |
 | **[4. Use Cases](./04_use_cases/README.md)** | Real-world and example agent projects and applications. |
 | **[5. Resources](./05_resources/resources.md)** | Courses, tool stacks, protocols, and list of resources. |
+| **[6. Interview Prep](./06_interview_prep/README.md)** | GenAI and agentic system design interview frameworks, prompts, and practice templates. |
 
 
 ## Highlights
 
 #### Agentic AI Systems
 - **[Agentic AI Design Patterns](./03_system_design/design-patterns/agentic-ai-design-patterns.md):** A comprehensive overview of reusable design patterns in Gen-AI and agentic AI systems.
+- **[2026 Agentic AI System Design Update](./03_system_design/2026-agentic-ai-system-design.md):** Current framing for harness engineering, long-running agents, AgentOps, context engineering, MCP/A2A, security, and cost-aware design.
 - **[RAGs](./03_system_design/RAGs/README.md):** A comprehensive overview of RAG architectures, including basic RAGs, agentic RAGs, multi-modal RAGs, and advanced RAGs.
 - **[Cookbooks](./03_system_design/cookbooks/README.md):** A comprehensive overview of the most useful cookbooks in designing and building agentic AI systems.
 - **[OpenAI Agents](./02_frameworks/1_openai/README.md):** Comprehensive guides, tutorials, and code examples for building AI agents using the OpenAI API and Agents SDK.
