@@ -26,6 +26,7 @@ ENV/
 *.faiss
 *.json
 *.csv
+05_resources/source-material/
 
 # Logs and temp
 *.log
