@@ -56,8 +56,10 @@ Useful design rule: choose the cheapest and fastest model that meets the product
 
 Read more:
 
-- [LLM frameworks and model selection](./llms/llms-frameworks.md)
+- [LLM model selection](./llms/llm-model-selection.md)
 - [Transformer architecture variants](./llms/transformer_architecture_variants.md)
+- [Multimodal and VLM Foundations](./multimodal-vlm-foundations.md)
+- [Diffusion and Generative Media Foundations](./diffusion-foundations.md)
 
 ## 3. Transformers and Context
 

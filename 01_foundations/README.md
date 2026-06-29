@@ -14,9 +14,9 @@ Read this chapter in order if you are building intuition from scratch. Skip arou
 | Order | Topic | What to Know | Current Notes |
 |-------|-------|--------------|---------------|
 | 1 | Foundation models | Pretraining, adaptation, model families, scaling, capabilities, and limits. | [AI Engineering: Foundation Models](./ai-engineering-summary/Chapter_2_FMs.md) |
-| 2 | LLM architecture | Transformer variants, context windows, tokenization, reasoning behavior, and model selection. | [LLM architecture variants](./llms/transformer_architecture_variants.md), [LLM frameworks and selection](./llms/llms-frameworks.md) |
-| 3 | Multimodal models | VLMs, image/video/audio inputs, multimodal embeddings, computer-use models, and UI grounding. | To be split from current LLM and agent notes. |
-| 4 | Diffusion and generative media | Denoising diffusion, text-to-image/video systems, conditioning, controllability, and evaluation. | To be added as a new subchapter. |
+| 2 | LLM architecture | Transformer variants, context windows, tokenization, reasoning behavior, and model selection. | [LLM architecture variants](./llms/transformer_architecture_variants.md), [LLM model selection](./llms/llm-model-selection.md) |
+| 3 | Multimodal models | VLMs, image/video/audio inputs, multimodal embeddings, computer-use models, and UI grounding. | [Multimodal and VLM Foundations](./multimodal-vlm-foundations.md) |
+| 4 | Diffusion and generative media | Denoising diffusion, text-to-image/video systems, conditioning, controllability, and evaluation. | [Diffusion and Generative Media Foundations](./diffusion-foundations.md) |
 | 5 | Prompting and context | Instructions, examples, structured outputs, context construction, prompt caching, and failure modes. | [Prompt Engineering](./ai-engineering-summary/Chapter_5_Prompt_Eng.md) |
 | 6 | Retrieval and knowledge | Embeddings, chunking, hybrid retrieval, reranking, RAG, agentic RAG, and freshness. | [RAG](./ai-engineering-summary/Chapter_6_1_RAG.md), [GenAI platform](./gen-AI/huyen-Gen-AI-Platform.md) |
 | 7 | Evaluation | Model evals, application evals, agent evals, human review, AI-as-judge, and regression suites. | [Evaluation of Generative Systems](./ai-engineering-summary/Chapter_3_Evaluation.md), [Evaluating AI Models and Agents](./ai-engineering-summary/Chapter_4_Evaluate_AI.md) |
@@ -28,6 +28,11 @@ Read this chapter in order if you are building intuition from scratch. Skip arou
 ## Part A: Generative AI Foundations
 
 Start with the compact subchapter: [GenAI Foundations](./genai-foundations.md).
+
+Use these focused notes for missing model families:
+
+- [Multimodal and VLM Foundations](./multimodal-vlm-foundations.md)
+- [Diffusion and Generative Media Foundations](./diffusion-foundations.md)
 
 ### 1. Foundation Models
 
@@ -58,7 +63,7 @@ Core ideas:
 
 Read:
 
-- [LLM frameworks and model selection](./llms/llms-frameworks.md)
+- [LLM model selection](./llms/llm-model-selection.md)
 - [Transformer architecture variants](./llms/transformer_architecture_variants.md)
 
 ### 3. VLMs and Multimodal Models
@@ -72,7 +77,9 @@ Core ideas:
 - **Computer-use agents depend on visual grounding** plus action APIs such as browser control, desktop control, or mobile automation.
 - **Evaluation is harder** because errors can come from perception, reasoning, tool choice, or action execution.
 
-Migration note: this topic will become its own subchapter as the foundation section is expanded.
+Read:
+
+- [Multimodal and VLM Foundations](./multimodal-vlm-foundations.md)
 
 ### 4. Diffusion and Generative Media
 
@@ -85,7 +92,9 @@ Core ideas:
 - **Production constraints** include latency, GPU cost, content safety, provenance, copyright risk, and human review.
 - **Evaluation mixes objective and subjective signals**: prompt adherence, visual quality, identity consistency, brand fit, safety, and downstream task success.
 
-Migration note: this topic will be added as a new subchapter because it is currently missing from the repo.
+Read:
+
+- [Diffusion and Generative Media Foundations](./diffusion-foundations.md)
 
 ### 5. Prompting, Context, and RAG
 
@@ -216,9 +225,15 @@ This chapter explains the foundations. It should not become a framework tutorial
 
 ## Migration Notes
 
-Planned follow-up passes:
+Completed in this phase:
 
-1. Add dedicated subchapters for multimodal models and diffusion models.
-2. Split outdated framework/model selection notes out of `llms/llms-frameworks.md` and move build-stack content to the production chapter.
-3. Clean `agents/README.md` into a shorter foundation page and move production/design material to system design.
-4. Keep only compact inline examples in this chapter; move full tutorials to the hands-on appendix.
+- Added compact GenAI and Agentic AI foundations subchapters.
+- Added focused multimodal/VLM and diffusion foundations notes.
+- Cleaned the agents reference page into a concise visual/reference index.
+- Split build-stack guidance out of foundation notes and left it for production/hands-on chapters.
+
+Future chapter work:
+
+1. Move framework/build-stack decisions into the Prototype to Production chapter.
+2. Move detailed system-design diagrams and production patterns into the System Design chapter.
+3. Keep only compact inline examples in this chapter; move full tutorials to the hands-on appendix.

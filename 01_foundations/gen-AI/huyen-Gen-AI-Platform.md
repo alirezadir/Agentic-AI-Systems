@@ -26,7 +26,7 @@ Summary of the article: [Building A Generative AI Platform](https://huyenchip.co
     - More topics, not covered here (**EPFAC**): 
         - **Evals**: model evaluation, application evaluation (see [Gen AI Evals](../../03_system_design/evals/gen-ai-evals.md))
         - **Prompt engineering**
-        - **Finetuning** & **data annotation** guidelines (see [Finetuning & Annotation](../llms/_fine_tuning+annotation.md))
+        - **Finetuning** & **data annotation** guidelines (see [Finetuning & Annotation](../llms/fine_tuning+annotation.md))
         - **Chunking strategies** (for RAGs)
     - **Evals** are necessary in every step
 

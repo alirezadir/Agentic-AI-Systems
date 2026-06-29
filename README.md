@@ -34,6 +34,8 @@ This repo is being refactored one chapter at a time:
 #### Foundations
 - **[GenAI Foundations](./01_foundations/genai-foundations.md):** Compact review of foundation models, LLMs, VLMs, diffusion models, embeddings, prompting, RAG, evals, and fine-tuning.
 - **[Agentic AI Foundations](./01_foundations/agentic-ai-foundations.md):** Core concepts for agents, tools, memory, planning, human checkpoints, multi-agent systems, protocols, and reliability.
+- **[Multimodal and VLM Foundations](./01_foundations/multimodal-vlm-foundations.md):** Foundations for vision-language models, documents, screenshots, audio, video, multimodal RAG, and computer-use inputs.
+- **[Diffusion and Generative Media Foundations](./01_foundations/diffusion-foundations.md):** Foundations for image, video, audio, design generation, media controls, evaluation, and governance.
 - **[AI Engineering Book Summary](./01_foundations/ai-engineering-summary/README.md):** GenAI system workflows and infrastructure.
 
 #### Agentic AI Systems
@@ -52,17 +54,6 @@ This repo is being refactored one chapter at a time:
 #### Compound GenAI Systems
 - **[GenAI Systems Overview](./01_foundations/gen-AI/huyen-Gen-AI-Platform.md):** Platform architecture and technical breakdowns.
 - **[GenAI and Agentic System Design Interview Prep](./06_interview_prep/genai-agentic-system-design.md):** Practice templates for production-minded system-design interviews. This will move into the system-design chapter during the refactor.
-
-
-
-<!-- 
-## Frameworks & Tutorials
-
-- **OpenAI SDK:** [Overview](./02_frameworks/1_openai/openai_agents/), [Design Guide](./02_frameworks/1_openai_agents/docs/openai-agents-design-guide.md), [Starter Code](./02_frameworks/1_openai_agents/code/)
-- **LangGraph:** [Docs](./02_frameworks/3_langgraph/docs/), [Code](./02_frameworks/3_langgraph/code/)
-- **LlamaIndex:** [Multi-Agent Systems](./02_frameworks/4_llamaindex/docs/llama-index-multi-agent.md)
-- **LangChain, CrewAI, Chainlit:** Each with their own docs and code samples. -->
-
 
 ## Why Agentic-AI-Systems?
 
