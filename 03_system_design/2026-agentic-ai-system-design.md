@@ -211,7 +211,7 @@ Never optimize blindly. Profile the bottleneck first, then pick the lever that i
 - Add a context-engineering guide covering retrieval, memory, policy context, tool outputs, provenance, and context isolation.
 - Add an AgentOps page under evals or a new operations folder.
 - Expand protocols with current MCP concepts, remote MCP, authorization, security risks, and A2A.
-- Add an interview-prep chapter separate from the main learning chapters.
+- Keep interview prep inside the system-design chapter so practice templates stay close to the design concepts.
 - Add examples for agent budget caps, tool gateways, trace schemas, and idempotent side-effecting actions.
 
 ## Sources
@@ -222,6 +222,4 @@ Never optimize blindly. Profile the bottleneck first, then pick the lever that i
 - [Google Developers Blog, Announcing Agent2Agent Protocol](https://developers.googleblog.com/en/a2a-a-new-era-of-agent-interoperability/)
 - [Anthropic, Building effective agents](https://www.anthropic.com/engineering/building-effective-agents)
 - [LangSmith, Evaluation concepts](https://docs.langchain.com/langsmith/evaluation-concepts)
-- Local notes: [2026-1.md](../05_resources/source-material/2026-agentic-ai/2026-1.md)
-- Local notes: [2026-2.md](../05_resources/source-material/2026-agentic-ai/2026-2.md)
-- Local image: [Claude-cheatsheet.jpg](../05_resources/source-material/2026-agentic-ai/Claude-cheatsheet.jpg)
+Local source notes used during drafting live under `05_resources/source-material/`, which is intentionally excluded from the public repo.

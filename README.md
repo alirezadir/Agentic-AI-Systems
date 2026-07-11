@@ -12,7 +12,7 @@ Welcome to **Agentic-AI-Systems**, a curated and evolving book-style guide for l
 | Chapter | Description |
 |---------|-------------|
 | **[1. Foundations](./01_foundations/README.md)** | GenAI foundations and agentic AI fundamentals: FMs, LLMs, VLMs, diffusion models, prompting, RAG, agents, tools, planning, memory, and multi-agent systems. |
-| **[2. GenAI & Agentic System Design](./03_system_design/README.md)** | Signature system-design chapter for compound AI systems, RAG, agentic systems, multimodal systems, coding agents, evals, security, protocols, memory, and cost/latency trade-offs. It will absorb [interview prep](./06_interview_prep/README.md) during the next refactor phase. |
+| **[2. GenAI & Agentic System Design](./03_system_design/README.md)** | Signature system-design chapter for compound AI systems, RAG, agentic systems, multimodal systems, coding agents, evals, security, protocols, memory, cost/latency trade-offs, and interview prep. |
 | **3. From Prototype to Production** | New production chapter covering product scoping, runtime architecture, data/privacy, tool gateways, memory, evals, observability, deployment, scaling, AWS/Bedrock/AgentCore, and cost optimization. |
 | **[4. Use Cases](./04_use_cases/README.md)** | Case studies and architecture walkthroughs, from simple demos to production-grade agent applications. Runnable code will move to the hands-on appendix over time. |
 | **5. Hands-On Appendix** | Runnable tutorials, framework examples, starter projects, and code snippets. Current hands-on material still lives across [02_frameworks](./02_frameworks/README.md) and [04_use_cases](./04_use_cases/README.md) during migration. |
@@ -53,7 +53,7 @@ This repo is being refactored one chapter at a time:
 
 #### Compound GenAI Systems
 - **[GenAI Systems Overview](./01_foundations/gen-AI/huyen-Gen-AI-Platform.md):** Platform architecture and technical breakdowns.
-- **[GenAI and Agentic System Design Interview Prep](./06_interview_prep/genai-agentic-system-design.md):** Practice templates for production-minded system-design interviews. This will move into the system-design chapter during the refactor.
+- **[GenAI and Agentic System Design Interview Prep](./03_system_design/interview-prep/genai-agentic-system-design.md):** Practice templates for production-minded system-design interviews.
 
 ## Why Agentic-AI-Systems?
 
