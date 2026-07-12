@@ -1,697 +1,469 @@
-# 12-Step Agentic System Design Framework
+# 12-Step GenAI and Agentic System Design Framework
 
-**Updated 2025**: This comprehensive framework provides a systematic approach to designing production-ready agentic AI systems. The 12-step methodology has been refined based on real-world implementations and represents industry best practices for 2025.
+Use this framework for product design reviews and system-design interviews. It works for LLM apps, RAG systems, agentic workflows, multimodal assistants, coding agents, and long-running background agents.
 
-## 12 steps 
-1.	Problem Formulation 
+The goal is not to force every system into maximum complexity. The goal is to make the important decisions explicit.
 
-Clarifying Qs: why/what(s): 
-- objective 
-    - task(s)
-    - use case 
-    - business goal 
-- requirements 
-- constraints 
-- data availability + needs + storage (KB, DB, etc)
-- assumptions ( Human-in-the-loop, internet access, etc)
-- tools (availability + needs)
-- memory (availability + needs)
-- workflow/agent(s)
-- Agents: scopes + 
-    - assumptions (roles/scopes, personas, autonomy)
-    - interactions + 
-    - (components) + 
-- Modalities (text, voice, vision, code, multimodal, etc)
-- UI: AI native (chat, voice, multimodal, etc), or traditional
-- Environment  + 
-- Design: Modularity
+## One-Page Flow
 
-2.	Evaluation Metrics & methods 
-- (metrics, KPIs, SLAs, etc) 
-- Human experience (feedback, satisfaction, etc)
-- Task success 
-- Agent performance (reasoning, memory, tools, orchestration)
-- system level (latency, throughput, availability, orchestration, scalability, security, etc)
-- tools (validation,availability, latency, throughput, etc)
-- memory (availability, latency, throughput, etc)
-- evaluation methods (automated, human, AI as judge, etc)
+```text
+1. Frame problem and scope
+2. Define success metrics and SLOs
+3. Pick system mode and autonomy level
+4. Design high-level architecture
+5. Design data, context, and retrieval
+6. Select models and adaptation strategy
+7. Design tools, actions, and permissions
+8. Design memory and durable state
+9. Design orchestration and runtime control
+10. Design safety, guardrails, and governance
+11. Design evals, observability, and feedback
+12. Design deployment, scaling, cost, and rollout
+```
 
-3.	MVP Design (Perception  Cognition  Action loop 
- + workflow/agent(s) pipeline + layers (reasonong, memory, tools/action, orchestration) + Agent Role(s) + cognitive (planning, reasoning and decision-making) + core loop (perceive  reason  act  reflect (or variations).)
-4. Data 
-- Modeling schemas 
-- storage: Databases, knowledge bases, graph DBs, vector DBs,  (KB, DB, etc) 
-- real time vs batch, streaming, user feedback data 
-5. model(s) selection + Prompting + RAG vs FT (lora, QLoRA, etc) - domain/task adaptation vs behavior adaptation (RLHT, DPO)
-7.	Memory, Context, State) Management + Caching 
-- STM (working memory, cache)
-- LTM (episodic, semantic, procedural, etc)
-6. RAGs
-    - embedding models 
-    - retrievers 
-    - vector stores 
-    - RAG vs Agentic RAG (agent decides and executes retrieval)
-    - Multimodal RAG (MM models, MM embeddings, MM retrievers, etc)
+## Step 1: Frame Problem and Scope
 
-6. Planning & Reasoning: 
-- patterns: ReACt, ReWOO, symbolic patterns, etc + 
-6.	Tooling & frameworks: 
-- Interfaces + API Integration
-- frameworks 
-5.	Workflow/Pipeline / Agents Orchestration: 
-- frameworks 
--routing, planing, agent patterns, MA orchestration, collaboration), MA patterns, - (sub)task execution + agent interactions + 
-- Protocols (MCP, A2A, etc)
-- async processing, streaming, batch processing, parallel etc 
-- task allocation 
+Clarify the product contract before designing components.
 
-8. Guardrails: Input/Output Guardrails, Safety & Governance 
-9.	Monitoring (performance, failures/fallbacks/ anomalies, and trigger alerts), Observability + Evaluations + Debugging
-10. Feedback loops (collection, evaluation, improvement) + User Interaction (thumbs, edits, resopnses, etc)/ Reflection 
-11. Depoloyment & Scaling (users, data, and complexity) -  Iterative Dev (CI/CD) + Ethical (Bias + Transparency) + Optimmization (latency, resource management, computational cost, scalability, security), human AI collaboration, versioning, rollouts, etc 
+Ask:
 
-**Gen-AI Platform**: A common order of components to add:
-
-1. Enhance **Context** (external data + Tools)
-2. **Guardrails** (protect system + users)
-3. **Router** and gateway (pipelines + security)
-4. **Optimize** latency + costs (cache)
-5. Add **complex logic** 
-6. **Observability**: visibility into the system for monitoring and debugging
-7. **Orchestration**: chaining all the components together
-
-# Agentic AI System Design Template 
-Example: (Customer Support Agent)
-
-A comprehensive, step-by-step design document for building a production-grade agentic AI customer support system, combining reasoning, retrieval, memory, tool use, observability, feedback loops, and pattern-driven architecture.
-
-
-## Step 1: Problem Formulation 
-### 1.1 Define the System Goal & Scope
-
-Objective
-
-We start by establishing **why** the system exists and **what** it must achieve.
-
-Example Use Cases:
-- A. Customer Support Agent
-Handles queries using RAG + tool calls (e.g., refunds, tracking, updates)
-B. Personal Productivity Agent
-Manages tasks, calendars, notes, reminders across tools
-C. Simulation NPC Agent
-Used in a game, behaves with memory, planning, and dialogue
-D. Domain-Specific Agent
-e.g., Legal assistant, Healthcare triage assistant, Code reviewer
-E. Agentic Backend for LLM SaaS
-Allows devs to plug in reasoning + actions with memory
-
-
-Example Use Case: Customer Support Agent
-
-
-Build a customer-facing LLM agent that:
-		Answers queries using documentation and knowledge bases
-		Performs actions like refunds or order tracking via APIs
-		Adapts to user history and preferences
-		Escalates gracefully to human agents
-		Learns and improves over time
-
-Key Questions
-
-- What is the agent expected to do?
-Is it a task planner, code assistant, gaming NPC, customer support agent, etc.?
 - Who are the users?
-Internal developers, end-users, customers, or other systems?
-- What is the interaction mode?
-Text, voice, multimodal UI, or via APIs?
-- What is the latency requirement?
-Real-time (e.g., voice), interactive (e.g., chat), or batch (e.g., data processing)?
-- What type of intelligence is expected?
-Rule-based logic, retrieval-augmented generation (RAG), or tool-augmented autonomous reasoning?
+- What job must the system complete?
+- What is in scope for v1?
+- What is explicitly out of scope?
+- What modalities are involved: text, code, documents, images, audio, video, UI?
+- Is the system interactive, batch, event-driven, or long-running?
+- Is this a user-facing product, internal tool, API, or platform capability?
+- What privacy, safety, compliance, or business constraints apply?
 
-Example: 
+Output:
 
-Question	Description
-What is the agent expected to do?	Task resolution (refunds, tracking) via LLM+tools
-Who are the users?	End-customers interacting via chat, email, voice
-What is the interaction mode?	Multimodal UI or API gateway
-What is the latency requirement?	Under 2s for real-time conversations
-What type of intelligence is expected?	RAG + tool-augmented LLM with reflection and planning
+- User and use case.
+- Functional requirements.
+- Non-functional requirements.
+- Assumptions and scope cuts.
+- Launch stage: prototype, MVP, beta, production.
+
+## Step 2: Define Success Metrics and SLOs
+
+AI systems need product, quality, serving, and safety metrics.
+
+Metrics:
+
+- **Task success**: resolution, answer correctness, extraction accuracy, action completion.
+- **Quality**: groundedness, helpfulness, completeness, tone, format validity.
+- **Retrieval**: recall@k, precision@k, nDCG, citation accuracy, freshness.
+- **Agent behavior**: tool-call correctness, step efficiency, termination quality, recovery.
+- **Serving**: TTFT, TPOT, p50/p95/p99 latency, availability, throughput.
+- **Cost**: cost per request, session, workflow, and successful task.
+- **Safety**: policy violations, prompt-injection events, PII exposure, unsafe actions.
+- **Human experience**: CSAT, edits, escalation rate, approval rate, user feedback.
+
+Output:
+
+- Offline eval metrics.
+- Online metrics and dashboards.
+- SLOs and error budgets where relevant.
+- A minimum quality bar for launch.
 
+## Step 3: Pick System Mode and Autonomy Level
 
-### Step 1.2: High-Level Requirements 
+Choose the simplest architecture that satisfies the product contract.
 
-Functional Requirements
+System modes:
 
-Requirement	Description
-NLU	Interpret natural queries
-RAG	Answer questions from FAQs, policies
-Tool Use	Interact with refund/status APIs
-Personalization	Memory-based behavior adjustment
-Multichannel	Support web, mobile, voice, email
-Feedback	Capture satisfaction metrics
-Observability	Logs, metrics, eval tracing
-Compliance	Handle PII, audit trails
+| Mode | Use When |
+|------|----------|
+| Single model call | Task is simple and low-risk. |
+| Compound GenAI workflow | Steps are known and repeatable. |
+| RAG system | Answers depend on external knowledge. |
+| Agentic workflow | The system must choose tools/actions dynamically. |
+| Multi-agent system | Roles, tools, permissions, or parallel work justify separation. |
+| Background agent | Work is scheduled, event-driven, durable, or long-running. |
 
+Autonomy levels:
 
-Key Design Constraints
-Low latency
-Expected response time under 2s
-Data sensitivity
-May access personal user info (GDPR/HIPAA-aware design)
-Fallbacks
-Must have safe error handling + escalation to human agents
-Multilingual (optional)
-Potential support for global markets
+- **Suggest only**: user takes action.
+- **Draft and approve**: system drafts; human approves.
+- **Execute with checkpoints**: system acts after explicit gates.
+- **Limited auto-action**: system acts within narrow policies.
+- **Autonomous with rollback**: only for well-tested, low-blast-radius tasks.
 
+Output:
 
+- Chosen system mode.
+- Autonomy level.
+- Human checkpoint policy.
+- Justification for not using a simpler design.
 
-### 1.3 Core Components
+## Step 4: Design High-Level Architecture
 
-	UI: Chat widget, API endpoint
-	Orchestration: LangGraph, LangChain logic
-	LLM Layer: OpenAI, Claude, Groq
-	RAG System: Vector DB + retriever
-	Tool Layer: Order, refund, CRM APIs
-	Memory: Short (Redis), Long (Zep, MongoDB)
-	Feedback: Upvote/downvote, GPT scoring
-	Observability: Langfuse, Helicone, dashboards
+Draw the path from request to response/action.
 
-## Step 3: System Architecture Design (MVP)
-	Component layout
-	Infrastructure stack
-	Data flows
-	Model integration strategy
+Reference skeleton:
 
-Component Architecture
+```text
+client / trigger
+  -> API gateway and auth
+  -> router or orchestrator
+  -> context builder
+  -> retrieval, memory, tools, and policy services
+  -> model gateway or agent runtime
+  -> validators, guardrails, and human checkpoints
+  -> response/action
+  -> traces, evals, metrics, and feedback
+```
 
-Layer	Tools/Tech
-UI	React, Streamlit, Gradio
-Orchestration	FastAPI, LangGraph, CrewAI
-LLM Gateway	OpenAI, Claude, Mistral
-RAG Retrieval	Chroma, Pinecone, Weaviate
-Tooling	Custom APIs, LangChain Tools
-Memory Store	Redis, Supabase, Zep
-Observability	Opik, Helicone, Langfuse
+Specify:
 
-Data Flow
+- Main services.
+- Synchronous vs asynchronous boundaries.
+- Data stores.
+- Trust boundaries.
+- Failure and fallback paths.
+- Which components are deterministic vs model-driven.
 
-User  UI  Agent Orchestrator
-   > RAG  Vector Store  Docs
-   > Tools  External APIs
-   > Memory Layer  Context Injection
-   > LLM Inference  Final Response  Guardrails  Output to User
+Output:
 
-Design Patterns at this Layer
-		Meta-Agent Pattern: Modular orchestration of reasoning, memory, tools.
-		Prompt Routing: Dynamic path selection based on intent.
-		Parallel Execution: Run RAG + tool calls concurrently.
+- Component diagram.
+- Request/action sequence.
+- Ownership boundaries.
+- First MVP architecture.
 
-## Step 3: System Architecture Design
+## Step 5: Design Data, Context, and Retrieval
 
+Context is the model's runtime environment. Treat it as a first-class subsystem.
 
+Design:
 
-High-Level Component Architecture
+- Source-of-truth data.
+- Ingestion and freshness.
+- Chunking and metadata.
+- Embeddings and lexical indexes.
+- Hybrid retrieval and reranking.
+- ACL and tenant filtering.
+- Context packing and compression.
+- Citations and provenance.
+- Deletion and retention.
 
-1. User Interface (Frontend Layer)
+For RAG:
 
-Subcomponents	Description
-Chat/Web Interface	Captures user messages
-Optional Voice UI	Converts speech to text (STT) and back (TTS)
-Messaging Middleware	Sends/receives messages from backend agent
+```text
+documents -> ingestion -> chunking -> embeddings/indexes
+query -> rewrite -> retrieve -> rerank -> pack context -> model -> cited answer
+```
 
+Output:
 
+- Data model.
+- Retrieval strategy.
+- Context budget.
+- Provenance and citation strategy.
+- Retrieval eval plan.
 
-2. Agent Orchestration Layer
+## Step 6: Select Models and Adaptation Strategy
 
-Function	Tools/Frameworks
-Reasoning Flow	LangGraph / LangChain / CrewAI
-Planning / Reflection	ReAct / Reflexion / Plan & Solve
-Prompt Construction	Dynamic templates (Jinja, JSON prompts)
-Task Execution / Routing	Routes requests to tools, retriever, LLM
+Model choice is a trade-off across quality, latency, cost, modality, privacy, and tool support.
 
+Decide:
 
+- Model provider or self-hosting.
+- Model routing strategy.
+- Context window needs.
+- Structured output and tool-call support.
+- Multimodal needs.
+- Streaming needs.
+- Fallbacks.
+- Fine-tuning, adapters, distillation, or prompting only.
 
-3. LLM Inference Layer
+RAG vs fine-tuning:
+
+- Use **RAG** for changing facts, source-grounded answers, and private knowledge.
+- Use **fine-tuning** for repeated behavior, format, style, domain language, tool-call consistency, or cost reduction.
 
-Capability	Notes
-LLM API Gateway	Connects to OpenAI, Claude, Groq, etc.
-Response Synthesis	Final response generation, error handling
-Tool-aware Generation	Embeds tool call structure into prompt context
+Output:
 
+- Model matrix.
+- Routing/fallback plan.
+- Adaptation plan.
+- Cost and latency assumptions.
 
+## Step 7: Design Tools, Actions, and Permissions
 
-4. Retrieval-Augmented Generation (RAG) System
+Tool access changes the risk profile of the system.
 
-Subcomponents	Tools/Tech
-Document Loader	Load docs (manuals, policies) into DB
-Embedding Engine	OpenAI, HuggingFace, Cohere
-Vector Store	Chroma, Weaviate, Pinecone, Qdrant
-Retriever	Hybrid (vector + keyword fallback)
+Classify tools:
 
+- Read-only tools.
+- Write/action tools.
+- Code/browser/desktop tools.
+- Internal APIs.
+- External APIs.
+- Other agents.
 
+Design:
 
-5. Tooling Layer (Action API Gateway)
+- Tool schemas.
+- Tool registry or gateway.
+- Auth and scoped credentials.
+- Input validation.
+- Idempotency keys for side effects.
+- Approval gates.
+- Timeouts and retries.
+- Tool result trust model.
+- Audit logs.
+
+Output:
+
+- Tool inventory.
+- Permission model.
+- Approval policy.
+- Side-effect handling plan.
+
+## Step 8: Design Memory and Durable State
+
+Separate context, state, memory, and knowledge.
 
-Example Tools	Description
-Order Lookup Tool	Calls CRM/order API
-Refund Trigger Tool	Sends refund request
-Profile Fetch Tool	Pulls user profile from DB
-External Search Tool	Optional fallback (e.g., Serper, Exa)
+| Concept | Role |
+|---------|------|
+| Context | Information included in the current model call. |
+| State | Durable task/session data owned by the application. |
+| Memory | Persisted information selected for future use. |
+| Knowledge | External source of truth, usually retrieved. |
+| Trace | Execution record for debugging and evals. |
 
+Design:
 
+- Session state.
+- Task state.
+- User memory.
+- Long-term memory.
+- Memory write filters.
+- Memory retrieval.
+- Summarization and consolidation.
+- Forgetting and deletion.
+- Cross-tenant isolation.
+
+Output:
+
+- State schema.
+- Memory policy.
+- Retention/deletion policy.
+- Privacy controls.
+
+## Step 9: Design Orchestration and Runtime Control
+
+Control flow can be deterministic, model-driven, graph-based, or hybrid.
+
+Patterns:
+
+- Router.
+- Fixed workflow.
+- ReAct loop.
+- Plan-execute.
+- Reflection/revision.
+- Supervisor-worker.
+- Background worker.
+- Human checkpoint.
+
+Runtime controls:
 
-6. Memory Layer
+- Step limit.
+- Time limit.
+- Token budget.
+- Cost budget.
+- Retry policy.
+- Cancellation.
+- Checkpointing.
+- Resume and recovery.
+- Loop detection.
+
+Output:
 
-Memory Type	Store	Use
-Short-Term	In-Memory / Redis	Maintains session context
-Long-Term	MongoDB / Zep / Supabase	Stores user preferences, history, feedback
-Summarization	Periodically distills old sessions into memory slots	
-
-
-
-7. Observability & Feedback
-
-Capability	Tools
-Prompt/Trace Monitoring	Langfuse, Helicone, Opik
-Feedback Capture	Thumbs up/down, edit suggestions
-Model Evaluation	Human or LLM-graded evaluation
-
-
-
-8. Security, Guardrails, and Governance
-
-Measure	Strategy
-Rate Limiting	API Gateway or LangChain callbacks
-Profanity / PII Filters	Input/output filters, regex or classifiers
-Policy Enforcement	Role-based access control for agents
-Audit Logging	User actions + model outputs logged securely
-
-
-
-Data Flow (Logical)
-
-User Input  Frontend  Agent Orchestrator
-   > RAG  Vector Store  Docs
-   > Tooling Layer  External APIs
-   > Memory Layer  Context Injection
-   > LLM Inference  Final Response
- Guardrails + Observability  Output to User
-
-
-
-Example Tech Stack (Modular)
-
-Layer	Technologies
-UI	React, Streamlit, Gradio
-Agent Runtime	FastAPI, LangGraph, CrewAI
-LLM APIs	OpenAI, Claude, Mistral, Groq
-Vector DB	Chroma, Pinecone, Qdrant, Weaviate
-Memory Store	Redis, Supabase, MongoDB, Zep
-Observability	Langfuse, Opik, Helicone, Prometheus
-Tool APIs	Custom REST APIs, Google, Stripe, etc.
-Infra	Docker, Kubernetes, AWS/GCP/Azure, RunPod
-
-
-
-
-
-## Step 4: Data Modeling & Prompt Interface Design
-
-### 4.1  Core Data Models
-Primary Entities
-Entity
-Attributes
-Source
-User
-user_id, name, email, language, permissions, history[]
-Auth system, CRM
-Order
-order_id, status, items[], tracking_url, refund_eligible
-Order API
-Product/Service
-product_id, description, warranty, faq[]
-Knowledge base
-Session Context
-session_id, user_id, messages[], tools_used[], summary
-Memory Layer
-Interaction Log
-timestamp, input, retrieved_docs, tool_calls[], output
-
-### 4.2. Prompt Interface Design
-
-A modular prompt structure is critical for consistent, contextual agent behavior.
-
-Prompt Template Structure
-
-[System Instructions]
-You are a helpful AI agent assisting users.
-
-[User Context]
-Name: {{user.name}}
-Language: {{user.language}}
-
-[Current Question]
-{{user_input}}
-
-[Memory / Retrieved Docs]
-{{retrieved_snippets}}
-
-[Expected Format]
-Clear, actionable response
-
-Tool-Calling Prompt Interface
-
-{
-  "tool_call": {
-    "tool": "OrderLookup",
-    "params": {
-      "order_id": "123456"
-    }
-  }
-}
-
-### 4.3 Tool Use Protocol (Optional Format)
-
-In multi-tool environments, prompt structure must also embed tool call hints.
-
-### 4.4 Design Patterns at this Layer
-	Prompt Chaining: Sequential reasoning and formatting layers.
-	ReAct Pattern: Reasoning followed by tool action.
-	CodeAct Pattern: Embed tool APIs directly in prompts.
-
-
-## Step 5: Memory Strategy & Feedback Loops
-
-5.1. Why Memory Matters in Customer Support
-
-An effective support agent needs situational awareness:
-		What was asked before?
-		What tools were used?
-		What did the user like/dislike?
-		What is known about this user historically?
-
-Without memory, the agent feels robotic. With well-designed memory, it feels context-aware, adaptive, and human-aligned.
-
-5.2 Context Window Strategy
-Context Type
-Injection Approach
-Triggers
-Short-Term Memory
-Token window + sliding buffer
-Chat session
-Long-Term Memory
-Summarized and inserted
-Start of session
-RAG Retrieval
-Top-k semantic chunks
-For factual queries
-Tool Results
-Appended or summarized inline
-On tool completion
-
-
-Memory Layers
-
-Type	Description	Tools
-Short-term	In-session recall	Redis, BufferMemory
-Long-term	Cross-session summary, preferences	Zep, MongoDB
-
-Memory Ingestion Flow
-
-Transcript  GPT Summary  Store in Zep/Supabase  Retrieve per session/init
-
-### 6. Feedback Loop Design
-
-Feedback Collection
-
-Type	Channel
-User Feedback	Thumbs up/down, edits
-LLM Scoring	GPT eval, Opik pipeline
-
-Real-time Feedback
-Method
-Action
-Thumbs up / Thumbs down
-Store interaction result in feedback DB
-Not helpful
-Tag and escalate to human
-Edit Response
-Capture correction for LLM fine-tuning
-
-Feedback Loop
-
-Feedback  Eval Tag  Prompt/Memory Update  Improved Behavior
-
-Design Patterns at this Layer
-		Self-Reflection: Analyze and revise outputs internally.
-		Reflexion Loop: Re-evaluate failed outputs using memory.
-		Evaluator Optimizer: Score outputs and re-route.
-
-LLM Evaluation
-
-Use automated scoring (e.g., GPT-4) for:
-		Answer quality
-		Factual accuracy
-		Politeness / tone
-		Tool success or failure
-
-Store this evaluation metadata for:
-		Dashboard analytics
-		Long-term tuning
-		Prompt updates or model reranking
-
-## Step 6: Tooling Integration + Action Framework
-Language alone isnt enough  agentic AI systems must act:
-		Fetch order status
-		Trigger refunds
-		Update user profiles
-		Escalate to humans
-
-Tools extend LLMs from smart talkers into interactive systems that can change the world (or a database, at least).
-
-2. Tool Types by Use Case
-
-Tool Type
-Example Function
-Real World API Source
-Read-Only
-Order lookup, product info
-CRM, e-commerce API
-Transactional
-Initiate refund, cancel order
-Payments or ERP system
-Data Generation
-Fetch summaries, create tickets
-Notion, Jira, Slack, etc.
-Fallback Search
-External search (FAQs, web docs)
-Serper.dev, Exa, Bing API
-
-Tool Types
-
-Type	Example
-Lookup	Track Order API
-Transaction	Refund API
-Escalation	Route to Human Agent
-
-3. Tool Call Protocol (LLM-Aware Format)
-
-Tools must be defined in a structured, model-readable way.
-
-4. Agent-to-Tool Flow
-[Prompt]  [LLM generates tool_call JSON]  [Tool Router executes API] 
- [Result returned]  [LLM generates final response using result]
-If the LLM is uncertain:
-		It can reflect (Do I need a tool?)
-		Or ask user for clarification before action
-
-5. Tool Execution Engine (Router)
-Handles:
-		JSON validation
-		Auth tokens (OAuth, API keys)
-		Rate limiting
-		Retry/backoff on failure
-
-Tool Router Flow
-
-LLM  JSON Tool Call  Router  API  Result  Injected in Prompt  Response
-
-Tool Execution Platform
-		LangChain ToolExecutor
-		Custom FastAPI tool server
-		Observability via Langfuse traces
-
-Design Patterns at this Layer
-		Tool Use Pattern: Encapsulate tool use with error handling.
-		CodeAct Pattern: Translate LLM output into structured tool calls.
-6. Tool Call Triggers
-
-7. Tool Output Injection Strategies
-
-8. Error & Safety Handling
-
-9. Security & Observability for Tools
-
-## Step 7: Observability, Evaluation & Continuous Improvement
-
-What to Measure
-
-Metric Type	Example
-Latency	Time per LLM+tool round
-Accuracy	Match to ground truth or eval score
-Feedback	Thumb ratio, correction count
-Tool Success	Failures, retries, latency
-
-Evaluation Types
-		Automated: GPT-graded factuality, relevance
-		Human: Qualitative feedback, tagging
-
-Monitoring Stack
-
-Layer	Tool
-Tracing	Langfuse, OpenTelemetry
-Logs	Helicone, CloudWatch
-Alerting	Prometheus, PagerDuty
-
-Improvement Cycle
-
-Observability  Pattern Tagging  Prompt/Tool/Memory Update  Versioned Rollout
-
-Design Patterns at this Layer
-		Evaluator Optimizer: Scores and corrects poor output.
-		Reflexion Loop: Improves system based on performance feedback.
-
-
-## Step 7: Observability, Evaluation & Continuous Improvement
-
-Use Case: Customer Support Agent (Agentic AI System)
-
-
-1. Why Observability Matters
-
-An agent is never done  it must be monitored, evaluated, and refined continuously.
-
-Without observability, youre:
-		Flying blind during failures
-		Missing edge cases
-		Blind to user frustration
-		Unable to improve model behavior
-
-
-2. What to Monitor
-
-Category	Metrics / Signals
-Prompt Lifecycle	Token count, latency, tool calls triggered
-LLM Responses	Accuracy, hallucination rate, format validity
-Tool Usage	Success rate, latency, error codes
-User Feedback	Thumbs up/down, edits, rephrasings
-Memory Access	Retrieval hit/miss rate, summary size
-Escalations	When agents hand off to humans
-
-
-
-3. Key Tools & Frameworks
-
-Layer	Tools / Services
-Logging & Tracing	Langfuse, Helicone, OpenTelemetry
-Prompt/Tool Logs	Custom logging middleware (LangChain/LCEL)
-LLM Evaluation	Opik, GPT-as-a-judge, custom grading tools
-Error Alerting	Prometheus + Grafana, Sentry, PagerDuty
-
-
-
-4. Evaluation Types
-
-Automated Evaluation
-
-Metric	Method
-Factuality	GPT-4 graded on factual correctness
-Relevance	Compare question  response relevance score
-Politeness	Classifier or LLM detects tone issues
-Latency	Measure roundtrip response time
-
-
-
-Human-in-the-Loop Evaluation
-		Review edge cases
-		Tag failure reasons (wrong tool, bad memory, hallucination, etc.)
-		Feed back into:
-		Prompt tuning
-		Tool fix/update
-		Model selection refinement
-
-
-5. Feedback Loop Integration
-
-[User Feedback / LLM Grading]
-    
-[Log to Feedback DB]
-    
-[Tag: good / needs improvement / escalation]
-    
- Prompt Library Update
- Tool Decision Rule Update
- LLM Ranking Tuning
- Memory Injection Fix
-
-
-
-6. Versioning & Rollouts
-
-Layer	Version Control Needed
-Prompt Templates	Git-tracked or hash-versioned
-Tools & APIs	Schema + endpoint versioning
-LLM Selection	Use A/B testing + traffic split
-Memory Format	Schema evolution via migration
-
-Tip: Use feature flags to test new flows safely.
-
-
-7. Failure Mode Analysis
-
-Mode	Example	Mitigation
-Hallucination	We refunded it (but didnt)	Guardrail prompts + tool use only
-Tool fails silently	Timeout during refund call	Add retries, confirm via status
-Wrong context injected	Wrong user summary used	Add memory hash validation
-Looping responses	Agent keeps re-answering same way	Conversation turn limit + fallback
-
-
-
-8. Continuous Improvement Strategy
-
-Area	Update Method
-Prompts	Weekly review, auto-tune w/ eval data
-Tools	Improve APIs, better error handling
-LLM Choice	Retrain, fine-tune, or swap providers
-Memory Strategy	Tune summarization + injection methods
-Escalation Logic	Add rules based on recurring fail tags
-
-
-
-Summary of Step 7
-
-You now have:
-		A complete observability stack
-		Evaluation strategies using LLM + human grading
-		Feedback loops for improving prompts, tools, and memory
-		A rollout/versioning strategy for safe iteration
-
-
-
-
-Conclusion
-
-This full-stack system design enables:
-		Intelligent support agent behavior
-		Real-time and batch tool interaction
-		Memory-informed conversation continuity
-		Continuous, data-driven improvement
-		Pattern-aligned system design for modular growth
-
-
-This design document is extensible to additional use cases such as:
-		Healthcare triage agents
-		Knowledge worker copilots
-		Simulation agents for games
-		Developer-facing agentic SDKs
+- Orchestration pattern.
+- Runtime limits.
+- Recovery behavior.
+- Human handoff behavior.
+
+## Step 10: Design Safety, Guardrails, and Governance
+
+Agents can read private data and perform actions, so safety is architectural.
+
+Threats:
+
+- Prompt injection.
+- Tool poisoning.
+- Data exfiltration.
+- Memory poisoning.
+- Over-permissioned tools.
+- Unsafe side effects.
+- PII leakage.
+- Cross-tenant leakage.
+- Supply-chain risk from plugins or tool servers.
+
+Controls:
+
+- Input/output validation.
+- Policy checks before tool calls.
+- Least-privilege credentials.
+- Read/write tool separation.
+- Sandboxed execution.
+- DLP and PII detection.
+- Human approval for risky actions.
+- Audit logs.
+- Rate limits and abuse controls.
+
+Output:
+
+- Threat model.
+- Guardrail plan.
+- Audit/compliance plan.
+- Incident response hooks.
+
+## Step 11: Design Evals, Observability, and Feedback
+
+Evals are the test suite for AI behavior. Observability makes failures debuggable.
+
+Offline evals:
+
+- Golden task sets.
+- RAG retrieval evals.
+- Tool-call evals.
+- Safety/adversarial evals.
+- Regression tests.
+- Human-reviewed samples.
+
+Online monitoring:
+
+- Task success.
+- Trace-level quality.
+- Tool errors.
+- Latency and cost.
+- User feedback.
+- Escalations.
+- Policy events.
+- Drift and incident alerts.
+
+Trace fields:
+
+- Prompt/context version.
+- Model and parameters.
+- Retrieved sources.
+- Tool calls and outputs.
+- Memory reads/writes.
+- Validation results.
+- Human approvals.
+- Cost and latency.
+
+Output:
+
+- Eval suite.
+- Trace schema.
+- Dashboards and alerts.
+- Feedback-to-eval loop.
+
+## Step 12: Design Deployment, Scaling, Cost, and Rollout
+
+Production design needs rollout and operating plans, not just architecture diagrams.
+
+Deployment:
+
+- API service.
+- Worker service.
+- Queue/scheduler.
+- Model gateway.
+- Vector store.
+- State/memory stores.
+- Observability stack.
+- CI/CD and config/versioning.
+
+Scaling:
+
+- Request QPS.
+- Tokens per second.
+- Tool-call throughput.
+- Indexing throughput.
+- Queue depth.
+- Storage growth.
+- Multi-region or tenant needs.
+
+Cost levers:
+
+- Model routing.
+- Context pruning.
+- Prompt/prefix caching.
+- Semantic caching.
+- Smaller models.
+- Batch/offline processing.
+- Tool-call reduction.
+- Early termination.
+- Quantization or distillation.
+
+Rollout:
+
+- Offline eval pass.
+- Shadow mode.
+- Internal beta.
+- Draft-only mode.
+- Human approval mode.
+- Limited auto-action.
+- Gradual ramp.
+- Incident rollback.
+
+Output:
+
+- Deployment plan.
+- Scale estimates.
+- Cost estimate.
+- Rollout plan.
+- Operational ownership.
+
+## Example: Customer Support Agent
+
+Use the framework to design a support agent.
+
+### Scope
+
+Build an agent that answers policy/order questions, drafts customer replies, looks up order status, and can request refunds with human approval.
+
+### Architecture
+
+```text
+chat/email ticket
+  -> API gateway and auth
+  -> intent classifier
+  -> support orchestrator
+  -> policy RAG + order tools + CRM tools
+  -> response/action draft
+  -> safety checks and approval gates
+  -> customer response or human escalation
+  -> traces, evals, and feedback
+```
+
+### Key Decisions
+
+- Start with draft-only for refunds and account changes.
+- Use RAG for policies and order FAQs.
+- Use tools for order status, refund eligibility, and escalation.
+- Keep customer profile as state, not uncontrolled prompt history.
+- Add idempotency keys for refund actions.
+- Log every tool call, retrieved source, approval, and final response.
+- Evaluate task resolution, citation accuracy, tone, escalation quality, tool-call correctness, latency, and cost per resolved ticket.
+
+### Failure Modes
+
+- Wrong policy retrieved.
+- Refund eligibility tool called with wrong user/order.
+- Agent answers with stale policy.
+- Prompt injection through customer email.
+- Agent loops between retrieval and tool calls.
+- Customer PII leaks into logs or external tools.
+
+### MVP Rollout
+
+1. Offline evals with historical tickets.
+2. Shadow mode against live tickets.
+3. Draft replies for human agents.
+4. Limited auto-replies for low-risk FAQ intents.
+5. Approval-gated actions for refunds and account changes.
+6. Gradual ramp with monitoring and rollback.
