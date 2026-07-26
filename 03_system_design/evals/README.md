@@ -28,7 +28,7 @@ This guide outlines key categories and metrics to consider when evaluating AI ag
 - **Evidently AI**: AI agent benchmarks and testing frameworks
 
 ### Popular Benchmarks
-- **Web Agent Benchmarks**: Evaluate agents' ability to navigate and interact with web interfaces
+- **Web Agent Benchmarks**: Evaluate agents' ability to navigate and interact with web interfaces. [ClawBench](https://claw-bench.com/) provides 153 everyday tasks across 144 live websites with replayable five-layer execution traces ([paper](https://arxiv.org/abs/2604.08523), [code](https://github.com/TIGER-AI-Lab/ClawBench)).
 - **OS Agent Benchmarks**: Test agents' capabilities in operating system environments
 - **Tool-Using Agent Benchmarks**: Assess agents' proficiency with external tools and APIs
 - **Multi-Agent Benchmarks**: Evaluate collaborative agent systems
