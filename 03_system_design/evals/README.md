@@ -34,6 +34,7 @@ This guide outlines key categories and metrics to consider when evaluating AI ag
 - **Multi-Agent Benchmarks**: Evaluate collaborative agent systems
 
 ### Testing Frameworks
+- **[Agent QA](https://github.com/vostride/agent-qa)**: Black-box web/mobile regression testing around agent-powered products, with persistent test memory and MCP workflows.
 - Specialized frameworks for non-deterministic AI agents
 - Real-world scenario testing approaches
 - Performance metrics and reliability assessment tools
