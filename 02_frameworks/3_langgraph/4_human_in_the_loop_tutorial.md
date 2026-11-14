@@ -2,15 +2,15 @@
 
 Agents can be unreliable and may need human input to successfully accomplish tasks. Similarly, for some actions, you may want to require human approval before running to ensure that everything is running as intended.
 
-LangGraph's [persistence](../../concepts/persistence.md) layer supports **human-in-the-loop** workflows, allowing execution to pause and resume based on user feedback. The primary interface to this functionality is the [`interrupt`](../../how-tos/human_in_the_loop/add-human-in-the-loop.md) function. Calling `interrupt` inside a node will pause execution. Execution can be resumed, together with new input from a human, by passing in a [Command](../../concepts/low_level.md#command). `interrupt` is ergonomically similar to Python's built-in `input()`, [with some caveats](../../how-tos/human_in_the_loop/add-human-in-the-loop.md).
+LangGraph's [persistence](https://langchain-ai.github.io/langgraph/concepts/persistence/) layer supports **human-in-the-loop** workflows, allowing execution to pause and resume based on user feedback. The primary interface to this functionality is the [`interrupt`](https://langchain-ai.github.io/langgraph/how-tos/human_in_the_loop/add-human-in-the-loop/) function. Calling `interrupt` inside a node will pause execution. Execution can be resumed, together with new input from a human, by passing in a [Command](https://langchain-ai.github.io/langgraph/concepts/low_level/#command). `interrupt` is ergonomically similar to Python's built-in `input()`, [with some caveats](https://langchain-ai.github.io/langgraph/how-tos/human_in_the_loop/add-human-in-the-loop/).
 
 !!! note
 
-    This tutorial builds on [Add memory](./3-add-memory.md).
+    This tutorial builds on [Add memory](./3_add_memory_tutorial.md).
 
 ## 1. Add the `human_assistance` tool
 
-Starting with the existing code from the [Add memory to the chatbot](./3-add-memory.md) tutorial, add the `human_assistance` tool to the chatbot. This tool uses `interrupt` to receive information from a human.
+Starting with the existing code from the [Add memory to the chatbot](./3_add_memory_tutorial.md) tutorial, add the `human_assistance` tool to the chatbot. This tool uses `interrupt` to receive information from a human.
 
 Let's first select a chat model:
 
@@ -78,7 +78,7 @@ graph_builder.add_edge(START, "chatbot")
 
 !!! tip
 
-    For more information and examples of human-in-the-loop workflows, see [Human-in-the-loop](../../concepts/human_in_the_loop.md). This includes how to [review and edit tool calls](../../how-tos/human_in_the_loop/review-tool-calls.ipynb) before they are executed.
+    For more information and examples of human-in-the-loop workflows, see [Human-in-the-loop](https://langchain-ai.github.io/langgraph/concepts/human_in_the_loop/). This includes how to [review and edit tool calls](https://langchain-ai.github.io/langgraph/how-tos/human_in_the_loop/review-tool-calls/) before they are executed.
 
 ## 2. Compile the graph
 
@@ -104,7 +104,6 @@ except Exception:
     pass
 ```
 
-![chatbot-with-tools-diagram](chatbot-with-tools.png)
 
 ## 4. Prompt the chatbot
 
@@ -161,11 +160,11 @@ snapshot.next
         return human_response["data"]
     ```
 
-    Similar to Python's built-in `input()` function, calling `interrupt` inside the tool will pause execution. Progress is persisted based on the [checkpointer](../../concepts/persistence.md#checkpointer-libraries); so if it is persisting with Postgres, it can resume at any time as long as the database is alive. In this example, it is persisting with the in-memory checkpointer and can resume any time if the Python kernel is running.
+    Similar to Python's built-in `input()` function, calling `interrupt` inside the tool will pause execution. Progress is persisted based on the [checkpointer](https://langchain-ai.github.io/langgraph/concepts/persistence/#checkpointer-libraries); so if it is persisting with Postgres, it can resume at any time as long as the database is alive. In this example, it is persisting with the in-memory checkpointer and can resume any time if the Python kernel is running.
 
 ## 5. Resume execution
 
-To resume execution, pass a [`Command`](../../concepts/low_level.md#command) object containing data expected by the tool. The format of this data can be customized based on needs. For this example, use a dict with a key `"data"`:
+To resume execution, pass a [`Command`](https://langchain-ai.github.io/langgraph/concepts/low_level/#command) object containing data expected by the tool. The format of this data can be customized based on needs. For this example, use a dict with a key `"data"`:
 
 ``` python
 human_response = (
@@ -274,4 +273,4 @@ graph = graph_builder.compile(checkpointer=memory)
 
 ## Next steps
 
-So far, the tutorial examples have relied on a simple state with one entry: a list of messages. You can go far with this simple state, but if you want to define complex behavior without relying on the message list, you can [add additional fields to the state](./5-customize-state.md).
+So far, the tutorial examples have relied on a simple state with one entry: a list of messages. You can go far with this simple state, but if you want to define complex behavior without relying on the message list, you can [add additional fields to the state](https://langchain-ai.github.io/langgraph/tutorials/get-started/5-customize-state/).

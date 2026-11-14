@@ -36,28 +36,28 @@ Reusable solutions to common problems in Agentic AI development.
 - **Flow**:  
   Input  LLM Call 1  Output  Gate (Fail  Exit, Pass  LLM Call 2)  Final Output
 - **Use Case**: Proofreading, Copywriting, Sequential execution logic
-- [Code](./Code/basic_workflows.ipynb), [Langgraph](https://langchain-ai.github.io/langgraph/tutorials/workflows/#prompt-chaining)
+- [Code](./code/basic_workflows.ipynb), [Langgraph](https://langchain-ai.github.io/langgraph/tutorials/workflows/#prompt-chaining)
 
 #### Routing
 - **Pattern**: Decision-based branching to different LLMs.
 - **Flow**:  
   LLM Call 1  Output evaluated  Routed to LLM Call 2/3/4  Output
 - **Use Case**: CRM agents, Agentic task delegation
-- [Code](./Code/basic_workflows.ipynb), [Langgraph](https://langchain-ai.github.io/langgraph/tutorials/workflows/#routing)
+- [Code](./code/basic_workflows.ipynb), [Langgraph](https://langchain-ai.github.io/langgraph/tutorials/workflows/#routing)
 
 #### Parallel Execution
 - **Pattern**: Multiple LLMs called in parallel, then aggregated.
 - **Flow**:  
   LLM Call 1  Multiple LLM Call 2s (parallel)  Aggregator  Output
 - **Use Case**: Vulnerability analysis, ensemble reasoning
-- [Code](./Code/basic_workflows.ipynb), [Langgraph](https://langchain-ai.github.io/langgraph/tutorials/workflows/#parallelization)
+- [Code](./code/basic_workflows.ipynb), [Langgraph](https://langchain-ai.github.io/langgraph/tutorials/workflows/#parallelization)
 
 #### Orchestrator-Workers
 - **Pattern**: Orchestrator parses input, dynamically decomposes tasks, delegates subtasks to worker LLMs, then synthesizes their results.
 - **Flow**:  
   Input  Orchestrator (parse & decompose)  Multiple Worker LLMs (execute subtasks, in parallel or sequence)  Synthesizer (aggregate/summarize results)  Output
 - **Use Case**: Vulnerability analysis, ensemble reasoning
-- [Code](./Code/orchestrator_workers.ipynb), [Langgraph](https://langchain-ai.github.io/langgraph/tutorials/workflows/#orchestrator-worker)
+- [Code](./code/orchestrator_workers.ipynb), [Langgraph](https://langchain-ai.github.io/langgraph/tutorials/workflows/#orchestrator-worker)
 
 ## 2. Reasoning Patterns
 
@@ -151,7 +151,7 @@ Reusable solutions to common problems in Agentic AI development.
 - **Flow**:  
    **Generator** (LLM)  **Evaluator** (LLM)  (Accepted  Output, Rejected  Feedback Loop to Generator)
 - **Use Case**: Personalized agents, search optimization
-- **Code**: [Code](./Code/evaluator_optimizer.ipynb), [Langgraph](https://github.com/langchain-ai/langgraph/blob/main/docs/docs/tutorials/multi_agent/agent_supervisor.ipynb)
+- **Code**: [Code](./code/evaluator_optimizer.ipynb), [Langgraph](https://github.com/langchain-ai/langgraph/blob/main/docs/docs/tutorials/multi_agent/agent_supervisor.ipynb)
 
 #### Reflection / Self-Reflection 
 - **Pattern:**  The agent critiques and refines its own output in a single or iterative loop, often during the same session.
@@ -311,7 +311,7 @@ End-to-end pipelines with modular reasoning, content creation (e.g., Researcher 
   Query  Agent A  Agent B (uses Agent A as a tool)  Output
 - **Use Case**:
   Collaborative reasoning, consensus building
-- [Code](./Code/agents_as_tools.py)
+- [Code](./code/agents_as_tools.py)
 
 
 #### Code-as-Tool (CodeAct Sandbox)
@@ -349,7 +349,7 @@ End-to-end pipelines with modular reasoning, content creation (e.g., Researcher 
    - [LangGraph](https://github.com/langchain-ai/langgraph/blob/main/examples/reflexion/reflexion.ipynb), [Paper](https://arxiv.org/abs/2303.11366)
 
 5. **Evaluator-Optimizer (Self-Improving Loop)**  
-   - [Code Example](./Code/evaluator_optimizer.ipynb)
+   - [Code Example](./code/evaluator_optimizer.ipynb)
 
 6. **ReWoo (Reasoning Without Observation)**  
    - [LangGraph](https://github.com/langchain-ai/langgraph/blob/main/docs/docs/tutorials/rewoo/rewoo.ipynb)
@@ -358,7 +358,7 @@ End-to-end pipelines with modular reasoning, content creation (e.g., Researcher 
    - [LangGraph](https://github.com/langchain-ai/langgraph/blob/main/examples/meta_agents/meta_agents.ipynb)
 
 8. **Agents as Tools**  
-   - [Code Example](./Code/agents_as_tools.py)
+   - [Code Example](./code/agents_as_tools.py)
 
 9. **CodeAct (Code-as-Tool / Sandbox Execution)**  
    - [LangGraph](https://github.com/langchain-ai/langgraph/blob/main/examples/codeact/codeact.ipynb)

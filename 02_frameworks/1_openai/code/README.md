@@ -36,7 +36,7 @@ This folder provides starter code and examples to help you build AI agents with 
 - [`07_run_stream/`](./07_run_stream/): Working with streaming responses from agents
 - [`08_lifecycle/`](./08_lifecycle/): Understanding and managing agent lifecycles and hooks
 - [`09_outputs/`](./09_outputs/): Handling different types of agent outputs
-- [`10_tracing/`](./10_tracing/): Implementing tracing and logging for agent actions
+- `10_tracing/` (planned): Implementing tracing and logging for agent actions
 #### Advanced
 - [`11_mcp/`](./11_mcp/): Using the Model Context Protocol
 - [`12_prompting/`](./12_prompting/): Advanced prompting techniques (e.g. dynamic prompting)

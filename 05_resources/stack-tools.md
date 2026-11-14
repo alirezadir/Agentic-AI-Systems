@@ -1,6 +1,6 @@
 ## Frameworks & Tools
 ### Modern Python for Gen-AI
-- [Modern Python for Gen-AI](../modern_python.md)
+- [Modern Python for Gen-AI](../01_foundations/python/modern_python.md)
 
 ### Agent Frameworks
 - OpenAI Agents

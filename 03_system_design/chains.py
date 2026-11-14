@@ -56,5 +56,20 @@ def rewrite_question(state):
 def generate_answer(state):
     ...
 
-# assemble the graph 
-graph = 
+# assemble the graph (LangGraph)
+workflow = StateGraph(MessagesState)
+workflow.add_node(generate_query_or_respond)
+workflow.add_node("retrieve", ToolNode([retriever_tool]))
+workflow.add_node(rewrite_question)
+workflow.add_node(generate_answer)
+
+workflow.add_edge(START, "generate_query_or_respond")
+# tool call -> retrieve; otherwise answer directly
+workflow.add_conditional_edges(
+    "generate_query_or_respond", tools_condition, {"tools": "retrieve", END: END})
+# relevant -> generate_answer; not relevant -> rewrite_question
+workflow.add_conditional_edges("retrieve", grade_documents)
+workflow.add_edge("rewrite_question", "generate_query_or_respond")
+workflow.add_edge("generate_answer", END)
+
+graph = workflow.compile()

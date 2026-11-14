@@ -17,8 +17,7 @@ class WeatherAgent:
     def __init__(self):
         self.agent = Agent(
             name="Weather Agent",
-            instructions="""
-            """You are a weather assistant that can provide current weather information.  
+            instructions="""You are a weather assistant that can provide current weather information.
             When asked about weather, use the get_weather tool to fetch accurate data.
             If the user doesn't specify a country code and there might be ambiguity,
             ask for clarification (e.g., Paris, France vs. Paris, Texas).

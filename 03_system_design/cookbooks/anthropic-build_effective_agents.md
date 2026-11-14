@@ -73,7 +73,7 @@ response = llm.invoke(prompt + docs)
 3. **Orchestrator-Workers Workflow**  
     - An orchestrator agent dynamically decomposes tasks into subtasks, delegates to specialized workers, and synthesizes results.   -->
 
-![Workflow patterns](../../assets/design-patterns/anthropthic-patterns.jpeg)
+![Workflow patterns](../../assets/design-patterns/workflow/anthropthic-patterns.jpeg)
 
 *Figure: Antrhopic Workflow patterns. Adapted from [Anthropic]).*
 
