@@ -1,192 +1,95 @@
-# Protocols
+# Protocols and Interoperability
 
-## Protocols for AI Systems
+Protocols define how agents, tools, models, data sources, and other agents communicate. In system design, protocols are not just integration details; they are trust boundaries.
 
-This page provides an overview of protocols for AI systems, including Model Context Protocol (MCP) and Agentic AI (A2A).
+This page focuses on MCP, A2A-style agent communication, protocol gateways, and production security.
 
-<img src="../../assets/protocols/agent-protocols-workflows.png" alt="Protocols for AI Systems" width="80%" />
+## Why Protocols Matter
 
-*Figure: Protocols for AI Systems. Adapted from [@rakeshgohel01].*
+Without standard protocols, every model-tool-agent integration becomes custom glue.
 
+Protocols help with:
 
-### 1. Model Context Protocol (MCP) (2025)
+- Tool discovery.
+- Structured inputs and outputs.
+- Context/resource access.
+- Agent-to-agent delegation.
+- Auth and identity propagation.
+- Observability.
+- Governance and reuse.
 
-- MCP (Model Context Protocol) is a **standardized protocol** (by Anthropic) to simplify how AI systems (like Claude or LLM agents) **connect** to external tools and databases (local or remote).
-- **2025 Status**: MCP has been widely adopted by OpenAI, Anthropic, and other major providers, becoming the de facto standard for tool and context provisioning in agentic AI systems. 
-- Think of it as a USB-C for AI systems.
-    - Solves the **NxM problem** (N tools and M models talk through a single interface)
-    - a **model-agnostic**, **tool-agnostic**, and **open** protocol 
-- Follows a **host  client  server** architecture
+They also expand the attack surface, because the agent can now reach more systems.
 
-<img src="../../assets/protocols/mcp.png" alt="Protocols for AI Systems" width="80%" />
+## MCP: Model Context Protocol
 
-*Figure: Protocols for AI Systems. Adapted from [@rakeshgohel01].*
+MCP standardizes how an AI application connects to tools, resources, prompts, and data sources.
 
-#### Component Roles
+Conceptual roles:
 
-| Component      | Role                                                               |
-| -------------- | ------------------------------------------------------------------ |
-| **MCP Host**   | The LLM or assistant making the request (e.g., Claude, your agent) |
-| **MCP Client** | The middle layer that connects hosts to servers                    |
-| **MCP Server** | Exposes a tool (e.g. GitHub, Postgres) using MCP format & methods  |
+| Role | Responsibility |
+|------|----------------|
+| Host | The application or assistant using tools/resources. |
+| Client | The connector inside the host that speaks MCP. |
+| Server | The external service exposing tools/resources through MCP. |
 
-#### Example
+Typical flow:
 
-**Use case:** Claude wants to summarize open GitHub issues from a repo.
-
-1. You install the **MCP GitHub Server**
-2. Claude (MCP Host) sends a request via the **MCP Client**
-3. The GitHub Server fetches the issues
-4. Claude summarizes them and replies to the user
-
-
-##### Example: GitHub MCP Server
-
-#####  Sample MCP Request (JSON-RPC)
-
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "method": "get_issues",
-  "params": {
-    "repo": "your-username/agentic-ai-systems",
-    "state": "open",
-    "limit": 5
-  }
-}
+```text
+agent host
+  -> MCP client
+  -> MCP server
+  -> tool/resource/data source
+  -> result
+  -> agent reasoning loop
 ```
 
-#####  Sample MCP Request (Python)
+Use MCP for:
 
-```python
-    import requests
-    import json
+- File systems.
+- Databases.
+- GitHub/issues/repos.
+- Internal APIs.
+- Search systems.
+- Knowledge bases.
+- Business tools.
+- Code or browser tools.
 
-    # Example JSON-RPC request to MCP GitHub Server
-    payload = {
-        "jsonrpc": "2.0",
-        "method": "get_issues",
-        "params": {
-            "repo": "your-username/agentic-ai-systems",
-            "state": "open"
-        },
-        "id": 1
-    }
+## A2A-Style Agent Communication
 
-    response = requests.post("http://localhost:6001", json=payload)
-    issues = response.json().get("result", [])
+Agent-to-agent communication covers delegation, collaboration, handoff, and artifact exchange between agents.
 
-    # Print issue titles
-    for issue in issues:
-        print(f"- {issue['title']}")
+Typical flow:
+
+```text
+supervisor agent
+  -> task message
+  -> specialist agent
+  -> artifact / result / clarification
+  -> supervisor synthesis or next delegation
 ```
 
-#####  Sample MCP Server Response
+Use A2A-style patterns when:
 
-```json
-{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "result": [
-    {
-      "title": "Refactor prompt handling logic",
-      "url": "https://github.com/your-username/agentic-ai-systems/issues/42",
-      "created_at": "2025-05-15T10:30:00Z"
-    },
-    {
-      "title": "Fix vectorstore index bug",
-      "url": "https://github.com/your-username/agentic-ai-systems/issues/41",
-      "created_at": "2025-05-14T19:10:00Z"
-    }
-  ]
-}
-```
-#### Python FastMCP 
-Simple MCP server using python [FastMCP](https://github.com/anthropics/fastmcp).
+- Agents represent different roles or domains.
+- Agents need different tools or permissions.
+- Work can run in parallel.
+- One system delegates to another owned system.
+- Outputs are artifacts, not just chat messages.
 
-```python
-from fastmcp import FastMCP, Tool
+Avoid agent-to-agent protocols when a simple function call, queue job, or deterministic workflow is enough.
 
-mcp = FastMCP()
+## MCP vs A2A
 
-@mcp.tool()
-def get_issues(repo: str, state: str, limit: int = 5):
-    """Get issues from a GitHub repository"""
-    return [
-        {"title": "Issue 1", "created_at": "2025-05-14T19:10:00Z"},
-        {"title": "Issue 2", "created_at": "2025-05-14T19:10:00Z"},
-    ]
-```
+| Protocol Type | Main Job | Boundary |
+|---------------|----------|----------|
+| MCP | Connect agents/apps to tools, resources, prompts, and data. | Agent-to-tool / agent-to-context |
+| A2A-style communication | Let agents discover, delegate, exchange messages, and return artifacts. | Agent-to-agent |
 
+In many systems both appear together: agents communicate with other agents, and each agent uses MCP-style tools.
 
-#### Open AI MCP 
-- **MCP Servers**
-    - stdio(`MCPServerStdio`): runs locally 
-    - HTTP over SSE (`MCPServerSse`): runs remotely
-    ```python
-    async with MCPServerStdio(
-        params={
-            "command": "npx",
-            "args": ["-y", "@modelcontextprotocol/server-filesystem", samples_dir],
-        }
-    ) as server:
-        tools = await server.list_tools()
-    ```
+## Production Gateway Pattern
 
-#### Claude MCP Tool
-- Check out the code for [mcp tool example by Claude.py](./mcp_tool_claude.py) and 
-
-- **Using MCP servers**
-    - MPSC servers can be added to the agents as tools (the agent will call the list_tools() on the server to get the tools)
-
-    ```python
-    agent=Agent(
-        name="Assistant",
-        instructions="Use the tools to achieve the task",
-        mcp_servers=[mcp_server_1, mcp_server_2]
-    )
-    ```
-- [ToDo]
-    - [ ] mcp_streamable_http
-    - [ ] caching 
-    - [ ] tracing
-- [Open AI MCP](https://openai.github.io/openai-agents-python/mcp/)
-
-### 2. A2A (Agent-to-Agent Protocol)
-
-**Updated 2025**: A2A protocols enable standardized communication between agents in multi-agent systems, supporting complex orchestration and collaboration patterns.
-
-<img src="../../assets/protocols/a2a.png" alt="Protocols for AI Systems" width="80%" />
-
-*Figure: A2A Protocol. Adapted from [@rakeshgohel01].*
-
-**Key Features (2025)**:
-- Standardized message formats for agent communication
-- Support for multi-agent orchestration frameworks
-- Integration with MCP for tool sharing between agents
-- Protocol support in major frameworks (LangGraph, CrewAI, OpenAI Agents SDK)
-
-**Use Cases**:
-- Multi-agent collaboration systems
-- Hierarchical agent architectures
-- Agent handoff and delegation patterns
-- Distributed agent workflows
-
-## 3. Protocol Security and Production Readiness
-
-MCP and A2A should be treated as trust boundaries. They make agents more useful, but they also expand the attack surface because tools and agents can expose private data, execute actions, or influence downstream reasoning.
-
-### MCP vs A2A in System Design
-
-| Protocol | Main job | Typical boundary |
-| --- | --- | --- |
-| MCP | Connect an LLM app or agent to tools, resources, prompts, and data | Agent-to-tool and agent-to-context |
-| A2A | Let agents discover, message, delegate, and coordinate with other agents | Agent-to-agent |
-
-### Production Gateway Pattern
-
-Put a gateway between the agent runtime and external protocol servers:
+Put a gateway between the agent runtime and protocol servers.
 
 ```text
 agent runtime
@@ -201,34 +104,70 @@ agent runtime
 
 The gateway should enforce:
 
-- Tool allowlists.
-- User, tenant, and task-scoped permissions.
-- Schema validation for inputs and outputs.
-- Timeout and retry policy.
+- Tool and agent allowlists.
+- User, tenant, task, and action-scoped permissions.
+- Input and output schema validation.
+- Timeouts and retries.
 - Cost and call-count budgets.
 - PII and secret scanning.
 - Human approval for sensitive actions.
 - Audit logs for every cross-boundary call.
 
-### Threat Model
+## Protocol Threat Model
 
 | Threat | Example | Control |
-| --- | --- | --- |
-| Prompt injection | Retrieved webpage instructs the agent to leak data | isolate tool output, apply instruction hierarchy, scan untrusted text |
-| Tool poisoning | Malicious tool mimics a trusted tool name | signed registries, allowlists, provenance |
-| Over-permission | Calendar tool can also email external users | least privilege, separate read/write scopes |
-| Cross-tool exfiltration | Agent reads private docs, then posts to Slack | data-flow policy, approval gates, DLP checks |
-| Agent impersonation | Remote agent claims a false capability or identity | authentication, agent cards, signed metadata |
-| Runaway delegation | Agents recursively call each other | max depth, budget caps, cycle detection |
-| Silent side effects | Tool changes data without user approval | dry-run mode, approvals, idempotency keys |
+|--------|---------|---------|
+| Prompt injection | Retrieved webpage tells agent to leak data. | isolate tool output, instruction hierarchy, untrusted-text scanning |
+| Tool poisoning | Malicious tool mimics a trusted tool. | signed registries, allowlists, provenance |
+| Over-permission | Calendar tool can also email external users. | least privilege, separate read/write scopes |
+| Cross-tool exfiltration | Agent reads private docs, then posts to chat. | data-flow policy, approvals, DLP checks |
+| Agent impersonation | Remote agent claims a false identity. | authentication, signed metadata, agent registry |
+| Runaway delegation | Agents recursively call each other. | max depth, budget caps, cycle detection |
+| Silent side effects | Tool changes data without approval. | dry-run mode, approvals, idempotency keys |
 
-### Design Checklist
+## Observability
+
+Protocol calls should show up in traces.
+
+Log:
+
+- Trace ID and task ID.
+- User and tenant.
+- Tool/server/agent name.
+- Input arguments.
+- Output schema and status.
+- Latency.
+- Cost if applicable.
+- Permission decision.
+- Approval decision.
+- Error and retry state.
+
+## Design Checklist
 
 - Which tools or agents are trusted, semi-trusted, or untrusted?
-- What identity is propagated to each protocol call?
+- What identity is propagated to each call?
 - Are permissions scoped by user, tenant, task, and action?
 - Are read tools separated from write tools?
-- Can the agent call a tool that sends data outside the tenant?
+- Can a tool send data outside the tenant?
 - Are tool outputs treated as data rather than instructions?
-- Are calls logged with trace id, task id, tool name, arguments, result, and cost?
-- Is there a kill switch or draft-only mode for unsafe behavior?
+- Are all calls logged with trace IDs?
+- Are budgets enforced across nested calls?
+- Is there a kill switch or draft-only mode?
+- How are protocol servers versioned, reviewed, and retired?
+
+## Code Examples
+
+Small MCP examples currently live in this folder:
+
+- [MCP calculator tool](./mcp_calculator_tool.py)
+- [Claude MCP tool example](./mcp_tool_claude.py)
+
+These examples will move to the hands-on appendix later.
+
+## Visual Notes
+
+<img src="../../assets/protocols/agent-protocols-workflows.png" alt="Protocols for AI systems" width="80%" />
+
+<img src="../../assets/protocols/mcp.png" alt="MCP architecture" width="80%" />
+
+<img src="../../assets/protocols/a2a.png" alt="A2A protocol" width="80%" />

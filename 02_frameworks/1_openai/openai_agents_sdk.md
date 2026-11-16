@@ -1,7 +1,7 @@
 
 This document provides a comprehensive simmarized overview of OpenAI's Agents, with inline code examples, based on the [official documentation](https://platform.openai.com/docs/guides/agents) and the [OpenAI Agents Python SDK](https://openai.github.io/openai-agents-python/).
 
-**Code Examples**: You can find the code examples in the [OpenAI Agents Examples](../../code/01_framework_examples/openai_agents/README.md) directory.
+**Code Examples**: You can find the code examples in the [OpenAI Agents Examples](./code/README.md) directory.
 
 **System Architecture Diagram**:
 

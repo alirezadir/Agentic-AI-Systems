@@ -1,358 +1,314 @@
-# Retrieval-Augmented Generation (RAG)
+# RAG and Knowledge System Design
 
-**Updated 2025**: This page provides an overview of (Retrieval-Augmented Generation) RAG architectures, including basic RAGs, agentic RAGs, multi-modal RAGs, and more advanced types of RAGs (such as CRAGs, self-RAGs, adaptive-RAGs, and KG-RAGs).
+Retrieval-Augmented Generation (RAG) grounds model outputs in external knowledge. In system design, RAG is not just "vector DB plus prompt"; it is a data, retrieval, permission, context, evaluation, and product-trust subsystem.
 
-**2025 Context**: Agentic RAG has emerged as a major paradigm shift, representing the future of RAG systems. A comprehensive survey paper (arXiv:2501.09136v3) documents the evolution from Traditional RAG to Agentic RAG, highlighting dynamic retrieval strategies, reasoning-enhanced retrieval, and multi-step retrieval capabilities.
+Use this page as the system-design guide for enterprise search, document assistants, knowledge copilots, agentic retrieval, multimodal RAG, and cited-answer systems.
 
-You can find some code implementation in the [RAGs/code](https://github.com/alirezadir/Agentic-AI-Systems/tree/main/03_system_design/RAGs/code) folder.
+## Core Architecture
 
-<!-- [ ] Todo add agentic RAG code implementation -->
+```text
+documents / data sources
+  -> ingestion
+  -> parsing and normalization
+  -> chunking and metadata extraction
+  -> embeddings, lexical indexes, graph indexes
+  -> access-control filters
 
-### Introduction
-- **RAG**s augment **document retrieval** with **generation** to ground LLM responses in real data.
-#### Why Use RAGs?
-- **Dynamic Knowledge Updates**
-    - Overcomes static model limitations by accessing up-to-date information
-    - Enables retrieval of real-time data (e.g., stock prices, news, weather)
-    - Keeps responses current without requiring model retraining
-
-- **Private/Proprietary Information**
-    - Connects to internal company databases and documents
-    - Allows secure access to personal or confidential information
-    - Supports organization-specific knowledge bases
-
-- **Domain Expertise & Grounding**
-    - Retrieves information from expert knowledge bases and research papers
-- Reduces hallucination by grounding responses in actual sources
-- Provides authoritative information in specialized fields
-
-#### Embeddings and Vector DBs
-- **Embeddings**
-    - Numerical vectors representing text, code, or images for semantic search and retrieval.
-    - Common models: OpenAI `text-embedding-ada-002`, Sentence-BERT, HuggingFace transformers.
-    - Used in semantic search, document retrieval, clustering, and RAG.
-
-- **Vector Databases (VDBs)**
-    - Databases for storing and searching embeddings, enabling fast, scalable retrieval.
-    - Use cases: semantic memory, external knowledge, hybrid search.
-
-    - Popular Tools: Pinecone, Weaviate, Qdrant, FAISS, Milvus
-
-    - Key Features: ANN search, metadata filtering, hybrid/multimodal support, real-time updates, scalability
-    - Vector DBs core vector records, include **vector_id, vector, and payload**.
-    ```json
-    {
-        "id": "chunk_abc123",
-        "vector": [0.1, -0.2, 0.3, ...],
-        "payload": {
-            "document_id": "doc_12345",
-            "document_title": "Q3 Financial Report", 
-            "document_type": "pdf",
-            "source_url": "https://company.com/reports/q3.pdf",
-            "chunk_idx": 123,
-            "chunk_text": "RAG combines document retrieval with LLMs to improve accuracy.",
-            "chunk_size": 100,
-            "chunk_overlap": 10,
-        }
-    }
-    ```
-
-Below is an example architecture of a vector DB:
-<img src="../../assets/rags/qdrant_archpng.png" alt="Qdrant Architecture" width="90%" />
-
-*Figure: Qdrant Architecture. Adapted from [qdrant].*
-
-
-Below you can find a comparison of vector DBs with OLTP and OLAP DBs:
-
-<p style="font-size: 0.9em;">
-  <img src="../../assets/rags/databases.png" alt="Embeddings and Vector DBs" />
-  <br>
-  <em>Figure: Comparison of Vector DBs with OLTP and OLAP DBs. Adapted from [cite].</em>
-</p>
-
-## 1. Basic RAG
-
-#### How It Works:
-1. **Retrieve**: Find relevant documents from a vector database.
-2. **Augment**: Add retrieved context to the prompt.
-3. **Generate**: LLM creates a grounded response.
-
-<p align="center">
-  <img src="../../assets/rags/basic-rag-1.png" alt="Basic RAGs" width="50%" />
-</p>
-
-*Figure: Basic RAGs. Adapted from [cite].*
-
-#### Components:
-- **Preprocessing:** Load and parse documents, split into chunks, extract metadata.
-- **Embedding & Indexing:** Convert chunks to embedded vectors, store in a vector DB, optimize for retrieval.
-- **Retrieval:** Embed user query, search for similar chunks, rank and filter results.
-- **Generation:** Inject retrieved context into prompt, generate response with LLM, format output.
-- **Enhancements (Optional):** Rerank results, expand queries, combine search methods, use feedback for improvement.
-
-**Example Use Cases:**
-
-  - Chat with PDFs, Notion docs, wikis
-  - Internal knowledge assistants
-  - Legal, medical, or financial Q&A bots
-
-
-  
-**Example: Simple RAG Pipeline with LangChain (FAISS + OpenAI)**
-``` python 
-# use LangChain, FAISS, and OpenAI to create a simple RAG pipeline
-from langchain.embeddings import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
-from langchain.llms import OpenAI
-from langchain.chains import RetrievalQA
-from langchain.text_splitter import CharacterTextSplitter
-from langchain.docstore.document import Document
-
-# 1. Load docs
-docs = [
-    Document(page_content="RAG combines document retrieval with LLMs to improve accuracy."),
-    Document(page_content="It helps ground responses using relevant data fetched from a vector store."),
-]
-
-# 2. Split & chunk documents
-splitter = CharacterTextSplitter(chunk_size=100, chunk_overlap=10)
-chunks = splitter.split_documents(docs)
-
-# 3. Create embeddings and vector store
-embedding_model = OpenAIEmbeddings()
-vector_store = FAISS.from_documents(chunks, embedding_model)
-
-# 4. Setup retriever and LLM
-retriever = vector_store.as_retriever()
-llm = OpenAI(temperature=0)
-
-# 5. Create the RAG pipeline (Retrieval + Generation)
-rag_chain = RetrievalQA.from_chain_type(
-    llm=llm,
-    retriever=retriever,
-    return_source_documents=True
-)
-
-# 6. Ask a question
-query = "How does RAG improve LLM responses?"
-result = rag_chain(query)
-
-# 7. Print output
-print("Answer:", result["result"])
-print("\nRetrieved Docs:")
-for doc in result["source_documents"]:
-    print("-", doc.page_content)
-```
-## 2. Multi-Modal RAGs
-
-- Many documents mix text and images.
-- Image information is often lost in standard RAG.
-- **Multimodal LLMs** (e.g., GPT-4V) and **Multimodal Embedding** Models (e.g., CLIP) enable multimodal RAG strategies:
-
-There are three main approaches to multi-modal RAGs:
-
-**Option 1:**
-- Embed images and text into **multimodal embedding** models (e.g., CLIP)
-- Retrieve both via similarity search
-- Pass raw images and text to a **multimodal LLM** (e.g., GPT-4V)
-
-![Multi-Modal RAGs](../../assets/rags/multimodal-RAG-o1-1.png)
-
-- Tools: CLIP, OpenAI, Gemini, etc.
-
-    - [Unstructured](https://unstructured.io/) to parse images, text, and tables from documents (PDFs).
-    - [Open CLIP](https://python.langchain.com/docs/integrations/text_embedding/open_clip/) multi-modal embeddings.
-    - [Chroma](https://www.trychroma.com/) with support for multi-modal.
-
-- [sample code](./code/04_multimodal_rag_clip.py)
-
-
-
-**Option 2:**
-- Use **multimodal LLM** to summarize **images as text** (e.g., GPT-4V)
-- Embed and retrieve only text
-- Pass text chunks to an **text based LLM** (e.g., GPT-4)
-- Used when a multi-modal LLM cannot be used for answer synthesis (e.g., cost, privacy,etc)
-
-**Option 3:**
-- Summarize **images as text** with **multimodal LLM** (e.g., GPT-4V)
-- Embed and retrieve image summaries (with reference to raw image)
-- Pass raw images + text to a **multimodal LLM**(e.g., GPT-4V)
-- Tools: 
-    - Use [Unstructured](https://unstructured.io/) to extract images, text, and tables from PDFs.
-    - Store raw text, images, and their summaries in Chroma with a multi-vector retriever.
-    - Use GPT-4V for image summarization (for retrieval) and final answer synthesis from both images and text.
-- [sample code](./code/04_multimodal_rag_mvr.py)
-
-
-
-<img src="../../assets/rags/multimodal-RAG-o3-3.png" alt="Multi-Modal RAGs" width="100%" />
-
-*Figure: Multi-Modal RAGs Options. Adapted from [langgraph].*
-
-#### Base64 Encoding
-- Images are stored as base64 strings in the vector DB.
-- Multimodal LLMs accept images as base64 in API calls.
-- Base64 encodes binary as ASCII (A-Z, a-z, 0-9, +, /), adding ~33% size.
-- Allows images in JSON with text, no multipart needed.
-- To process images, decode base64, edit, then re-encode.
-
-**Example API Request:**
-
-```json 
-    {
-    "messages": [{
-        "role": "user", 
-        "content": [
-        {"type": "text", "text": "What's in this image?"},
-        {"type": "image_url", "image_url": {"url": "data:image/png;base64,iVBORw0K..."}}
-            ]
-        }]
-    }
+query
+  -> auth and policy checks
+  -> query understanding / rewriting
+  -> retrieval
+  -> reranking
+  -> context packing
+  -> model generation
+  -> citation and groundedness checks
+  -> answer, abstention, or escalation
+  -> traces, feedback, and evals
 ```
 
+## Why Use RAG
 
-## 3. Agentic RAGs
+Use RAG when the system needs:
 
-**The Future of RAG is Agentic** (2025)
+- Fresh or frequently changing knowledge.
+- Private or proprietary knowledge.
+- Source-grounded answers.
+- Citations and auditability.
+- Access-control-aware retrieval.
+- Domain-specific facts that should not be baked into model weights.
+- Deletion, retention, or compliance controls.
 
-Agentic RAG represents the evolution from static retrieval to dynamic, intelligent knowledge systems. Unlike traditional RAG that follows a fixed retrieve-then-generate pipeline, Agentic RAG enables AI agents to make intelligent decisions about when and how to retrieve information, adapt retrieval strategies based on context, and reason about the retrieved content.
+Do not use RAG as a reflex. If a task needs stable style, format, or behavior rather than external facts, prompting or fine-tuning may be a better lever.
 
-**2025 Research & Industry Adoption**: A comprehensive survey paper (arXiv:2501.09136v3, February 2025) documents the taxonomy and applications of Agentic RAG. Major technology companies including NVIDIA, AWS, and IBM have published guides and implementations, confirming Agentic RAG as the dominant paradigm for production RAG systems in 2025.
+## RAG Components
 
-### Key Characteristics of Agentic RAG (2025):
+| Component | Responsibility | Design Questions |
+|-----------|----------------|------------------|
+| Source connectors | Pull data from docs, wikis, databases, tickets, emails, code, media, or APIs. | What is the source of truth? How fresh must data be? |
+| Parser | Convert files into text, tables, layout, images, metadata, and structured records. | Is deterministic parsing needed before model reasoning? |
+| Chunker | Split content into retrievable units. | What chunk size, overlap, hierarchy, and metadata preserve meaning? |
+| Indexes | Store lexical, vector, graph, or multimodal representations. | Which retrieval modes are needed? |
+| Retriever | Fetch candidate evidence. | How are query rewriting, filters, and top-k chosen? |
+| Reranker | Reorder candidates with a stronger relevance signal. | What is the latency and quality trade-off? |
+| Context packer | Fit evidence into the model context. | What gets included, compressed, cited, or dropped? |
+| Generator | Produce grounded answer or structured output. | How does the model cite, abstain, or ask follow-up questions? |
+| Verifier | Check faithfulness, policy, format, and citations. | What failures require retry, fallback, or escalation? |
+| Eval/observability | Measure retrieval and answer quality. | Which traces and metrics prove the system works? |
 
-- **Dynamic Knowledge Access**: Agents can access constantly changing data sources and make real-time retrieval decisions. Unlike static training data, Agentic RAG systems integrate with AI query engines that handle continuous updates from both private and public sources (NVIDIA, 2025).
-- **Reasoning-Enhanced Retrieval**: Agents reason about what information is needed before retrieving, improving relevance. The LLM acts as an orchestrator that understands tasks, generates solutions, and coordinates specialized models (NVIDIA's Perceive-Reason-Act-Learn framework).
-- **Multi-Step Retrieval**: Agents can perform iterative retrieval, refining queries based on initial results. This enables multi-hop reasoning across multiple documents and knowledge sources.
-- **Memory Integration**: Agents maintain context across interactions, learning from previous retrievals. This includes both short-term conversation context and long-term knowledge accumulation.
-- **Adaptive Strategies**: Agents choose retrieval strategies (semantic search, keyword search, hybrid, graph-based) based on query complexity and type. Systems can dynamically adjust from simple single-step retrieval to complex multi-step reasoning workflows.
+## Retrieval Patterns
 
-### Traditional RAG vs. Agentic RAG (2025):
+### 1. Basic RAG
 
-| Aspect | Traditional RAG | Agentic RAG |
-|--------|----------------|-------------|
-| **Retrieval Strategy** | Fixed pipeline (query → retrieve → generate) | Dynamic, adaptive (agent decides retrieval approach) |
-| **Query Processing** | Single-pass | Multi-step reasoning with iterative refinement |
-| **Context Awareness** | Limited to current query | Maintains conversation context and learns from interactions |
-| **Decision Making** | No decisions | Autonomous decisions about when/what/how to retrieve |
-| **Error Handling** | Basic | Self-corrective with reflection and query refinement |
-| **Knowledge Sources** | Static vector databases | Dynamic access to constantly updated sources (internal + external) |
-| **Workflow** | Linear | Orchestrated with planning, reflection, and tool use patterns |
-| **Use Cases** | Simple Q&A, fact retrieval | Complex research, multi-domain analysis, real-time decision support |
+```text
+query -> retrieve -> augment prompt -> generate answer
+```
 
-### Implementation:
+Use for simple document Q&A, FAQ assistants, and internal knowledge search.
 
-Agentic RAGs refer to building **Retrieval Agents** that can make intelligent decisions about retrieval. Retrieval Agents are useful when we want to make decisions about:
-- Whether to retrieve context from a vectorstore or respond to the user directly
-- Which retrieval strategy to use (semantic, keyword, hybrid)
-- How many retrieval iterations are needed
-- Whether retrieved documents are relevant enough
+Strengths:
 
-**Steps:**
-1. Preprocess documents
-2. Index documents in a vector DB
-3. Create a retriever tool
-4. Build an agentic RAG system with retrieval tool that can decide when to use the retriever tool or respond to the user directly
+- Simple architecture.
+- Fast to prototype.
+- Works well when documents are clean and questions are direct.
 
+Limits:
 
+- Weak on ambiguous, multi-hop, or cross-source questions.
+- Sensitive to chunking and retrieval quality.
+- Can produce grounded-looking answers from irrelevant chunks.
 
-<!-- <img src="../../assets/rags/agentic-rag-langraph.png" alt="Agentic-RAGs" width="90%" />
+### 2. Hybrid Search
 
-<img src="../../assets/rags/agentic-rags-1.jpeg" alt="Agentic-RAGs" width="70%" /> -->
+```text
+query -> keyword search + vector search -> merge/rerank -> answer
+```
 
-<img src="../../assets/rags/agentic-rag-vec-2.png" alt="Agentic-RAGs" width="80%" />
+Use when exact terms, IDs, names, error codes, legal clauses, or technical vocabulary matter.
 
+Design note: hybrid search is often better than pure vector search for enterprise systems because real user queries mix semantic intent with exact identifiers.
 
-<img src="../../assets/rags/agentic-rag-langraph.png" alt="Agentic-RAGs" width="90%" />
+### 3. Reranked RAG
 
-*Figure: Agentic RAGs. Adapted from [vectorize].*
+```text
+retrieve broad candidates -> rerank -> pack top evidence -> answer
+```
 
-### Retrieval Agent
-- To implement a retrieval agent, we simply need to give an LLM access to a retriever tool.
-- We can incorporate this into LangGraph.
-- Steps: 
-    - Fetch and preprocess documents that will be used for retrieval.
-    - Index those documents for semantic search and create a retriever tool for the agent.
-    - Build an agentic RAG system that can decide when to use the retriever tool.
+Use when first-stage retrieval has acceptable recall but poor ordering.
 
+Trade-off: better quality at the cost of extra latency and compute.
 
-### Reflective RAGs
-#### Self-RAGs
-- Self-RAG is a strategy for RAG that incorporates self-reflection / self-grading on retrieved documents and generations.
+### 4. Multi-Hop RAG
 
-**Steps:**
-Simialr to agentic RAG, but few decisions are made:
-  - Should I retrieve from retriever R,
-  - Are the retrieved passages D relevant to the question x?
-  - Are the LLM generation from each chunk in D is relevant to the chunk (hallucinations, etc)
-  - The LLM generation from each chunk in D is a useful response to x (question)
+```text
+query -> retrieve evidence -> derive next query -> retrieve more -> synthesize
+```
 
+Use when answers require connecting facts across documents, entities, or time.
 
+Risks:
 
+- More steps increase cost and latency.
+- Each retrieval step can compound errors.
+- Requires stronger traceability and evals.
 
+### 5. Agentic RAG
 
+```text
+query -> agent decides source/tool/query -> retrieve/search/query -> inspect evidence -> continue or answer
+```
 
-![Self-RAGs](../../assets/rags/Self-rag-1.png)
+Use when the system must decide:
 
-*Figure: Self-RAGs. Adapted from [vectorize].*
+- Whether retrieval is needed.
+- Which source to query.
+- Whether to use vector search, keyword search, SQL, graph, web, or API tools.
+- Whether evidence is sufficient.
+- Whether to retrieve again, ask a follow-up, or abstain.
 
+Agentic RAG is useful for complex research and operational assistants, but it needs budget caps, loop detection, traceability, and tool permissions.
 
+### 6. Graph RAG
 
-##### CRAGS
-Corrective-RAG (CRAG) is another strategy for RAG that incorporates self-reflection / self-grading on retrieved documents.
-- If at least one document exceeds the threshold for relevance, then it proceeds to generation.
-- Otherwise it proceeds with web search tool. 
-![CRAGs](../../assets/rags/c-rag.png)
+```text
+query -> entity/relation extraction -> graph traversal + document retrieval -> synthesis
+```
 
-*Figure: CRAGs. Adapted from [vectorize].*
+Use when relationships are central: organizations, people, transactions, dependencies, legal clauses, incidents, code ownership, or supply chains.
 
-#### Adaptive-RAGs
-- Adaptive RAG is a strategy for RAG that includes:
-    - 1. query analysis 
-    - 2. active / self-corrective RA 
-- Query analysis routes across:
-    - No Retrieval (web search)
-    - Single-shot RAG
-    - Iterative RAG
+### 7. Multimodal RAG
 
+```text
+documents/images/audio/video -> multimodal parsing/indexing -> retrieval -> multimodal or text synthesis
+```
 
+Use when knowledge lives in charts, screenshots, scanned documents, diagrams, images, videos, or audio.
 
+Common options:
 
+- Embed text and images into a shared multimodal space.
+- Summarize images/tables/charts into text and retrieve summaries.
+- Store image summaries with pointers to raw artifacts.
+- Retrieve text plus raw images and pass both to a multimodal model.
 
+See runnable examples in [`code/`](./code/).
 
-![Adaptive-RAGs](../../assets/rags/adaptive-RAG.png)
+## Data and Index Design
 
-*Figure: Adaptive-RAGs. Adapted from [langgraph].*
+Chunk metadata matters as much as chunk text.
 
+Useful metadata:
 
-## 4. Advanced RAGs 
+- Document ID and version.
+- Source URL or storage path.
+- Author/owner.
+- Tenant/user/group ACL.
+- Timestamp and freshness.
+- Section/page/paragraph/table/figure.
+- Chunk hierarchy.
+- Language.
+- Data classification.
+- Deletion/retention policy.
 
-### KG-RAGs
-![KG-RAGs](../../assets/rags/KG-RAG.png)
+Example record shape:
 
-*Figure: KG-RAGs. Adapted from [langgraph].*
+```json
+{
+  "chunk_id": "policy_v4_page12_chunk03",
+  "document_id": "refund_policy",
+  "document_version": "v4",
+  "text": "Refunds require approval after 30 days...",
+  "metadata": {
+    "source": "support_policy_pdf",
+    "page": 12,
+    "section": "Refund exceptions",
+    "tenant": "global",
+    "acl": ["support_agents"],
+    "updated_at": "2026-06-01"
+  }
+}
+```
 
-## Examples 
+## Access Control and Privacy
 
-### Enterprise Agentic RAG Implementations
+Enterprise RAG must filter before generation.
 
-#### Uber Agentic RAG
-- [Enhanced Agentic RAG at Uber (Uber Blog)](https://www.uber.com/blog/enhanced-agentic-rag/?utm_source=chatgpt.com)
-- Uber's implementation demonstrates production-scale agentic RAG with dynamic retrieval strategies and multi-step reasoning
-![Agentic RAG Architecture](../../assets/rags/uber-agentic-rag.png)
+Controls:
 
-#### Key Enterprise Solutions (2025)
-- **Perplexity AI**: B2B agentic RAG platform for enterprise knowledge bases
-- **Glean AI**: Enterprise search with agentic RAG capabilities
-- **Sonar API**: Agentic RAG infrastructure for developers
+- Enforce ACLs at retrieval time, not only after generation.
+- Keep tenant indexes isolated when risk is high.
+- Filter by user, group, role, region, and data classification.
+- Prevent citations to unauthorized sources.
+- Redact PII when context leaves the trusted boundary.
+- Support deletion and re-indexing.
+- Log which sources were retrieved and shown to the model.
 
-### Research & Open Source
+Failure mode: the final answer can leak information even if the cited source is hidden. Retrieval and generation both need policy checks.
 
-- **ARAG (Agentic Retrieval Augmented Generation)**: Research showing up to 42.1% improvement over standard RAG and recency-based baselines
-- Focus areas: Dynamic knowledge updates, reasoning-enhanced retrieval, multi-step query refinement
+## Context Packing
 
+Retrieved chunks are not automatically good context.
 
+Packing decisions:
 
+- Top-k evidence.
+- Diversity across sources.
+- Recency and authority.
+- Redundancy removal.
+- Compression/summarization.
+- Source ordering.
+- Citation format.
+- Token budget.
+- Conflict handling.
 
+Useful pattern:
+
+```text
+query
+  -> candidates
+  -> rerank
+  -> remove duplicates
+  -> group by source
+  -> include citations and metadata
+  -> generate with explicit grounding instructions
+```
+
+## Evaluation
+
+Evaluate retrieval and generation separately.
+
+Retrieval metrics:
+
+- Recall@k.
+- Precision@k.
+- MRR.
+- nDCG.
+- Source freshness.
+- ACL correctness.
+
+Generation metrics:
+
+- Groundedness.
+- Faithfulness.
+- Citation accuracy.
+- Completeness.
+- Abstention quality.
+- Format validity.
+- Safety and PII handling.
+
+End-to-end metrics:
+
+- Task success.
+- User satisfaction.
+- Escalation rate.
+- Time to answer.
+- Cost per answered question.
+- Human correction rate.
+
+Golden eval cases should include:
+
+- Easy direct facts.
+- Multi-hop questions.
+- Ambiguous queries.
+- Questions with no answer.
+- Outdated documents.
+- Conflicting sources.
+- Unauthorized sources.
+- Prompt injection inside retrieved text.
+- Tables, charts, images, and scanned PDFs if multimodal.
+
+## Common Failure Modes
+
+- Bad chunking loses context.
+- Retrieval misses exact IDs or rare terms.
+- Reranker over-prioritizes semantically similar but wrong chunks.
+- Context includes too much irrelevant text.
+- Model answers from prior knowledge instead of evidence.
+- Citations point to sources that do not support the claim.
+- ACL filters are applied too late.
+- Index is stale after document changes.
+- Prompt injection inside retrieved content changes behavior.
+- Agentic RAG loops or overspends.
+
+## Design Checklist
+
+- What is the source of truth?
+- How fresh must the index be?
+- What document types and modalities are supported?
+- What chunking strategy preserves meaning?
+- Which retrieval modes are needed?
+- How are ACLs enforced?
+- How are citations generated and verified?
+- What happens when evidence is insufficient?
+- How are retrieval and answer quality evaluated?
+- How are stale, deleted, or conflicting sources handled?
+- What is the latency and cost budget?
+
+## Runnable Examples
+
+Current examples live under [`code/`](./code/) and will move to the hands-on appendix later:
+
+- Basic LangChain RAG.
+- LangGraph RAG.
+- Multimodal RAG with CLIP.
+- Multimodal multi-vector retrieval.
+- Agentic RAG.

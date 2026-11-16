@@ -42,10 +42,10 @@ This directory contains complete, real-world agentic applications. Each subfolde
 
 ## Example Projects
 
-- [`weather_agent_app/`](./1_weather_agent_app/README.md): Weather assistant with CLI and web UI.
-- [`customer_support_flights/`](./2_customer_support_flights/README.md): Customer support bot for flight-related queries.
-- [`financial_research_multi_agent/`](./3_financial_research_multi_agent/README.md): Multi-agent system for financial research and analysis.
-- [`multi_agent_researcher/`](./4_multi_agent_researcher/README.md): Collaborative multi-agent research assistant.
-- [`crewai_starter/`](./5_crewai_starter/README.md): Starter template for using CrewAI to manage a team of agents.
+- [`weather_agent_app/`](./weather_agent_app/README.md): Weather assistant with CLI and web UI.
+- [`customer_support_flights/`](./customer_support_agents/02_customer_support_flights/README.md): Customer support bot for flight-related queries.
+- [`financial_research_multi_agent/`](./research_agents/financial_research_multi_agent/README.md): Multi-agent system for financial research and analysis.
+- [`multi_agent_researcher/`](./research_agents/multi_agent_researcher/README.md): Collaborative multi-agent research assistant.
+- [`crewai_starter/`](../02_frameworks/5_crewai/code/starter_project/README.md): Starter template for using CrewAI to manage a team of agents.
 - `more coming soon...`
 Each use case includes its own README, setup instructions, and example usage. 

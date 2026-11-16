@@ -1,8 +1,8 @@
-#    Agents
+# Agents
 
-**Updated 2025**: This is a summary of Chip Huyen's blog and book chapter on agents, with some added context to provide a comprehensive overview of their design, capabilities, and practical applications.
+This is a summary of Chip Huyen's blog and book chapter on agents, with added notes on design, capabilities, and practical applications.
 
-**2025 Context**: While the foundational concepts remain valid, the field has evolved with new agent types (Computer-Using Agents, Voice Agents), standardized frameworks, and production-ready patterns. See the [Agents README](./README.md) for latest developments.
+For the current Chapter 1 overview, start with [Agentic AI Foundations](../agentic-ai-foundations.md). Use this page as the deeper notes page for planning, tools, control flow, and evaluation.
 
 ### 1. Agents Overview
 

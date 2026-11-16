@@ -12,4 +12,4 @@ Agentic AI uses a four-step process for problem-solving:
 4. **Learn**: Agentic AI continuously improves through a feedback loop, or
 data flywheel, where the data generated from its interactions is fed into the system to enhance models. This ability to adapt and become more effective over time offers businesses a powerful tool for driving better decision-making and operational efficiency.
 
-![NVIDIA Agentic AI](../../assets/agentic-ai/agentic-ai-nvidia.png)
+![NVIDIA Agentic AI](../../assets/agents/agentic-ai-nvidia.png)

@@ -63,4 +63,4 @@ filled_prompt = prompt.format(title="Quantum Mechanics")
     - Solves the **NxM problem** (N tools and M models talk through a single interface)
     - a **model-agnostic**, **tool-agnostic**, and **open** protocol 
 - Follows a **host  client  server** architecture
-- For more details visit [Protocols for AI Systems](protocols-AI.md)
+- For more details visit [Protocols](../../03_system_design/protocols/README.md)

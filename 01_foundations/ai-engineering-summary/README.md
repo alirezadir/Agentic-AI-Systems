@@ -18,7 +18,7 @@
 | 6.2 | [Agents](./Chapter_6_2_Agents.md) |
 | 7 | [Finetuning & Model Adaptation](./Chapter_7_Finetuning.md) |
 | 8 | [Data Engineering for GenAI](./Chapter_8_Data_Eng.md) |
-| 9 | [Inference Optimization Techniques](./Chapter_9_Inference%20Optim.md) |
+| 9 | Inference Optimization Techniques (to be added) |
 | 10 | [Full-Stack AI Engineering](./Chapter_10_AI_Engineering.md) |
 
 
